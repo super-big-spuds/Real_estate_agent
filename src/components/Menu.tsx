@@ -25,8 +25,8 @@ function getItem(
 
 const items: MenuProps['items'] = [
   getItem('代收付管理', 'collection', undefined, [
-    getItem('代收付管理列表', 'collection-list'),
-    getItem('代收付管理新增', 'collection-add'),
+    getItem('代收付管理列表', 'Collection/List'),
+    getItem('代收付管理新增', 'Collection/Add'),
   ]),
   getItem('房屋管理', 'house', undefined, [
     getItem('房屋管理列表', 'house-list'),
@@ -63,6 +63,7 @@ const App: React.FC = () => {
       defaultOpenKeys={['sub1']}
       mode="inline"
       items={items}
+      className='pt-20 '
     />
   );
 };

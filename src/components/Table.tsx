@@ -1,7 +1,9 @@
 import React from 'react';
 import { Table } from 'antd';
-import type { ColumnsType, TableProps } from 'antd/es/table';
-
+import { Link } from 'react-router-dom'; // React Router中的Link
+import type { ColumnsType} from 'antd/es/table';
+import type { TableRowSelection } from 'antd/es/table/interface';
+import { useNavigate } from 'react-router-dom';
 interface DataType {
   key: React.Key;
   name: string;
@@ -9,7 +11,6 @@ interface DataType {
   amount: string;
   id: string;
 }
-
 const columns: ColumnsType<DataType> = [
   {
     title: '編號',
@@ -18,6 +19,7 @@ const columns: ColumnsType<DataType> = [
   {
     title: '費用名稱',
     dataIndex: 'name',
+    render: (text, record) => <Link to={`/edit/${record.id}`}>{text}</Link>,
   },
   {
     title: '費用類型',
@@ -32,14 +34,13 @@ const columns: ColumnsType<DataType> = [
         value: '代付',
       },
     ],
-    onFilter: (value, record) => record.name.includes(value as string),
+    onFilter: (value, record) => record.type.includes(value as string),
   },
   {
     title: '費用金額',
     dataIndex: 'amount',
   }
 ];
-
 const data = [
   {
     key: '1',
@@ -70,11 +71,22 @@ const data = [
     amount: '4000',
   },
 ];
-
-const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
-  console.log('params', pagination, filters, sorter, extra);
+const App=() => {
+  const navigate = useNavigate();
+  const rowSelection: TableRowSelection<DataType> = {
+    onSelect: (record:any) => {
+      console.log('Selected row:', record);
+      navigate(`/Collection/Edit/${record.id}`)
+    },
+  };
+  return (
+    <Table
+      columns={columns}
+      dataSource={data}
+      size='large'
+      rowSelection={rowSelection}
+    />
+  );
 };
-
-const App: React.FC = () => <Table columns={columns} dataSource={data} size='large' onChange={onChange} />;
-
 export default App;
+
