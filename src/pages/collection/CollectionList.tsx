@@ -5,7 +5,6 @@ import { Button } from 'antd';
 
 export const CollectionList = () => {
   return (
-   
       <div className='flex h-screen bg-gray-300 '>
         <Menu />
         <div className='flex flex-col items-center w-4/5 m-10 '>
