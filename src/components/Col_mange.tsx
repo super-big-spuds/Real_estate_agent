@@ -1,89 +1,30 @@
-import { useState, useEffect } from 'react';
 import { Input, Select, Button } from 'antd';
+import useCol from '../hooks/useCol';
 import Notice from './Notice';
-
-interface FormData {
-    roomNumber: string;
-    expenseName: string;
-    expenseAmount: string;
-    paymentMethod: string;
-    note: string;
-    bankName: string;
-    bankAccount: string;
-}
-interface NoticeData {
-    visitDate: string;
-    record: string;
-    remindDate: string;
-    remind: string;
-}
 
 export default function Col_mange() {
     const { TextArea } = Input;
-    const [notice, setnotice] = useState<NoticeData>({
-        visitDate: '',
-        record: '',
-        remindDate: '',
-        remind: '',
-    });
-    const [formData, setFormData] = useState<FormData>({
-        roomNumber: '',
-        expenseName: '水費',
-        expenseAmount: '',
-        paymentMethod: '現金',
-        note: '',
-        bankName: '',
-        bankAccount: '',
-    });
-
-    const handleChange = (key: keyof FormData, value: string) => {
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [key]: value,
-        }));
-    };
-
-    const handleNoticeChange = (key: keyof NoticeData, value: string) => {
-        setnotice((prevNoticeData) => ({
-            ...prevNoticeData,
-            [key]: value,
-        }));
-    }
-
-    const handleSave = () => {
-        console.log(formData);
-        console.log(notice);
-    };
-    const handleReset = () => {
-        setFormData({
-            roomNumber: '',
-            expenseName: '水費',
-            expenseAmount: '',
-            paymentMethod: '現金',
-            note: '',
-            bankName: '',
-            bankAccount: '',
-        });
-        setnotice({
-            visitDate: '',
-            record: '',
-            remindDate: '',
-            remind: '',
-        });
-    };
-
-    useEffect(() => {
-        handleReset
-    }, [setFormData, setnotice]);
+    const {
+        formData,
+        notices,
+        handleChange,
+        handleNoticeChange,
+        handleSave,
+        handleReset,
+        onChangeDate,
+        onChangeRemindDate,
+        handleAddNotice,
+        handleDeleteNotice
+    } = useCol();
 
     return (
-        <div className='flex w-full h-full flex-col '>
-            <div className='flex flex-col w-full p-12 pb-0 pt-16 h-screen '>
+        <div className='flex flex-col w-full h-full'>
+            <div className='flex flex-col w-full pt-12 pl-12 pr-16 h-1/5'>
                 <div className='inline-flex flex-col ml-5'>
                     <p className='text-2xl whitespace-normal'>代收付管理</p>
                     <p>編號 <span>1</span> </p>
                 </div>
-                <div className='flex flex-col flex-wrap w-full h-full gap-10 p-16 overflow-visible '>
+                <div className='flex flex-col flex-wrap w-full h-full gap-10 p-10 overflow-visible '>
                     <div className='inline-flex items-center whitespace-nowrap w-96'>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                         <p>房號:</p>
@@ -133,13 +74,34 @@ export default function Col_mange() {
                     </div>
                 </div>
             </div>
-            <div className=' p-5'>
+            <div className='flex flex-col p-5'>
+                <div className='inline-flex flex-row justify-around mb-5 '>
+                    <p className='text-2xl whitespace-normal'>提醒設定</p>
+                    <Button type='primary' className='bg-blue-600 ' onClick={handleAddNotice}>
+                        新增提醒
+                    </Button>
+                </div>
+                <div className='flex flex-col gap-5'>
 
-                <Notice handleNoticeChange={handleNoticeChange} onReset={handleReset} notice={notice} />
+                    {
+                        notices.map((notice, index) => (
+                            <Notice
+                                key={index}
+                                keya={index}
+                                notice={notice}
+                                handleNoticeChange={handleNoticeChange}
+                                onChangeDate={onChangeDate}
+                                onChangeRemindDate={onChangeRemindDate}
+                                handleDeleteNotice={handleDeleteNotice}
+
+                            />
+                        ))
+                    }
+                </div>
             </div>
-            <div className=' flex justify-end m-10 gap-5'>
-                <Button className=" bg-blue-600" type='primary' onClick={handleSave}>儲存</Button>
-                <Button danger onClick={handleReset}>回復預設</Button>
+            <div className='flex justify-end gap-5 m-10 '>
+                <Button className="bg-blue-600 " type='primary' onClick={handleSave}>儲存</Button>
+                <Button danger onClick={() => handleReset()}>回復預設</Button>
             </div>
         </div>
     );

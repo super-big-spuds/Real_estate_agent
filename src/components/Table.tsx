@@ -39,6 +39,8 @@ const columns: ColumnsType<DataType> = [
   {
     title: '費用金額',
     dataIndex: 'amount',
+    sorter: (a, b) => parseInt(a.amount) - parseInt(b.amount), 
+
   }
 ];
 const data = [
