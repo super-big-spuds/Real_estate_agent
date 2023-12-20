@@ -1,8 +1,7 @@
 import { Input, Select, Button } from 'antd';
-import useCol from '../hooks/useCol';
 import Notice from './Notice';
 
-export default function Col_mange() {
+export default function Col_mange(props) {
     const { TextArea } = Input;
     const {
         formData,
@@ -15,7 +14,8 @@ export default function Col_mange() {
         onChangeRemindDate,
         handleAddNotice,
         handleDeleteNotice
-    } = useCol();
+    } = props;
+    
 
     return (
         <div className='flex flex-col w-full h-full'>
