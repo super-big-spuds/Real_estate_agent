@@ -61,7 +61,7 @@ export default function Notice({ keya,handleNoticeChange,onChangeDate,onChangeRe
                     />
                 </div>
                 <div className='inline-flex items-center whitespace-nowrap'>
-                    <Button onClick={() => handleDeleteNotice(keya)}>刪除</Button>
+                    <Button danger onClick={() => handleDeleteNotice(keya)}>刪除</Button>
                 </div>
             </div>
         </div>
