@@ -1,7 +1,5 @@
 import Col_mange from '../../components/Col_mange';
 import useColedit from '../../hooks/useColedit';
-
-
 export const Collection = () => {
   const {
     formData,
