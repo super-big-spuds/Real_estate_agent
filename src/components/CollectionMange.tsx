@@ -2,7 +2,7 @@ import { Input, Select, Button } from 'antd';
 import Notice from './Notice';
 import { useNavigate } from 'react-router-dom';
 
-export default function Col_mange(props:any) {
+export default function CollectionMange(props:any) {
     const { TextArea } = Input;
     const navigate = useNavigate();
     const handleback = () => {

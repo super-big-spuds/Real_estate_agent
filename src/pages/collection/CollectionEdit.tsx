@@ -1,4 +1,4 @@
-import Col_mange from '../../components/Col_mange';
+import CollectionMange from '../../components/CollectionMange';
 import useColedit from '../../hooks/useColedit';
 export const Collection = () => {
   const {
@@ -15,7 +15,7 @@ export const Collection = () => {
   } = useColedit();
   return (
 
-      <Col_mange
+      <CollectionMange
         formData={formData}
         notices={notices}
         handleChange={handleChange}

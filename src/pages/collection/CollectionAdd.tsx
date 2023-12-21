@@ -1,4 +1,4 @@
-import Col_mange from '../../components/Col_mange';
+import CollectionMange from '../../components/CollectionMange';
 import useColadd from '../../hooks/useColadd';
 
 export const Collection = () => {
@@ -15,7 +15,7 @@ export const Collection = () => {
     handleDeleteNotice
   } = useColadd();
   return (
-      <Col_mange 
+      <CollectionMange 
         formData={formData}
         notices={notices}
         handleChange={handleChange}
