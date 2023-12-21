@@ -157,6 +157,7 @@ export default [
         {
           key: '1',
           name: '水電費',
+          houseid: '1',
           type: '代收',
           amount: '1000',
           id: '1',
@@ -164,6 +165,7 @@ export default [
         {
           key: '2',
           name: '水電費',
+          houseid: '2',
           type: '代付',
           amount: '2000',
           id: '2',
@@ -171,6 +173,7 @@ export default [
         {
           key: '3',
           name: '水電費',
+          houseid: '3',
           type: '代收',
           amount: '3000',
           id: '3',
@@ -178,6 +181,7 @@ export default [
         {
           key: '4',
           name: '瓦斯費',
+          houseid: '4',
           type: '代付',
           amount: '4000',
           id: '4',
