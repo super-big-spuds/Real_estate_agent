@@ -119,6 +119,14 @@ const useColedit = () => {
         console.log(dateString);
         handleNoticeChange(0, 'remindDate', dateString);
     };
+    const getapi = async () => {
+        const res = await fetch('http://localhost:5173/api/aaa');
+        const data = await res.json();
+        console.log(data);
+    };
+    useEffect(() => {
+        getapi();
+    }, []);
 
     return {
         formData,
