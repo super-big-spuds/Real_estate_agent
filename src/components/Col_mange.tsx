@@ -7,7 +7,7 @@ export default function Col_mange(props:any) {
     const navigate = useNavigate();
     const handleback = () => {
         // history
-        navigate('/collection/List'); 
+        navigate('/Collection/List'); 
 
     }
     const {

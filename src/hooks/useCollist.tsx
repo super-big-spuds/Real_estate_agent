@@ -20,7 +20,7 @@ const columns: ColumnsType<DataType> = [
   {
     title: '費用名稱',
     dataIndex: 'name',
-    render: (text, record) => <Link to={`/edit/${record.id}`}>{text}</Link>,
+    render: (text, record) => <Link to={`/Collection/edit/${record.id}`}>{text}</Link>,
   },
   {
     title: '費用類型',

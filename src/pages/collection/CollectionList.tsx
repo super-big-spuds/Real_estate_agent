@@ -8,7 +8,7 @@ import useCollist from '../../hooks/useCollist';
 export const CollectionList = () => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/collection/add');
+    navigate('/Collection/add');
   };
   const {data,
     columns,
