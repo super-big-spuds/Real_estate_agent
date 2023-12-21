@@ -22,7 +22,6 @@ export default function Col_mange(props) {
             <div className='flex flex-col w-full pt-12 pl-12 pr-16 h-1/5'>
                 <div className='inline-flex flex-col ml-5'>
                     <p className='text-2xl whitespace-normal'>代收付管理</p>
-                    <p>編號 <span>1</span> </p>
                 </div>
                 <div className='flex flex-col flex-wrap w-full h-full gap-10 p-10 overflow-visible '>
                     <div className='inline-flex items-center whitespace-nowrap w-96'>
