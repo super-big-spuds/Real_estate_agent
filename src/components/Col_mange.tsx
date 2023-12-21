@@ -1,8 +1,15 @@
 import { Input, Select, Button } from 'antd';
 import Notice from './Notice';
+import { useNavigate } from 'react-router-dom';
 
 export default function Col_mange(props:any) {
     const { TextArea } = Input;
+    const navigate = useNavigate();
+    const handleback = () => {
+        // history
+        navigate('/collection/List'); 
+
+    }
     const {
         formData,
         notices,
@@ -16,12 +23,14 @@ export default function Col_mange(props:any) {
         handleDeleteNotice
     } = props;
     
-
+    
     return (
         <div className='flex flex-col w-full h-full'>
             <div className='flex flex-col w-full pt-12 pl-12 pr-16 h-1/5'>
+
+                <button className='flex w-12 h-20' onClick={handleback} >{"< 返回"}</button>
                 <div className='inline-flex flex-col ml-5'>
-                    <p className='text-2xl whitespace-normal'>代收付管理</p>
+                    <p className='text-4xl whitespace-normal'>代收付管理</p>
                 </div>
                 <div className='flex flex-col flex-wrap w-full h-full gap-10 p-10 overflow-visible '>
                     <div className='inline-flex items-center whitespace-nowrap w-96'>
@@ -83,7 +92,7 @@ export default function Col_mange(props:any) {
                 <div className='flex flex-col gap-5'>
 
                     {
-                        notices.map((notice, index) => (
+                        notices.map((notice:any, index:number) => (
                             <Notice
                                 key={index}
                                 keya={index}

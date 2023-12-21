@@ -147,5 +147,43 @@ export default [
     response: {
       message: 'Successfully add the media',
     }
+  },
+  {
+    url: '/api/colelist',
+    method: 'get',
+    response: {
+      message: 'Successfully get the media',
+      data:[
+        {
+          key: '1',
+          name: '水電費',
+          type: '代收',
+          amount: '1000',
+          id: '1',
+        },
+        {
+          key: '2',
+          name: '水電費',
+          type: '代付',
+          amount: '2000',
+          id: '2',
+        },
+        {
+          key: '3',
+          name: '水電費',
+          type: '代收',
+          amount: '3000',
+          id: '3',
+        },
+        {
+          key: '4',
+          name: '瓦斯費',
+          type: '代付',
+          amount: '4000',
+          id: '4',
+        }
+      ]
+
+  }
   }
 ] as MockMethod[]

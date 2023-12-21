@@ -72,12 +72,18 @@ const useCustomHook = () => {
                 
             }),
         });
+        if (!res.ok) {
+            throw new Error(res.statusText);
+          }
         const notices_psot = await fetch('/api/coledit/notices', {
             method: 'POST',
             body: JSON.stringify({
                 notices,
             }),
         });
+        if (!notices_psot.ok) {
+            throw new Error(notices_psot.statusText);
+          }
         const data_notice = await notices_psot.json();
         const data = await res.json();
         console.log(data);
