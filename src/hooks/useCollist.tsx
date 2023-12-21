@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // React Router中的Link
 import type { ColumnsType } from 'antd/es/table';
-import type { TableRowSelection } from 'antd/es/table/interface';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { Input, Button, Space } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
-type InputRef = React.RefObject<Input | null>;
+
 type FilterConfirmProps = { closeDropdown: boolean };
 
 
@@ -173,8 +172,7 @@ const useCollist = () => {
     },
     {
       title: '費用名稱',
-      dataIndex: 'name',
-      render: (text, record) => <Link to={`/Collection/edit/${record.id}`}>{text}</Link>,
+      dataIndex: 'name'
     },
     {
       title: '費用類型',

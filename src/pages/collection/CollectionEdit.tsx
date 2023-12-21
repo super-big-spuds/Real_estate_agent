@@ -1,4 +1,3 @@
-import Menu from '../../components/Menu';
 import Col_mange from '../../components/Col_mange';
 import useColedit from '../../hooks/useColedit';
 
@@ -17,8 +16,7 @@ export const Collection = () => {
     handleDeleteNotice
   } = useColedit();
   return (
-    <div className='flex w-full bg-gray-300 '>
-      <Menu />
+
       <Col_mange
         formData={formData}
         notices={notices}
@@ -31,7 +29,7 @@ export const Collection = () => {
         handleAddNotice={handleAddNotice}
         handleDeleteNotice={handleDeleteNotice}
       />
-    </div>
+
   );
 };
 export default Collection;

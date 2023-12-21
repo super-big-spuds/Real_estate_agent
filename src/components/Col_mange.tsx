@@ -8,7 +8,6 @@ export default function Col_mange(props:any) {
     const handleback = () => {
         // history
         navigate('/Collection/List'); 
-
     }
     const {
         formData,
@@ -25,9 +24,8 @@ export default function Col_mange(props:any) {
     
     
     return (
-        <div className='flex flex-col w-full h-full'>
-            <div className='flex flex-col w-full pt-12 pl-12 pr-16 h-1/5'>
-
+        <div className='flex flex-col w-full h-full '>
+            <div className='flex flex-col w-full h-full pt-12 pl-12 pr-16'>
                 <button className='flex w-12 h-20' onClick={handleback} >{"< 返回"}</button>
                 <div className='inline-flex flex-col ml-5'>
                     <p className='text-4xl whitespace-normal'>代收付管理</p>
@@ -90,7 +88,6 @@ export default function Col_mange(props:any) {
                     </Button>
                 </div>
                 <div className='flex flex-col gap-5'>
-
                     {
                         notices.map((notice:any, index:number) => (
                             <Notice

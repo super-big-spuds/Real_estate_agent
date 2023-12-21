@@ -1,8 +1,5 @@
-import Menu from '../../components/Menu';
 import Col_mange from '../../components/Col_mange';
 import useColadd from '../../hooks/useColadd';
-
-
 
 export const Collection = () => {
   const {
@@ -18,8 +15,6 @@ export const Collection = () => {
     handleDeleteNotice
   } = useColadd();
   return (
-    <div className='flex w-full h-full bg-gray-300 '>
-      <Menu />
       <Col_mange 
         formData={formData}
         notices={notices}
@@ -32,8 +27,6 @@ export const Collection = () => {
         handleAddNotice={handleAddNotice}
         handleDeleteNotice={handleDeleteNotice}
       />
-  
-    </div>
   );
 };
 export default Collection;
