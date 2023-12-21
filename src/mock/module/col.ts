@@ -149,7 +149,7 @@ export default [
     }
   },
   {
-    url: '/api/colelist',
+    url: '/api/collection/list',
     method: 'get',
     response: {
       message: 'Successfully get the media',
