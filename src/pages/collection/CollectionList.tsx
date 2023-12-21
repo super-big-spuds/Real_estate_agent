@@ -12,7 +12,7 @@ export const CollectionList = () => {
   };
   const {data,
     columns,
-    rowSelection} = useCollist();
+    onRow} = useCollist();
 
   return (
       <div className='flex h-screen bg-gray-300 '>
@@ -22,7 +22,7 @@ export const CollectionList = () => {
             <p className='text-4xl '>代收付管理列表</p>
             <Button type='primary' onClick={handleClick} className='bg-blue-600 ' >新增</Button>
           </div>
-          <Table data={data} columns={columns} rowSelection={rowSelection} />
+          <Table data={data} columns={columns} onRow={onRow} />
         </div>
 
       </div>

@@ -211,15 +211,17 @@ const useCollist = () => {
     getListdata();
   }, []);
   const navigate = useNavigate();
-  const rowSelection: TableRowSelection<DataType> = {
-    onSelect: (record: any) => {
-      navigate(`/Collection/Edit/${record.id}`)
-    },
+  const onRow = (record: any) => {
+    return {
+      onClick: () => {
+        navigate(`/Collection/Edit/${record.id}`)
+      },
+    };
   };
   return {
     data,
     columns,
-    rowSelection
+    onRow
   };
 }
 
