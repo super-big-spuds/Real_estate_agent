@@ -7,6 +7,7 @@ const ColTable=(props:any) => {
       dataSource={data}
       size='large'
       rowSelection={rowSelection}
+      className='w-4/5 '
     />
   );
 };
