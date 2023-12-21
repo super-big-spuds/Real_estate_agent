@@ -73,11 +73,46 @@ const useColedit = () => {
     });
   };
 
-  const handleSave = () => {
-    console.log(formData);
-    console.log(notices);
+  const handleSave = async () => {
+    const token = 123;
+    const res = await fetch("http://localhost:5173/api/coledit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        formData,
+      }),
+    });
+    const data = await res.json();
+    // if error alert
+    if (data.error) {
+      alert(data.error);
+      return;
+    }
+    const notices_psot = await fetch(
+      "http://localhost:5173/api/coledit/notices",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          notices,
+        }),
+      }
+    );
+    const data_notice = await notices_psot.json();
+    // if error alert
+    if (data_notice.error) {
+      alert(data_notice.error);
+      return;
+    }
+    console.log(data);
+    console.log(data_notice);
   };
-
   const handleReset = () => {
     setFormData({
       roomNumber: "",
