@@ -11,7 +11,7 @@ type DataType = {
   amount: string;
   id: string;
 }
-type DataTypes = {
+type ColumnTypes = {
   title: string;
   dataIndex: string;
   key: string;
@@ -54,9 +54,22 @@ const useCollist = () => {
       id: '4',
     },
   ]);
+  type ColumnsType = {
+    title: string;
+    dataIndex: string;
+    key?: string;
+    width?: string;
+    type?: string;
+    amount?: string;
+    filters?: any;
+    onFilter?: any;
+    sorter?: any;
+  }
+
+  type columnsarray = ColumnsType[];
 
 
-  const columns: ColumnsType<DataTypes> = [
+  const columns:columnsarray = [
     {
       title: '編號',
       dataIndex: 'id',
@@ -85,15 +98,16 @@ const useCollist = () => {
           value: '代付',
         },
       ],
-      onFilter: (value, record) => record.type.includes(value as string),
+      onFilter: (value:string, record:any) => record.type.includes(value as string),
     },
     {
       title: '費用金額',
       dataIndex: 'amount',
-      sorter: (a, b) => parseInt(a.amount) - parseInt(b.amount),
+      sorter: (a:string, b:string) => parseInt(a) - parseInt(b),
 
     }
   ];
+
   const getListdata = async () => {
     const response = await fetch('http://localhost:5173/api/colelist');
     if (!response.ok) {
