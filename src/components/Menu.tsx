@@ -48,7 +48,6 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   
   const onClick: MenuProps['onClick'] = (e) => {
-    console.log('click ', e);
     if (e.key && e.key.toString() !== '') {
       navigate('/' + e.key.toString());
     }

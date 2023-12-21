@@ -21,15 +21,15 @@ interface NoticeData {
 const useColedit = () => {
     const [notices, setNotices] = useState<NoticeData[]>([
         {
-            visitDate: '',
+            visitDate: '2024-01-01',
             record: '',
-            remindDate: '',
+            remindDate: '2024-01-31',
             remind: '',
         },
         {
-            visitDate: '',
+            visitDate: '2024-01-01',
             record: '',
-            remindDate: '',
+            remindDate: '2024-01-31',
             remind: '',
         },
     ]);
@@ -87,14 +87,14 @@ const useColedit = () => {
         });
         setNotices([
             {
-                visitDate: '',
+                visitDate: '2024-01-01',
                 record: '',
-                remindDate: '',
+                remindDate: '2024-01-31',
                 remind: '',
             },
         ]);
     };
-    
+
     const handleAddNotice = () => {
         setNotices((prevNotices) => {
             const newNotices = [...prevNotices];
@@ -109,20 +109,43 @@ const useColedit = () => {
     }
 
     const onChangeDate: DatePickerProps['onChange'] = (date, dateString) => {
-        console.log(date, dateString);
-        console.log(dateString);
         handleNoticeChange(0, 'visitDate', dateString);
     };
 
     const onChangeRemindDate: DatePickerProps['onChange'] = (date, dateString) => {
-        console.log(date, dateString);
-        console.log(dateString);
         handleNoticeChange(0, 'remindDate', dateString);
     };
     const getapi = async () => {
-        const res = await fetch('http://localhost:5173/api/aaa');
+        //get url last number
+        const url = window.location.href;
+        const url_split = url.split('/');
+        const url_last = url_split[url_split.length - 1];
+        const token = 'YOUR_ACCESS_TOKEN'; 
+        const res = await fetch(`http://localhost:5173/api/coledit/${url_last}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+      
+        });
         const data = await res.json();
-        console.log(data);
+        // if error alert
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+        setFormData({
+            roomNumber: data.data.roomNumber,
+            expenseName: data.data.expenseName,
+            expenseAmount: data.data.expenseAmount,
+            paymentMethod: data.data.paymentMethod,
+            note: data.data.note,
+            bankName: data.data.bankName,
+            bankAccount: data.data.bankAccount,
+        });
+        setNotices(data.data.notices);
+
     };
     useEffect(() => {
         getapi();

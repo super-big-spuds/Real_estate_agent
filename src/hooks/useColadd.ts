@@ -21,15 +21,9 @@ interface NoticeData {
 const useCustomHook = () => {
     const [notices, setNotices] = useState<NoticeData[]>([
         {
-            visitDate: '',
+            visitDate: '2024-01-01',
             record: '',
-            remindDate: '',
-            remind: '',
-        },
-        {
-            visitDate: '',
-            record: '',
-            remindDate: '',
+            remindDate: '2024-01-31',
             remind: '',
         },
     ]);
@@ -70,10 +64,25 @@ const useCustomHook = () => {
     }
 
 
-    const handleSave = () => {
-        console.log(formData);
-        console.log(notices);
-    };
+    const handleSave = async () => {
+        const res = await fetch('/api/coledit', {
+            method: 'POST',
+            body: JSON.stringify({
+                formData,
+                
+            }),
+        });
+        const notices_psot = await fetch('/api/coledit/notices', {
+            method: 'POST',
+            body: JSON.stringify({
+                notices,
+            }),
+        });
+        const data_notice = await notices_psot.json();
+        const data = await res.json();
+        console.log(data);
+        console.log(data_notice);
+    }
 
     const handleReset = () => {
         setFormData({
@@ -87,9 +96,9 @@ const useCustomHook = () => {
         });
         setNotices([
             {
-                visitDate: '',
+                visitDate: '2024-01-01',
                 record: '',
-                remindDate: '',
+                remindDate: '2024-01-31',
                 remind: '',
             },
         ]);
@@ -99,9 +108,9 @@ const useCustomHook = () => {
         setNotices((prevNotices) => {
             const newNotices = [...prevNotices];
             newNotices.push({
-                visitDate: '',
+                visitDate: '2024-01-01',
                 record: '',
-                remindDate: '',
+                remindDate: '2024-01-31',
                 remind: '',
             });
             return newNotices;
@@ -109,14 +118,10 @@ const useCustomHook = () => {
     }
 
     const onChangeDate: DatePickerProps['onChange'] = (date, dateString) => {
-        console.log(date, dateString);
-        console.log(dateString);
         handleNoticeChange(0, 'visitDate', dateString);
     };
 
     const onChangeRemindDate: DatePickerProps['onChange'] = (date, dateString) => {
-        console.log(date, dateString);
-        console.log(dateString);
         handleNoticeChange(0, 'remindDate', dateString);
     };
 

@@ -1,7 +1,7 @@
 import { Input, Select, Button } from 'antd';
 import Notice from './Notice';
 
-export default function Col_mange(props) {
+export default function Col_mange(props:any) {
     const { TextArea } = Input;
     const {
         formData,

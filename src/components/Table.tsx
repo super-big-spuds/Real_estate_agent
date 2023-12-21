@@ -77,7 +77,6 @@ const App=() => {
   const navigate = useNavigate();
   const rowSelection: TableRowSelection<DataType> = {
     onSelect: (record:any) => {
-      console.log('Selected row:', record);
       navigate(`/Collection/Edit/${record.id}`)
     },
   };
