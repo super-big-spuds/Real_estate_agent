@@ -15,7 +15,7 @@ const useCollectionAdd = () => {
   ]);
   const [formData, setFormData] = useState<FormData>({
     roomNumber: "",
-    expenseName: "水費",
+    expenseName: "水電空調費",
     type: "代收",
     expenseAmount: "",
     paymentMethod: "現金",
@@ -63,7 +63,7 @@ const useCollectionAdd = () => {
   const handleReset = () => {
     setFormData({
       roomNumber: "",
-      expenseName: "水費",
+      expenseName: "水電空調費",
       type: "代收",
       expenseAmount: "",
       paymentMethod: "現金",

@@ -43,7 +43,7 @@ export default function CollectionMange(props: any) {
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <p>房號:</p>
                 <Input
-                  placeholder="Basic usage"
+                  placeholder="請輸入內容"
                   value={formData.roomNumber}
                   onChange={(e) => handleChange("roomNumber", e.target.value)}
                 />
@@ -78,7 +78,7 @@ export default function CollectionMange(props: any) {
               <div className="inline-flex whitespace-nowrap w-96">
                 <p>費用金額:</p>
                 <Input
-                  placeholder="Basic usage"
+                  placeholder="請輸入內容"
                   value={formData.expenseAmount}
                   onChange={(e) =>
                     handleChange("expenseAmount", e.target.value)
@@ -98,7 +98,7 @@ export default function CollectionMange(props: any) {
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <p>備註:</p>
                 <TextArea
-                  placeholder="Basic usage"
+                  placeholder="請輸入內容"
                   rows={10}
                   className="h-48 w-72"
                   value={formData.note}
@@ -108,7 +108,7 @@ export default function CollectionMange(props: any) {
               <div className="inline-flex whitespace-nowrap w-96">
                 <p>匯款銀行:</p>
                 <Input
-                  placeholder="Basic usage"
+                  placeholder="請輸入內容"
                   value={formData.bankName}
                   onChange={(e) => handleChange("bankName", e.target.value)}
                 />
@@ -116,7 +116,7 @@ export default function CollectionMange(props: any) {
               <div className="inline-flex whitespace-nowrap w-96">
                 <p>匯款帳號:</p>
                 <Input
-                  placeholder="Basic usage"
+                  placeholder="請輸入內容"
                   value={formData.bankAccount}
                   onChange={(e) => handleChange("bankAccount", e.target.value)}
                 />
