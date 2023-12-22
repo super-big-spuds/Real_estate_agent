@@ -51,7 +51,7 @@ const useCollectionList = () => {
       value: string;
     }[];
     onFilter?: (value: string, record: Collection) => boolean;
-    sorter?: (a: string, b: string) => number;
+    sorter?: (a: Collection, b: Collection) => number;
   };
 
   type columnsarray = ColumnsType[];
@@ -89,8 +89,7 @@ const useCollectionList = () => {
           value: "第四台",
         },
       ],
-      onFilter: (value: string, record: Collection) =>
-        record.name.includes(value as string),
+      onFilter: (value, record) => record.name.includes(value),
     },
     {
       title: "費用類型",
@@ -105,13 +104,12 @@ const useCollectionList = () => {
           value: "代付",
         },
       ],
-      onFilter: (value: string, record: Collection) =>
-        record.type.includes(value as string),
+      onFilter: (value, record) => record.type.includes(value),
     },
     {
       title: "費用金額",
       dataIndex: "amount",
-      sorter: (a: string, b: string) => parseInt(a) - parseInt(b),
+      sorter: (a, b) => parseInt(a.amount) - parseInt(b.amount),
     },
   ];
 
