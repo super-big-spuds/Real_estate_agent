@@ -1,24 +1,7 @@
 import { useState, useEffect } from "react";
 import { DatePickerProps } from "antd/lib/date-picker";
 import { useGetCollectionEdit, usePostCollectionEdit } from "./useAPI";
-
-interface FormData {
-  roomNumber: string;
-  expenseName: string;
-  type: string;
-  expenseAmount: string;
-  paymentMethod: string;
-  note: string;
-  bankName: string;
-  bankAccount: string;
-}
-
-interface NoticeData {
-  visitDate: string;
-  record: string;
-  remindDate: string;
-  remind: string;
-}
+import type { FormData, NoticeData } from "../type";
 
 const useCollectionEdit = () => {
   const { getCollectionEdit, isError, isLoading, dataEdit } =
@@ -48,7 +31,6 @@ const useCollectionEdit = () => {
     bankName: "",
     bankAccount: "",
   });
-
   const handleChange = (key: keyof FormData, value: string) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -87,11 +69,8 @@ const useCollectionEdit = () => {
       ...formData,
       id: url_last,
     };
-    const jsonFromData = JSON.stringify(newformdata);
-    const jsonNotices = JSON.stringify(notices);
-    await handleSaveColumn(jsonFromData);
-    await handleSaveNotice(jsonNotices);
-
+    await handleSaveColumn(newformdata);
+    await handleSaveNotice(notices);
     alert("儲存成功");
   };
 
@@ -145,22 +124,23 @@ const useCollectionEdit = () => {
     const url_last = url_split[url_split.length - 1];
     await getCollectionEdit(url_last);
   };
+
   useEffect(() => {
     getapi();
   }, []);
   useEffect(() => {
     if (!dataEdit) return;
     setFormData({
-      roomNumber: dataEdit.data.roomNumber,
-      expenseName: dataEdit.data.expenseName,
-      type: dataEdit.data.type,
-      expenseAmount: dataEdit.data.expenseAmount,
-      paymentMethod: dataEdit.data.paymentMethod,
-      note: dataEdit.data.note,
-      bankName: dataEdit.data.bankName,
-      bankAccount: dataEdit.data.bankAccount,
+      roomNumber: dataEdit.roomNumber,
+      expenseName: dataEdit.expenseName,
+      type: dataEdit.type,
+      expenseAmount: dataEdit.expenseAmount,
+      paymentMethod: dataEdit.paymentMethod,
+      note: dataEdit.note,
+      bankName: dataEdit.bankName,
+      bankAccount: dataEdit.bankAccount,
     });
-    setNotices(dataEdit.data.notices);
+    setNotices(dataEdit.notices as NoticeData[]);
   }, [dataEdit]);
 
   return {

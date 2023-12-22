@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Collection } from "../type";
+import type { Collection, FormData, NoticeData } from "../type";
 
 const APIBaseURL = process.env.BASE_URL;
 
@@ -75,7 +75,7 @@ export function usePostCollectionAdd() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const handleSaveColumn = async (formDatas: any) => {
+  const handleSaveColumn = async (formDatas: FormData) => {
     setIsLoading(true);
     try {
       const res = await muliteFetch("/coladd", "POST", token, formDatas);
@@ -90,7 +90,7 @@ export function usePostCollectionAdd() {
     }
   };
 
-  const handleSaveNotice = async (notices: any) => {
+  const handleSaveNotice = async (notices: NoticeData[]) => {
     setIsLoading(true);
     try {
       const res = await muliteFetch("/coladd/notices", "POST", token, notices);
@@ -117,13 +117,13 @@ export const useGetCollectionEdit = () => {
   const token = useToken();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [dataEdit, setData] = useState<any>();
+  const [dataEdit, setData] = useState<FormData>();
 
   const getCollectionEdit = async (id: string) => {
     try {
       const res = await getFetch(`/coledit/${id}`, token);
       const data = await res.json();
-      setData(data);
+      setData(data.data);
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -143,11 +143,11 @@ export function usePostCollectionEdit() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const handleSaveColumn = async (formDatas: any) => {
+  const handleSaveColumn = async (formDatas: FormData) => {
     setIsLoading(true);
-
+    const jsonFromData = JSON.stringify(formDatas);
     try {
-      const res = await muliteFetch("/coledit", "POST", token, formDatas);
+      const res = await muliteFetch("/coledit", "POST", token, jsonFromData);
       if (!res.ok) {
         throw new Error(res.statusText);
       }
@@ -159,10 +159,16 @@ export function usePostCollectionEdit() {
     }
   };
 
-  const handleSaveNotice = async (notices: any) => {
+  const handleSaveNotice = async (notices: NoticeData[]) => {
     setIsLoading(true);
+    const jsonNotices = JSON.stringify(notices);
     try {
-      const res = await muliteFetch("/coledit/notices", "POST", token, notices);
+      const res = await muliteFetch(
+        "/coledit/notices",
+        "POST",
+        token,
+        jsonNotices
+      );
       if (!res.ok) {
         throw new Error(res.statusText);
       }

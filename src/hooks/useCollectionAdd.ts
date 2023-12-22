@@ -1,27 +1,10 @@
 import { useState, useEffect } from "react";
 import { DatePickerProps } from "antd/lib/date-picker";
 import { usePostCollectionAdd } from "./useAPI";
-
-interface FormData {
-  roomNumber: string;
-  expenseName: string;
-  expenseAmount: string;
-  paymentMethod: string;
-  note: string;
-  bankName: string;
-  bankAccount: string;
-}
-
-interface NoticeData {
-  visitDate: string;
-  record: string;
-  remindDate: string;
-  remind: string;
-}
+import type { FormData, NoticeData } from "../type";
 
 const useCollectionAdd = () => {
-  const { isLoading, isError, handleSaveColumn, handleSaveNotice } =
-    usePostCollectionAdd();
+  const { handleSaveColumn, handleSaveNotice } = usePostCollectionAdd();
   const [notices, setNotices] = useState<NoticeData[]>([
     {
       visitDate: "2024-01-01",
@@ -33,6 +16,7 @@ const useCollectionAdd = () => {
   const [formData, setFormData] = useState<FormData>({
     roomNumber: "",
     expenseName: "水費",
+    type: "代收",
     expenseAmount: "",
     paymentMethod: "現金",
     note: "",
@@ -80,6 +64,7 @@ const useCollectionAdd = () => {
     setFormData({
       roomNumber: "",
       expenseName: "水費",
+      type: "代收",
       expenseAmount: "",
       paymentMethod: "現金",
       note: "",
