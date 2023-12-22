@@ -42,18 +42,17 @@ export function useToken() {
   return token;
 }
 export function useGetCollectionList() {
-  const token = useToken();
+  const token = "";
   const [datasa, setData] = useState<Collection>();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     (async () => {
+      if (token) return;
       try {
         const res = await getFetch("/collection/list", token);
         const newData = await res.json();
-        console.log(newData);
-
         setData(newData);
       } catch (error) {
         console.error(error);
