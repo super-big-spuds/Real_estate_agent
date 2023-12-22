@@ -1,5 +1,5 @@
 import CollectionMange from "../../components/CollectionMange";
-import useColadd from "../../hooks/useCollectionAdd";
+import useCollectionAdd from "../../hooks/useCollectionAdd";
 
 export const Collection = () => {
   const {
@@ -13,7 +13,7 @@ export const Collection = () => {
     onChangeRemindDate,
     handleAddNotice,
     handleDeleteNotice,
-  } = useColadd();
+  } = useCollectionAdd();
   return (
     <CollectionMange
       formData={formData}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { DatePickerProps } from "antd/lib/date-picker";
+import { useGetCollectionEdit, usePostCollectionEdit } from "./useAPI";
 
 interface FormData {
   roomNumber: string;
@@ -19,6 +20,9 @@ interface NoticeData {
 }
 
 const useCollectionEdit = () => {
+  const { getCollectionEdit, isError, isLoading, dataEdit } =
+    useGetCollectionEdit();
+  const { handleSaveColumn, handleSaveNotice } = usePostCollectionEdit();
   const [notices, setNotices] = useState<NoticeData[]>([
     {
       visitDate: "2024-01-01",
@@ -74,45 +78,21 @@ const useCollectionEdit = () => {
   };
 
   const handleSave = async () => {
-    const token = 123;
-    const res = await fetch("http://localhost:5173/api/coledit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        formData,
-      }),
-    });
-    const data = await res.json();
-    // if error alert
-    if (data.error) {
-      alert(data.error);
-      return;
-    }
-    const notices_psot = await fetch(
-      "http://localhost:5173/api/coledit/notices",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          notices,
-        }),
-      }
-    );
-    const data_notice = await notices_psot.json();
-    // if error alert
-    if (data_notice.error) {
-      alert(data_notice.error);
-      return;
-    }
-    console.log(data);
-    console.log(data_notice);
+    const url = window.location.href;
+    const url_split = url.split("/");
+    const url_last = url_split[url_split.length - 1];
+    const newformdata = {
+      ...formData,
+      id: url_last,
+    };
+    const jsonFromData = JSON.stringify(newformdata);
+    const jsonNotices = JSON.stringify(notices);
+    await handleSaveColumn(jsonFromData);
+    await handleSaveNotice(jsonNotices);
+
+    alert("儲存成功");
   };
+
   const handleReset = () => {
     setFormData({
       roomNumber: "",
@@ -157,38 +137,27 @@ const useCollectionEdit = () => {
     handleNoticeChange(0, "remindDate", dateString);
   };
   const getapi = async () => {
-    //get url last number
     const url = window.location.href;
     const url_split = url.split("/");
     const url_last = url_split[url_split.length - 1];
-    const token = "YOUR_ACCESS_TOKEN";
-    const res = await fetch(`http://localhost:5173/api/coledit/${url_last}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    // if error alert
-    if (data.error) {
-      alert(data.error);
-      return;
-    }
-    setFormData({
-      roomNumber: data.data.roomNumber,
-      expenseName: data.data.expenseName,
-      expenseAmount: data.data.expenseAmount,
-      paymentMethod: data.data.paymentMethod,
-      note: data.data.note,
-      bankName: data.data.bankName,
-      bankAccount: data.data.bankAccount,
-    });
-    setNotices(data.data.notices);
+    await getCollectionEdit(url_last);
   };
   useEffect(() => {
     getapi();
   }, []);
+  useEffect(() => {
+    if (!dataEdit) return;
+    setFormData({
+      roomNumber: dataEdit.data.roomNumber,
+      expenseName: dataEdit.data.expenseName,
+      expenseAmount: dataEdit.data.expenseAmount,
+      paymentMethod: dataEdit.data.paymentMethod,
+      note: dataEdit.data.note,
+      bankName: dataEdit.data.bankName,
+      bankAccount: dataEdit.data.bankAccount,
+    });
+    setNotices(dataEdit.data.notices);
+  }, [dataEdit]);
 
   return {
     formData,
@@ -201,6 +170,8 @@ const useCollectionEdit = () => {
     onChangeRemindDate,
     handleAddNotice,
     handleDeleteNotice,
+    isLoading,
+    isError,
   };
 };
 

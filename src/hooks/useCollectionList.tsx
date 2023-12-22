@@ -11,7 +11,7 @@ type DataType = {
   id: string;
 };
 
-const useCollist = () => {
+const useCollectionList = () => {
   const [data, setData] = useState<DataType[]>([
     {
       key: "1",
@@ -124,4 +124,4 @@ const useCollist = () => {
   };
 };
 
-export default useCollist;
+export default useCollectionList;

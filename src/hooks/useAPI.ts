@@ -81,6 +81,8 @@ export function usePostCollectionAdd() {
 
   const handleSaveColumn = async (formDatas: any) => {
     setIsLoading(true);
+    console.log(formDatas);
+
     try {
       const res = await muliteFetch("/coladd", "POST", token, formDatas);
       if (!res.ok) {
@@ -105,6 +107,75 @@ export function usePostCollectionAdd() {
       }
       const data = await res.json();
       console.log(data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return {
+    isLoading,
+    isError,
+    handleSaveColumn,
+    handleSaveNotice,
+  };
+}
+
+export const useGetCollectionEdit = () => {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [dataEdit, setData] = useState<any>();
+
+  const getCollectionEdit = async (id: string) => {
+    try {
+      const res = await getFetch(`/coledit/${id}`, token);
+      const data = await res.json();
+      setData(data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    getCollectionEdit,
+    dataEdit,
+  };
+};
+export function usePostCollectionEdit() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleSaveColumn = async (formDatas: any) => {
+    setIsLoading(true);
+
+    try {
+      const res = await muliteFetch("/coledit", "POST", token, formDatas);
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSaveNotice = async (notices: any) => {
+    setIsLoading(true);
+    try {
+      const res = await muliteFetch("/coledit/notices", "POST", token, notices);
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
     } catch (error) {
       console.error(error);
       setIsError(true);

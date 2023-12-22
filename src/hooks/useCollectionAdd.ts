@@ -19,7 +19,7 @@ interface NoticeData {
   remind: string;
 }
 
-const useCustomHook = () => {
+const useCollectionAdd = () => {
   const { isLoading, isError, handleSaveColumn, handleSaveNotice } =
     usePostCollectionAdd();
   const [notices, setNotices] = useState<NoticeData[]>([
@@ -134,4 +134,4 @@ const useCustomHook = () => {
   };
 };
 
-export default useCustomHook;
+export default useCollectionAdd;

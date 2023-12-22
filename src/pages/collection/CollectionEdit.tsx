@@ -12,6 +12,8 @@ export const Collection = () => {
     onChangeRemindDate,
     handleAddNotice,
     handleDeleteNotice,
+    isLoading,
+    isError,
   } = useCollectionEdit();
   return (
     <CollectionMange
@@ -25,6 +27,8 @@ export const Collection = () => {
       onChangeRemindDate={onChangeRemindDate}
       handleAddNotice={handleAddNotice}
       handleDeleteNotice={handleDeleteNotice}
+      isLoading={isLoading}
+      isError={isError}
     />
   );
 };
