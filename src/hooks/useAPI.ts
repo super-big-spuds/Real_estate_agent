@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { Collection } from "../type";
 
 const APIBaseURL = process.env.BASE_URL;
 
@@ -40,12 +41,6 @@ export function useToken() {
 
   return token;
 }
-
-type Collection = {
-  data(data: any): unknown;
-  name: string;
-  description: string;
-};
 export function useGetCollectionList() {
   const token = useToken();
   const [datasa, setData] = useState<Collection>();
@@ -57,6 +52,8 @@ export function useGetCollectionList() {
       try {
         const res = await getFetch("/collection/list", token);
         const newData = await res.json();
+        console.log(newData);
+
         setData(newData);
       } catch (error) {
         console.error(error);

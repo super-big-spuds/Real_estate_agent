@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import getColumnSearchProps from "../components/getColumnSearchProps";
 import { useGetCollectionList } from "./useAPI";
+import type { Collection } from "../type";
+
 type DataType = {
   key: React.Key;
   name: string;
@@ -53,9 +55,12 @@ const useCollectionList = () => {
     width?: string;
     type?: string;
     amount?: string;
-    filters?: any;
-    onFilter?: any;
-    sorter?: any;
+    filters?: {
+      text: string;
+      value: string;
+    }[];
+    onFilter?: (value: string, record: Collection) => boolean;
+    sorter?: (a: string, b: string) => number;
   };
 
   type columnsarray = ColumnsType[];
@@ -89,7 +94,7 @@ const useCollectionList = () => {
           value: "代付",
         },
       ],
-      onFilter: (value: string, record: any) =>
+      onFilter: (value: string, record: Collection) =>
         record.type.includes(value as string),
     },
     {
@@ -100,15 +105,14 @@ const useCollectionList = () => {
   ];
 
   const { isLoading, isError, datasa } = useGetCollectionList();
-
   useEffect(() => {
     if (datasa) {
-      setData(datasa.data as any);
+      setData(datasa.data || []);
     }
   }, [datasa]);
 
   const navigate = useNavigate();
-  const onRow = (record: any) => {
+  const onRow = (record: Collection) => {
     return {
       onClick: () => {
         navigate(`/Collection/Edit/${record.id}`);
