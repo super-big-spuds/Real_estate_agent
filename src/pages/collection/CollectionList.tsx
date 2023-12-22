@@ -2,7 +2,7 @@
 import Table from "../../components/Table";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import useCollist from "../../hooks/useCollist";
+import useCollist from "../../hooks/useCollectionList";
 
 export const CollectionList = () => {
   const navigate = useNavigate();

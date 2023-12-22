@@ -1,5 +1,5 @@
-import CollectionMange from '../../components/CollectionMange';
-import useColadd from '../../hooks/useColadd';
+import CollectionMange from "../../components/CollectionMange";
+import useColadd from "../../hooks/useCollectionAdd";
 
 export const Collection = () => {
   const {
@@ -12,22 +12,21 @@ export const Collection = () => {
     onChangeDate,
     onChangeRemindDate,
     handleAddNotice,
-    handleDeleteNotice
+    handleDeleteNotice,
   } = useColadd();
   return (
-      <CollectionMange 
-        formData={formData}
-        notices={notices}
-        handleChange={handleChange}
-        handleNoticeChange={handleNoticeChange}
-        handleSave={handleSave}
-        handleReset={handleReset}
-        onChangeDate={onChangeDate}
-        onChangeRemindDate={onChangeRemindDate}
-        handleAddNotice={handleAddNotice}
-        handleDeleteNotice={handleDeleteNotice}
-      />
+    <CollectionMange
+      formData={formData}
+      notices={notices}
+      handleChange={handleChange}
+      handleNoticeChange={handleNoticeChange}
+      handleSave={handleSave}
+      handleReset={handleReset}
+      onChangeDate={onChangeDate}
+      onChangeRemindDate={onChangeRemindDate}
+      handleAddNotice={handleAddNotice}
+      handleDeleteNotice={handleDeleteNotice}
+    />
   );
 };
 export default Collection;
-

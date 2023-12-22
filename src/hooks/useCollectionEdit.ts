@@ -18,7 +18,7 @@ interface NoticeData {
   remind: string;
 }
 
-const useColedit = () => {
+const useCollectionEdit = () => {
   const [notices, setNotices] = useState<NoticeData[]>([
     {
       visitDate: "2024-01-01",
@@ -204,4 +204,4 @@ const useColedit = () => {
   };
 };
 
-export default useColedit;
+export default useCollectionEdit;
