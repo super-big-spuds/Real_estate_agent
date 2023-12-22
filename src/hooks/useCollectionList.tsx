@@ -4,17 +4,8 @@ import getColumnSearchProps from "../components/getColumnSearchProps";
 import { useGetCollectionList } from "./useAPI";
 import type { Collection } from "../type";
 
-type DataType = {
-  key: React.Key;
-  name: string;
-  houseid: string;
-  type: string;
-  amount: string;
-  id: string;
-};
-
 const useCollectionList = () => {
-  const [data, setData] = useState<DataType[]>([
+  const [data, setData] = useState<Collection[]>([
     {
       key: "1",
       name: "代收1",
@@ -127,7 +118,7 @@ const useCollectionList = () => {
   const { isLoading, isError, datasa } = useGetCollectionList();
   useEffect(() => {
     if (datasa) {
-      setData(datasa.data || []);
+      setData(datasa);
     }
   }, [datasa]);
 

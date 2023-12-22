@@ -43,7 +43,7 @@ export function useToken() {
 }
 export function useGetCollectionList() {
   const token = "";
-  const [datasa, setData] = useState<Collection>();
+  const [datasa, setData] = useState<Collection[]>();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -53,7 +53,7 @@ export function useGetCollectionList() {
       try {
         const res = await getFetch("/collection/list", token);
         const newData = await res.json();
-        setData(newData);
+        setData(newData.data);
       } catch (error) {
         console.error(error);
         setIsError(true);
