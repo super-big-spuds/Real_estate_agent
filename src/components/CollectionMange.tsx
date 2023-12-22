@@ -6,7 +6,6 @@ export default function CollectionMange(props: any) {
   const { TextArea } = Input;
   const navigate = useNavigate();
   const handleback = () => {
-    // history
     navigate("/Collection/List");
   };
   const {
@@ -49,17 +48,31 @@ export default function CollectionMange(props: any) {
                   onChange={(e) => handleChange("roomNumber", e.target.value)}
                 />
               </div>
+
+              <div className="inline-flex items-center whitespace-nowrap">
+                <p>費用類型:</p>
+                <Select
+                  defaultValue="代收"
+                  style={{ width: 120 }}
+                  options={[{ value: "代收" }, { value: "代付" }]}
+                  onChange={(value) => handleChange("expenseType", value)}
+                  value={formData.type}
+                />
+              </div>
+
               <div className="inline-flex items-center whitespace-nowrap">
                 <p>費用名稱:</p>
                 <Select
-                  defaultValue="水費"
+                  defaultValue="管理費"
                   style={{ width: 120 }}
                   options={[
-                    { value: "水費" },
-                    { value: "電費" },
+                    { value: "水電空調費" },
+                    { value: "第四台" },
                     { value: "管理費" },
+                    { value: "其他" },
                   ]}
                   onChange={(value) => handleChange("expenseName", value)}
+                  value={formData.expenseName}
                 />
               </div>
               <div className="inline-flex whitespace-nowrap w-96">

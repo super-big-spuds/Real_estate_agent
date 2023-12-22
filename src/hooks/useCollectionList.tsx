@@ -80,6 +80,26 @@ const useCollectionList = () => {
     {
       title: "費用名稱",
       dataIndex: "name",
+      filters: [
+        {
+          text: "水電空調費",
+          value: "水電空調費",
+        },
+        {
+          text: "管理費",
+          value: "管理費",
+        },
+        {
+          text: "其他費用",
+          value: "其他費用",
+        },
+        {
+          text: "第四台",
+          value: "第四台",
+        },
+      ],
+      onFilter: (value: string, record: Collection) =>
+        record.name.includes(value as string),
     },
     {
       title: "費用類型",

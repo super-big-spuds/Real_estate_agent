@@ -8,7 +8,8 @@ export default [
       message: "Successfully get the media",
       data: {
         roomNumber: "51734",
-        expenseName: "水費",
+        expenseName: "水電空調費",
+        type: "代收",
         expenseAmount: "100",
         paymentMethod: "現金",
         note: "10樓以下",
@@ -32,7 +33,8 @@ export default [
       message: "Successfully get the media",
       data: {
         roomNumber: "51734",
-        expenseName: "水費",
+        expenseName: "管理費",
+        type: "代付",
         expenseAmount: "100",
         paymentMethod: "現金",
         note: "10樓以下",
@@ -68,7 +70,8 @@ export default [
       message: "Successfully get the media",
       data: {
         roomNumber: "51734",
-        expenseName: "水費",
+        expenseName: "第四台",
+        type: "代收",
         expenseAmount: "100",
         paymentMethod: "現金",
         note: "10樓以下",
@@ -110,7 +113,8 @@ export default [
       message: "Successfully get the media",
       data: {
         roomNumber: "51734",
-        expenseName: "水費",
+        expenseName: "其他費用",
+        type: "代付",
         expenseAmount: "100",
         paymentMethod: "現金",
         note: "10樓以下",
@@ -169,7 +173,7 @@ export default [
       data: [
         {
           key: "1",
-          name: "水電費",
+          name: "水電空調費",
           houseid: "1",
           type: "代收",
           amount: "1000",
@@ -177,7 +181,7 @@ export default [
         },
         {
           key: "2",
-          name: "水電費",
+          name: "管理費",
           houseid: "2",
           type: "代付",
           amount: "2000",
@@ -185,7 +189,7 @@ export default [
         },
         {
           key: "3",
-          name: "水電費",
+          name: "第四台",
           houseid: "3",
           type: "代收",
           amount: "3000",
@@ -193,7 +197,7 @@ export default [
         },
         {
           key: "4",
-          name: "瓦斯費",
+          name: "其他費用",
           houseid: "4",
           type: "代付",
           amount: "4000",

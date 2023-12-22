@@ -5,6 +5,7 @@ import { useGetCollectionEdit, usePostCollectionEdit } from "./useAPI";
 interface FormData {
   roomNumber: string;
   expenseName: string;
+  type: string;
   expenseAmount: string;
   paymentMethod: string;
   note: string;
@@ -40,6 +41,7 @@ const useCollectionEdit = () => {
   const [formData, setFormData] = useState<FormData>({
     roomNumber: "",
     expenseName: "水費",
+    type: "代收",
     expenseAmount: "",
     paymentMethod: "現金",
     note: "",
@@ -97,6 +99,7 @@ const useCollectionEdit = () => {
     setFormData({
       roomNumber: "",
       expenseName: "水費",
+      type: "代收",
       expenseAmount: "",
       paymentMethod: "現金",
       note: "",
@@ -150,6 +153,7 @@ const useCollectionEdit = () => {
     setFormData({
       roomNumber: dataEdit.data.roomNumber,
       expenseName: dataEdit.data.expenseName,
+      type: dataEdit.data.type,
       expenseAmount: dataEdit.data.expenseAmount,
       paymentMethod: dataEdit.data.paymentMethod,
       note: dataEdit.data.note,

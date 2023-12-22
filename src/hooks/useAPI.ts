@@ -77,15 +77,11 @@ export function usePostCollectionAdd() {
 
   const handleSaveColumn = async (formDatas: any) => {
     setIsLoading(true);
-    console.log(formDatas);
-
     try {
       const res = await muliteFetch("/coladd", "POST", token, formDatas);
       if (!res.ok) {
         throw new Error(res.statusText);
       }
-      const data = await res.json();
-      console.log(data);
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -101,8 +97,6 @@ export function usePostCollectionAdd() {
       if (!res.ok) {
         throw new Error(res.statusText);
       }
-      const data = await res.json();
-      console.log(data);
     } catch (error) {
       console.error(error);
       setIsError(true);
