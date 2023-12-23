@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { DatePickerProps } from "antd/lib/date-picker";
 import { useGetCollectionEdit, usePostCollectionEdit } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
+import { useParams } from "react-router-dom";
 
 const useCollectionEdit = () => {
   const { getCollectionEdit, isError, isLoading, dataEdit } =
     useGetCollectionEdit();
   const { handleSaveColumn, handleSaveNotice } = usePostCollectionEdit();
+  const { id } = useParams();
   const [notices, setNotices] = useState<NoticeData[]>([
     {
       visitDate: "2024-01-01",
@@ -62,12 +64,10 @@ const useCollectionEdit = () => {
   };
 
   const handleSave = async () => {
-    const url = window.location.href;
-    const url_split = url.split("/");
-    const url_last = url_split[url_split.length - 1];
+    if (!id) return;
     const newformdata = {
       ...formData,
-      id: url_last,
+      id: id,
     };
     await handleSaveColumn(newformdata);
     await handleSaveNotice(notices);
@@ -119,10 +119,8 @@ const useCollectionEdit = () => {
     handleNoticeChange(0, "remindDate", dateString);
   };
   const getapi = async () => {
-    const url = window.location.href;
-    const url_split = url.split("/");
-    const url_last = url_split[url_split.length - 1];
-    await getCollectionEdit(url_last);
+    if (!id) return;
+    await getCollectionEdit(id);
   };
 
   useEffect(() => {

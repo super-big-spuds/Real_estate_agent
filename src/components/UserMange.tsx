@@ -1,5 +1,6 @@
 import { Input, Select, Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import InputWithErrorMessage from "./InputWithErrorMessage";
 
 export default function CollectionMange(props: any) {
   const navigate = useNavigate();
@@ -34,10 +35,11 @@ export default function CollectionMange(props: any) {
             <div className="flex flex-col flex-wrap w-full h-full gap-10 p-10 overflow-visible ">
               <div className="inline-flex items-center whitespace-nowrap w-96">
                 <p>使用者名稱:</p>
-                <Input
-                  placeholder="請輸入內容"
+                <InputWithErrorMessage
                   value={formData.name}
                   onChange={(e) => handleChange("name", e.target.value)}
+                  isError={formData.name.length < 2}
+                  errorMessage={"請輸入內容"}
                 />
               </div>
               <div className="inline-flex items-center whitespace-nowrap w-96">

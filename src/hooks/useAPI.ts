@@ -283,6 +283,7 @@ export function useGetUserEdit() {
     try {
       const res = await getFetch(`/user/edit/${id}`, token);
       const data = await res.json();
+
       setData(data.data);
     } catch (error) {
       console.error(error);
