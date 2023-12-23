@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Collection, FormData, NoticeData } from "../type";
+import type { Collection, FormData, NoticeData, User } from "../type";
 
 const APIBaseURL = process.env.BASE_URL;
 
@@ -185,5 +185,117 @@ export function usePostCollectionEdit() {
     isError,
     handleSaveColumn,
     handleSaveNotice,
+  };
+}
+
+export function useGetUserList() {
+  const token = "";
+  const [dataUser, setDataUser] = useState<User[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const getUserList = async () => {
+    try {
+      const res = await getFetch("/user/list", token);
+      const newData = await res.json();
+      setDataUser(newData.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    getUserList();
+  }, []);
+
+  return {
+    isLoading,
+    isError,
+    dataUser,
+  };
+}
+
+export function usePostUserAdd() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleSaveUser = async (formDatas: User) => {
+    setIsLoading(true);
+
+    try {
+      const res = await muliteFetch("/user/add", "POST", token, formDatas);
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return {
+    isLoading,
+    isError,
+    handleSaveUser,
+  };
+}
+
+export function usePostUserEdit() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleSaveUser = async (formDatas: User) => {
+    setIsLoading(true);
+
+    try {
+      const res = await muliteFetch("/user/edit", "POST", token, formDatas);
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return {
+    isLoading,
+    isError,
+    handleSaveUser,
+  };
+}
+
+export function useGetUserEdit() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [dataEdit, setData] = useState<User>();
+
+  const getUserEdit = async (id: string) => {
+    try {
+      const res = await getFetch(`/user/edit/${id}`, token);
+      const data = await res.json();
+
+      setData(data.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    getUserEdit,
+    dataEdit,
   };
 }

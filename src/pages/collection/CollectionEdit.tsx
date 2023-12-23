@@ -1,5 +1,5 @@
 import CollectionMange from "../../components/CollectionMange";
-import useCollectionEdit from "../../hooks/useCollectionedit";
+import useCollectionEdit from "../../hooks/useCollectionEdit";
 export const Collection = () => {
   const {
     formData,
