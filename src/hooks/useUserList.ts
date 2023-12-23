@@ -50,9 +50,7 @@ const useCollectionList = () => {
     sorter?: (a: User, b: User) => number;
   };
 
-  type columnsarray = ColumnsType[];
-
-  const columns: columnsarray = [
+  const columns: ColumnsType[] = [
     {
       title: "編號",
       dataIndex: "id",
