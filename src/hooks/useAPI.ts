@@ -224,7 +224,7 @@ export function usePostUserAdd() {
 
   const handleSaveUser = async (formDatas: User) => {
     setIsLoading(true);
-    console.log(formDatas);
+
     try {
       const res = await muliteFetch("/user/add", "POST", token, formDatas);
       if (!res.ok) {
@@ -252,7 +252,7 @@ export function usePostUserEdit() {
 
   const handleSaveUser = async (formDatas: User) => {
     setIsLoading(true);
-    console.log(formDatas);
+
     try {
       const res = await muliteFetch("/user/edit", "POST", token, formDatas);
       if (!res.ok) {
