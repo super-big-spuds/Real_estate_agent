@@ -48,7 +48,7 @@ export default function CollectionMange(props: any) {
                   onChange={(e) => handleChange("email", e.target.value)}
                 />
               </div>
-              <div className="inline-flex items-center whitespace-nowrap w-96">
+              <div className="inline-flex items-center whitespace-nowrap w-96 ">
                 <p>使用者密碼:</p>
                 <Input
                   placeholder="請輸入內容"

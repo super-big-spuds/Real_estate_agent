@@ -1,32 +1,20 @@
-import CollectionMange from "../../components/CollectionMange";
-import useCollectionEdit from "../../hooks/useCollectionedit";
+import UserMange from "../../components/UserMange";
+import useUserEdit from "../../hooks/useUserEdit";
 export const Collection = () => {
   const {
     formData,
-    notices,
     handleChange,
-    handleNoticeChange,
     handleSave,
     handleReset,
-    onChangeDate,
-    onChangeRemindDate,
-    handleAddNotice,
-    handleDeleteNotice,
     isLoading,
     isError,
-  } = useCollectionEdit();
+  } = useUserEdit();
   return (
-    <CollectionMange
+    <UserMange
       formData={formData}
-      notices={notices}
       handleChange={handleChange}
-      handleNoticeChange={handleNoticeChange}
       handleSave={handleSave}
       handleReset={handleReset}
-      onChangeDate={onChangeDate}
-      onChangeRemindDate={onChangeRemindDate}
-      handleAddNotice={handleAddNotice}
-      handleDeleteNotice={handleDeleteNotice}
       isLoading={isLoading}
       isError={isError}
     />

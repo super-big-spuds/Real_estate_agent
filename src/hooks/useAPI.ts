@@ -244,3 +244,57 @@ export function usePostUserAdd() {
     handleSaveUser,
   };
 }
+
+export function usePostUserEdit() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleSaveUser = async (formDatas: User) => {
+    setIsLoading(true);
+    console.log(formDatas);
+    try {
+      const res = await muliteFetch("/user/edit", "POST", token, formDatas);
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return {
+    isLoading,
+    isError,
+    handleSaveUser,
+  };
+}
+
+export function useGetUserEdit() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [dataEdit, setData] = useState<User>();
+
+  const getUserEdit = async (id: string) => {
+    try {
+      const res = await getFetch(`/user/edit/${id}`, token);
+      const data = await res.json();
+      setData(data.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    getUserEdit,
+    dataEdit,
+  };
+}
