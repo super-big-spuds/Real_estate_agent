@@ -121,17 +121,6 @@ const useCollectionAdd = () => {
     ]);
   };
 
-  type onChangeDatetype = (
-    keya: number,
-    date: any,
-    dateString: string,
-    type: any
-  ) => void;
-
-  const onChangeDate: onChangeDatetype = (keya, date, dateString, type) => {
-    handleNoticeChange(keya, type, dateString);
-  };
-
   return {
     formData,
     notices,
@@ -139,7 +128,6 @@ const useCollectionAdd = () => {
     handleNoticeChange,
     handleSave,
     handleReset,
-    onChangeDate,
     handleAddNotice,
     handleDeleteNotice,
   };

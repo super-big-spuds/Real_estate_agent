@@ -16,8 +16,6 @@ export default function CollectionMange(props: any) {
     handleNoticeChange,
     handleSave,
     handleReset,
-    onChangeDate,
-    onChangeRemindDate,
     handleAddNotice,
     handleDeleteNotice,
     isLoading,
@@ -154,8 +152,6 @@ export default function CollectionMange(props: any) {
               keya={index}
               notice={notice}
               handleNoticeChange={handleNoticeChange}
-              onChangeDate={onChangeDate}
-              onChangeRemindDate={onChangeRemindDate}
               handleDeleteNotice={handleDeleteNotice}
             />
           ))}

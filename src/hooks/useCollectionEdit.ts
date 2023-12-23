@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { DatePickerProps } from "antd/lib/date-picker";
 import { useGetCollectionEdit, usePostCollectionEdit } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { useParams } from "react-router-dom";
@@ -131,17 +130,6 @@ const useCollectionEdit = () => {
     });
   };
 
-  type onChangeDatetype = (
-    keya: number,
-    date: any,
-    dateString: string,
-    type: any
-  ) => void;
-
-  const onChangeDate: onChangeDatetype = (keya, date, dateString, type) => {
-    handleNoticeChange(keya, type, dateString);
-  };
-
   const getapi = async () => {
     if (!id) return;
     await getCollectionEdit(id);
@@ -173,7 +161,6 @@ const useCollectionEdit = () => {
     handleNoticeChange,
     handleSave,
     handleReset,
-    onChangeDate,
     handleAddNotice,
     handleDeleteNotice,
     isLoading,

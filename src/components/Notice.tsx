@@ -5,13 +5,6 @@ dayjs.extend(customParseFormat);
 
 interface NoticeProps {
   handleNoticeChange: (index: number, key: string, value: string) => void;
-  onChangeDate: (
-    index: number,
-    date: any,
-    dateString: string,
-    type: string
-  ) => void;
-  onChangeRemindDate: () => void;
   notice: {
     visitDate: string;
     record: string;
@@ -25,7 +18,6 @@ interface NoticeProps {
 export default function Notice({
   keya,
   handleNoticeChange,
-  onChangeDate,
   notice,
   handleDeleteNotice,
 }: NoticeProps) {
@@ -40,8 +32,8 @@ export default function Notice({
         <div className="inline-flex items-center whitespace-nowrap">
           <p>拜訪日期：</p>
           <DatePicker
-            onChange={(date, dateString) =>
-              onChangeDate(keya, date, dateString, "visitDate")
+            onChange={(_, dateString) =>
+              handleNoticeChange(keya, "visitDate", dateString)
             } // 注意這裡的修改
             value={visitDate}
           />
@@ -59,8 +51,8 @@ export default function Notice({
         <div className="inline-flex items-center whitespace-nowrap">
           <p>提醒日期：</p>
           <DatePicker
-            onChange={(date, dateString) =>
-              onChangeDate(keya, date, dateString, "remindDate")
+            onChange={(_, dateString) =>
+              handleNoticeChange(keya, "remindDate", dateString)
             }
             value={remindDate}
           />

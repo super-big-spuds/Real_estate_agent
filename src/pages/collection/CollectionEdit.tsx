@@ -8,8 +8,6 @@ export const Collection = () => {
     handleNoticeChange,
     handleSave,
     handleReset,
-    onChangeDate,
-    onChangeRemindDate,
     handleAddNotice,
     handleDeleteNotice,
     isLoading,
@@ -23,8 +21,6 @@ export const Collection = () => {
       handleNoticeChange={handleNoticeChange}
       handleSave={handleSave}
       handleReset={handleReset}
-      onChangeDate={onChangeDate}
-      onChangeRemindDate={onChangeRemindDate}
       handleAddNotice={handleAddNotice}
       handleDeleteNotice={handleDeleteNotice}
       isLoading={isLoading}
