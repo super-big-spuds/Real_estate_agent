@@ -2,24 +2,22 @@ import { useState, useEffect } from "react";
 import { DatePickerProps } from "antd/lib/date-picker";
 import { useGetCollectionEdit, usePostCollectionEdit } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
-import { useParams } from "react-router-dom";
-import { z } from "zod";
 
 const useCollectionEdit = () => {
   const { getCollectionEdit, isError, isLoading, dataEdit } =
     useGetCollectionEdit();
   const { handleSaveColumn, handleSaveNotice } = usePostCollectionEdit();
-  const nowdate = new Date();
-  const nowyear = nowdate.getFullYear();
-  const nowmonth = nowdate.getMonth() + 1;
-  const nowday = nowdate.getDate();
-  const nowdatestring = `${nowyear}-${nowmonth}-${nowday}`;
-  const { id } = useParams();
   const [notices, setNotices] = useState<NoticeData[]>([
     {
-      visitDate: nowdatestring,
+      visitDate: "2024-01-01",
       record: "",
-      remindDate: nowdatestring,
+      remindDate: "2024-01-31",
+      remind: "",
+    },
+    {
+      visitDate: "2024-01-01",
+      record: "",
+      remindDate: "2024-01-31",
       remind: "",
     },
   ]);
@@ -64,36 +62,15 @@ const useCollectionEdit = () => {
   };
 
   const handleSave = async () => {
-    if (!id) return;
-    const schemaform = z.object({
-      roomNumber: z.string().min(2, "房號至少兩個字"),
-      expenseName: z.string(),
-      type: z.string(),
-      expenseAmount: z.string().nonempty("金額不得為空"),
-      paymentMethod: z.string(),
-      note: z.string(),
-      bankName: z.string(),
-      bankAccount: z.string(),
-    });
-
-    const parseResult = schemaform.safeParse(formData);
-
-    if (!parseResult.success) {
-      const errorMessages = parseResult.error.errors.map((error) => {
-        return error.message;
-      });
-
-      alert(errorMessages.join("\n"));
-      return;
-    }
+    const url = window.location.href;
+    const url_split = url.split("/");
+    const url_last = url_split[url_split.length - 1];
     const newformdata = {
-      ...parseResult.data,
-      id: id,
+      ...formData,
+      id: url_last,
     };
     await handleSaveColumn(newformdata);
-    if (notices.length > 0) {
-      await handleSaveNotice(notices);
-    }
+    await handleSaveNotice(notices);
     alert("儲存成功");
   };
 
@@ -110,9 +87,9 @@ const useCollectionEdit = () => {
     });
     setNotices([
       {
-        visitDate: nowdatestring,
+        visitDate: "2024-01-01",
         record: "",
-        remindDate: nowdatestring,
+        remindDate: "2024-01-31",
         remind: "",
       },
     ]);
@@ -122,35 +99,35 @@ const useCollectionEdit = () => {
     setNotices((prevNotices) => {
       const newNotices = [...prevNotices];
       newNotices.push({
-        visitDate: nowdatestring,
+        visitDate: "",
         record: "",
-        remindDate: nowdatestring,
+        remindDate: "",
         remind: "",
       });
       return newNotices;
     });
   };
 
-  type onChangeDatetype = (
-    keya: number,
-    date: any,
-    dateString: string,
-    type: any
-  ) => void;
-
-  const onChangeDate: onChangeDatetype = (keya, date, dateString, type) => {
-    handleNoticeChange(keya, type, dateString);
+  const onChangeDate: DatePickerProps["onChange"] = (date, dateString) => {
+    handleNoticeChange(0, "visitDate", dateString);
   };
 
+  const onChangeRemindDate: DatePickerProps["onChange"] = (
+    date,
+    dateString
+  ) => {
+    handleNoticeChange(0, "remindDate", dateString);
+  };
   const getapi = async () => {
-    if (!id) return;
-    await getCollectionEdit(id);
+    const url = window.location.href;
+    const url_split = url.split("/");
+    const url_last = url_split[url_split.length - 1];
+    await getCollectionEdit(url_last);
   };
 
   useEffect(() => {
     getapi();
   }, []);
-
   useEffect(() => {
     if (!dataEdit) return;
     setFormData({
@@ -174,6 +151,7 @@ const useCollectionEdit = () => {
     handleSave,
     handleReset,
     onChangeDate,
+    onChangeRemindDate,
     handleAddNotice,
     handleDeleteNotice,
     isLoading,

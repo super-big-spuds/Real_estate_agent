@@ -34,12 +34,3 @@ export type NoticeData = {
   remindDate: string;
   remind: string;
 };
-
-export type User = {
-  key?: string;
-  name: string;
-  email: string;
-  isactive: string;
-  id?: string;
-  password?: string;
-};

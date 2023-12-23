@@ -1,14 +1,14 @@
-import { MockMethod } from "vite-plugin-mock";
+import { MockMethod } from 'vite-plugin-mock'
 
 export default [
   {
-    url: "/api/aaa",
-    method: "get",
+    url: '/api/aaa',
+    method: 'get',
     response: {
-      message: "Successfully update the media",
+      message: 'Successfully update the media',
       data: {
-        name: "http://localhost:5173/public/default-thumb.png",
-      },
-    },
-  },
-] as MockMethod[];
+        name: 'http://localhost:5173/public/default-thumb.png'
+      }
+    }
+  }
+] as MockMethod[]
