@@ -105,22 +105,28 @@ export default function CollectionMange(props: any) {
                   onChange={(e) => handleChange("note", e.target.value)}
                 />
               </div>
-              <div className="inline-flex whitespace-nowrap w-96">
-                <p>匯款銀行:</p>
-                <Input
-                  placeholder="請輸入內容"
-                  value={formData.bankName}
-                  onChange={(e) => handleChange("bankName", e.target.value)}
-                />
-              </div>
-              <div className="inline-flex whitespace-nowrap w-96">
-                <p>匯款帳號:</p>
-                <Input
-                  placeholder="請輸入內容"
-                  value={formData.bankAccount}
-                  onChange={(e) => handleChange("bankAccount", e.target.value)}
-                />
-              </div>
+              {formData.paymentMethod === "匯款" && (
+                <>
+                  <div className="inline-flex whitespace-nowrap w-96">
+                    <p>匯款銀行:</p>
+                    <Input
+                      placeholder="請輸入內容"
+                      value={formData.bankName}
+                      onChange={(e) => handleChange("bankName", e.target.value)}
+                    />
+                  </div>
+                  <div className="inline-flex whitespace-nowrap w-96">
+                    <p>匯款帳號:</p>
+                    <Input
+                      placeholder="請輸入內容"
+                      value={formData.bankAccount}
+                      onChange={(e) =>
+                        handleChange("bankAccount", e.target.value)
+                      }
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         )}

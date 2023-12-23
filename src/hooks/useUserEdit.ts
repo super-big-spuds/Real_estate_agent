@@ -24,6 +24,7 @@ const useCollectionEdit = () => {
 
   const handleSave = async () => {
     if (!id) return;
+
     const newformdata = {
       ...formData,
       id: id,
@@ -47,8 +48,7 @@ const useCollectionEdit = () => {
       return;
     }
 
-    await handleSaveUser(newformdata);
-
+    await handleSaveUser(parseResult.data);
     alert("儲存成功");
   };
 
