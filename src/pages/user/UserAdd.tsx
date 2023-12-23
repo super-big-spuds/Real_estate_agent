@@ -1,5 +1,6 @@
 import CollectionMange from "../../components/CollectionMange";
-import useCollectionEdit from "../../hooks/useCollectionEdit";
+import useCollectionAdd from "../../hooks/useCollectionAdd";
+
 export const Collection = () => {
   const {
     formData,
@@ -12,9 +13,7 @@ export const Collection = () => {
     onChangeRemindDate,
     handleAddNotice,
     handleDeleteNotice,
-    isLoading,
-    isError,
-  } = useCollectionEdit();
+  } = useCollectionAdd();
   return (
     <CollectionMange
       formData={formData}
@@ -27,8 +26,6 @@ export const Collection = () => {
       onChangeRemindDate={onChangeRemindDate}
       handleAddNotice={handleAddNotice}
       handleDeleteNotice={handleDeleteNotice}
-      isLoading={isLoading}
-      isError={isError}
     />
   );
 };

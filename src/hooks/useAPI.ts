@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Collection, FormData, NoticeData } from "../type";
+import type { Collection, FormData, NoticeData, User } from "../type";
 
 const APIBaseURL = process.env.BASE_URL;
 
@@ -185,5 +185,34 @@ export function usePostCollectionEdit() {
     isError,
     handleSaveColumn,
     handleSaveNotice,
+  };
+}
+
+export function useGetUserList() {
+  const token = "";
+  const [dataUser, setDataUser] = useState<User[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const getUserList = async () => {
+    try {
+      const res = await getFetch("/user/list", token);
+      const newData = await res.json();
+      setDataUser(newData.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    getUserList();
+  }, []);
+
+  return {
+    isLoading,
+    isError,
+    dataUser,
   };
 }
