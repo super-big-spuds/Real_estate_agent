@@ -29,10 +29,12 @@ export type FormData = {
 };
 
 export type NoticeData = {
+  id: string;
   visitDate: string;
   record: string;
   remindDate: string;
   remind: string;
+  isNew: boolean;
 };
 
 export type User = {

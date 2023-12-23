@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { DatePickerProps } from "antd/lib/date-picker";
 import { usePostCollectionAdd } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { z } from "zod";
@@ -11,14 +10,7 @@ const useCollectionAdd = () => {
   const nowmonth = nowdate.getMonth() + 1;
   const nowday = nowdate.getDate();
   const nowdatestring = `${nowyear}-${nowmonth}-${nowday}`;
-  const [notices, setNotices] = useState<NoticeData[]>([
-    {
-      visitDate: nowdatestring,
-      record: "",
-      remindDate: nowdatestring,
-      remind: "",
-    },
-  ]);
+  const [notices, setNotices] = useState<NoticeData[]>([]);
   const [formData, setFormData] = useState<FormData>({
     roomNumber: "",
     expenseName: "水電空調費",
@@ -101,10 +93,12 @@ const useCollectionAdd = () => {
     });
     setNotices([
       {
+        id: Math.random().toString(),
         visitDate: nowdatestring,
         record: "",
         remindDate: nowdatestring,
         remind: "",
+        isNew: true,
       },
     ]);
   };
@@ -113,10 +107,12 @@ const useCollectionAdd = () => {
     setNotices((prevNotices) => [
       ...prevNotices,
       {
+        id: Math.random().toString(),
         visitDate: nowdatestring,
         record: "",
         remindDate: nowdatestring,
         remind: "",
+        isNew: true,
       },
     ]);
   };

@@ -35,7 +35,7 @@ export default function Notice({
             onChange={(_, dateString) =>
               handleNoticeChange(keya, "visitDate", dateString)
             } // 注意這裡的修改
-            value={visitDate}
+            defaultValue={visitDate}
           />
         </div>
         <div className="inline-flex items-center whitespace-nowrap">
@@ -54,7 +54,7 @@ export default function Notice({
             onChange={(_, dateString) =>
               handleNoticeChange(keya, "remindDate", dateString)
             }
-            value={remindDate}
+            defaultValue={remindDate}
           />
         </div>
         <div className="inline-flex items-center whitespace-nowrap">

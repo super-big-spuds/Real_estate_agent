@@ -35,18 +35,21 @@ export default [
         bankAccount: "123456789",
         notices: [
           {
+            id: "1",
             visitDate: "2023-01-01",
             record: "看房子",
             remindDate: "2023-02-01",
             remind: "提醒",
           },
           {
+            id: "2",
             visitDate: "2023-01-01",
             record: "繳水電",
             remindDate: "2023-02-01",
             remind: "繳房租",
           },
           {
+            id: "3",
             visitDate: "2023-01-01",
             record: "繳水電",
             remindDate: "2023-02-01",

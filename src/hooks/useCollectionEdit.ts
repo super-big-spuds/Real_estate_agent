@@ -14,14 +14,7 @@ const useCollectionEdit = () => {
   const nowday = nowdate.getDate();
   const nowdatestring = `${nowyear}-${nowmonth}-${nowday}`;
   const { id } = useParams();
-  const [notices, setNotices] = useState<NoticeData[]>([
-    {
-      visitDate: nowdatestring,
-      record: "",
-      remindDate: nowdatestring,
-      remind: "",
-    },
-  ]);
+  const [notices, setNotices] = useState<NoticeData[]>([]);
   const [formData, setFormData] = useState<FormData>({
     roomNumber: "",
     expenseName: "水費",
@@ -109,10 +102,12 @@ const useCollectionEdit = () => {
     });
     setNotices([
       {
+        id: Math.random().toString(),
         visitDate: nowdatestring,
         record: "",
         remindDate: nowdatestring,
         remind: "",
+        isNew: true,
       },
     ]);
   };
@@ -121,10 +116,12 @@ const useCollectionEdit = () => {
     setNotices((prevNotices) => {
       const newNotices = [...prevNotices];
       newNotices.push({
+        id: Math.random().toString(),
         visitDate: nowdatestring,
         record: "",
         remindDate: nowdatestring,
         remind: "",
+        isNew: true,
       });
       return newNotices;
     });
