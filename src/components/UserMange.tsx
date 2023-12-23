@@ -38,24 +38,28 @@ export default function CollectionMange(props: any) {
                 <InputWithErrorMessage
                   value={formData.name}
                   onChange={(e) => handleChange("name", e.target.value)}
-                  isError={formData.name.length < 2}
-                  errorMessage={"請輸入內容"}
+                  isError={formData.name.length <= 2}
+                  errorMessage={"至少兩個字"}
                 />
               </div>
               <div className="inline-flex items-center whitespace-nowrap w-96">
                 <p>使用者信箱:</p>
-                <Input
-                  placeholder="請輸入內容"
+
+                <InputWithErrorMessage
                   value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
+                  isError={!formData.email.includes("@")}
+                  errorMessage={"email格式錯誤"}
                 />
               </div>
               <div className="inline-flex items-center whitespace-nowrap w-96 ">
                 <p>使用者密碼:</p>
-                <Input
-                  placeholder="請輸入內容"
+
+                <InputWithErrorMessage
                   value={formData.password}
                   onChange={(e) => handleChange("password", e.target.value)}
+                  isError={formData.password.length < 2}
+                  errorMessage={"至少六個字"}
                 />
               </div>
               <div className="inline-flex items-center whitespace-nowrap">
