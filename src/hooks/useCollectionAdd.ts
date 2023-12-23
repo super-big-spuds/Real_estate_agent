@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DatePickerProps } from "antd/lib/date-picker";
 import { usePostCollectionAdd } from "./useAPI";
 import type { FormData, NoticeData } from "../type";

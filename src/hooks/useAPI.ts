@@ -216,3 +216,31 @@ export function useGetUserList() {
     dataUser,
   };
 }
+
+export function usePostUserAdd() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleSaveUser = async (formDatas: User) => {
+    setIsLoading(true);
+    console.log(formDatas);
+    try {
+      const res = await muliteFetch("/user/add", "POST", token, formDatas);
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return {
+    isLoading,
+    isError,
+    handleSaveUser,
+  };
+}

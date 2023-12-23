@@ -1,31 +1,14 @@
-import CollectionMange from "../../components/CollectionMange";
-import useCollectionAdd from "../../hooks/useCollectionAdd";
+import UserMange from "../../components/UserMange";
+import useUserAdd from "../../hooks/useUserAdd";
 
 export const Collection = () => {
-  const {
-    formData,
-    notices,
-    handleChange,
-    handleNoticeChange,
-    handleSave,
-    handleReset,
-    onChangeDate,
-    onChangeRemindDate,
-    handleAddNotice,
-    handleDeleteNotice,
-  } = useCollectionAdd();
+  const { formData, handleChange, handleSave, handleReset } = useUserAdd();
   return (
-    <CollectionMange
+    <UserMange
       formData={formData}
-      notices={notices}
       handleChange={handleChange}
-      handleNoticeChange={handleNoticeChange}
       handleSave={handleSave}
       handleReset={handleReset}
-      onChangeDate={onChangeDate}
-      onChangeRemindDate={onChangeRemindDate}
-      handleAddNotice={handleAddNotice}
-      handleDeleteNotice={handleDeleteNotice}
     />
   );
 };
