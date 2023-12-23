@@ -41,4 +41,5 @@ export type User = {
   email: string;
   isactive: string;
   id?: string;
+  password?: string;
 };

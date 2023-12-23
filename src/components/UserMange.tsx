@@ -36,7 +36,7 @@ export default function CollectionMange(props: any) {
                 <p>使用者名稱:</p>
                 <Input
                   placeholder="請輸入內容"
-                  value={formData.roomNumber}
+                  value={formData.name}
                   onChange={(e) => handleChange("name", e.target.value)}
                 />
               </div>
@@ -44,7 +44,7 @@ export default function CollectionMange(props: any) {
                 <p>使用者信箱:</p>
                 <Input
                   placeholder="請輸入內容"
-                  value={formData.roomNumber}
+                  value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
                 />
               </div>
@@ -52,7 +52,7 @@ export default function CollectionMange(props: any) {
                 <p>使用者密碼:</p>
                 <Input
                   placeholder="請輸入內容"
-                  value={formData.roomNumber}
+                  value={formData.password}
                   onChange={(e) => handleChange("password", e.target.value)}
                 />
               </div>
@@ -64,7 +64,7 @@ export default function CollectionMange(props: any) {
                   style={{ width: 120 }}
                   options={[{ value: "是" }, { value: "否" }]}
                   onChange={(value) => handleChange("isactive", value)}
-                  value={formData.type}
+                  value={formData.isactive}
                 />
               </div>
             </div>

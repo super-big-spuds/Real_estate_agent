@@ -6,8 +6,8 @@ const useCollectionAdd = () => {
   const { isLoading, isError, handleSaveUser } = usePostUserAdd();
 
   const [formData, setFormData] = useState<User>({
-    name: "王營明",
-    email: "User4@gmail.com",
+    name: "",
+    email: "",
     isactive: "是",
   });
 
@@ -28,6 +28,7 @@ const useCollectionAdd = () => {
       name: "",
       email: "",
       isactive: "是",
+      password: "",
     });
   };
 
