@@ -9,6 +9,7 @@ const useCollectionAdd = () => {
     name: "",
     email: "",
     isactive: "是",
+    password: "",
   });
 
   const handleChange = (key: keyof User, value: string) => {
