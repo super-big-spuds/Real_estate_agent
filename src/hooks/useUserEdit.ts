@@ -80,6 +80,7 @@ const useCollectionEdit = () => {
       email: dataEdit.email,
       isactive: dataEdit.isactive,
       password: dataEdit.password,
+      isadmin: dataEdit.isadmin,
     });
   }, [dataEdit]);
 
