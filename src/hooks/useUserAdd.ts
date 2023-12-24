@@ -11,6 +11,7 @@ const useCollectionAdd = () => {
     email: "",
     isactive: "是",
     password: "",
+    isadmin: "否",
   });
 
   const handleChange = (key: keyof User, value: string) => {
@@ -21,11 +22,13 @@ const useCollectionAdd = () => {
   };
 
   const handleSave = async () => {
+    console.log(formData);
     const schema = z.object({
       name: z.string().min(2, "請輸入至少兩個以上的名字"),
       email: z.string().email("不符合Email格式"),
       isactive: z.string(),
       password: z.string().min(6, "請輸入至少六個以上的密碼"),
+      isadmin: z.string(),
     });
 
     const parseResult = schema.safeParse(formData);
@@ -49,6 +52,7 @@ const useCollectionAdd = () => {
       email: "",
       isactive: "是",
       password: "",
+      isadmin: "否",
     });
   };
 

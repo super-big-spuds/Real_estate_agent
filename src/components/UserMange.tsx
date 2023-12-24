@@ -73,6 +73,16 @@ export default function CollectionMange(props: any) {
                   value={formData.isactive}
                 />
               </div>
+              <div className="inline-flex items-center whitespace-nowrap">
+                <p>管理員權限:</p>
+                <Select
+                  defaultValue="是"
+                  style={{ width: 120 }}
+                  options={[{ value: "是" }, { value: "否" }]}
+                  onChange={(value) => handleChange("isadmin", value)}
+                  value={formData.isadmin}
+                />
+              </div>
             </div>
           </div>
         )}

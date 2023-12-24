@@ -44,6 +44,7 @@ export type User = {
   isactive: string;
   id?: string;
   password?: string;
+  isadmin?: string;
 };
 
 export type Calender = {

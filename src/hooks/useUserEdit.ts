@@ -14,6 +14,7 @@ const useCollectionEdit = () => {
     email: "",
     isactive: "是",
     password: "",
+    isadmin: "否",
   });
   const handleChange = (key: keyof User, value: string) => {
     setFormData((prevFormData) => ({
@@ -24,6 +25,7 @@ const useCollectionEdit = () => {
 
   const handleSave = async () => {
     if (!id) return;
+    console.log(formData);
 
     const newformdata = {
       ...formData,
@@ -35,6 +37,7 @@ const useCollectionEdit = () => {
       email: z.string().email("不符合Email格式"),
       isactive: z.string(),
       password: z.string().min(6, "請輸入至少六個以上的密碼"),
+      isadmin: z.string(),
     });
 
     const parseResult = schema.safeParse(newformdata);
@@ -58,6 +61,7 @@ const useCollectionEdit = () => {
       email: "",
       isactive: "是",
       password: "",
+      isadmin: "否",
     });
   };
 
