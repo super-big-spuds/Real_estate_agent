@@ -53,7 +53,7 @@ export default [
     },
   },
   {
-    url: "/api/user/edit/1",
+    url: "/api/user/1",
     method: "get",
     response: {
       message: "Successfully get the media",
@@ -68,7 +68,7 @@ export default [
     },
   },
   {
-    url: "/api/user/edit/2",
+    url: "/api/user/2",
     method: "get",
     response: {
       message: "Successfully get the media",
@@ -83,7 +83,7 @@ export default [
     },
   },
   {
-    url: "/api/user/edit/3",
+    url: "/api/user/3",
     method: "get",
     response: {
       message: "Successfully get the media",
@@ -98,7 +98,7 @@ export default [
     },
   },
   {
-    url: "/api/user/edit/4",
+    url: "/api/user/4",
     method: "get",
     response: {
       message: "Successfully get the media",

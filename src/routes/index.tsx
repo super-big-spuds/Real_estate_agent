@@ -13,10 +13,10 @@ export const App = () => (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="Collection/List" element={<CollectionList />} />
-        <Route path="Collection/Edit/:id" element={<CollectionEdit />} />
+        <Route path="Collection/:id" element={<CollectionEdit />} />
         <Route path="Collection/Add" element={<CollectionAdd />} />
         <Route path="User/List" element={<UserList />} />
-        <Route path="User/Edit/:id" element={<UserEdit />} />
+        <Route path="User/:id" element={<UserEdit />} />
         <Route path="User/Add" element={<UserAdd />} />
         <Route path="Calenderlist" element={<CalenderList />} />
       </Route>

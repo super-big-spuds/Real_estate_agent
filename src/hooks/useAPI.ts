@@ -281,7 +281,7 @@ export function useGetUserEdit() {
 
   const getUserEdit = async (id: string) => {
     try {
-      const res = await getFetch(`/user/edit/${id}`, token);
+      const res = await getFetch(`/user/${id}`, token);
       const data = await res.json();
 
       setData(data.data);
@@ -311,12 +311,11 @@ export function usePostCalender() {
     month: number;
   }) => {
     setIsLoading(true);
-    const jsonFromData = JSON.stringify(formDatas);
     try {
-      const res = await muliteFetch("/calender", "POST", token, jsonFromData);
-      if (!res.ok) {
-        throw new Error(res.statusText);
-      }
+      const res = await getFetch(
+        `/calender/${formDatas.year}/${formDatas.month}`,
+        token
+      );
       const data = await res.json();
       setDataCalender(data.data);
     } catch (error) {

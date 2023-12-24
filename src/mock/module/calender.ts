@@ -2,8 +2,8 @@ import { MockMethod } from "vite-plugin-mock";
 
 export default [
   {
-    url: "/api/calender",
-    method: "post",
+    url: "/api/calender/:year/:month",
+    method: "get",
     response: {
       message: "Successfully update the media",
       data: [
@@ -13,12 +13,12 @@ export default [
             {
               content: "代收付款",
               id: "1",
-              class: "Collection",
+              class: "collection",
             },
             {
               content: "房屋",
               id: "2",
-              class: "Rent",
+              class: "rent",
             },
           ],
         },
@@ -28,12 +28,17 @@ export default [
             {
               content: "開發客源",
               id: "3",
-              class: "Sell",
+              class: "sell",
             },
             {
               content: "房屋",
               id: "4",
-              class: "Develop",
+              class: "develop",
+            },
+            {
+              content: "追蹤",
+              id: "5",
+              class: "market",
             },
           ],
         },

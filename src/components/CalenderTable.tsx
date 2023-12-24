@@ -29,14 +29,16 @@ export default function CalenderTable(props: Props) {
 
   const getEventType = (classType: string) => {
     switch (classType) {
-      case "Collection":
+      case "collection":
         return "success";
-      case "Rent":
+      case "rent":
         return "error";
-      case "Sell":
+      case "sell":
         return "default";
-      case "Develop":
+      case "develop":
         return "processing";
+      case "market":
+        return "warning";
     }
   };
 
@@ -79,7 +81,20 @@ export default function CalenderTable(props: Props) {
         }))
       : [];
   };
-
+  const switchparam = (param: string) => {
+    switch (param) {
+      case "market":
+        return "house";
+      case "rent":
+        return "house";
+      case "sell":
+        return "house";
+      case "develop":
+        return "house";
+      case "collection":
+        return "collection";
+    }
+  };
   const dateCellRender = (value: Dayjs) => {
     const listData = getListData(value);
     const navigate = useNavigate();
@@ -89,7 +104,7 @@ export default function CalenderTable(props: Props) {
         {listData.map((item: any, index: any) => (
           <li
             key={index}
-            onClick={() => navigate(`/${item.class}/edit/${item.id}`)}
+            onClick={() => navigate(`/${switchparam(item.class)}/${item.id}`)}
           >
             <Badge
               status={item.type as BadgeProps["status"]}
@@ -106,6 +121,7 @@ export default function CalenderTable(props: Props) {
   };
   useEffect(() => {
     handleGetCalenderData(dayjs());
+    console.log("dataCalender", dataCalender);
   }, []);
 
   return (

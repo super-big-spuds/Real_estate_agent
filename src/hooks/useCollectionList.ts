@@ -122,7 +122,7 @@ const useCollectionList = () => {
   const onRow = (record: Collection) => {
     return {
       onClick: () => {
-        navigate(`/Collection/Edit/${record.id}`);
+        navigate(`/Collection/${record.id}`);
       },
     };
   };
