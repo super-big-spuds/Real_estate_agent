@@ -26,6 +26,20 @@ export default function CalenderTable(props: Props) {
     setMonthClick(month);
     handleGetCalender({ year, month });
   };
+
+  const getEventType = (classType: string) => {
+    switch (classType) {
+      case "Collection":
+        return "success";
+      case "Rent":
+        return "error";
+      case "Sell":
+        return "default";
+      case "Develop":
+        return "processing";
+    }
+  };
+
   const transformEvent = (event: any, year: number, month: number) => {
     const eventDataWithDate = {
       ...event,
@@ -33,7 +47,7 @@ export default function CalenderTable(props: Props) {
       month,
       events: event.events.map((event: any) => ({
         ...event,
-        type: event.class === "Collection" ? "success" : "error",
+        type: getEventType(event.class),
       })),
     };
     return eventDataWithDate;

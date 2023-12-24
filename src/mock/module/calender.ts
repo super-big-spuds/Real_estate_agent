@@ -18,23 +18,22 @@ export default [
             {
               content: "房屋",
               id: "2",
-              class: "House",
+              class: "Rent",
             },
-            // 添加其他同一天的事件
           ],
         },
         {
           day: 10,
           events: [
             {
-              content: "代收付款",
+              content: "開發客源",
               id: "3",
-              class: "Collection",
+              class: "Sell",
             },
             {
               content: "房屋",
               id: "4",
-              class: "House",
+              class: "Develop",
             },
           ],
         },
