@@ -45,3 +45,8 @@ export type User = {
   id?: string;
   password?: string;
 };
+
+export type Calender = {
+  day: number;
+  events: Event[];
+};

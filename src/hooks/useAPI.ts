@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Collection, FormData, NoticeData, User } from "../type";
+import type { Calender, Collection, FormData, NoticeData, User } from "../type";
 
 const APIBaseURL = process.env.BASE_URL;
 
@@ -297,5 +297,39 @@ export function useGetUserEdit() {
     isError,
     getUserEdit,
     dataEdit,
+  };
+}
+
+export function usePostCalender() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [dataCalender, setDataCalender] = useState<Calender[]>([]);
+
+  const handleGetCalender = async (formDatas: {
+    year: number;
+    month: number;
+  }) => {
+    setIsLoading(true);
+    const jsonFromData = JSON.stringify(formDatas);
+    try {
+      const res = await muliteFetch("/calender", "POST", token, jsonFromData);
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+      const data = await res.json();
+      setDataCalender(data.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    handleGetCalender,
+    dataCalender,
   };
 }

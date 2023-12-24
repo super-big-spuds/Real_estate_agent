@@ -6,6 +6,7 @@ import UserAdd from "../pages/user/UserAdd";
 import UserEdit from "../pages/user/UserEdit";
 import UserList from "../pages/user/UserList";
 import Layout from "../components/Layout";
+import CalenderList from "../pages/calender/CalenderList";
 
 export const App = () => (
   <div className="w-full h-full ">
@@ -17,6 +18,7 @@ export const App = () => (
         <Route path="User/List" element={<UserList />} />
         <Route path="User/Edit/:id" element={<UserEdit />} />
         <Route path="User/Add" element={<UserAdd />} />
+        <Route path="Calenderlist" element={<CalenderList />} />
       </Route>
     </Routes>
   </div>
