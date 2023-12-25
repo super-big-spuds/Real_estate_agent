@@ -9,7 +9,6 @@ export const Collection = () => {
     handleNoticeChange,
     handleSave,
     handleReset,
-
     handleAddNotice,
     handleDeleteNotice,
   } = useCollectionAdd();

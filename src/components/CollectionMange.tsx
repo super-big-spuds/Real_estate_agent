@@ -57,7 +57,7 @@ export default function CollectionMange(props: any) {
                   style={{ width: 120 }}
                   options={[{ value: "代收" }, { value: "代付" }]}
                   onChange={(value) => handleChange("expenseType", value)}
-                  value={formData.type}
+                  value={formData.collection_type}
                 />
               </div>
 
