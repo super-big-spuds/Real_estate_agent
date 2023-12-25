@@ -7,28 +7,24 @@ import type { User } from "../type";
 const useCollectionList = () => {
   const [data, setData] = useState<User[]>([
     {
-      key: "1",
       id: "1",
       name: "翁先生",
       email: "user@gmail.com",
       isactive: "是",
     },
     {
-      key: "2",
       id: "2",
       name: "李先生",
       email: "user2@gmail.com",
       isactive: "是",
     },
     {
-      key: "3",
       id: "3",
       name: "張先生",
       email: "user3@gmail.com",
       isactive: "是",
     },
     {
-      key: "4",
       id: "4",
       name: "陳先生",
       email: "user4@gmail.com",
@@ -38,7 +34,7 @@ const useCollectionList = () => {
   type ColumnsType = {
     title: string;
     dataIndex: string;
-    key?: string;
+
     width?: string;
     type?: string;
     price?: string;

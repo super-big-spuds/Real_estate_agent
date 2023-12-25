@@ -31,7 +31,6 @@ export type NoticeData = {
 };
 
 export type User = {
-  key?: string;
   name: string;
   email: string;
   isactive: string;
