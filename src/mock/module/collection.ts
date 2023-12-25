@@ -197,4 +197,18 @@ export default [
       ],
     },
   },
+  {
+    url: "/api/collection/notice/:collectionid",
+    method: "delete",
+    response: {
+      message: "Successfully delete the media",
+    },
+  },
+  {
+    url: "/api/collection/:collectionid",
+    method: "delete",
+    response: {
+      message: "Successfully delete the media",
+    },
+  },
 ] as MockMethod[];

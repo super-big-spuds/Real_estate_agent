@@ -10,6 +10,7 @@ export const Collection = () => {
     handleReset,
     handleAddNotice,
     handleDeleteNotice,
+    handleDeleteCollection,
     isLoading,
     isError,
   } = useCollectionEdit();
@@ -23,6 +24,7 @@ export const Collection = () => {
       handleReset={handleReset}
       handleAddNotice={handleAddNotice}
       handleDeleteNotice={handleDeleteNotice}
+      handleDeleteCollection={handleDeleteCollection}
       isLoading={isLoading}
       isError={isError}
     />

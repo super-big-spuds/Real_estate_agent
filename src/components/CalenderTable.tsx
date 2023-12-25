@@ -121,7 +121,6 @@ export default function CalenderTable(props: Props) {
   };
   useEffect(() => {
     handleGetCalenderData(dayjs());
-    console.log("dataCalender", dataCalender);
   }, []);
 
   return (

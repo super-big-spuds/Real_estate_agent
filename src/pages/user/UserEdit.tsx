@@ -6,6 +6,7 @@ export const Collection = () => {
     handleChange,
     handleSave,
     handleReset,
+    handleDeleteUser,
     isLoading,
     isError,
   } = useUserEdit();
@@ -17,6 +18,7 @@ export const Collection = () => {
       handleReset={handleReset}
       isLoading={isLoading}
       isError={isError}
+      handleDeleteUser={handleDeleteUser}
     />
   );
 };

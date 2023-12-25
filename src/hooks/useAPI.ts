@@ -150,7 +150,7 @@ export function usePostCollectionEdit() {
 
   const handleSaveColumn = async (formDatas: FormData) => {
     setIsLoading(true);
-    console.log(formDatas);
+
     const jsonFromData = JSON.stringify(formDatas);
 
     try {
@@ -191,12 +191,48 @@ export function usePostCollectionEdit() {
       setIsLoading(false);
     }
   };
+  const handleDeleteNoticeFetch = async (id: string) => {
+    setIsLoading(true);
+    try {
+      const res = await muliteFetch(
+        `/collection/notice/${id}`,
+        "DELETE",
+        token,
+        id
+      );
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDeleteCollectionFetch = async (id: string) => {
+    setIsLoading(true);
+    try {
+      const res = await muliteFetch(`/collection/${id}`, "DELETE", token, id);
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return {
     isLoading,
     isError,
     handleSaveColumn,
     handleSaveNotice,
+    handleDeleteNoticeFetch,
+    handleDeleteCollectionFetch,
   };
 }
 
@@ -264,8 +300,6 @@ export function usePostUserEdit() {
 
   const handleSaveUser = async (formDatas: User) => {
     setIsLoading(true);
-    console.log(formDatas);
-
     try {
       const res = await muliteFetch(
         `/user/${formDatas.id}`,
@@ -283,11 +317,26 @@ export function usePostUserEdit() {
       setIsLoading(false);
     }
   };
+  const handleDeleteUserFetch = async (id: string) => {
+    setIsLoading(true);
+    try {
+      const res = await muliteFetch(`/user/${id}`, "DELETE", token, id);
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return {
     isLoading,
     isError,
     handleSaveUser,
+    handleDeleteUserFetch,
   };
 }
 
@@ -348,5 +397,36 @@ export function usePostCalender() {
     isError,
     handleGetCalender,
     dataCalender,
+  };
+}
+
+export function useDeleteNotice() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleDeleteNotice = async (id: string) => {
+    setIsLoading(true);
+    try {
+      const res = await muliteFetch(
+        `/collection/notices/${id}`,
+        "DELETE",
+        token,
+        id
+      );
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    handleDeleteNotice,
   };
 }

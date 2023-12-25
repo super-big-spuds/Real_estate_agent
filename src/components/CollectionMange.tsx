@@ -18,6 +18,7 @@ export default function CollectionMange(props: any) {
     handleReset,
     handleAddNotice,
     handleDeleteNotice,
+    handleDeleteCollection,
     isLoading,
     isError,
   } = props;
@@ -163,8 +164,11 @@ export default function CollectionMange(props: any) {
         <Button className="bg-blue-600 " type="primary" onClick={handleSave}>
           儲存
         </Button>
-        <Button danger onClick={() => handleReset()}>
+        <Button type="default" onClick={() => handleReset()}>
           回復預設
+        </Button>
+        <Button onClick={() => handleDeleteCollection()} danger>
+          刪除
         </Button>
       </div>
     </div>

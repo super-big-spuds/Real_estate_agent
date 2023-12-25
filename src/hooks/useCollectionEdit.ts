@@ -7,7 +7,12 @@ import { z } from "zod";
 const useCollectionEdit = () => {
   const { getCollectionEdit, isError, isLoading, dataEdit } =
     useGetCollectionEdit();
-  const { handleSaveColumn, handleSaveNotice } = usePostCollectionEdit();
+  const {
+    handleSaveColumn,
+    handleSaveNotice,
+    handleDeleteNoticeFetch,
+    handleDeleteCollectionFetch,
+  } = usePostCollectionEdit();
   const nowdate = new Date();
   const nowyear = nowdate.getFullYear();
   const nowmonth = nowdate.getMonth() + 1;
@@ -54,6 +59,12 @@ const useCollectionEdit = () => {
       newNotices.splice(index, 1);
       return newNotices;
     });
+    if (notices[index].isNew) return;
+    handleDeleteNoticeFetch(notices[index].id);
+  };
+  const handleDeleteCollection = () => {
+    confirm("確定要刪除嗎？");
+    handleDeleteCollectionFetch(id || "");
   };
 
   const handleSave = async () => {
@@ -162,6 +173,7 @@ const useCollectionEdit = () => {
     handleReset,
     handleAddNotice,
     handleDeleteNotice,
+    handleDeleteCollection,
     isLoading,
     isError,
   };

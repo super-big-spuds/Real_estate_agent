@@ -5,7 +5,8 @@ import { z } from "zod";
 import { useParams } from "react-router-dom";
 
 const useCollectionEdit = () => {
-  const { isLoading, isError, handleSaveUser } = usePostUserEdit();
+  const { isLoading, isError, handleSaveUser, handleDeleteUserFetch } =
+    usePostUserEdit();
   const { getUserEdit, dataEdit } = useGetUserEdit();
   const { id } = useParams();
 
@@ -53,6 +54,10 @@ const useCollectionEdit = () => {
     await handleSaveUser(parseResult.data);
     alert("儲存成功");
   };
+  const handleDeleteUser = () => {
+    confirm("確定要刪除嗎？");
+    handleDeleteUserFetch(id || "");
+  };
 
   const handleReset = () => {
     setFormData({
@@ -90,6 +95,7 @@ const useCollectionEdit = () => {
     handleReset,
     isLoading,
     isError,
+    handleDeleteUser,
   };
 };
 

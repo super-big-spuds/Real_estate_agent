@@ -115,4 +115,11 @@ export default [
       },
     },
   },
+  {
+    url: "/api/user/:id",
+    method: "delete",
+    response: {
+      message: "Successfully delete the media",
+    },
+  },
 ] as MockMethod[];
