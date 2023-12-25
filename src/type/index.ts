@@ -41,3 +41,13 @@ export type Calender = {
   day: number;
   events: Event[];
 };
+
+export type TenementList = {
+  tenement_no: number;
+  tenement_face: string;
+  tenement_status: string;
+  tenement_type: string;
+  tenement_style: string;
+  management_fee_bottom: number;
+  management_floor_bottom: number;
+};

@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import type { Calender, Collection, FormData, NoticeData, User } from "../type";
+import type {
+  Calender,
+  Collection,
+  FormData,
+  NoticeData,
+  User,
+  TenementList,
+} from "../type";
 
 const APIBaseURL = process.env.BASE_URL;
 
@@ -433,5 +440,34 @@ export function useDeleteNotice() {
     isLoading,
     isError,
     handleDeleteNotice,
+  };
+}
+
+export function useGetTenementList() {
+  const token = "";
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [dataTenement, setDataTenement] = useState<TenementList[]>([]);
+
+  const handleGetTenement = async () => {
+    setIsLoading(true);
+    try {
+      const res = await getFetch(`/tenements`, token);
+      const data = await res.json();
+      setDataTenement(data.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    handleGetTenement();
+  }, []);
+  return {
+    isLoading,
+    isError,
+    dataTenement,
   };
 }

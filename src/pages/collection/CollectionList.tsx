@@ -2,14 +2,14 @@
 import Table from "../../components/Table";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import useCollist from "../../hooks/useCollectionList";
+import useCollectionist from "../../hooks/useCollectionList";
 
 export const CollectionList = () => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/Collection/add");
   };
-  const { data, columns, onRow, isError, isLoading } = useCollist();
+  const { data, columns, onRow, isError, isLoading } = useCollectionist();
 
   return (
     <div className="flex flex-col items-center w-4/5 m-10 ">

@@ -8,11 +8,19 @@ type DataIndex = keyof DataType | number;
 
 interface DataType {
   key: React.Key;
-  collection_name: string;
-  tenement_no: string;
-  type: string;
-  price: string;
-  id: string;
+  collection_name?: string;
+  tenement_no?: string;
+  type?: string;
+  price?: string;
+  id?: string;
+  tenement_face?: string;
+  tenement_floor?: string;
+  tenement_type?: string;
+  tenement_status?: string;
+  tenement_note?: string;
+  tenement_style?: string;
+  management_fee_bottom?: string;
+  management_floor_bottom?: string;
 }
 
 const getColumnSearchProps = (dataIndex: DataIndex) => {

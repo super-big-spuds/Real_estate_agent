@@ -2,7 +2,7 @@ import { MockMethod } from "vite-plugin-mock";
 
 export default [
   {
-    url: "/api/tenement",
+    url: "/api/tenements",
     method: "get",
     response: {
       message: "Successfully update the media",
@@ -28,7 +28,7 @@ export default [
         {
           tenement_no: 54323,
           tenement_face: "三多路",
-          tenement_status: "未成交",
+          tenement_status: "已退租下架",
           tenement_type: "開發追蹤",
           tenement_style: "面海",
           management_fee_bottom: 150,
@@ -37,7 +37,7 @@ export default [
         {
           tenement_no: 54323,
           tenement_face: "三多路",
-          tenement_status: "未成交",
+          tenement_status: "過戶完成下架",
           tenement_type: "行銷追蹤",
           tenement_style: "面海",
           management_fee_bottom: 150,
