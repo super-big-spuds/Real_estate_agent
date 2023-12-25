@@ -43,9 +43,9 @@ export default function CollectionMange(props: any) {
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <p>房號:</p>
                 <InputWithErrorMessage
-                  value={formData.tenement_id}
-                  onChange={(e) => handleChange("tenement_id", e.target.value)}
-                  isError={formData.tenement_id.length <= 2}
+                  value={formData.tenement_no}
+                  onChange={(e) => handleChange("tenement_no", e.target.value)}
+                  isError={formData.tenement_no.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>

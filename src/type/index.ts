@@ -1,13 +1,13 @@
 export type Collection = {
   collection_name: string;
-  tenement_id: string;
+  tenement_no: string;
   price: string;
   collection_type: string;
   collection_id: number;
 };
 
 export type FormData = {
-  tenement_id: string;
+  tenement_no: string;
   collection_id: string;
   collection_name: string;
   collection_type: string;

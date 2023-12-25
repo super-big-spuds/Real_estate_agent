@@ -21,7 +21,7 @@ const useCollectionEdit = () => {
   const { id } = useParams();
   const [notices, setNotices] = useState<NoticeData[]>([]);
   const [formData, setFormData] = useState<FormData>({
-    tenement_id: "",
+    tenement_no: "",
     collection_id: "",
     collection_name: "水費",
     collection_type: "代收",
@@ -71,7 +71,7 @@ const useCollectionEdit = () => {
     if (!id) return;
 
     const schemaform = z.object({
-      tenement_id: z.string().min(2, "房號至少兩個字"),
+      tenement_no: z.string().min(2, "房號至少兩個字"),
       collection_name: z.string(),
       collection_type: z.string(),
       price: z.string().nonempty("金額不得為空"),
@@ -102,7 +102,7 @@ const useCollectionEdit = () => {
 
   const handleReset = () => {
     setFormData({
-      tenement_id: "",
+      tenement_no: "",
       collection_id: "",
       collection_name: "水費",
       collection_type: "代收",
@@ -151,7 +151,7 @@ const useCollectionEdit = () => {
   useEffect(() => {
     if (!dataEdit) return;
     setFormData({
-      tenement_id: dataEdit.tenement_id,
+      tenement_no: dataEdit.tenement_no,
       collection_id: dataEdit.collection_id,
       collection_name: dataEdit.collection_name,
       collection_type: dataEdit.collection_type,

@@ -9,7 +9,7 @@ type DataIndex = keyof DataType | number;
 interface DataType {
   key: React.Key;
   collection_name: string;
-  tenement_id: string;
+  tenement_no: string;
   type: string;
   price: string;
   id: string;
