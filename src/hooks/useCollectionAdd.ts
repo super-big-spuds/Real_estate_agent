@@ -12,14 +12,15 @@ const useCollectionAdd = () => {
   const nowdatestring = `${nowyear}-${nowmonth}-${nowday}`;
   const [notices, setNotices] = useState<NoticeData[]>([]);
   const [formData, setFormData] = useState<FormData>({
-    roomNumber: "",
-    expenseName: "水電空調費",
+    tenement_id: "",
+    collection_id: "",
+    collection_name: "水電空調費",
     type: "代收",
-    expenseAmount: "",
-    paymentMethod: "現金",
-    note: "",
-    bankName: "",
-    bankAccount: "",
+    price: "",
+    payment: "現金",
+    collection_remark: "",
+    remittance_bank: "",
+    remittance_account: "",
   });
 
   const handleChange = (key: keyof FormData, value: string) => {
@@ -54,14 +55,15 @@ const useCollectionAdd = () => {
 
   const handleSave = async () => {
     const schemaform = z.object({
-      roomNumber: z.string().min(2, "房號至少兩個字"),
-      expenseName: z.string(),
+      tenement_id: z.string().min(2, "房號至少兩個字"),
+      collection_name: z.string(),
+      collection_id: z.string(),
       type: z.string(),
-      expenseAmount: z.string().nonempty("金額不得為空"),
-      paymentMethod: z.string(),
-      note: z.string(),
-      bankName: z.string(),
-      bankAccount: z.string(),
+      price: z.string().nonempty("金額不得為空"),
+      payment: z.string(),
+      collection_remark: z.string(),
+      remittance_bank: z.string(),
+      remittance_account: z.string(),
     });
 
     const parseResult = schemaform.safeParse(formData);
@@ -82,14 +84,15 @@ const useCollectionAdd = () => {
 
   const handleReset = () => {
     setFormData({
-      roomNumber: "",
-      expenseName: "水電空調費",
+      tenement_id: "",
+      collection_id: "",
+      collection_name: "水電空調費",
       type: "代收",
-      expenseAmount: "",
-      paymentMethod: "現金",
-      note: "",
-      bankName: "",
-      bankAccount: "",
+      price: "",
+      payment: "現金",
+      collection_remark: "",
+      remittance_bank: "",
+      remittance_account: "",
     });
     setNotices([
       {

@@ -1,30 +1,23 @@
 export type Collection = {
-  key: string;
   name: string;
-  houseid: string;
-  amount: string;
+  tenement_id: string;
+  price: string;
   type: string;
-  id: string;
+  collection_id: string;
 };
 
-export type CollectionAdd = {
-  key: string;
-  name: string;
-  houseid: string;
-  amount: string;
-  type: string;
-  id: string;
-};
+
 
 export type FormData = {
-  roomNumber: string;
-  expenseName: string;
+  tenement_id: string;
+  collection_id: string;
+  collection_name: string;
   type: string;
-  expenseAmount: string;
-  paymentMethod: string;
-  note: string;
-  bankName: string;
-  bankAccount: string;
+  price: string;
+  payment: string;
+  collection_remark: string;
+  remittance_bank: string;
+  remittance_account: string;
   notices?: NoticeData[];
 };
 

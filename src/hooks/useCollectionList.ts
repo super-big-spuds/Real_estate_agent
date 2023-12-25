@@ -10,32 +10,32 @@ const useCollectionList = () => {
       key: "1",
       name: "代收1",
       type: "代收",
-      houseid: "1",
-      amount: "1000",
+      tenement_id: "1",
+      price: "1000",
       id: "1",
     },
     {
       key: "2",
       name: "代付1",
-      houseid: "2",
+      tenement_id: "2",
       type: "代付",
-      amount: "2000",
+      price: "2000",
       id: "2",
     },
     {
       key: "3",
       name: "代收2",
-      houseid: "3",
+      tenement_id: "3",
       type: "代收",
-      amount: "3000",
+      price: "3000",
       id: "3",
     },
     {
       key: "4",
       name: "代付2",
-      houseid: "4",
+      tenement_id: "4",
       type: "代付",
-      amount: "4000",
+      price: "4000",
       id: "4",
     },
   ]);
@@ -45,7 +45,7 @@ const useCollectionList = () => {
     key?: string;
     width?: string;
     type?: string;
-    amount?: string;
+    price?: string;
     filters?: {
       text: string;
       value: string;
@@ -61,10 +61,10 @@ const useCollectionList = () => {
     },
     {
       title: "房屋編號",
-      dataIndex: "houseid",
-      key: "houseid",
+      dataIndex: "tenement_id",
+      key: "tenement_id",
       width: "30%",
-      ...getColumnSearchProps("houseid"),
+      ...getColumnSearchProps("tenement_id"),
     },
     {
       title: "費用名稱",
@@ -106,8 +106,8 @@ const useCollectionList = () => {
     },
     {
       title: "費用金額",
-      dataIndex: "amount",
-      sorter: (a, b) => parseInt(a.amount) - parseInt(b.amount),
+      dataIndex: "price",
+      sorter: (a, b) => parseInt(a.price) - parseInt(b.price),
     },
   ];
 

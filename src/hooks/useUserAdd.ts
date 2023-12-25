@@ -22,7 +22,6 @@ const useCollectionAdd = () => {
   };
 
   const handleSave = async () => {
-    console.log(formData);
     const schema = z.object({
       name: z.string().min(2, "請輸入至少兩個以上的名字"),
       email: z.string().email("不符合Email格式"),

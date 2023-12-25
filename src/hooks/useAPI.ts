@@ -121,7 +121,7 @@ export const useGetCollectionEdit = () => {
 
   const getCollectionEdit = async (id: string) => {
     try {
-      const res = await getFetch(`/coledit/${id}`, token);
+      const res = await getFetch(`/collection/${id}`, token);
       const data = await res.json();
       setData(data.data);
     } catch (error) {
@@ -147,7 +147,7 @@ export function usePostCollectionEdit() {
     setIsLoading(true);
     const jsonFromData = JSON.stringify(formDatas);
     try {
-      const res = await muliteFetch("/coledit", "POST", token, jsonFromData);
+      const res = await muliteFetch("/collection", "POST", token, jsonFromData);
       if (!res.ok) {
         throw new Error(res.statusText);
       }
@@ -164,7 +164,7 @@ export function usePostCollectionEdit() {
     const jsonNotices = JSON.stringify(notices);
     try {
       const res = await muliteFetch(
-        "/coledit/notices",
+        "/collection/notices",
         "POST",
         token,
         jsonNotices

@@ -41,7 +41,7 @@ const useCollectionList = () => {
     key?: string;
     width?: string;
     type?: string;
-    amount?: string;
+    price?: string;
     filters?: {
       text: string;
       value: string;

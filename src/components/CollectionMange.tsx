@@ -42,9 +42,9 @@ export default function CollectionMange(props: any) {
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <p>房號:</p>
                 <InputWithErrorMessage
-                  value={formData.roomNumber}
-                  onChange={(e) => handleChange("roomNumber", e.target.value)}
-                  isError={formData.roomNumber.length <= 2}
+                  value={formData.tenement_id}
+                  onChange={(e) => handleChange("tenement_id", e.target.value)}
+                  isError={formData.tenement_id.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>
@@ -71,18 +71,18 @@ export default function CollectionMange(props: any) {
                     { value: "管理費" },
                     { value: "其他" },
                   ]}
-                  onChange={(value) => handleChange("expenseName", value)}
-                  value={formData.expenseName}
+                  onChange={(value) => handleChange("collection_name", value)}
+                  value={formData.collection_name}
                 />
               </div>
               <div className="inline-flex items-center whitespace-nowrap w-96">
                 <p>費用金額:</p>
                 <InputWithErrorMessage
-                  value={formData.expenseAmount}
+                  value={formData.price}
                   onChange={(e) =>
-                    handleChange("expenseAmount", e.target.value)
+                    handleChange("price", e.target.value)
                   }
-                  isError={formData.expenseAmount.length <= 2}
+                  isError={formData.price.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>
@@ -92,7 +92,7 @@ export default function CollectionMange(props: any) {
                   defaultValue="現金"
                   style={{ width: 120 }}
                   options={[{ value: "現金" }, { value: "匯款" }]}
-                  onChange={(value) => handleChange("paymentMethod", value)}
+                  onChange={(value) => handleChange("payment", value)}
                 />
               </div>
               <div className="inline-flex whitespace-nowrap ">
@@ -102,29 +102,29 @@ export default function CollectionMange(props: any) {
                   placeholder="請輸入內容"
                   rows={10}
                   className="h-48 w-72"
-                  value={formData.note}
-                  onChange={(e) => handleChange("note", e.target.value)}
+                  value={formData.collection_remark}
+                  onChange={(e) => handleChange("collection_remark", e.target.value)}
                 />
               </div>
-              {formData.paymentMethod === "匯款" && (
+              {formData.payment === "匯款" && (
                 <>
                   <div className="inline-flex items-center whitespace-nowrap w-96">
                     <p>匯款銀行:</p>
                     <InputWithErrorMessage
-                      value={formData.bankName}
-                      onChange={(e) => handleChange("bankName", e.target.value)}
-                      isError={formData.bankName.length <= 2}
+                      value={formData.remittance_bank}
+                      onChange={(e) => handleChange("remittance_bank", e.target.value)}
+                      isError={formData.remittance_bank.length <= 2}
                       errorMessage={"請輸入內容"}
                     />
                   </div>
                   <div className="inline-flex items-center whitespace-nowrap w-96">
                     <p>匯款帳號:</p>
                     <InputWithErrorMessage
-                      value={formData.bankAccount}
+                      value={formData.remittance_account}
                       onChange={(e) =>
-                        handleChange("bankAccount", e.target.value)
+                        handleChange("remittance_account", e.target.value)
                       }
-                      isError={formData.bankAccount.length <= 2}
+                      isError={formData.remittance_account.length <= 2}
                       errorMessage={"請輸入內容"}
                     />
                   </div>
