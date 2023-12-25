@@ -7,6 +7,9 @@ import UserEdit from "../pages/user/UserEdit";
 import UserList from "../pages/user/UserList";
 import Layout from "../components/Layout";
 import CalenderList from "../pages/calender/CalenderList";
+import TenementAdd from "../pages/tenement/TenementAdd";
+import TenementEdit from "../pages/tenement/TenementEdit";
+import TenementList from "../pages/tenement/TenementList";
 
 export const App = () => (
   <div className="w-full h-full ">
@@ -19,6 +22,9 @@ export const App = () => (
         <Route path="User/:user_id" element={<UserEdit />} />
         <Route path="user" element={<UserAdd />} />
         <Route path="Calenderlist" element={<CalenderList />} />
+        <Route path="Tenement/Add" element={<TenementAdd />} />
+        <Route path="Tenement/:id" element={<TenementEdit />} />
+        <Route path="Tenements" element={<TenementList />} />
       </Route>
     </Routes>
   </div>

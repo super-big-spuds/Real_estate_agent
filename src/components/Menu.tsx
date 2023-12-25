@@ -27,8 +27,8 @@ const items: MenuProps["items"] = [
     getItem("代收付管理新增", "Collection/Add"),
   ]),
   getItem("房屋管理", "tenementmange", undefined, [
-    getItem("房屋管理列表", "house-list"),
-    getItem("房屋管理新增", "house-add"),
+    getItem("房屋管理列表", "Tenements"),
+    getItem("房屋管理新增", "Tenement/Add"),
   ]),
   getItem("提醒月曆", "calendarmange", undefined, [
     getItem("提醒月曆列表", "Calenderlist"),
