@@ -72,8 +72,8 @@ export default function CollectionMange(props: any) {
                   defaultValue="是"
                   style={{ width: 120 }}
                   options={[{ value: "是" }, { value: "否" }]}
-                  onChange={(value) => handleChange("isactive", value)}
-                  value={formData.isactive}
+                  onChange={(value) => handleChange("status", value)}
+                  value={formData.status}
                 />
               </div>
               <div className="inline-flex items-center whitespace-nowrap">

@@ -31,7 +31,7 @@ export type NoticeData = {
 export type User = {
   user_name: string;
   user_email: string;
-  isactive: string;
+  status: string;
   id?: string;
   user_password?: string;
   isadmin?: string;

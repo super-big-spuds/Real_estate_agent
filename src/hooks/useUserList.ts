@@ -9,25 +9,25 @@ const useCollectionList = () => {
       id: "1",
       user_name: "翁先生",
       user_email: "user@gmail.com",
-      isactive: "是",
+      status: "是",
     },
     {
       id: "2",
       user_name: "李先生",
       user_email: "user2@gmail.com",
-      isactive: "是",
+      status: "是",
     },
     {
       id: "3",
       user_name: "張先生",
       user_email: "user3@gmail.com",
-      isactive: "是",
+      status: "是",
     },
     {
       id: "4",
       user_name: "陳先生",
       user_email: "user4@gmail.com",
-      isactive: "否",
+      status: "否",
     },
   ]);
   type ColumnsType = {
@@ -59,7 +59,7 @@ const useCollectionList = () => {
     },
     {
       title: "是否啟用",
-      dataIndex: "isactive",
+      dataIndex: "status",
       filters: [
         {
           text: "是",
@@ -70,7 +70,7 @@ const useCollectionList = () => {
           value: "否",
         },
       ],
-      onFilter: (value, record) => record.isactive.indexOf(value) === 0,
+      onFilter: (value, record) => record.status.indexOf(value) === 0,
     },
   ];
 
@@ -83,7 +83,7 @@ const useCollectionList = () => {
           id: user.id,
           user_name: user.user_name,
           user_email: user.user_email,
-          isactive: user.isactive,
+          status: user.status,
           key: user.id,
         };
       });
