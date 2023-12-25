@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import getColumnSearchProps from "../components/getColumnSearchProps";
 import { useGetUserList } from "./useAPI";
 import type { User } from "../type";
 
@@ -8,26 +7,26 @@ const useCollectionList = () => {
   const [data, setData] = useState<User[]>([
     {
       id: "1",
-      name: "翁先生",
-      email: "user@gmail.com",
+      user_name: "翁先生",
+      user_email: "user@gmail.com",
       isactive: "是",
     },
     {
       id: "2",
-      name: "李先生",
-      email: "user2@gmail.com",
+      user_name: "李先生",
+      user_email: "user2@gmail.com",
       isactive: "是",
     },
     {
       id: "3",
-      name: "張先生",
-      email: "user3@gmail.com",
+      user_name: "張先生",
+      user_email: "user3@gmail.com",
       isactive: "是",
     },
     {
       id: "4",
-      name: "陳先生",
-      email: "user4@gmail.com",
+      user_name: "陳先生",
+      user_email: "user4@gmail.com",
       isactive: "否",
     },
   ]);
@@ -52,12 +51,11 @@ const useCollectionList = () => {
     },
     {
       title: "使用者名稱",
-      dataIndex: "name",
-      ...getColumnSearchProps("name"),
+      dataIndex: "user_name",
     },
     {
       title: "使用者信箱",
-      dataIndex: "email",
+      dataIndex: "user_email",
     },
     {
       title: "是否啟用",
@@ -83,8 +81,8 @@ const useCollectionList = () => {
       const newdatauser = dataUser.map((user) => {
         return {
           id: user.id,
-          name: user.name,
-          email: user.email,
+          user_name: user.user_name,
+          user_email: user.user_email,
           isactive: user.isactive,
           key: user.id,
         };

@@ -167,21 +167,21 @@ export default [
       message: "Successfully get the media",
       data: [
         {
-          name: "水電空調費",
+          collection_name: "水電空調費",
           tenement_id: "1",
           type: "代收",
           price: "1000",
           collection_id: 1,
         },
         {
-          name: "管理費",
+          collection_name: "管理費",
           tenement_id: "2",
           type: "代付",
           price: "2000",
           collection_id: 2,
         },
         {
-          name: "第四台",
+          collection_name: "第四台",
           tenement_id: "3",
           type: "代收",
           price: "3000",
@@ -189,7 +189,7 @@ export default [
         },
         {
           collection_id: 4,
-          name: "其他費用",
+          collection_name: "其他費用",
           tenement_id: "4",
           type: "代付",
           price: "4000",

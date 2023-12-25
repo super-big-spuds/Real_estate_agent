@@ -8,26 +8,26 @@ export default [
       message: "Successfully get the media",
       data: [
         {
-          name: "王小明",
-          email: "User1@gmail.com",
+          user_name: "王小明",
+          user_email: "User1@gmail.com",
           isactive: "是",
           id: "1",
         },
         {
-          name: "王大明",
-          email: "User2@gmail.com",
+          user_name: "王大明",
+          user_email: "User2@gmail.com",
           isactive: "是",
           id: "2",
         },
         {
-          name: "王中明",
-          email: "User3@gmail.com",
+          user_name: "王中明",
+          user_email: "User3@gmail.com",
           isactive: "否",
           id: "3",
         },
         {
-          name: "王營明",
-          email: "User4@gmail.com",
+          user_name: "王營明",
+          user_email: "User4@gmail.com",
           isactive: "是",
           id: "4",
         },
@@ -61,10 +61,10 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        name: "王小明",
-        email: "User1@gmail.com",
+        user_name: "王小明",
+        user_email: "User1@gmail.com",
         isactive: "是",
-        password: "123456",
+        user_password: "123456",
         id: "1",
         isadmin: "否",
       },
@@ -76,10 +76,10 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        name: "王大明",
-        email: "User2@gmail.com",
+        user_name: "王大明",
+        user_email: "User2@gmail.com",
         isactive: "是",
-        password: "123456",
+        user_password: "123456",
         id: "2",
         isadmin: "否",
       },
@@ -91,9 +91,9 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        name: "王中明",
-        email: "User3@gmail.com",
-        password: "123456",
+        user_name: "王中明",
+        user_email: "User3@gmail.com",
+        user_password: "123456",
         isactive: "否",
         id: "3",
         isadmin: "否",
@@ -106,9 +106,9 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        name: "王營明",
-        email: "User4@gmail.com",
-        password: "123456",
+        user_name: "王營明",
+        user_email: "User4@gmail.com",
+        user_password: "123456",
         isactive: "是",
         id: "4",
         isadmin: "否",

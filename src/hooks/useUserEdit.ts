@@ -11,10 +11,10 @@ const useCollectionEdit = () => {
   const { id } = useParams();
 
   const [formData, setFormData] = useState<User>({
-    name: "",
-    email: "",
+    user_name: "",
+    user_email: "",
     isactive: "是",
-    password: "",
+    user_password: "",
     isadmin: "否",
   });
   const handleChange = (key: keyof User, value: string) => {
@@ -32,10 +32,10 @@ const useCollectionEdit = () => {
     };
 
     const schema = z.object({
-      name: z.string().min(2, "請輸入至少兩個以上的名字"),
-      email: z.string().email("不符合Email格式"),
+      user_name: z.string().min(2, "請輸入至少兩個以上的名字"),
+      user_email: z.string().email("不符合Email格式"),
       isactive: z.string(),
-      password: z.string().min(6, "請輸入至少六個以上的密碼"),
+      user_password: z.string().min(6, "請輸入至少六個以上的密碼"),
       isadmin: z.string(),
       id: z.string(),
     });
@@ -61,10 +61,10 @@ const useCollectionEdit = () => {
 
   const handleReset = () => {
     setFormData({
-      name: "",
-      email: "",
+      user_name: "",
+      user_email: "",
       isactive: "是",
-      password: "",
+      user_password: "",
       isadmin: "否",
     });
   };
@@ -80,10 +80,10 @@ const useCollectionEdit = () => {
   useEffect(() => {
     if (!dataEdit) return;
     setFormData({
-      name: dataEdit.name,
-      email: dataEdit.email,
+      user_name: dataEdit.user_name,
+      user_email: dataEdit.user_email,
       isactive: dataEdit.isactive,
-      password: dataEdit.password,
+      user_password: dataEdit.user_password,
       isadmin: dataEdit.isadmin,
     });
   }, [dataEdit]);

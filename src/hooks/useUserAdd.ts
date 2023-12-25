@@ -7,10 +7,10 @@ const useCollectionAdd = () => {
   const { isLoading, isError, handleSaveUser } = usePostUserAdd();
 
   const [formData, setFormData] = useState<User>({
-    name: "",
-    email: "",
+    user_name: "",
+    user_email: "",
     isactive: "是",
-    password: "",
+    user_password: "",
     isadmin: "否",
   });
 
@@ -23,10 +23,10 @@ const useCollectionAdd = () => {
 
   const handleSave = async () => {
     const schema = z.object({
-      name: z.string().min(2, "請輸入至少兩個以上的名字"),
-      email: z.string().email("不符合Email格式"),
+      user_name: z.string().min(2, "請輸入至少兩個以上的名字"),
+      user_email: z.string().email("不符合Email格式"),
       isactive: z.string(),
-      password: z.string().min(6, "請輸入至少六個以上的密碼"),
+      user_password: z.string().min(6, "請輸入至少六個以上的密碼"),
       isadmin: z.string(),
     });
 
@@ -47,10 +47,10 @@ const useCollectionAdd = () => {
 
   const handleReset = () => {
     setFormData({
-      name: "",
-      email: "",
+      user_name: "",
+      user_email: "",
       isactive: "是",
-      password: "",
+      user_password: "",
       isadmin: "否",
     });
   };

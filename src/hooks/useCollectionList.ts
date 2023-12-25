@@ -7,28 +7,28 @@ import type { Collection } from "../type";
 const useCollectionList = () => {
   const [data, setData] = useState<Collection[]>([
     {
-      name: "代收1",
+      collection_name: "代收1",
       type: "代收",
       tenement_id: "1",
       price: "1000",
       collection_id: 1,
     },
     {
-      name: "代付1",
+      collection_name: "代付1",
       tenement_id: "2",
       type: "代付",
       price: "2000",
       collection_id: 2,
     },
     {
-      name: "代收2",
+      collection_name: "代收2",
       tenement_id: "3",
       type: "代收",
       price: "3000",
       collection_id: 3,
     },
     {
-      name: "代付2",
+      collection_name: "代付2",
       tenement_id: "4",
       type: "代付",
       price: "4000",
@@ -64,7 +64,7 @@ const useCollectionList = () => {
     },
     {
       title: "費用名稱",
-      dataIndex: "name",
+      dataIndex: "collection_name",
       filters: [
         {
           text: "水電空調費",
@@ -83,7 +83,7 @@ const useCollectionList = () => {
           value: "第四台",
         },
       ],
-      onFilter: (value, record) => record.name.includes(value),
+      onFilter: (value, record) => record.collection_name.includes(value),
     },
     {
       title: "費用類型",
@@ -114,7 +114,7 @@ const useCollectionList = () => {
         return {
           collection_id: collection.collection_id,
           tenement_id: collection.tenement_id,
-          name: collection.name,
+          collection_name: collection.collection_name,
           type: collection.type,
           price: collection.price,
           key: collection.collection_id,

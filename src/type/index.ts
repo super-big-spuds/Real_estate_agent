@@ -1,5 +1,5 @@
 export type Collection = {
-  name: string;
+  collection_name: string;
   tenement_id: string;
   price: string;
   type: string;
@@ -29,11 +29,11 @@ export type NoticeData = {
 };
 
 export type User = {
-  name: string;
-  email: string;
+  user_name: string;
+  user_email: string;
   isactive: string;
   id?: string;
-  password?: string;
+  user_password?: string;
   isadmin?: string;
 };
 
