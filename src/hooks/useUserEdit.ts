@@ -8,7 +8,7 @@ const useCollectionEdit = () => {
   const { isLoading, isError, handleSaveUser, handleDeleteUserFetch } =
     usePostUserEdit();
   const { getUserEdit, dataEdit } = useGetUserEdit();
-  const { id } = useParams();
+  const { user_id } = useParams();
 
   const [formData, setFormData] = useState<User>({
     user_name: "",
@@ -25,10 +25,10 @@ const useCollectionEdit = () => {
   };
 
   const handleSave = async () => {
-    if (!id) return;
+    if (!user_id) return;
     const newformdata = {
       ...formData,
-      id: id,
+      user_id: user_id,
     };
 
     const schema = z.object({
@@ -37,7 +37,7 @@ const useCollectionEdit = () => {
       status: z.string(),
       user_password: z.string().min(6, "請輸入至少六個以上的密碼"),
       isadmin: z.string(),
-      id: z.string(),
+      user_id: z.string(),
     });
 
     const parseResult = schema.safeParse(newformdata);
@@ -56,7 +56,7 @@ const useCollectionEdit = () => {
   };
   const handleDeleteUser = () => {
     confirm("確定要刪除嗎？");
-    handleDeleteUserFetch(id || "");
+    handleDeleteUserFetch(user_id || "");
   };
 
   const handleReset = () => {
@@ -70,8 +70,8 @@ const useCollectionEdit = () => {
   };
 
   const getapi = async () => {
-    if (!id) return;
-    await getUserEdit(id);
+    if (!user_id) return;
+    await getUserEdit(user_id);
   };
 
   useEffect(() => {

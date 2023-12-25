@@ -32,7 +32,7 @@ export type User = {
   user_name: string;
   user_email: string;
   status: string;
-  id?: string;
+  user_id?: string;
   user_password?: string;
   isadmin?: string;
 };

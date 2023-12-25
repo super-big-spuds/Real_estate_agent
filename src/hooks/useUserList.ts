@@ -6,25 +6,25 @@ import type { User } from "../type";
 const useCollectionList = () => {
   const [data, setData] = useState<User[]>([
     {
-      id: "1",
+      user_id: "1",
       user_name: "翁先生",
       user_email: "user@gmail.com",
       status: "是",
     },
     {
-      id: "2",
+      user_id: "2",
       user_name: "李先生",
       user_email: "user2@gmail.com",
       status: "是",
     },
     {
-      id: "3",
+      user_id: "3",
       user_name: "張先生",
       user_email: "user3@gmail.com",
       status: "是",
     },
     {
-      id: "4",
+      user_id: "4",
       user_name: "陳先生",
       user_email: "user4@gmail.com",
       status: "否",
@@ -47,7 +47,7 @@ const useCollectionList = () => {
   const columns: ColumnsType[] = [
     {
       title: "編號",
-      dataIndex: "id",
+      dataIndex: "user_id",
     },
     {
       title: "使用者名稱",
@@ -77,14 +77,14 @@ const useCollectionList = () => {
   const { isLoading, isError, dataUser } = useGetUserList();
   useEffect(() => {
     if (dataUser) {
-      //const newdatauser =  datauser map key = id
+      //const newdatauser =  datauser map key = user_id
       const newdatauser = dataUser.map((user) => {
         return {
-          id: user.id,
+          user_id: user.user_id,
           user_name: user.user_name,
           user_email: user.user_email,
           status: user.status,
-          key: user.id,
+          key: user.user_id,
         };
       });
 
@@ -96,7 +96,7 @@ const useCollectionList = () => {
   const onRow = (record: User) => {
     return {
       onClick: () => {
-        navigate(`/User/${record.id}`);
+        navigate(`/User/${record.user_id}`);
       },
     };
   };

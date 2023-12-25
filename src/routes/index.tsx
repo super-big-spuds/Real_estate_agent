@@ -16,7 +16,7 @@ export const App = () => (
         <Route path="Collection/:id" element={<CollectionEdit />} />
         <Route path="Collection/Add" element={<CollectionAdd />} />
         <Route path="users" element={<UserList />} />
-        <Route path="User/:id" element={<UserEdit />} />
+        <Route path="User/:user_id" element={<UserEdit />} />
         <Route path="user" element={<UserAdd />} />
         <Route path="Calenderlist" element={<CalenderList />} />
       </Route>

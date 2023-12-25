@@ -302,7 +302,7 @@ export function usePostUserEdit() {
     setIsLoading(true);
     try {
       const res = await muliteFetch(
-        `/user/${formDatas.id}`,
+        `/user/${formDatas.user_id}`,
         "PUT",
         token,
         formDatas
@@ -317,10 +317,15 @@ export function usePostUserEdit() {
       setIsLoading(false);
     }
   };
-  const handleDeleteUserFetch = async (id: string) => {
+  const handleDeleteUserFetch = async (user_id: string) => {
     setIsLoading(true);
     try {
-      const res = await muliteFetch(`/user/${id}`, "DELETE", token, id);
+      const res = await muliteFetch(
+        `/user/${user_id}`,
+        "DELETE",
+        token,
+        user_id
+      );
       if (!res.ok) {
         throw new Error(res.statusText);
       }
@@ -346,9 +351,9 @@ export function useGetUserEdit() {
   const [isError, setIsError] = useState(false);
   const [dataEdit, setData] = useState<User>();
 
-  const getUserEdit = async (id: string) => {
+  const getUserEdit = async (user_id: string) => {
     try {
-      const res = await getFetch(`/user/${id}`, token);
+      const res = await getFetch(`/user/${user_id}`, token);
       const data = await res.json();
 
       setData(data.data);
