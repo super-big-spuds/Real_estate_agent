@@ -7,36 +7,32 @@ import type { Collection } from "../type";
 const useCollectionList = () => {
   const [data, setData] = useState<Collection[]>([
     {
-      key: "1",
       name: "代收1",
       type: "代收",
       tenement_id: "1",
       price: "1000",
-      id: "1",
+      collection_id: 1,
     },
     {
-      key: "2",
       name: "代付1",
       tenement_id: "2",
       type: "代付",
       price: "2000",
-      id: "2",
+      collection_id: 2,
     },
     {
-      key: "3",
       name: "代收2",
       tenement_id: "3",
       type: "代收",
       price: "3000",
-      id: "3",
+      collection_id: 3,
     },
     {
-      key: "4",
       name: "代付2",
       tenement_id: "4",
       type: "代付",
       price: "4000",
-      id: "4",
+      collection_id: 4,
     },
   ]);
   type ColumnsType = {
@@ -57,7 +53,7 @@ const useCollectionList = () => {
   const columns: ColumnsType[] = [
     {
       title: "編號",
-      dataIndex: "id",
+      dataIndex: "collection_id",
     },
     {
       title: "房屋編號",
@@ -114,7 +110,17 @@ const useCollectionList = () => {
   const { isLoading, isError, datasa } = useGetCollectionList();
   useEffect(() => {
     if (datasa) {
-      setData(datasa);
+      const newdataCollection = datasa.map((collection) => {
+        return {
+          collection_id: collection.collection_id,
+          tenement_id: collection.tenement_id,
+          name: collection.name,
+          type: collection.type,
+          price: collection.price,
+          key: collection.collection_id,
+        };
+      });
+      setData(newdataCollection);
     }
   }, [datasa]);
 
@@ -122,7 +128,7 @@ const useCollectionList = () => {
   const onRow = (record: Collection) => {
     return {
       onClick: () => {
-        navigate(`/Collection/${record.id}`);
+        navigate(`/Collection/${record.tenement_id}`);
       },
     };
   };

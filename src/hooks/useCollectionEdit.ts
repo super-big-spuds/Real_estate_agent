@@ -58,9 +58,9 @@ const useCollectionEdit = () => {
 
   const handleSave = async () => {
     if (!id) return;
+
     const schemaform = z.object({
       tenement_id: z.string().min(2, "房號至少兩個字"),
-      collection_id: z.string(),
       collection_name: z.string(),
       type: z.string(),
       price: z.string().nonempty("金額不得為空"),
@@ -69,9 +69,7 @@ const useCollectionEdit = () => {
       remittance_bank: z.string(),
       remittance_account: z.string(),
     });
-
     const parseResult = schemaform.safeParse(formData);
-
     if (!parseResult.success) {
       const errorMessages = parseResult.error.errors.map((error) => {
         return error.message;
@@ -82,7 +80,7 @@ const useCollectionEdit = () => {
     }
     const newformdata = {
       ...parseResult.data,
-      id: id,
+      collection_id: id,
     };
     await handleSaveColumn(newformdata);
     if (notices.length > 0) {

@@ -89,14 +89,14 @@ export default [
             remind: "繳房租",
           },
           {
-            id:"7",
+            id: "7",
             visitDate: "2023-01-01",
             record: "看房子",
             remindDate: "2023-02-01",
             remind: "提醒",
           },
           {
-            id:"8",
+            id: "8",
             visitDate: "2023-01-01",
             record: "繳水電",
             remindDate: "2023-02-01",
@@ -122,14 +122,14 @@ export default [
         remittance_account: "123456789",
         notices: [
           {
-            id:"9",
+            id: "9",
             visitDate: "2023-01-01",
             record: "看房子",
             remindDate: "2023-02-01",
             remind: "提醒",
           },
           {
-            id:"10",
+            id: "10",
             visitDate: "2023-01-01",
             record: "繳水電",
             remindDate: "2023-02-01",
@@ -140,8 +140,15 @@ export default [
     },
   },
   {
-    url: "/api/collection",
+    url: "/api/collections",
     method: "post",
+    response: {
+      message: "Successfully add the media",
+    },
+  },
+  {
+    url: "/api/collection/:collectionid",
+    method: "put",
     response: {
       message: "Successfully update the media",
     },
@@ -154,56 +161,38 @@ export default [
     },
   },
   {
-    url: "/api/coladd",
-    method: "post",
-    response: {
-      message: "Successfully add the media",
-    },
-  },
-  {
-    url: "/api/coladd/notices",
-    method: "post",
-    response: {
-      message: "Successfully add the media",
-    },
-  },
-  {
-    url: "/api/collection/list",
+    url: "/api/collections",
     method: "get",
     response: {
       message: "Successfully get the media",
       data: [
         {
-          key: "1",
           name: "水電空調費",
           tenement_id: "1",
           type: "代收",
           price: "1000",
-          id: "1",
+          collection_id: 1,
         },
         {
-          key: "2",
           name: "管理費",
           tenement_id: "2",
           type: "代付",
           price: "2000",
-          id: "2",
+          collection_id: 2,
         },
         {
-          key: "3",
           name: "第四台",
           tenement_id: "3",
           type: "代收",
           price: "3000",
-          id: "3",
+          collection_id: 3,
         },
         {
-          key: "4",
+          collection_id: 4,
           name: "其他費用",
           tenement_id: "4",
           type: "代付",
           price: "4000",
-          id: "4",
         },
       ],
     },

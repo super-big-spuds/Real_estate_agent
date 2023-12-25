@@ -25,8 +25,6 @@ const useCollectionEdit = () => {
 
   const handleSave = async () => {
     if (!id) return;
-    console.log(formData);
-
     const newformdata = {
       ...formData,
       id: id,
@@ -38,6 +36,7 @@ const useCollectionEdit = () => {
       isactive: z.string(),
       password: z.string().min(6, "請輸入至少六個以上的密碼"),
       isadmin: z.string(),
+      id: z.string(),
     });
 
     const parseResult = schema.safeParse(newformdata);

@@ -5,7 +5,7 @@ import InputWithErrorMessage from "./InputWithErrorMessage";
 export default function CollectionMange(props: any) {
   const navigate = useNavigate();
   const handleback = () => {
-    navigate("/User/List");
+    navigate("/users");
   };
 
   const {

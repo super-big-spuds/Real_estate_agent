@@ -12,12 +12,12 @@ export const App = () => (
   <div className="w-full h-full ">
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="Collection/List" element={<CollectionList />} />
+        <Route path="collections" element={<CollectionList />} />
         <Route path="Collection/:id" element={<CollectionEdit />} />
         <Route path="Collection/Add" element={<CollectionAdd />} />
-        <Route path="User/List" element={<UserList />} />
+        <Route path="users" element={<UserList />} />
         <Route path="User/:id" element={<UserEdit />} />
-        <Route path="User/Add" element={<UserAdd />} />
+        <Route path="user" element={<UserAdd />} />
         <Route path="Calenderlist" element={<CalenderList />} />
       </Route>
     </Routes>

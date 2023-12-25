@@ -3,10 +3,8 @@ export type Collection = {
   tenement_id: string;
   price: string;
   type: string;
-  collection_id: string;
+  collection_id: number;
 };
-
-
 
 export type FormData = {
   tenement_id: string;

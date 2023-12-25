@@ -51,7 +51,7 @@ export function useGetCollectionList() {
     (async () => {
       if (token) return;
       try {
-        const res = await getFetch("/collection/list", token);
+        const res = await getFetch("/collections", token);
         const newData = await res.json();
         setData(newData.data);
       } catch (error) {
@@ -78,7 +78,7 @@ export function usePostCollectionAdd() {
   const handleSaveColumn = async (formDatas: FormData) => {
     setIsLoading(true);
     try {
-      const res = await muliteFetch("/coladd", "POST", token, formDatas);
+      const res = await muliteFetch("/collections", "POST", token, formDatas);
       if (!res.ok) {
         throw new Error(res.statusText);
       }
@@ -93,7 +93,12 @@ export function usePostCollectionAdd() {
   const handleSaveNotice = async (notices: NoticeData[]) => {
     setIsLoading(true);
     try {
-      const res = await muliteFetch("/coladd/notices", "POST", token, notices);
+      const res = await muliteFetch(
+        "/collection/notices",
+        "POST",
+        token,
+        notices
+      );
       if (!res.ok) {
         throw new Error(res.statusText);
       }
@@ -145,9 +150,16 @@ export function usePostCollectionEdit() {
 
   const handleSaveColumn = async (formDatas: FormData) => {
     setIsLoading(true);
+    console.log(formDatas);
     const jsonFromData = JSON.stringify(formDatas);
+
     try {
-      const res = await muliteFetch("/collection", "POST", token, jsonFromData);
+      const res = await muliteFetch(
+        `/collection/${formDatas.collection_id}`,
+        "PUT",
+        token,
+        jsonFromData
+      );
       if (!res.ok) {
         throw new Error(res.statusText);
       }
@@ -196,7 +208,7 @@ export function useGetUserList() {
 
   const getUserList = async () => {
     try {
-      const res = await getFetch("/user/list", token);
+      const res = await getFetch("/users", token);
       const newData = await res.json();
       setDataUser(newData.data);
     } catch (error) {
@@ -226,7 +238,7 @@ export function usePostUserAdd() {
     setIsLoading(true);
 
     try {
-      const res = await muliteFetch("/user/add", "POST", token, formDatas);
+      const res = await muliteFetch("/user", "POST", token, formDatas);
       if (!res.ok) {
         throw new Error(res.statusText);
       }
@@ -252,9 +264,15 @@ export function usePostUserEdit() {
 
   const handleSaveUser = async (formDatas: User) => {
     setIsLoading(true);
+    console.log(formDatas);
 
     try {
-      const res = await muliteFetch("/user/edit", "POST", token, formDatas);
+      const res = await muliteFetch(
+        `/user/${formDatas.id}`,
+        "PUT",
+        token,
+        formDatas
+      );
       if (!res.ok) {
         throw new Error(res.statusText);
       }

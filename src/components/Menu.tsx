@@ -22,20 +22,20 @@ function getItem(
 }
 
 const items: MenuProps["items"] = [
-  getItem("代收付管理", "collection", undefined, [
-    getItem("代收付管理列表", "Collection/List"),
+  getItem("代收付管理", "collectionmange", undefined, [
+    getItem("代收付管理列表", "collections"),
     getItem("代收付管理新增", "Collection/Add"),
   ]),
-  getItem("房屋管理", "house", undefined, [
+  getItem("房屋管理", "tenementmange", undefined, [
     getItem("房屋管理列表", "house-list"),
     getItem("房屋管理新增", "house-add"),
   ]),
-  getItem("提醒月曆", "calendar", undefined, [
+  getItem("提醒月曆", "calendarmange", undefined, [
     getItem("提醒月曆列表", "Calenderlist"),
   ]),
-  getItem("使用者管理", "user", undefined, [
-    getItem("使用者管理列表", "User/List"),
-    getItem("使用者管理新增", "User/Add"),
+  getItem("使用者管理", "usermange", undefined, [
+    getItem("使用者管理列表", "users"),
+    getItem("使用者管理新增", "user"),
   ]),
 ];
 

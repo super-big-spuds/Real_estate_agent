@@ -2,7 +2,7 @@ import { MockMethod } from "vite-plugin-mock";
 
 export default [
   {
-    url: "/api/user/list",
+    url: "/api/users",
     method: "get",
     response: {
       message: "Successfully get the media",
@@ -39,10 +39,17 @@ export default [
     },
   },
   {
-    url: "/api/user/add",
+    url: "/api/user",
     method: "post",
     response: {
       message: "Successfully add the media",
+    },
+  },
+  {
+    url: "/api/user/:userid",
+    method: "put",
+    response: {
+      message: "Successfully update the media",
     },
   },
   {

@@ -34,7 +34,6 @@ const useCollectionList = () => {
   type ColumnsType = {
     title: string;
     dataIndex: string;
-
     width?: string;
     type?: string;
     price?: string;
@@ -80,7 +79,18 @@ const useCollectionList = () => {
   const { isLoading, isError, dataUser } = useGetUserList();
   useEffect(() => {
     if (dataUser) {
-      setData(dataUser);
+      //const newdatauser =  datauser map key = id
+      const newdatauser = dataUser.map((user) => {
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          isactive: user.isactive,
+          key: user.id,
+        };
+      });
+
+      setData(newdatauser);
     }
   }, [dataUser]);
 

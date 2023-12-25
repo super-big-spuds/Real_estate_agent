@@ -7,7 +7,7 @@ export default function CollectionMange(props: any) {
   const { TextArea } = Input;
   const navigate = useNavigate();
   const handleback = () => {
-    navigate("/Collection/List");
+    navigate("/collections");
   };
   const {
     formData,
@@ -79,9 +79,7 @@ export default function CollectionMange(props: any) {
                 <p>費用金額:</p>
                 <InputWithErrorMessage
                   value={formData.price}
-                  onChange={(e) =>
-                    handleChange("price", e.target.value)
-                  }
+                  onChange={(e) => handleChange("price", e.target.value)}
                   isError={formData.price.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
@@ -103,7 +101,9 @@ export default function CollectionMange(props: any) {
                   rows={10}
                   className="h-48 w-72"
                   value={formData.collection_remark}
-                  onChange={(e) => handleChange("collection_remark", e.target.value)}
+                  onChange={(e) =>
+                    handleChange("collection_remark", e.target.value)
+                  }
                 />
               </div>
               {formData.payment === "匯款" && (
@@ -112,7 +112,9 @@ export default function CollectionMange(props: any) {
                     <p>匯款銀行:</p>
                     <InputWithErrorMessage
                       value={formData.remittance_bank}
-                      onChange={(e) => handleChange("remittance_bank", e.target.value)}
+                      onChange={(e) =>
+                        handleChange("remittance_bank", e.target.value)
+                      }
                       isError={formData.remittance_bank.length <= 2}
                       errorMessage={"請輸入內容"}
                     />

@@ -7,7 +7,7 @@ import useUserList from "../../hooks/useUserList";
 export const CollectionList = () => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/User/Add");
+    navigate("/user");
   };
   const { data, columns, onRow, isError, isLoading } = useUserList();
 
