@@ -59,7 +59,7 @@ const HouseInformationForm = (props: any) => {
             X
           </p>
         </div>
-        <Form.Item name="source" label="房號">
+        <Form.Item name="source" label="房號" className="w-48 ">
           <Input />
         </Form.Item>
         <Form.Item name="caseType" label="案件型態">
@@ -97,11 +97,11 @@ const HouseInformationForm = (props: any) => {
         </Form.Item>
         <div className="inline-flex gap-6">
           <Form.Item
-            name="budget-MIN"
+            name="budget-min"
             label="資金"
             rules={[{ message: "請輸入資金 min" }]}
           >
-            <Input type="number" />
+            <Input type="number" placeholder="mix" />
           </Form.Item>
           <p className="mt-1">~</p>
           <Form.Item
@@ -111,16 +111,16 @@ const HouseInformationForm = (props: any) => {
               { validator: validateBudgetMax },
             ]}
           >
-            <Input type="number" />
+            <Input type="number" placeholder="max" />
           </Form.Item>
         </div>
-        <div className="inline-flex gap-6">
+        <div className="flex gap-6">
           <Form.Item
             name="floor-min"
             label="樓層"
             rules={[{ message: "請輸入樓層 min" }]}
           >
-            <Input type="number" />
+            <Input type="number" placeholder="min" />
           </Form.Item>
           <p className="mt-1">~</p>
           <Form.Item
@@ -130,7 +130,7 @@ const HouseInformationForm = (props: any) => {
               { validator: validateFloorMax },
             ]}
           >
-            <Input type="number" />
+            <Input type="number" placeholder="max" />
           </Form.Item>
         </div>
         <Form.Item>
