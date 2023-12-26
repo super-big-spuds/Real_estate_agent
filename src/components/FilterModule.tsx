@@ -79,7 +79,7 @@ const HouseInformationForm = (props: any) => {
               <Radio value="已退租下架">已退租下架</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item name="orientation" label="面相">
+          <Form.Item name="orientation" label="面向">
             <Radio.Group>
               <Radio value="海景">海景</Radio>
               <Radio value="中庭">中庭</Radio>

@@ -138,7 +138,7 @@ export default function CollectionMange(props: any) {
         )}
       </div>
       <div className="flex flex-col p-5">
-        <div className="inline-flex flex-row justify-between pl-10 mb-5 pr-96">
+        <div className="inline-flex flex-row justify-between pl-10 mb-5 pr-80">
           <p className="text-2xl whitespace-normal">提醒設定</p>
           <Button
             type="primary"
