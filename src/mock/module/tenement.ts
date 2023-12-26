@@ -20,7 +20,7 @@ export default [
           tenement_no: 54322,
           tenement_face: "中庭",
           tenement_status: "已成交",
-          tenement_type: "出售",
+          tenement_type: "可租",
           tenement_style: "店面",
           management_fee_bottom: 120,
           management_floor_bottom: 11,
