@@ -2,12 +2,19 @@ import Table from "../../components/Table";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import useTenementList from "../../hooks/useTenementList";
+import FilterModule from "../../components/FilterModule";
+import { useState } from "react";
 
 export const TenementList = () => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/Tenement/Add");
   };
+  const [Popout, setPopout] = useState(false);
+  const handlePopout = () => {
+    setPopout(!Popout);
+  };
+
   const { data, columns, onRow, isError, isLoading } = useTenementList();
 
   return (
@@ -17,6 +24,9 @@ export const TenementList = () => {
         <Button type="primary" onClick={handleClick} className="bg-blue-600 ">
           新增
         </Button>
+        <Button type="primary" onClick={handlePopout} className="bg-blue-600 ">
+          篩選
+        </Button>
       </div>
       {isLoading ? (
         <p>loading...</p>
@@ -25,6 +35,7 @@ export const TenementList = () => {
       ) : (
         <Table data={data} columns={columns} onRow={onRow} />
       )}
+      {Popout && <FilterModule handlePopout={handlePopout} />}
     </div>
   );
 };
