@@ -1,9 +1,9 @@
-import TenementRent from "../../components/TenementRent";
+import TenementInfo from "../../components/TenementInfo";
 
 const TenemmentAdd = () => {
   return (
     <div className="flex justify-center">
-      <TenementRent />
+      <TenementInfo />
     </div>
   );
 };

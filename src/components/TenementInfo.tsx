@@ -1,13 +1,14 @@
-import { Input, Select, Button, Radio } from "antd";
+import { Button, Radio } from "antd";
 import Notice from "./Notice";
 import { useNavigate } from "react-router-dom";
 import InputWithErrorMessage from "./InputWithErrorMessage";
+import RenterInfo from "./RenterInfo";
+import Uploadfile from "./Uploadfile";
 
-export default function CollectionMange(props: any) {
-  const { TextArea } = Input;
+export default function TenementInfo(props: any) {
   const navigate = useNavigate();
   const handleback = () => {
-    navigate("/collections");
+    navigate("/tenements");
   };
   const formData = {
     tenement_no: "",
@@ -22,9 +23,18 @@ export default function CollectionMange(props: any) {
   };
   const notices = [
     {
-      notice_type: "",
-      notice_date: "",
-      notice_remark: "",
+      id: "1",
+      visitDate: "2023-01-01",
+      record: "看房子",
+      remindDate: "2023-02-01",
+      remind: "提醒",
+    },
+    {
+      id: "2",
+      visitDate: "2023-01-01",
+      record: "繳水電",
+      remindDate: "2023-02-01",
+      remind: "繳房租",
     },
   ];
   const {
@@ -45,7 +55,7 @@ export default function CollectionMange(props: any) {
         <button className="flex w-12 h-20" onClick={handleback}>
           {"< 返回"}
         </button>
-        <div className="inline-flex flex-col ml-5">
+        <div className="inline-flex flex-col mb-10 ml-5">
           <p className="text-4xl font-bold whitespace-normal">租房資訊</p>
         </div>
         {isLoading ? (
@@ -190,14 +200,19 @@ export default function CollectionMange(props: any) {
             </div>
             <div className="flex flex-col w-1/2 h-full ">
               {/* 房屋照片 */}
-              <div className="inline-flex flex-col ml-5">
+              <div className="inline-flex flex-col mb-10 ">
                 <p className="mt-2 text-3xl font-bold whitespace-normal">
                   房屋照片
                 </p>
+                <Uploadfile />
               </div>
+              <p className="mt-2 text-3xl font-bold whitespace-normal">
+                屋主資訊
+              </p>
               {/* 屋主姓名 */}
               <div className="inline-flex items-center whitespace-nowrap w-96">
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
                 <p>屋主姓名:</p>
                 <InputWithErrorMessage
                   value={formData.collection_name}
@@ -270,9 +285,12 @@ export default function CollectionMange(props: any) {
           </div>
         )}
       </div>
+      <div>
+        <RenterInfo />
+      </div>
       <div className="flex flex-col p-5">
-        <div className="inline-flex flex-row justify-between pl-10 mb-5 mr-48">
-          <p className="text-2xl whitespace-normal">提醒設定</p>
+        <div className="inline-flex flex-row justify-between pl-10 mb-5 mr-5">
+          <p className="text-4xl font-bold whitespace-normal">提醒設定</p>
           <Button
             type="primary"
             className="bg-blue-600 "

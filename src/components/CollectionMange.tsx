@@ -36,7 +36,7 @@ export default function CollectionMange(props: any) {
         ) : (
           <div>
             <div className="inline-flex flex-col ml-5">
-              <p className="text-4xl whitespace-normal">代收付管理</p>
+              <p className="text-4xl font-bold whitespace-normal">代收付管理</p>
             </div>
             <div className="flex flex-col flex-wrap w-full h-full gap-10 p-10 overflow-visible ">
               <div className="inline-flex items-center whitespace-nowrap w-96">
@@ -139,7 +139,7 @@ export default function CollectionMange(props: any) {
       </div>
       <div className="flex flex-col p-5">
         <div className="inline-flex flex-row justify-between pl-10 mb-5 pr-80">
-          <p className="text-2xl whitespace-normal">提醒設定</p>
+          <p className="text-4xl font-bold whitespace-normal">提醒設定</p>
           <Button
             type="primary"
             className="bg-blue-600 "
