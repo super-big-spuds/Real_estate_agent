@@ -1,4 +1,4 @@
-import TenementInfo from "../../components/TenementInfo";
+import TenementInfo from "../../components/tenement/TenementInfo";
 
 const TenemmentAdd = () => {
   return (

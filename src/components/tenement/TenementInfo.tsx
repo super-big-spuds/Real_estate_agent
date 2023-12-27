@@ -1,9 +1,10 @@
 import { Button, Radio } from "antd";
-import Notice from "./Notice";
+import Notice from "../Notice";
 import { useNavigate } from "react-router-dom";
-import InputWithErrorMessage from "./InputWithErrorMessage";
+import InputWithErrorMessage from "../InputWithErrorMessage";
 import RenterInfo from "./RenterInfo";
 import Uploadfile from "./Uploadfile";
+import SellerInfo from "./SellerInfo";
 
 export default function TenementInfo(props: any) {
   const navigate = useNavigate();
@@ -287,6 +288,7 @@ export default function TenementInfo(props: any) {
       </div>
       <div>
         <RenterInfo />
+        <SellerInfo />
       </div>
       <div className="flex flex-col p-5">
         <div className="inline-flex flex-row justify-between pl-10 mb-5 mr-5">
