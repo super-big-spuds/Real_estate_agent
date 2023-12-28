@@ -12,14 +12,12 @@ export default function RenterInfo() {
         <div className="flex flex-col w-2/5 gap-10 ml-32">
           {/* 租屋期限開始 */}
           <div className="inline-flex items-center whitespace-nowrap w-96">
-            <p>&nbsp;&nbsp;&nbsp;</p>
-            <p>租屋期限開始:</p>
+            <p>租屋開始日:</p>
             <DatePicker />
           </div>
           {/* 租屋期限結束 */}
           <div className="inline-flex items-center whitespace-nowrap w-96">
-            <p>&nbsp;&nbsp;&nbsp;</p>
-            <p>租屋期限結束:</p>
+            <p>租屋結束日:</p>
             <DatePicker />
           </div>
 

@@ -1,10 +1,11 @@
-import { Button, Radio } from "antd";
+import { Button, Radio, Select } from "antd";
 import Notice from "../Notice";
 import { useNavigate } from "react-router-dom";
 import InputWithErrorMessage from "../InputWithErrorMessage";
 import RenterInfo from "./RenterInfo";
 import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
+import { useState } from "react";
 
 export default function TenementInfo(props: any) {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function TenementInfo(props: any) {
   };
   const formData = {
     tenement_no: "",
-    collection_type: "",
+    tenement_type: "可租",
     collection_name: "",
     price: "",
     payment: "",
@@ -50,6 +51,164 @@ export default function TenementInfo(props: any) {
     isError,
   } = props;
 
+  const [tenement_type, setTenement_type] = useState("可租");
+
+  const handletypeChange = (e: any) => {
+    setTenement_type(e.target.value);
+  };
+
+  const swtitchExtraInfo = (tenement_type: string) => {
+    switch (tenement_type) {
+      case "可租":
+        return (
+          <div>
+            {/* 租金 */}
+            <div className="inline-flex items-center whitespace-nowrap w-96">
+              <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </p>
+              <p>租金:</p>
+              <InputWithErrorMessage
+                value={formData.tenement_no}
+                onChange={(e) => handleChange("tenement_no", e.target.value)}
+                isError={formData.tenement_no.length <= 2}
+                errorMessage={"至少兩個字"}
+              />
+            </div>
+            {/* 押金 */}
+            <div className="inline-flex items-center whitespace-nowrap w-96">
+              <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </p>
+              <p>押金:</p>
+              <InputWithErrorMessage
+                value={formData.tenement_no}
+                onChange={(e) => handleChange("tenement_no", e.target.value)}
+                isError={formData.tenement_no.length <= 2}
+                errorMessage={"至少兩個字"}
+              />
+            </div>
+          </div>
+        );
+
+      case "可售":
+        return (
+          <div>
+            {/* 售價 */}
+            <div className="inline-flex items-center whitespace-nowrap w-96">
+              <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+              </p>
+              <p>售價:</p>
+              <InputWithErrorMessage
+                value={formData.tenement_no}
+                onChange={(e) => handleChange("tenement_no", e.target.value)}
+                isError={formData.tenement_no.length <= 2}
+                errorMessage={"至少兩個字"}
+              />
+            </div>
+          </div>
+        );
+      case "開發追蹤":
+        return (
+          <div>
+            {/* 售價 */}
+            <div className="inline-flex items-center whitespace-nowrap w-96">
+              <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp; &nbsp;
+              </p>
+              <p>售價:</p>
+              <InputWithErrorMessage
+                value={formData.tenement_no}
+                onChange={(e) => handleChange("tenement_no", e.target.value)}
+                isError={formData.tenement_no.length <= 2}
+                errorMessage={"至少兩個字"}
+              />
+            </div>
+            {/* 租金 */}
+            <div className="inline-flex items-center whitespace-nowrap w-96">
+              <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </p>
+              <p>租金:</p>
+              <InputWithErrorMessage
+                value={formData.tenement_no}
+                onChange={(e) => handleChange("tenement_no", e.target.value)}
+                isError={formData.tenement_no.length <= 2}
+                errorMessage={"至少兩個字"}
+              />
+            </div>
+            {/* 押金 */}
+            <div className="inline-flex items-center whitespace-nowrap w-96">
+              <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </p>
+              <p>押金:</p>
+              <InputWithErrorMessage
+                value={formData.tenement_no}
+                onChange={(e) => handleChange("tenement_no", e.target.value)}
+                isError={formData.tenement_no.length <= 2}
+                errorMessage={"至少兩個字"}
+              />
+            </div>
+          </div>
+        );
+      case "行銷追蹤":
+        return (
+          <div>
+            {/* 要租要買 select  */}
+            <div className="inline-flex items-center whitespace-nowrap w-96">
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+              <p>要租要買:</p>
+              <Select defaultValue="租房" style={{ width: 120 }}>
+                <Select.Option value="租房">租房</Select.Option>
+                <Select.Option value="買房">買房</Select.Option>
+              </Select>
+            </div>
+            {/* 預算 最大值 最小值 */}
+            <div className="inline-flex items-center whitespace-nowrap w-96">
+              <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp; &nbsp;
+              </p>
+              <p>預算:</p>
+              <InputWithErrorMessage
+                value={formData.tenement_no}
+                onChange={(e) => handleChange("tenement_no", e.target.value)}
+                isError={formData.tenement_no.length <= 2}
+                errorMessage={"至少兩個字"}
+              />
+              <p>~</p>
+              <InputWithErrorMessage
+                value={formData.tenement_no}
+                onChange={(e) => handleChange("tenement_no", e.target.value)}
+                isError={formData.tenement_no.length <= 2}
+                errorMessage={"至少兩個字"}
+              />
+            </div>
+          </div>
+        );
+      default:
+        return "";
+    }
+  };
+  const switchTenementType = (tenement_type: string) => {
+    switch (tenement_type) {
+      case "可租":
+        return <RenterInfo />;
+      case "可售":
+        return <SellerInfo />;
+      case "開發追蹤":
+        return "";
+      case "行銷追蹤":
+        return "";
+      default:
+        return "";
+    }
+  };
+
   return (
     <div className="flex flex-col w-full h-full ">
       <div className="flex flex-col w-full h-full pt-12 pl-12 pr-16">
@@ -57,7 +216,9 @@ export default function TenementInfo(props: any) {
           {"< 返回"}
         </button>
         <div className="inline-flex flex-col mb-10 ml-5">
-          <p className="text-4xl font-bold whitespace-normal">租房資訊</p>
+          <p className="text-4xl font-bold whitespace-normal">
+            {tenement_type}資料
+          </p>
         </div>
         {isLoading ? (
           <p>loading...</p>
@@ -65,7 +226,7 @@ export default function TenementInfo(props: any) {
           <p>error...</p>
         ) : (
           <div className="flex flex-row ">
-            <div className="flex flex-col flex-wrap w-1/2 h-full gap-10 px-16 overflow-visible ">
+            <div className="flex flex-col flex-wrap w-1/2 h-full gap-4 px-16 overflow-visible ">
               <div className="inline-flex items-center whitespace-nowrap w-96">
                 <p>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -100,17 +261,19 @@ export default function TenementInfo(props: any) {
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <p>案件狀態:</p>
                 <Radio.Group>
-                  <Radio value="已出租">已出租</Radio>
-                  <Radio value="未出租">未出租</Radio>
+                  <Radio value="未成交">未成交</Radio>
+                  <Radio value="已成交">已成交</Radio>
+                  <Radio value="已成交下架">已成交下架</Radio>
+                  <Radio value="過戶完成下架">過戶完成下架</Radio>
                 </Radio.Group>
               </div>
               {/* 案件型態 */}
               <div className="inline-flex items-center whitespace-nowrap w-96">
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <p>案件型態:</p>
-                <Radio.Group>
-                  <Radio value="出租">出租</Radio>
-                  <Radio value="出售">出售</Radio>
+                <Radio.Group onChange={handletypeChange} value={tenement_type}>
+                  <Radio value="可租">可租</Radio>
+                  <Radio value="可售">可售</Radio>
                   <Radio value="開發追蹤">開發追蹤</Radio>
                   <Radio value="行銷追蹤">行銷追蹤</Radio>
                 </Radio.Group>
@@ -172,42 +335,17 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
-              {/* 租金 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </p>
-                <p>租金:</p>
-                <InputWithErrorMessage
-                  value={formData.tenement_no}
-                  onChange={(e) => handleChange("tenement_no", e.target.value)}
-                  isError={formData.tenement_no.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
-              {/* 押金 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </p>
-                <p>押金:</p>
-                <InputWithErrorMessage
-                  value={formData.tenement_no}
-                  onChange={(e) => handleChange("tenement_no", e.target.value)}
-                  isError={formData.tenement_no.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
+              {swtitchExtraInfo(tenement_type)}
             </div>
             <div className="flex flex-col w-1/2 h-full ">
               {/* 房屋照片 */}
               <div className="inline-flex flex-col mb-10 ">
-                <p className="mt-2 text-3xl font-bold whitespace-normal">
+                <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                   房屋照片
                 </p>
                 <Uploadfile />
               </div>
-              <p className="mt-2 text-3xl font-bold whitespace-normal">
+              <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                 屋主資訊
               </p>
               {/* 屋主姓名 */}
@@ -286,10 +424,7 @@ export default function TenementInfo(props: any) {
           </div>
         )}
       </div>
-      <div>
-        <RenterInfo />
-        <SellerInfo />
-      </div>
+      <div>{switchTenementType(tenement_type)}</div>
       <div className="flex flex-col p-5">
         <div className="inline-flex flex-row justify-between pl-10 mb-5 mr-5">
           <p className="text-4xl font-bold whitespace-normal">提醒設定</p>
