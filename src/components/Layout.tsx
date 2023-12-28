@@ -9,7 +9,7 @@ export default function Layout() {
   // }, []);
 
   return (
-    <div className="flex h-full min-h-screen bg-gray-300 ">
+    <div className="flex h-full min-h-screen bg-gray-100 ">
       <Menu />
       <Outlet />
     </div>

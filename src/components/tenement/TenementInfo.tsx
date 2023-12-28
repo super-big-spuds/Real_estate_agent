@@ -114,7 +114,7 @@ export default function TenementInfo(props: any) {
         return (
           <div>
             {/* 售價 */}
-            <div className="inline-flex items-center whitespace-nowrap w-96">
+            <div className="inline-flex items-center w-48 whitespace-nowrap">
               <p>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp; &nbsp;
@@ -128,7 +128,7 @@ export default function TenementInfo(props: any) {
               />
             </div>
             {/* 租金 */}
-            <div className="inline-flex items-center whitespace-nowrap w-96">
+            <div className="inline-flex items-center w-48 whitespace-nowrap">
               <p>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </p>
@@ -141,7 +141,7 @@ export default function TenementInfo(props: any) {
               />
             </div>
             {/* 押金 */}
-            <div className="inline-flex items-center whitespace-nowrap w-96">
+            <div className="inline-flex items-center w-48 whitespace-nowrap">
               <p>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </p>
@@ -211,15 +211,17 @@ export default function TenementInfo(props: any) {
 
   return (
     <div className="flex flex-col w-full h-full ">
-      <div className="flex flex-col w-full h-full pt-12 pl-12 pr-16">
-        <button className="flex w-12 h-20" onClick={handleback}>
+      <div className="flex flex-col w-full h-full pb-12 pr-16 mt-12 mb-10 ml-20 bg-white shadow-2xl rounded-xl ">
+        <button className="flex w-12 h-20 mt-10 ml-5" onClick={handleback}>
           {"< 返回"}
         </button>
-        <div className="inline-flex flex-col mb-10 ml-5">
+        <div className="inline-flex flex-col mb-5 ml-8">
           <p className="text-4xl font-bold whitespace-normal">
             {tenement_type}資料
           </p>
         </div>
+        {/* line */}
+        <p className="mb-3 ml-5 border-b-2 border-gray-300"></p>
         {isLoading ? (
           <p>loading...</p>
         ) : isError ? (
@@ -241,12 +243,12 @@ export default function TenementInfo(props: any) {
               </div>
 
               {/* 面向 */}
-              <div className="inline-flex items-center w-48 whitespace-nowrap">
+              <div className="inline-flex flex-row items-center w-96 ">
                 <p>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   &nbsp; &nbsp;
                 </p>
-                <p>面向:</p>
+                <p className=" whitespace-nowrap">面向:</p>
                 <Radio.Group>
                   <Radio value="海景">海景</Radio>
                   <Radio value="中庭">中庭</Radio>
@@ -257,9 +259,9 @@ export default function TenementInfo(props: any) {
                 </Radio.Group>
               </div>
               {/* 案件狀態 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
+              <div className="inline-flex flex-row items-center w-96">
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p>案件狀態:</p>
+                <p className=" whitespace-nowrap">案件狀態:</p>
                 <Radio.Group>
                   <Radio value="未成交">未成交</Radio>
                   <Radio value="已成交">已成交</Radio>
@@ -268,9 +270,9 @@ export default function TenementInfo(props: any) {
                 </Radio.Group>
               </div>
               {/* 案件型態 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
+              <div className="inline-flex items-center w-96">
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p>案件型態:</p>
+                <p className=" whitespace-nowrap">案件型態:</p>
                 <Radio.Group onChange={handletypeChange} value={tenement_type}>
                   <Radio value="可租">可租</Radio>
                   <Radio value="可售">可售</Radio>
@@ -423,41 +425,44 @@ export default function TenementInfo(props: any) {
             </div>
           </div>
         )}
-      </div>
-      <div>{switchTenementType(tenement_type)}</div>
-      <div className="flex flex-col p-5">
-        <div className="inline-flex flex-row justify-between pl-10 mb-5 mr-5">
-          <p className="text-4xl font-bold whitespace-normal">提醒設定</p>
-          <Button
-            type="primary"
-            className="bg-blue-600 "
-            onClick={handleAddNotice}
-          >
-            新增提醒
+
+        <div>{switchTenementType(tenement_type)}</div>
+        <div className="flex flex-col p-5">
+          <div className="inline-flex flex-row justify-between pl-10 mb-5 mr-5">
+            <p className="text-4xl font-bold whitespace-normal">提醒設定</p>
+
+            <Button
+              type="primary"
+              className="bg-blue-600 "
+              onClick={handleAddNotice}
+            >
+              新增提醒
+            </Button>
+          </div>
+          <p className="mb-3 ml-5 border-b-2 border-gray-300"></p>
+          <div className="flex flex-col gap-5">
+            {notices.map((notice: any, index: number) => (
+              <Notice
+                key={index}
+                keya={index}
+                notice={notice}
+                handleNoticeChange={handleNoticeChange}
+                handleDeleteNotice={handleDeleteNotice}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="flex justify-end gap-5 m-10 ">
+          <Button className="bg-blue-600 " type="primary" onClick={handleSave}>
+            儲存
+          </Button>
+          <Button type="default" onClick={() => handleReset()}>
+            回復預設
+          </Button>
+          <Button onClick={() => handleDeleteCollection()} danger>
+            刪除
           </Button>
         </div>
-        <div className="flex flex-col gap-5">
-          {notices.map((notice: any, index: number) => (
-            <Notice
-              key={index}
-              keya={index}
-              notice={notice}
-              handleNoticeChange={handleNoticeChange}
-              handleDeleteNotice={handleDeleteNotice}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="flex justify-end gap-5 m-10 ">
-        <Button className="bg-blue-600 " type="primary" onClick={handleSave}>
-          儲存
-        </Button>
-        <Button type="default" onClick={() => handleReset()}>
-          回復預設
-        </Button>
-        <Button onClick={() => handleDeleteCollection()} danger>
-          刪除
-        </Button>
       </div>
     </div>
   );

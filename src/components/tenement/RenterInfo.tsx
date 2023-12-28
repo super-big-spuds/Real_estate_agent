@@ -5,9 +5,10 @@ export default function RenterInfo() {
   return (
     // 租客資訊
     <div className="flex flex-col w-full mt-10">
-      <div className="inline-flex mb-10 ml-16 w-96">
+      <div className="inline-flex mb-5 ml-16 w-96">
         <p className="text-4xl font-bold">租客資訊</p>
       </div>
+      <p className="mb-3 ml-5 border-b-2 border-gray-300"></p>
       <div className="flex flex-row first-letter: ">
         <div className="flex flex-col w-2/5 gap-10 ml-32">
           {/* 租屋期限開始 */}

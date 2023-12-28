@@ -57,7 +57,7 @@ const App: React.FC = () => {
       defaultOpenKeys={["sub1"]}
       mode="inline"
       items={items}
-      className="pt-20 "
+      className="sticky top-0 h-screen pt-20 bg-blue-200 "
     />
   );
 };
