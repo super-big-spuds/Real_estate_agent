@@ -5,8 +5,10 @@ import { useLogin } from "../hooks/useAPI";
 
 const App: React.FC = () => {
   const { handleLogin, isLogin, isError } = useLogin();
-  const onFinish = (values: any) => {
+  const onFinish = (values: { user_email: string; user_password: string }) => {
     handleLogin(values);
+    console.log();
+
     if (!isLogin) {
       window.location.href = "/";
     }
