@@ -471,3 +471,35 @@ export function useGetTenementList() {
     dataTenement,
   };
 }
+
+export function useLogin() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+
+  const handleLogin = async (formDatas: {
+    user_email: string;
+    user_password: string;
+  }) => {
+    setIsLoading(true);
+    try {
+      const res = await muliteFetch("/user/login", "POST", "", formDatas);
+      const data = await res.json();
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        setIsLogin(true);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    handleLogin,
+    isLogin,
+  };
+}

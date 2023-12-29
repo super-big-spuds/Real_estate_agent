@@ -122,4 +122,12 @@ export default [
       message: "Successfully delete the media",
     },
   },
+  {
+    url: "/api/user/login",
+    method: "post",
+    response: {
+      message: "Successfully login the media",
+      token: "123456",
+    },
+  },
 ] as MockMethod[];

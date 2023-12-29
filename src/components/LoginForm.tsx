@@ -1,10 +1,18 @@
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
+import { useLogin } from "../hooks/useAPI";
 
 const App: React.FC = () => {
+  const { handleLogin, isLogin, isError } = useLogin();
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
+    handleLogin(values);
+    if (!isLogin) {
+      window.location.href = "/";
+    }
+    if (isError) {
+      alert("帳號或密碼錯誤");
+    }
   };
 
   return (
@@ -15,21 +23,22 @@ const App: React.FC = () => {
       onFinish={onFinish}
     >
       <Form.Item
-        name="username"
+        name="user_email"
         rules={[{ required: true, message: "請輸入您的信箱" }]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
+          type="email"
           placeholder="信箱"
         />
       </Form.Item>
       <Form.Item
-        name="password"
+        name="user_password"
         rules={[{ required: true, message: "請輸入您的密碼" }]}
       >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
+          type="user_password"
           placeholder="密碼"
         />
       </Form.Item>

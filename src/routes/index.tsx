@@ -11,28 +11,35 @@ import TenementAdd from "../pages/tenement/TenementAdd";
 import TenementEdit from "../pages/tenement/TenementEdit";
 import TenementList from "../pages/tenement/TenementList";
 import Login from "../pages/Login";
+import { useEffect, useState } from "react";
 const App = () => {
-  console.log(123);
+  const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLogin(true);
+    }
+  }, []);
 
   return (
     <div className="w-full h-full ">
       <Routes>
         <Route path="/login" element={<Login />} />
-      </Routes>
 
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="collections" element={<CollectionList />} />
-          <Route path="Collection/:id" element={<CollectionEdit />} />
-          <Route path="Collection/Add" element={<CollectionAdd />} />
-          <Route path="users" element={<UserList />} />
-          <Route path="User/:user_id" element={<UserEdit />} />
-          <Route path="user" element={<UserAdd />} />
-          <Route path="Calenderlist" element={<CalenderList />} />
-          <Route path="Tenement/Add" element={<TenementAdd />} />
-          <Route path="Tenement/:id" element={<TenementEdit />} />
-          <Route path="Tenements" element={<TenementList />} />
-        </Route>
+        {isLogin && (
+          <Route path="/" element={<Layout />}>
+            <Route path="collections" element={<CollectionList />} />
+            <Route path="Collection/:id" element={<CollectionEdit />} />
+            <Route path="Collection/Add" element={<CollectionAdd />} />
+            <Route path="users" element={<UserList />} />
+            <Route path="User/:user_id" element={<UserEdit />} />
+            <Route path="user" element={<UserAdd />} />
+            <Route path="Calenderlist" element={<CalenderList />} />
+            <Route path="Tenement/Add" element={<TenementAdd />} />
+            <Route path="Tenement/:id" element={<TenementEdit />} />
+            <Route path="Tenements" element={<TenementList />} />
+          </Route>
+        )}
       </Routes>
     </div>
   );
