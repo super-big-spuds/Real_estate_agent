@@ -27,8 +27,8 @@ export default function Notice({
   const remindDate = dayjs(notice.remindDate, dateFormat);
 
   return (
-    <div className="flex flex-col w-full pl-4 pr-12 ">
-      <div className="flex flex-row flex-wrap w-full h-full gap-10 pl-14 ">
+    <div className="flex flex-col w-full ml-12">
+      <div className="flex flex-row flex-wrap w-full h-full gap-2 ">
         <div className="inline-flex items-center whitespace-nowrap">
           <p>拜訪日期：</p>
           <DatePicker
@@ -43,7 +43,7 @@ export default function Notice({
           <TextArea
             placeholder="請輸入內容"
             rows={1}
-            className="w-72"
+            className="w-48"
             onChange={(e) => handleNoticeChange(keya, "record", e.target.value)}
             value={notice.record}
           />
@@ -62,7 +62,7 @@ export default function Notice({
           <TextArea
             placeholder="請輸入內容"
             rows={1}
-            className="w-72"
+            className="w-48"
             onChange={(e) => handleNoticeChange(keya, "remind", e.target.value)}
             value={notice.remind}
           />

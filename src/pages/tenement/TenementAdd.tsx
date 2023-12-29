@@ -1,11 +1,7 @@
 import TenementInfo from "../../components/tenement/TenementInfo";
 
 const TenemmentAdd = () => {
-  return (
-    <div className="flex justify-center">
-      <TenementInfo />
-    </div>
-  );
+  return <TenementInfo />;
 };
 
 export default TenemmentAdd;
