@@ -82,11 +82,8 @@ export default function TenementInfo(props: any) {
         return (
           <div className="flex flex-col gap-2">
             {/* 租金 */}
-            <div className="inline-flex items-center whitespace-nowrap w-96">
-              <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </p>
-              <p>租金:</p>
+            <div className="grid grid-cols-5 gap-1 text-right">
+              <p className="col-span-1 pt-5 ">租金:</p>
               <InputWithErrorMessage
                 value={formData.tenement_no}
                 onChange={(e) => handleChange("tenement_no", e.target.value)}
@@ -95,11 +92,8 @@ export default function TenementInfo(props: any) {
               />
             </div>
             {/* 押金 */}
-            <div className="inline-flex items-center whitespace-nowrap w-96">
-              <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </p>
-              <p>押金:</p>
+            <div className="grid grid-cols-5 gap-1 text-right">
+              <p className="col-span-1 pt-5 ">押金:</p>
               <InputWithErrorMessage
                 value={formData.tenement_no}
                 onChange={(e) => handleChange("tenement_no", e.target.value)}
@@ -114,12 +108,8 @@ export default function TenementInfo(props: any) {
         return (
           <div>
             {/* 售價 */}
-            <div className="inline-flex items-center whitespace-nowrap w-96">
-              <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;
-              </p>
-              <p>售價:</p>
+            <div className="grid grid-cols-5 gap-1 ">
+              <p className="col-span-1 pt-5 text-right ">售價:</p>
               <InputWithErrorMessage
                 value={formData.tenement_no}
                 onChange={(e) => handleChange("tenement_no", e.target.value)}
@@ -133,12 +123,8 @@ export default function TenementInfo(props: any) {
         return (
           <div className="flex flex-col ">
             {/* 售價 */}
-            <div className="inline-flex items-center w-96 whitespace-nowrap">
-              <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp; &nbsp;
-              </p>
-              <p>售價:</p>
+            <div className="grid grid-cols-5 gap-1 ">
+              <p className="col-span-1 pt-5 text-right">售價:</p>
               <InputWithErrorMessage
                 value={formData.tenement_no}
                 onChange={(e) => handleChange("tenement_no", e.target.value)}
@@ -147,11 +133,8 @@ export default function TenementInfo(props: any) {
               />
             </div>
             {/* 租金 */}
-            <div className="inline-flex items-center w-96 whitespace-nowrap">
-              <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </p>
-              <p>租金:</p>
+            <div className="grid grid-cols-5 gap-1 ">
+              <p className="col-span-1 pt-5 text-right ">租金:</p>
               <InputWithErrorMessage
                 value={formData.tenement_no}
                 onChange={(e) => handleChange("tenement_no", e.target.value)}
@@ -160,11 +143,8 @@ export default function TenementInfo(props: any) {
               />
             </div>
             {/* 押金 */}
-            <div className="inline-flex items-center w-96 whitespace-nowrap">
-              <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </p>
-              <p>押金:</p>
+            <div className="grid grid-cols-5 gap-1 ">
+              <p className="col-span-1 pt-5 text-right ">押金:</p>
               <InputWithErrorMessage
                 value={formData.tenement_no}
                 onChange={(e) => handleChange("tenement_no", e.target.value)}
@@ -178,34 +158,33 @@ export default function TenementInfo(props: any) {
         return (
           <div>
             {/* 要租要買 select  */}
-            <div className="inline-flex items-center whitespace-nowrap w-96">
-              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-              <p>要租要買:</p>
-              <Select defaultValue="租房" style={{ width: 120 }}>
+            <div className="grid grid-cols-6 gap-1 mb-5 ml-5 text-right">
+              <p className="col-span-1 pt-1 ">要租要買:</p>
+              <Select defaultValue="租房" className="w-20 col-span-1 ">
                 <Select.Option value="租房">租房</Select.Option>
                 <Select.Option value="買房">買房</Select.Option>
               </Select>
             </div>
             {/* 預算 最大值 最小值 */}
-            <div className="inline-flex items-center whitespace-nowrap w-96">
-              <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp; &nbsp;
-              </p>
-              <p>預算:</p>
-              <InputWithErrorMessage
-                value={formData.tenement_no}
-                onChange={(e) => handleChange("tenement_no", e.target.value)}
-                isError={formData.tenement_no.length <= 2}
-                errorMessage={"至少兩個字"}
-              />
-              <p>~</p>
-              <InputWithErrorMessage
-                value={formData.tenement_no}
-                onChange={(e) => handleChange("tenement_no", e.target.value)}
-                isError={formData.tenement_no.length <= 2}
-                errorMessage={"至少兩個字"}
-              />
+            <div className="grid grid-cols-5 gap-1 text-right">
+              <p className="col-span-1 pt-5 ">預算:</p>
+              <div className="inline-flex ">
+                <InputWithErrorMessage
+                  value={formData.tenement_no}
+                  onChange={(e) => handleChange("tenement_no", e.target.value)}
+                  isError={formData.tenement_no.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+                <span className="pt-5 ">~</span>
+              </div>
+              <div>
+                <InputWithErrorMessage
+                  value={formData.tenement_no}
+                  onChange={(e) => handleChange("tenement_no", e.target.value)}
+                  isError={formData.tenement_no.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+              </div>
             </div>
           </div>
         );
@@ -241,17 +220,14 @@ export default function TenementInfo(props: any) {
         </div>
         <p className="mb-3 ml-5 border-b-2 border-gray-300"></p>
         {isLoading ? (
-          <p>loading...</p>
+          <p className="col-span-1 pt-5 ">loading...</p>
         ) : isError ? (
-          <p>error...</p>
+          <p className="col-span-1 pt-5 ">error...</p>
         ) : (
           <div className="flex flex-row ">
             <div className="flex flex-col flex-wrap w-1/2 h-full gap-4 px-16 overflow-visible ">
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </p>
-                <p>房號:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">房號:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_no}
                   onChange={(e) => handleChange("tenement_no", e.target.value)}
@@ -261,13 +237,9 @@ export default function TenementInfo(props: any) {
               </div>
 
               {/* 面向 */}
-              <div className="inline-flex flex-row items-center w-96 ">
-                <p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </p>
-                <p className=" whitespace-nowrap">面向:</p>
-                <Radio.Group>
+              <div className="grid grid-cols-5 gap-1 ">
+                <p className="text-right whitespace-nowrap">面向:</p>
+                <Radio.Group className="col-span-2">
                   <Radio value="海景">海景</Radio>
                   <Radio value="中庭">中庭</Radio>
                   <Radio value="三多路">三多路</Radio>
@@ -277,10 +249,9 @@ export default function TenementInfo(props: any) {
                 </Radio.Group>
               </div>
               {/* 案件狀態 */}
-              <div className="inline-flex flex-row items-center w-96">
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p className=" whitespace-nowrap">案件狀態:</p>
-                <Radio.Group>
+              <div className="grid grid-cols-5 gap-1 ">
+                <p className="text-right whitespace-nowrap">案件狀態:</p>
+                <Radio.Group className="col-span-2">
                   <Radio value="未成交">未成交</Radio>
                   <Radio value="已成交">已成交</Radio>
                   <Radio value="已成交下架">已成交下架</Radio>
@@ -288,10 +259,13 @@ export default function TenementInfo(props: any) {
                 </Radio.Group>
               </div>
               {/* 案件型態 */}
-              <div className="inline-flex items-center w-96">
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p className=" whitespace-nowrap">案件型態:</p>
-                <Radio.Group onChange={handletypeChange} value={tenement_type}>
+              <div className="grid grid-cols-5 gap-1 ">
+                <p className="text-right whitespace-nowrap">案件型態:</p>
+                <Radio.Group
+                  onChange={handletypeChange}
+                  value={tenement_type}
+                  className="text-right whitespace-nowrap"
+                >
                   <Radio value="可租">可租</Radio>
                   <Radio value="可售">可售</Radio>
                   <Radio value="開發追蹤">開發追蹤</Radio>
@@ -299,11 +273,8 @@ export default function TenementInfo(props: any) {
                 </Radio.Group>
               </div>
               {/* 總坪數 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </p>
-                <p>總坪數:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">總坪數:</p>
                 <InputWithErrorMessage
                   value={formData.Total_rating}
                   onChange={(e) => handleChange("Total_rating", e.target.value)}
@@ -312,9 +283,8 @@ export default function TenementInfo(props: any) {
                 />
               </div>
               {/* 主建物坪數 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>&nbsp;&nbsp;&nbsp;</p>
-                <p>主建物坪數:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">主建物坪數:</p>
                 <InputWithErrorMessage
                   value={formData.main_building}
                   onChange={(e) =>
@@ -325,8 +295,8 @@ export default function TenementInfo(props: any) {
                 />
               </div>
               {/* 附屬建物坪數 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>附屬建物坪數:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">附屬建物坪數:</p>
                 <InputWithErrorMessage
                   value={formData.main_building}
                   onChange={(e) =>
@@ -337,8 +307,8 @@ export default function TenementInfo(props: any) {
                 />
               </div>
               {/* 公共設施坪數 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>公共設施坪數:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">公共設施坪數:</p>
                 <InputWithErrorMessage
                   value={formData.affiliated_building}
                   onChange={(e) =>
@@ -349,11 +319,8 @@ export default function TenementInfo(props: any) {
                 />
               </div>
               {/* 管理費 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </p>
-                <p>管理費:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">管理費:</p>
                 <InputWithErrorMessage
                   value={formData.management_fee}
                   onChange={(e) =>
@@ -365,11 +332,8 @@ export default function TenementInfo(props: any) {
               </div>
               {swtitchExtraInfo(tenement_type)}
               {/* 樓層 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </p>
-                <p>樓層:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">樓層:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_floor}
                   onChange={(e) =>
@@ -380,14 +344,10 @@ export default function TenementInfo(props: any) {
                 />
               </div>
               {/* 房型 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;
-                </p>
-                <p>房型:</p>
+              <div className="grid grid-cols-5 gap-1 ">
+                <p className="col-span-1 text-right">房型:</p>
                 {/* radio */}
-                <Radio.Group>
+                <Radio.Group className="col-span-2">
                   <Radio value="面海">面海</Radio>
                   <Radio value="店面">店面</Radio>
                   <Radio value="中庭">中庭</Radio>
@@ -406,10 +366,8 @@ export default function TenementInfo(props: any) {
                 屋主資訊
               </p>
               {/* 屋主姓名 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-                <p>屋主姓名:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">屋主姓名:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_host_name}
                   onChange={(e) =>
@@ -420,9 +378,8 @@ export default function TenementInfo(props: any) {
                 />
               </div>
               {/* 行動電話 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p>行動電話:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">行動電話:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_host_telphone}
                   onChange={(e) =>
@@ -433,12 +390,8 @@ export default function TenementInfo(props: any) {
                 />
               </div>
               {/* 電話 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;
-                </p>
-                <p>電話:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">電話:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_host_phone}
                   onChange={(e) =>
@@ -449,12 +402,8 @@ export default function TenementInfo(props: any) {
                 />
               </div>
               {/* Line */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp; &nbsp;
-                </p>
-                <p>Line:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">Line:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_host_line}
                   onChange={(e) =>
@@ -465,9 +414,8 @@ export default function TenementInfo(props: any) {
                 />
               </div>
               {/* 屋主匯款資訊 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>&nbsp;&nbsp;</p>
-                <p>屋主匯款銀行:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">屋主匯款銀行:</p>
                 <InputWithErrorMessage
                   value={formData.remittance_bank}
                   onChange={(e) =>
@@ -478,12 +426,8 @@ export default function TenementInfo(props: any) {
                 />
               </div>
               {/*  帳號 */}
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;
-                </p>
-                <p>帳號:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">帳號:</p>
                 <InputWithErrorMessage
                   value={formData.remittance_account}
                   onChange={(e) =>
@@ -499,12 +443,12 @@ export default function TenementInfo(props: any) {
 
         <div>{switchTenementType(tenement_type)}</div>
         <div className="flex flex-col p-5">
-          <div className="inline-flex flex-row justify-between pl-10 mb-5 mr-5">
+          <div className="inline-flex flex-row gap-5 mb-5 ">
             <p className="text-4xl font-bold whitespace-normal">提醒設定</p>
 
             <Button
               type="primary"
-              className="bg-blue-600 "
+              className="mt-1 bg-blue-600"
               onClick={handleAddNotice}
             >
               新增提醒

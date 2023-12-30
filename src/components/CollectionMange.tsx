@@ -30,20 +30,19 @@ export default function CollectionMange(props: any) {
           {"< 返回"}
         </button>
         {isLoading ? (
-          <p>loading...</p>
+          <p className="col-span-1 pt-5">loading...</p>
         ) : isError ? (
-          <p>error...</p>
+          <p className="col-span-1 pt-5">error...</p>
         ) : (
           <div>
             <div className="inline-flex flex-col mb-3 ml-5">
               <p className="text-4xl font-bold whitespace-normal">代收付管理</p>
             </div>
             <p className="ml-5 border-b-2 border-gray-300 "></p>
-            <div className="flex flex-row ">
-              <div className="flex flex-col flex-wrap w-3/5 h-full gap-10 px-12 overflow-visible ">
-                <div className="inline-flex items-center whitespace-nowrap w-96">
-                  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                  <p>房號:</p>
+            <div className="flex flex-row justify-between ">
+              <div className="flex flex-col flex-wrap w-1/3 h-full gap-5 px-10 overflow-visible">
+                <div className="grid grid-cols-3 gap-1 text-right">
+                  <p className="col-span-1 pt-5">房號:</p>
                   <InputWithErrorMessage
                     value={formData.tenement_no}
                     onChange={(e) =>
@@ -54,8 +53,8 @@ export default function CollectionMange(props: any) {
                   />
                 </div>
 
-                <div className="inline-flex items-center whitespace-nowrap">
-                  <p>費用類型:</p>
+                <div className="grid grid-cols-3 gap-1 ">
+                  <p className="col-span-1 text-right">費用類型:</p>
                   <Select
                     defaultValue="代收"
                     style={{ width: 120 }}
@@ -65,8 +64,8 @@ export default function CollectionMange(props: any) {
                   />
                 </div>
 
-                <div className="inline-flex items-center whitespace-nowrap">
-                  <p>費用名稱:</p>
+                <div className="grid grid-cols-3 gap-1 ">
+                  <p className="col-span-1 text-right">費用名稱:</p>
                   <Select
                     defaultValue="管理費"
                     style={{ width: 120 }}
@@ -80,8 +79,8 @@ export default function CollectionMange(props: any) {
                     value={formData.collection_name}
                   />
                 </div>
-                <div className="inline-flex items-center whitespace-nowrap w-96">
-                  <p>費用金額:</p>
+                <div className="grid grid-cols-3 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">費用金額:</p>
                   <InputWithErrorMessage
                     value={formData.price}
                     onChange={(e) => handleChange("price", e.target.value)}
@@ -89,8 +88,8 @@ export default function CollectionMange(props: any) {
                     errorMessage={"至少兩個字"}
                   />
                 </div>
-                <div className="inline-flex whitespace-nowrap ">
-                  <p>繳納方式:</p>
+                <div className="grid grid-cols-3 gap-1 ">
+                  <p className="col-span-1 text-right">繳納方式:</p>
                   <Select
                     defaultValue="現金"
                     style={{ width: 120 }}
@@ -101,8 +100,8 @@ export default function CollectionMange(props: any) {
 
                 {formData.payment === "匯款" && (
                   <>
-                    <div className="inline-flex items-center whitespace-nowrap w-96">
-                      <p>匯款銀行:</p>
+                    <div className="grid grid-cols-3 gap-1 text-right">
+                      <p className="col-span-1 pt-5">匯款銀行:</p>
                       <InputWithErrorMessage
                         value={formData.remittance_bank}
                         onChange={(e) =>
@@ -112,8 +111,8 @@ export default function CollectionMange(props: any) {
                         errorMessage={"請輸入內容"}
                       />
                     </div>
-                    <div className="inline-flex items-center whitespace-nowrap w-96">
-                      <p>匯款帳號:</p>
+                    <div className="grid grid-cols-3 gap-1 text-right">
+                      <p className="col-span-1 pt-5">匯款帳號:</p>
                       <InputWithErrorMessage
                         value={formData.remittance_account}
                         onChange={(e) =>
@@ -126,9 +125,8 @@ export default function CollectionMange(props: any) {
                   </>
                 )}
               </div>
-              <div className="inline-flex whitespace-nowrap w/2/5 ">
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p>備註:</p>
+              <div className="inline-flex w-2/5 mt-5 whitespace-nowrap ">
+                <p className="col-span-1">備註:</p>
                 <TextArea
                   placeholder="請輸入內容"
                   rows={10}
@@ -144,12 +142,12 @@ export default function CollectionMange(props: any) {
         )}
 
         <div className="flex flex-col p-5">
-          <div className="inline-flex flex-row justify-between pl-10 mb-5 pr-80">
+          <div className="inline-flex flex-row gap-5 mb-5 ">
             <p className="text-4xl font-bold whitespace-normal">提醒設定</p>
 
             <Button
               type="primary"
-              className="bg-blue-600 "
+              className="mt-1 bg-blue-600"
               onClick={handleAddNotice}
             >
               新增提醒

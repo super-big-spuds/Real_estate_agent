@@ -14,11 +14,13 @@ export default function InputWithErrorMessage({
   errorMessage,
 }: Props) {
   return (
-    <div className="relative my-4">
-      <Input placeholder="請輸入內容" value={value} onChange={onChange} />
-      <span className="absolute left-0 text-red-500 top-full">
-        {isError ? errorMessage : ""}
-      </span>
+    <div className="col-span-2">
+      <div className="relative my-4">
+        <Input placeholder="請輸入內容" value={value} onChange={onChange} />
+        <span className="absolute left-0 text-red-500 top-full">
+          {isError ? errorMessage : ""}
+        </span>
+      </div>
     </div>
   );
 }
