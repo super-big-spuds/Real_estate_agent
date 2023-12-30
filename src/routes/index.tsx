@@ -11,21 +11,15 @@ import TenementAdd from "../pages/tenement/TenementAdd";
 import TenementEdit from "../pages/tenement/TenementEdit";
 import TenementList from "../pages/tenement/TenementList";
 import Login from "../pages/Login";
-import { useEffect, useState } from "react";
+import { useAuth } from "../providers/Authprovider";
+
 const App = () => {
-  const [isLogin, setIsLogin] = useState(false);
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLogin(true);
-    }
-  }, []);
+  const { isLogin } = useAuth();
 
   return (
-    <div className="w-full h-full ">
+    <div className="w-full h-full">
       <Routes>
         <Route path="/login" element={<Login />} />
-
         {isLogin && (
           <Route path="/" element={<Layout />}>
             <Route path="collections" element={<CollectionList />} />

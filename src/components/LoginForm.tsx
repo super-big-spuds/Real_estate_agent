@@ -1,15 +1,16 @@
-import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { useLogin } from "../hooks/useAPI";
+import { useAuth } from "../providers/Authprovider";
 
 const App: React.FC = () => {
   const { handleLogin, isLogin, isError } = useLogin();
+  const { setIsLogin } = useAuth();
   const onFinish = (values: { user_email: string; user_password: string }) => {
     handleLogin(values);
-    console.log();
 
     if (!isLogin) {
+      setIsLogin(true);
       window.location.href = "/";
     }
     if (isError) {
