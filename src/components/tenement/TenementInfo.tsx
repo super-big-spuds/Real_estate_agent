@@ -1,11 +1,31 @@
-import { Button, Radio, Select } from "antd";
+import { Button, Radio, RadioChangeEvent, Select } from "antd";
 import Notice from "../Notice";
 import { useNavigate } from "react-router-dom";
 import InputWithErrorMessage from "../InputWithErrorMessage";
 import RenterInfo from "./RenterInfo";
 import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
-import { useState } from "react";
+import { memo, useState } from "react";
+
+const SwitchTenementType = memo((props: { tenement_type: string }) => {
+  const { tenement_type } = props; // 解構賦值，取得 tenement_type
+
+  console.log(123);
+  console.log(tenement_type);
+  
+  switch (tenement_type) {
+    case "可租":
+      return <RenterInfo />;
+    case "可售":
+      return <SellerInfo />;
+    case "開發追蹤":
+      return "";
+    case "行銷追蹤":
+      return "";
+    default:
+      return "";
+  }
+});
 
 export default function TenementInfo(props: any) {
   const navigate = useNavigate();
@@ -27,6 +47,11 @@ export default function TenementInfo(props: any) {
     affiliated_building: "1",
     public_buliding: "1",
     management_fee: "280",
+    selling_price: "2000000",
+    rent: "20000",
+    deposit: "30000",
+    bugert_max: "2000000",
+    bugert_min: "1000000",
     tenement_status: "1",
     tenement_photo: [
       {
@@ -39,8 +64,84 @@ export default function TenementInfo(props: any) {
     tenement_floor: "4",
     tenement_style: "面海",
   });
-  const notices = [
-    {
+  
+  const {
+    handleDeleteCollection,
+    isLoading,
+    isError,
+  } = props;
+  const [notices, setNotices] = useState([ {
+    id: "1",
+    visitDate: "2023-01-01",
+    record: "看房子",
+    remindDate: "2023-02-01",
+    remind: "提醒",
+  },
+  {
+    id: "2",
+    visitDate: "2023-01-01",
+    record: "繳水電",
+    remindDate: "2023-02-01",
+    remind: "繳房租",
+  },]);
+  const handleNoticeChange = (index: number, key: string, value: any) => {
+    setNotices((prev) =>
+      prev.map((notice, i) => (i === index ? { ...notice, [key]: value } : notice))
+    );
+  }
+  const handleDeleteNotice = (index: number) => {
+    setNotices((prev) => prev.filter((_, i) => i !== index));
+  }
+  const handleAddNotice = () => {
+    setNotices((prev) => [
+      ...prev,
+      {
+        id: "",
+        visitDate: "2024-01-01",
+        record: "",
+        remindDate: "2024-01-01",
+        remind: "",
+      },
+    ]);
+  }
+  const handleSave = () => {
+    alert("儲存成功");
+    console.log(formData);
+  }
+  const handleReset = () => {
+    setFormData({
+      tenement_no: "1234",
+      tenement_type: "可租",
+      tenement_face: "Maple Street",
+      tenement_host_name: "John",
+      tenement_host_telphone: "0987654321",
+      tenement_host_phone: "0987654321",
+      tenement_host_line: "line",
+      remittance_bank: "ABC Bank",
+      remittance_account: "1234567890",
+      Total_rating: "4",
+      main_building: "2",
+      affiliated_building: "1",
+      public_buliding: "1",
+      management_fee: "280",
+      selling_price: "2000000",
+      rent: "20000",
+      deposit: "30000",
+      bugert_max: "2000000",
+      bugert_min: "1000000",
+      tenement_status: "1",
+      tenement_photo: [
+        {
+          url: "https://example.com/image5.jpg",
+        },
+        {
+          url: "https://example.com/image6.jpg",
+        },
+      ],
+      tenement_floor: "4",
+      tenement_style: "面海",
+    });
+    setNotices([{
       id: "1",
       visitDate: "2023-01-01",
       record: "看房子",
@@ -53,26 +154,18 @@ export default function TenementInfo(props: any) {
       record: "繳水電",
       remindDate: "2023-02-01",
       remind: "繳房租",
-    },
-  ];
-  const {
-    handleNoticeChange,
-    handleSave,
-    handleReset,
-    handleAddNotice,
-    handleDeleteNotice,
-    handleDeleteCollection,
-    isLoading,
-    isError,
-  } = props;
+    },]);
+  }
 
   const [tenement_type, setTenement_type] = useState("可租");
 
-  const handletypeChange = (e: any) => {
+  const handletypeChange = (e:RadioChangeEvent) => {
+    console.log(e.target.value);
+    
     setTenement_type(e.target.value);
   };
 
-  const handleChange = (key: string, value: any) => {
+  const handleChange = (key: keyof typeof formData, value: string | number) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -85,9 +178,9 @@ export default function TenementInfo(props: any) {
             <div className="grid grid-cols-5 gap-1 text-right">
               <p className="col-span-1 pt-5 ">租金:</p>
               <InputWithErrorMessage
-                value={formData.tenement_no}
-                onChange={(e) => handleChange("tenement_no", e.target.value)}
-                isError={formData.tenement_no.length <= 2}
+                value={formData.rent}
+                onChange={(e) => handleChange("rent", e.target.value)}
+                isError={formData.rent.length <= 2}
                 errorMessage={"至少兩個字"}
               />
             </div>
@@ -95,9 +188,9 @@ export default function TenementInfo(props: any) {
             <div className="grid grid-cols-5 gap-1 text-right">
               <p className="col-span-1 pt-5 ">押金:</p>
               <InputWithErrorMessage
-                value={formData.tenement_no}
-                onChange={(e) => handleChange("tenement_no", e.target.value)}
-                isError={formData.tenement_no.length <= 2}
+                value={formData.deposit}
+                onChange={(e) => handleChange("deposit", e.target.value)}
+                isError={formData.deposit.length <= 2}
                 errorMessage={"至少兩個字"}
               />
             </div>
@@ -111,9 +204,9 @@ export default function TenementInfo(props: any) {
             <div className="grid grid-cols-5 gap-1 ">
               <p className="col-span-1 pt-5 text-right ">售價:</p>
               <InputWithErrorMessage
-                value={formData.tenement_no}
-                onChange={(e) => handleChange("tenement_no", e.target.value)}
-                isError={formData.tenement_no.length <= 2}
+                value={formData.selling_price}
+                onChange={(e) => handleChange("selling_price", e.target.value)}
+                isError={formData.selling_price.length <= 2}
                 errorMessage={"至少兩個字"}
               />
             </div>
@@ -126,9 +219,9 @@ export default function TenementInfo(props: any) {
             <div className="grid grid-cols-5 gap-1 ">
               <p className="col-span-1 pt-5 text-right">售價:</p>
               <InputWithErrorMessage
-                value={formData.tenement_no}
-                onChange={(e) => handleChange("tenement_no", e.target.value)}
-                isError={formData.tenement_no.length <= 2}
+                value={formData.selling_price}
+                onChange={(e) => handleChange("selling_price", e.target.value)}
+                isError={formData.selling_price.length <= 2}
                 errorMessage={"至少兩個字"}
               />
             </div>
@@ -136,9 +229,9 @@ export default function TenementInfo(props: any) {
             <div className="grid grid-cols-5 gap-1 ">
               <p className="col-span-1 pt-5 text-right ">租金:</p>
               <InputWithErrorMessage
-                value={formData.tenement_no}
-                onChange={(e) => handleChange("tenement_no", e.target.value)}
-                isError={formData.tenement_no.length <= 2}
+                value={formData.rent}
+                onChange={(e) => handleChange("rent", e.target.value)}
+                isError={formData.rent.length <= 2}
                 errorMessage={"至少兩個字"}
               />
             </div>
@@ -146,9 +239,9 @@ export default function TenementInfo(props: any) {
             <div className="grid grid-cols-5 gap-1 ">
               <p className="col-span-1 pt-5 text-right ">押金:</p>
               <InputWithErrorMessage
-                value={formData.tenement_no}
-                onChange={(e) => handleChange("tenement_no", e.target.value)}
-                isError={formData.tenement_no.length <= 2}
+                value={formData.deposit}
+                onChange={(e) => handleChange("deposit", e.target.value)}
+                isError={formData.deposit.length <= 2}
                 errorMessage={"至少兩個字"}
               />
             </div>
@@ -170,18 +263,18 @@ export default function TenementInfo(props: any) {
               <p className="col-span-1 pt-5 ">預算:</p>
               <div className="inline-flex ">
                 <InputWithErrorMessage
-                  value={formData.tenement_no}
-                  onChange={(e) => handleChange("tenement_no", e.target.value)}
-                  isError={formData.tenement_no.length <= 2}
+                  value={formData.bugert_min}
+                  onChange={(e) => handleChange("bugert_min", e.target.value)}
+                  isError={formData.bugert_min.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
                 <span className="pt-5 ">~</span>
               </div>
               <div>
                 <InputWithErrorMessage
-                  value={formData.tenement_no}
-                  onChange={(e) => handleChange("tenement_no", e.target.value)}
-                  isError={formData.tenement_no.length <= 2}
+                  value={formData.bugert_max}
+                  onChange={(e) => handleChange("bugert_max", e.target.value)}
+                  isError={formData.bugert_max.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>
@@ -192,20 +285,7 @@ export default function TenementInfo(props: any) {
         return "";
     }
   };
-  const switchTenementType = (tenement_type: string) => {
-    switch (tenement_type) {
-      case "可租":
-        return <RenterInfo />;
-      case "可售":
-        return <SellerInfo />;
-      case "開發追蹤":
-        return "";
-      case "行銷追蹤":
-        return "";
-      default:
-        return "";
-    }
-  };
+
 
   return (
     <div className="flex flex-col w-full h-full ">
@@ -298,11 +378,11 @@ export default function TenementInfo(props: any) {
               <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">附屬建物坪數:</p>
                 <InputWithErrorMessage
-                  value={formData.main_building}
+                  value={formData.affiliated_building}
                   onChange={(e) =>
-                    handleChange("main_building", e.target.value)
+                    handleChange("affiliated_building", e.target.value)
                   }
-                  isError={formData.main_building.length <= 2}
+                  isError={formData.affiliated_building.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>
@@ -310,11 +390,11 @@ export default function TenementInfo(props: any) {
               <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">公共設施坪數:</p>
                 <InputWithErrorMessage
-                  value={formData.affiliated_building}
+                  value={formData.public_buliding}
                   onChange={(e) =>
-                    handleChange("affiliated_building", e.target.value)
+                    handleChange("public_buliding", e.target.value)
                   }
-                  isError={formData.affiliated_building.length <= 2}
+                  isError={formData.public_buliding.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>
@@ -383,7 +463,7 @@ export default function TenementInfo(props: any) {
                 <InputWithErrorMessage
                   value={formData.tenement_host_telphone}
                   onChange={(e) =>
-                    handleChange("collection_name", e.target.value)
+                    handleChange("tenement_host_telphone", e.target.value)
                   }
                   isError={formData.tenement_host_telphone.length <= 2}
                   errorMessage={"至少兩個字"}
@@ -395,7 +475,7 @@ export default function TenementInfo(props: any) {
                 <InputWithErrorMessage
                   value={formData.tenement_host_phone}
                   onChange={(e) =>
-                    handleChange("collection_name", e.target.value)
+                    handleChange("tenement_host_phone", e.target.value)
                   }
                   isError={formData.tenement_host_phone.length <= 2}
                   errorMessage={"至少兩個字"}
@@ -407,7 +487,7 @@ export default function TenementInfo(props: any) {
                 <InputWithErrorMessage
                   value={formData.tenement_host_line}
                   onChange={(e) =>
-                    handleChange("collection_name", e.target.value)
+                    handleChange("tenement_host_line", e.target.value)
                   }
                   isError={formData.tenement_host_line.length <= 2}
                   errorMessage={"至少兩個字"}
@@ -431,7 +511,7 @@ export default function TenementInfo(props: any) {
                 <InputWithErrorMessage
                   value={formData.remittance_account}
                   onChange={(e) =>
-                    handleChange("collection_name", e.target.value)
+                    handleChange("remittance_account", e.target.value)
                   }
                   isError={formData.remittance_account.length <= 2}
                   errorMessage={"至少兩個字"}
@@ -441,7 +521,7 @@ export default function TenementInfo(props: any) {
           </div>
         )}
 
-        <div>{switchTenementType(tenement_type)}</div>
+        <SwitchTenementType tenement_type={tenement_type} />
         <div className="flex flex-col p-5">
           <div className="inline-flex flex-row gap-5 mb-5 ">
             <p className="text-4xl font-bold whitespace-normal">提醒設定</p>
