@@ -4,6 +4,7 @@ import getColumnSearchProps from "../components/getColumnSearchProps";
 import { useGetCollectionList } from "./useAPI";
 import type { Collection } from "../type";
 
+
 const useCollectionList = () => {
   const [data, setData] = useState<Collection[]>([
     {

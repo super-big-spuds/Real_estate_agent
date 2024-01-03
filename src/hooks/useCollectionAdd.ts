@@ -2,14 +2,10 @@ import { useState } from "react";
 import { usePostCollectionAdd } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { z } from "zod";
-
+import moment from "moment";
 const useCollectionAdd = () => {
   const { handleSaveColumn, handleSaveNotice } = usePostCollectionAdd();
-  const nowdate = new Date();
-  const nowyear = nowdate.getFullYear();
-  const nowmonth = nowdate.getMonth() + 1;
-  const nowday = nowdate.getDate();
-  const nowdatestring = `${nowyear}-${nowmonth}-${nowday}`;
+  const nowdatestring = moment().format("YYYY-MM-DD");
   const [notices, setNotices] = useState<NoticeData[]>([]);
   const [formData, setFormData] = useState<FormData>({
     tenement_no: "",
@@ -82,7 +78,7 @@ const useCollectionAdd = () => {
     alert("儲存成功");
   };
 
-  const handleReset = () => {
+  const handleReset = () => {    
     setFormData({
       tenement_no: "",
       collection_id: "",
@@ -94,16 +90,7 @@ const useCollectionAdd = () => {
       remittance_bank: "",
       remittance_account: "",
     });
-    setNotices([
-      {
-        id: Math.random().toString(),
-        visitDate: nowdatestring,
-        record: "",
-        remindDate: nowdatestring,
-        remind: "",
-        isNew: true,
-      },
-    ]);
+    setNotices([]);
   };
 
   const handleAddNotice = () => {

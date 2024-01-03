@@ -3,6 +3,7 @@ import { useGetCollectionEdit, usePostCollectionEdit } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { useParams } from "react-router-dom";
 import { z } from "zod";
+import moment from "moment";
 
 const useCollectionEdit = () => {
   const { getCollectionEdit, isError, isLoading, dataEdit } =
@@ -13,11 +14,7 @@ const useCollectionEdit = () => {
     handleDeleteNoticeFetch,
     handleDeleteCollectionFetch,
   } = usePostCollectionEdit();
-  const nowdate = new Date();
-  const nowyear = nowdate.getFullYear();
-  const nowmonth = nowdate.getMonth() + 1;
-  const nowday = nowdate.getDate();
-  const nowdatestring = `${nowyear}-${nowmonth}-${nowday}`;
+  const nowdatestring = moment().format("YYYY-MM-DD");
   const { id } = useParams();
   const [notices, setNotices] = useState<NoticeData[]>([]);
   const [formData, setFormData] = useState<FormData>({
@@ -101,6 +98,8 @@ const useCollectionEdit = () => {
   };
 
   const handleReset = () => {
+    console.log(nowdatestring);
+    
     setFormData({
       tenement_no: "",
       collection_id: "",
@@ -112,16 +111,7 @@ const useCollectionEdit = () => {
       remittance_bank: "",
       remittance_account: "",
     });
-    setNotices([
-      {
-        id: Math.random().toString(),
-        visitDate: nowdatestring,
-        record: "",
-        remindDate: nowdatestring,
-        remind: "",
-        isNew: true,
-      },
-    ]);
+    setNotices([]);
   };
 
   const handleAddNotice = () => {
