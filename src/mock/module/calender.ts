@@ -16,7 +16,7 @@ export default [
               class: "collection",
             },
             {
-              content: "房屋",
+              content: "租房",
               id: "2",
               class: "rent",
             },
@@ -26,17 +26,17 @@ export default [
           day: 10,
           events: [
             {
-              content: "開發客源",
+              content: "售房",
               id: "3",
               class: "sell",
             },
             {
-              content: "房屋",
+              content: "開發追蹤",
               id: "4",
               class: "develop",
             },
             {
-              content: "追蹤",
+              content: "行銷追蹤",
               id: "5",
               class: "market",
             },

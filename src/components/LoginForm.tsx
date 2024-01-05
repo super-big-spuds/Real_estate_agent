@@ -7,13 +7,20 @@ import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
   const navigate = useNavigate();
   const { handleLogin, isLogin, isError } = useLogin();
-  const { setIsLogin } = useAuth();
+  const { setIsLogin, setIsAdmin } = useAuth();
   const onFinish = (values: { user_email: string; user_password: string }) => {
     handleLogin(values);
+    if (values.user_email === "admin@gmail.com") {
+      setIsAdmin(true);
+    }
+    else {
+      setIsAdmin(false);
+    }
 
     if (!isLogin) {
       setIsLogin(true);
-      navigate("/");
+      
+      navigate("/Calenderlist");
     }
     if (isError) {
       alert("帳號或密碼錯誤");

@@ -2,6 +2,7 @@ import React from "react";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../providers/Authprovider";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -42,6 +43,12 @@ const items: MenuProps["items"] = [
 const App: React.FC = () => {
   // use navigate to change route
   const navigate = useNavigate();
+  // useAuth to get isAdmin
+  const { isAdmin } = useAuth();
+  // if isAdmin is false, remove usermange
+  if (!isAdmin) {
+    items.splice(3, 1);
+  }
 
   const onClick: MenuProps["onClick"] = (e) => {
     if (e.key && e.key.toString() !== "") {

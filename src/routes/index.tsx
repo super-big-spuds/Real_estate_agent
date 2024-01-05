@@ -14,7 +14,7 @@ import Login from "../pages/Login";
 import { useAuth } from "../providers/Authprovider";
 
 const App = () => {
-  const { isLogin } = useAuth();
+  const { isLogin, isAdmin } = useAuth();
 
   return (
     <div className="w-full h-full">
@@ -25,9 +25,15 @@ const App = () => {
             <Route path="collections" element={<CollectionList />} />
             <Route path="Collection/:id" element={<CollectionEdit />} />
             <Route path="Collection/Add" element={<CollectionAdd />} />
-            <Route path="users" element={<UserList />} />
-            <Route path="User/:user_id" element={<UserEdit />} />
-            <Route path="user" element={<UserAdd />} />
+            {
+              isAdmin && (
+                <>
+                  <Route path="users" element={<UserList />} />
+                  <Route path="User/:user_id" element={<UserEdit />} />
+                  <Route path="user" element={<UserAdd />} />
+                </>
+              )
+            }
             <Route path="Calenderlist" element={<CalenderList />} />
             <Route path="Tenement/Add" element={<TenementAdd />} />
             <Route path="Tenement/:id" element={<TenementEdit />} />
