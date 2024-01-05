@@ -211,7 +211,9 @@ const useTenementList = () => {
   const onRow = (record: TenementList) => {
     return {
       onClick: () => {
-        navigate(`/Tenement/${record.tenement_no}`);
+        // navigate(`/Tenement/${record.tenement_no}`);
+        
+        navigate(`/Tenement/Add`);
       },
     };
   };
