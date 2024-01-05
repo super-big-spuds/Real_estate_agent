@@ -41,11 +41,8 @@ const items: MenuProps["items"] = [
 ];
 
 const App: React.FC = () => {
-  // use navigate to change route
   const navigate = useNavigate();
-  // useAuth to get isAdmin
   const { isAdmin } = useAuth();
-  // if isAdmin is false, remove usermange
   if (!isAdmin) {
     items.splice(3, 1);
   }

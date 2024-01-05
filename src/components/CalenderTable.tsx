@@ -81,18 +81,20 @@ export default function CalenderTable(props: Props) {
         }))
       : [];
   };
-  const switchparam = (param: string) => {
+  const switchparam = (param: string,id:any) => {
     switch (param) {
       case "market":
-        return "Tenement";
+        return `/Tenement/Add`;
       case "rent":
-        return "Tenement";
+        return `/Tenement/Add`
       case "sell":
-        return "Tenement";
+        return `/Tenement/Add`
       case "develop":
-        return "Tenement";
+        return `/Tenement/Add`
       case "collection":
-        return "collection";
+        return `/Collection/${id}`
+      default:
+        return `/Calenderlist`;
     }
   };
   const dateCellRender = (value: Dayjs) => {
@@ -104,7 +106,7 @@ export default function CalenderTable(props: Props) {
         {listData.map((item: any, index: any) => (
           <li
             key={index}
-            onClick={() => navigate(`/${switchparam(item.class)}/${item.id}`)}
+            onClick={() => navigate(switchparam(item.class,item.id))}
           >
             <Badge
               status={item.type as BadgeProps["status"]}

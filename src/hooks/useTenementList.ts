@@ -60,7 +60,7 @@ const useTenementList = () => {
 
   const columns: ColumnsType[] = [
     {
-      title: "編號",
+      title: "房號",
       dataIndex: "tenement_no",
       key: "tenement_no",
       width: "10%",
