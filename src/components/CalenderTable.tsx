@@ -129,23 +129,23 @@ export default function CalenderTable(props: Props) {
     <>
       <div className="flex p-4 site-calendar-custom-header gap-x-4">
         <div className="flex">
-          <p className="w-4 h-4 bg-green-400"></p>
+          <p className="w-4 h-4 bg-green-400 rounded-full"></p>
           <p className="text-xs">代收付事項</p>
         </div>
         <div className="flex">
-          <p className="w-4 h-4 bg-red-400"></p>
+          <p className="w-4 h-4 bg-red-400 rounded-full"></p>
           <p className="text-xs">租房事項</p>
         </div>
         <div className="flex">
-          <p className="w-4 h-4 bg-gray-400"></p>
+          <p className="w-4 h-4 bg-gray-400 rounded-full"></p>
           <p className="text-xs">售房事項</p>
         </div>
         <div className="flex">
-          <p className="w-4 h-4 bg-blue-400"></p>
+          <p className="w-4 h-4 bg-blue-400 rounded-full"></p>
           <p className="text-xs">開發追蹤事項</p>
         </div>
         <div className="flex">
-          <p className="w-4 h-4 bg-orange-400"></p>
+          <p className="w-4 h-4 bg-orange-400 rounded-full"></p>
           <p className="text-xs">行銷追蹤事項</p>
         </div>
       </div>
