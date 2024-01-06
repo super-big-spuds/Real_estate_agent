@@ -81,18 +81,18 @@ export default function CalenderTable(props: Props) {
         }))
       : [];
   };
-  const switchparam = (param: string,id:any) => {
+  const switchparam = (param: string, id: any) => {
     switch (param) {
       case "market":
         return `/Tenement/Add`;
       case "rent":
-        return `/Tenement/Add`
+        return `/Tenement/Add`;
       case "sell":
-        return `/Tenement/Add`
+        return `/Tenement/Add`;
       case "develop":
-        return `/Tenement/Add`
+        return `/Tenement/Add`;
       case "collection":
-        return `/Collection/${id}`
+        return `/Collection/${id}`;
       default:
         return `/Calenderlist`;
     }
@@ -106,7 +106,7 @@ export default function CalenderTable(props: Props) {
         {listData.map((item: any, index: any) => (
           <li
             key={index}
-            onClick={() => navigate(switchparam(item.class,item.id))}
+            onClick={() => navigate(switchparam(item.class, item.id))}
           >
             <Badge
               status={item.type as BadgeProps["status"]}
@@ -126,9 +126,33 @@ export default function CalenderTable(props: Props) {
   }, []);
 
   return (
-    <Calendar
-      cellRender={cellRender}
-      onPanelChange={(date) => handleGetCalenderData(date)}
-    />
+    <>
+      <div className="flex p-4 site-calendar-custom-header gap-x-4">
+        <div className="flex">
+          <p className="w-4 h-4 bg-green-400"></p>
+          <p className="text-xs">代收付事項</p>
+        </div>
+        <div className="flex">
+          <p className="w-4 h-4 bg-red-400"></p>
+          <p className="text-xs">租房事項</p>
+        </div>
+        <div className="flex">
+          <p className="w-4 h-4 bg-gray-400"></p>
+          <p className="text-xs">售房事項</p>
+        </div>
+        <div className="flex">
+          <p className="w-4 h-4 bg-blue-400"></p>
+          <p className="text-xs">開發追蹤事項</p>
+        </div>
+        <div className="flex">
+          <p className="w-4 h-4 bg-orange-400"></p>
+          <p className="text-xs">行銷追蹤事項</p>
+        </div>
+      </div>
+      <Calendar
+        cellRender={cellRender}
+        onPanelChange={(date) => handleGetCalenderData(date)}
+      />
+    </>
   );
 }
