@@ -1,4 +1,3 @@
-// Collection page
 import Table from "../../components/Table";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";

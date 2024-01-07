@@ -20,13 +20,16 @@ const useCollectionEdit = () => {
   const [formData, setFormData] = useState<FormData>({
     tenement_no: "",
     collection_id: "",
-    collection_name: "水費",
-    collection_type: "代收",
+    collection_name: "",
+    collection_type: "",
     price: "",
-    payment: "現金",
+    payment: "",
     collection_remark: "",
+    collection_date: nowdatestring,
     remittance_bank: "",
     remittance_account: "",
+    cus_remittance_account: "",
+    cus_remittance_bank: "",
   });
   const handleChange = (key: keyof FormData, value: string) => {
     setFormData((prevFormData) => ({
@@ -74,8 +77,11 @@ const useCollectionEdit = () => {
       price: z.string().nonempty("金額不得為空"),
       payment: z.string(),
       collection_remark: z.string(),
+      collection_date: z.string(),
       remittance_bank: z.string(),
       remittance_account: z.string(),
+      cus_remittance_account: z.string(),
+      cus_remittance_bank: z.string(),
     });
     const parseResult = schemaform.safeParse(formData);
     if (!parseResult.success) {
@@ -98,8 +104,6 @@ const useCollectionEdit = () => {
   };
 
   const handleReset = () => {
-    console.log(nowdatestring);
-    
     setFormData({
       tenement_no: "",
       collection_id: "",
@@ -108,8 +112,11 @@ const useCollectionEdit = () => {
       price: "",
       payment: "現金",
       collection_remark: "",
+      collection_date: nowdatestring,
       remittance_bank: "",
       remittance_account: "",
+      cus_remittance_account: "",
+      cus_remittance_bank: "",
     });
     setNotices([]);
   };
@@ -150,6 +157,9 @@ const useCollectionEdit = () => {
       collection_remark: dataEdit.collection_remark,
       remittance_bank: dataEdit.remittance_bank,
       remittance_account: dataEdit.remittance_account,
+      collection_date: dataEdit.collection_date,
+      cus_remittance_account: dataEdit.cus_remittance_account,
+      cus_remittance_bank: dataEdit.cus_remittance_bank,
     });
     setNotices(dataEdit.notices as NoticeData[]);
   }, [dataEdit]);

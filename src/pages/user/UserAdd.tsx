@@ -1,7 +1,7 @@
 import UserMange from "../../components/UserMange";
 import useUserAdd from "../../hooks/useUserAdd";
 
-export const Collection = () => {
+export const UserAdd = () => {
   const { formData, handleChange, handleSave, handleReset } = useUserAdd();
   return (
     <UserMange
@@ -12,4 +12,4 @@ export const Collection = () => {
     />
   );
 };
-export default Collection;
+export default UserAdd;

@@ -11,10 +11,9 @@ export default [
         collection_name: "水電空調費",
         collection_type: "代收",
         price: "100",
-        payment: "匯款",
+        payment: "現金",
         collection_remark: "10樓以下",
-        remittance_bank: "中國信託",
-        remittance_account: "123456789",
+        collection_date: "2023-01-01",
         notices: [
           {
             id: "1",
@@ -22,7 +21,7 @@ export default [
             record: "看房子",
             remindDate: "2023-02-01",
             remind: "提醒",
-          }
+          },
         ],
       },
     },
@@ -37,10 +36,13 @@ export default [
         collection_name: "管理費",
         collection_type: "代付",
         price: "100",
-        payment: "現金",
+        payment: "匯款",
         collection_remark: "10樓以下",
+        collection_date: "2023-01-01",
         remittance_bank: "中國信託",
         remittance_account: "123456789",
+        cus_remittance_bank: "土地銀行",
+        cus_remittance_account: "987654321",
         notices: [
           {
             id: "1",
@@ -77,10 +79,13 @@ export default [
         collection_name: "第四台",
         collection_type: "代收",
         price: "100",
-        payment: "現金",
+        payment: "匯款",
         collection_remark: "10樓以下",
+        collection_date: "2023-01-01",
         remittance_bank: "中國信託",
         remittance_account: "123456789",
+        cus_remittance_bank: "土地銀行",
+        cus_remittance_account: "987654321",
         notices: [
           {
             id: "5",
@@ -121,13 +126,16 @@ export default [
       message: "Successfully get the media",
       data: {
         tenement_no: "51734",
-        collection_name: "其他費用",
+        collection_name: "其他",
         collection_type: "代付",
         price: "100",
-        payment: "現金",
+        payment: "匯款",
         collection_remark: "10樓以下",
+        collection_date: "2023-01-01",
         remittance_bank: "中國信託",
         remittance_account: "123456789",
+        cus_remittance_bank: "土地銀行",
+        cus_remittance_account: "987654321",
         notices: [
           {
             id: "9",

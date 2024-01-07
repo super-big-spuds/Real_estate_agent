@@ -17,6 +17,9 @@ const useCollectionAdd = () => {
     collection_remark: "",
     remittance_bank: "",
     remittance_account: "",
+    cus_remittance_account: "",
+    cus_remittance_bank: "",
+    collection_date: nowdatestring,
   });
 
   const handleChange = (key: keyof FormData, value: string) => {
@@ -60,6 +63,9 @@ const useCollectionAdd = () => {
       collection_remark: z.string(),
       remittance_bank: z.string(),
       remittance_account: z.string(),
+      cus_remittance_account: z.string(),
+      cus_remittance_bank: z.string(),
+      collection_date: z.string(),
     });
 
     const parseResult = schemaform.safeParse(formData);
@@ -78,7 +84,7 @@ const useCollectionAdd = () => {
     alert("儲存成功");
   };
 
-  const handleReset = () => {    
+  const handleReset = () => {
     setFormData({
       tenement_no: "",
       collection_id: "",
@@ -89,6 +95,9 @@ const useCollectionAdd = () => {
       collection_remark: "",
       remittance_bank: "",
       remittance_account: "",
+      cus_remittance_account: "",
+      cus_remittance_bank: "",
+      collection_date: nowdatestring,
     });
     setNotices([]);
   };

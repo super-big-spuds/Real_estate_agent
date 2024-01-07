@@ -14,8 +14,11 @@ export type FormData = {
   price: string;
   payment: string;
   collection_remark: string;
+  collection_date: string;
   remittance_bank: string;
   remittance_account: string;
+  cus_remittance_bank: string;
+  cus_remittance_account: string;
   notices?: NoticeData[];
 };
 

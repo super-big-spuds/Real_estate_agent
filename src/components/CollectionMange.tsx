@@ -1,7 +1,10 @@
-import { Input, Select, Button } from "antd";
+import { Input, Select, Button, DatePicker } from "antd";
 import Notice from "./Notice";
 import { useNavigate } from "react-router-dom";
 import InputWithErrorMessage from "./InputWithErrorMessage";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
 export default function CollectionMange(props: any) {
   const { TextArea } = Input;
@@ -22,6 +25,14 @@ export default function CollectionMange(props: any) {
     isLoading,
     isError,
   } = props;
+  const dateFormat = "YYYY-MM-DD";
+  const collection_date = dayjs(formData.collection_date, dateFormat);
+  if (!formData.remittance_bank) {
+    formData.remittance_bank = "";
+    formData.remittance_account = "";
+    formData.cus_remittance_bank = "";
+    formData.cus_remittance_account = "";
+  }
 
   return (
     <div className="flex flex-col w-full h-full ">
@@ -52,6 +63,16 @@ export default function CollectionMange(props: any) {
                     errorMessage={"至少兩個字"}
                   />
                 </div>
+                <div className="grid grid-cols-3 gap-1 text-right">
+                  <p>契約日期:</p>
+                  <DatePicker
+                    onChange={(_, dateString) =>
+                      handleChange("collection_date", dateString)
+                    }
+                    format={"YYYY-MM-DD"}
+                    defaultValue={collection_date}
+                  />
+                </div>
 
                 <div className="grid grid-cols-3 gap-1 ">
                   <p className="col-span-1 text-right">費用類型:</p>
@@ -59,7 +80,7 @@ export default function CollectionMange(props: any) {
                     defaultValue="代收"
                     style={{ width: 120 }}
                     options={[{ value: "代收" }, { value: "代付" }]}
-                    onChange={(value) => handleChange("expenseType", value)}
+                    onChange={(value) => handleChange("collection_type", value)}
                     value={formData.collection_type}
                   />
                 </div>
@@ -91,7 +112,7 @@ export default function CollectionMange(props: any) {
                 <div className="grid grid-cols-3 gap-1 ">
                   <p className="col-span-1 text-right">繳納方式:</p>
                   <Select
-                    defaultValue="現金"
+                    value={formData.payment}
                     style={{ width: 120 }}
                     options={[{ value: "現金" }, { value: "匯款" }]}
                     onChange={(value) => handleChange("payment", value)}
@@ -119,6 +140,28 @@ export default function CollectionMange(props: any) {
                           handleChange("remittance_account", e.target.value)
                         }
                         isError={formData.remittance_account.length <= 2}
+                        errorMessage={"請輸入內容"}
+                      />
+                    </div>
+                    <div className="grid grid-cols-3 gap-1 text-right">
+                      <p className="col-span-1 pt-5">客戶匯款銀行:</p>
+                      <InputWithErrorMessage
+                        value={formData.cus_remittance_bank}
+                        onChange={(e) =>
+                          handleChange("cus_remittance_bank", e.target.value)
+                        }
+                        isError={formData.cus_remittance_bank.length <= 2}
+                        errorMessage={"請輸入內容"}
+                      />
+                    </div>
+                    <div className="grid grid-cols-3 gap-1 text-right">
+                      <p className="col-span-1 pt-5">客戶匯款銀行:</p>
+                      <InputWithErrorMessage
+                        value={formData.cus_remittance_account}
+                        onChange={(e) =>
+                          handleChange("cus_remittance_account", e.target.value)
+                        }
+                        isError={formData.cus_remittance_account.length <= 2}
                         errorMessage={"請輸入內容"}
                       />
                     </div>
