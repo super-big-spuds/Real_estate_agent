@@ -7,22 +7,30 @@ import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
 import { memo, useState } from "react";
 
-const SwitchTenementType = memo((props: { tenement_type: string }) => {
-  const { tenement_type } = props;
+const SwitchTenementType = memo(
+  (props: {
+    tenement_type: string;
+    handleChange: (
+      key: string | number | symbol,
+      value: string | number
+    ) => void;
+  }) => {
+    const { tenement_type, handleChange } = props;
 
-  switch (tenement_type) {
-    case "可租":
-      return <RenterInfo />;
-    case "可售":
-      return <SellerInfo />;
-    case "開發追蹤":
-      return "";
-    case "行銷追蹤":
-      return "";
-    default:
-      return "";
+    switch (tenement_type) {
+      case "可租":
+        return <RenterInfo handleChange={handleChange} />;
+      case "可售":
+        return <SellerInfo handleChange={handleChange} />;
+      case "開發追蹤":
+        return "";
+      case "行銷追蹤":
+        return "";
+      default:
+        return "";
+    }
   }
-});
+);
 
 export default function TenementInfoEdit(props: any) {
   const { children, formData, setFormData } = props;
@@ -393,7 +401,10 @@ export default function TenementInfoEdit(props: any) {
           </div>
         )}
 
-        <SwitchTenementType tenement_type={tenement_type} />
+        <SwitchTenementType
+          tenement_type={tenement_type}
+          handleChange={handleChange}
+        />
         <div className="flex flex-col p-5">
           <div className="inline-flex flex-row gap-5 mb-5 ">
             <p className="text-4xl font-bold whitespace-normal">提醒設定</p>

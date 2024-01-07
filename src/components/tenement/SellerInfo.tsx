@@ -1,7 +1,7 @@
 import { DatePicker, Input } from "antd";
 import Uploadfile from "./Uploadfile";
 
-export default function SellerInfo() {
+export default function SellerInfo(props: any) {
   return (
     // 買客資訊
     <div className="flex flex-col w-full mt-10">
