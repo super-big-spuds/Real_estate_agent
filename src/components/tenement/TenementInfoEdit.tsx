@@ -1,4 +1,4 @@
-import { Button, Radio, RadioChangeEvent, Select } from "antd";
+import { Button, Radio, RadioChangeEvent } from "antd";
 import Notice from "../Notice";
 import { useNavigate } from "react-router-dom";
 import InputWithErrorMessage from "../InputWithErrorMessage";
@@ -24,43 +24,12 @@ const SwitchTenementType = memo((props: { tenement_type: string }) => {
   }
 });
 
-export default function TenementInfo(props: any) {
+export default function TenementInfoEdit(props: any) {
+  const { children, formData, setFormData } = props;
   const navigate = useNavigate();
   const handleback = () => {
     navigate("/tenements");
   };
-  const [formData, setFormData] = useState({
-    tenement_no: "1234",
-    tenement_type: "可租",
-    tenement_face: "Maple Street",
-    tenement_host_name: "John",
-    tenement_host_telphone: "0987654321",
-    tenement_host_phone: "0987654321",
-    tenement_host_line: "line",
-    remittance_bank: "ABC Bank",
-    remittance_account: "1234567890",
-    Total_rating: "4",
-    main_building: "2",
-    affiliated_building: "1",
-    public_buliding: "1",
-    management_fee: "280",
-    selling_price: "2000000",
-    rent: "20000",
-    deposit: "30000",
-    bugert_max: "2000000",
-    bugert_min: "1000000",
-    tenement_status: "1",
-    tenement_photo: [
-      {
-        url: "https://example.com/image5.jpg",
-      },
-      {
-        url: "https://example.com/image6.jpg",
-      },
-    ],
-    tenement_floor: "4",
-    tenement_style: "面海",
-  });
 
   const { handleDeleteCollection, isLoading, isError } = props;
   const [notices, setNotices] = useState([
@@ -156,131 +125,38 @@ export default function TenementInfo(props: any) {
     ]);
   };
 
-  const [tenement_type, setTenement_type] = useState("可租");
+  const [tenement_type, setTenement_type] = useState(formData.tenement_type);
 
   const handletypeChange = (e: RadioChangeEvent) => {
-    setTenement_type(e.target.value);
+    if (
+      window.confirm(
+        "是否要切換案件型態?(請確實按下處存，避免切換後部分資料會遺失)"
+      )
+    ) {
+      const id = window.location.pathname.split("/")[2];
+      switch (e.target.value) {
+        case "可租":
+          navigate("/tenement/" + id + "/rent");
+          break;
+        case "可售":
+          navigate("/tenement/" + id + "/sell");
+          break;
+        case "開發追蹤":
+          navigate("/tenement/" + id + "/develop");
+          break;
+        case "行銷追蹤":
+          navigate("/tenement/" + id + "/market");
+          break;
+        default:
+          break;
+      }
+    } else {
+      setTenement_type(formData.tenement_type);
+    }
   };
 
   const handleChange = (key: keyof typeof formData, value: string | number) => {
-    setFormData((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const swtitchExtraInfo = (tenement_type: string) => {
-    switch (tenement_type) {
-      case "可租":
-        return (
-          <div className="flex flex-col gap-2">
-            {/* 租金 */}
-            <div className="grid grid-cols-5 gap-1 text-right">
-              <p className="col-span-1 pt-5 ">租金:</p>
-              <InputWithErrorMessage
-                value={formData.rent}
-                onChange={(e) => handleChange("rent", e.target.value)}
-                isError={formData.rent.length <= 2}
-                errorMessage={"至少兩個字"}
-              />
-            </div>
-            {/* 押金 */}
-            <div className="grid grid-cols-5 gap-1 text-right">
-              <p className="col-span-1 pt-5 ">押金:</p>
-              <InputWithErrorMessage
-                value={formData.deposit}
-                onChange={(e) => handleChange("deposit", e.target.value)}
-                isError={formData.deposit.length <= 2}
-                errorMessage={"至少兩個字"}
-              />
-            </div>
-          </div>
-        );
-
-      case "可售":
-        return (
-          <div>
-            {/* 售價 */}
-            <div className="grid grid-cols-5 gap-1 ">
-              <p className="col-span-1 pt-5 text-right ">售價:</p>
-              <InputWithErrorMessage
-                value={formData.selling_price}
-                onChange={(e) => handleChange("selling_price", e.target.value)}
-                isError={formData.selling_price.length <= 2}
-                errorMessage={"至少兩個字"}
-              />
-            </div>
-          </div>
-        );
-      case "開發追蹤":
-        return (
-          <div className="flex flex-col ">
-            {/* 售價 */}
-            <div className="grid grid-cols-5 gap-1 ">
-              <p className="col-span-1 pt-5 text-right">售價:</p>
-              <InputWithErrorMessage
-                value={formData.selling_price}
-                onChange={(e) => handleChange("selling_price", e.target.value)}
-                isError={formData.selling_price.length <= 2}
-                errorMessage={"至少兩個字"}
-              />
-            </div>
-            {/* 租金 */}
-            <div className="grid grid-cols-5 gap-1 ">
-              <p className="col-span-1 pt-5 text-right ">租金:</p>
-              <InputWithErrorMessage
-                value={formData.rent}
-                onChange={(e) => handleChange("rent", e.target.value)}
-                isError={formData.rent.length <= 2}
-                errorMessage={"至少兩個字"}
-              />
-            </div>
-            {/* 押金 */}
-            <div className="grid grid-cols-5 gap-1 ">
-              <p className="col-span-1 pt-5 text-right ">押金:</p>
-              <InputWithErrorMessage
-                value={formData.deposit}
-                onChange={(e) => handleChange("deposit", e.target.value)}
-                isError={formData.deposit.length <= 2}
-                errorMessage={"至少兩個字"}
-              />
-            </div>
-          </div>
-        );
-      case "行銷追蹤":
-        return (
-          <div>
-            {/* 要租要買 select  */}
-            <div className="grid grid-cols-6 gap-1 mb-5 ml-5 text-right">
-              <p className="col-span-1 pt-1 ">要租要買:</p>
-              <Select defaultValue="租房" className="w-20 col-span-1 ">
-                <Select.Option value="租房">租房</Select.Option>
-                <Select.Option value="買房">買房</Select.Option>
-              </Select>
-            </div>
-            {/* 預算 最大值 最小值 */}
-            <div className="grid grid-cols-5 gap-1 text-right">
-              <p className="col-span-1 pt-5 ">預算:</p>
-              <div className="inline-flex ">
-                <InputWithErrorMessage
-                  value={formData.bugert_min}
-                  onChange={(e) => handleChange("bugert_min", e.target.value)}
-                  isError={formData.bugert_min.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-                <span className="pt-5 ">~</span>
-              </div>
-              <div>
-                <InputWithErrorMessage
-                  value={formData.bugert_max}
-                  onChange={(e) => handleChange("bugert_max", e.target.value)}
-                  isError={formData.bugert_max.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
-            </div>
-          </div>
-        );
-      default:
-        return "";
-    }
+    setFormData((prev: any) => ({ ...prev, [key]: value }));
   };
 
   return (
@@ -406,7 +282,7 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
-              {swtitchExtraInfo(tenement_type)}
+              {children}
               {/* 樓層 */}
               <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">樓層:</p>

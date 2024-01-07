@@ -208,12 +208,26 @@ const useTenementList = () => {
   }, [dataTenement]);
 
   const navigate = useNavigate();
+  const switchType = (type: string) => {
+    switch (type) {
+      case "可租":
+        return "rent";
+      case "可售":
+        return "sell";
+      case "開發追蹤":
+        return "develop";
+      case "行銷追蹤":
+        return "market";
+      default:
+        return "rent";
+    }
+  };
   const onRow = (record: TenementList) => {
     return {
       onClick: () => {
-        // navigate(`/Tenement/${record.tenement_no}`);
-        
-        navigate(`/Tenement/Add`);
+        navigate(
+          `/Tenement/${record.tenement_no}/${switchType(record.tenement_type)}`
+        );
       },
     };
   };

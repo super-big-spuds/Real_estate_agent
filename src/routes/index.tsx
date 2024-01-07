@@ -10,6 +10,10 @@ import CalenderList from "../pages/calender/CalenderList";
 import TenementAdd from "../pages/tenement/TenementAdd";
 import TenementEdit from "../pages/tenement/TenementEdit";
 import TenementList from "../pages/tenement/TenementList";
+import Market from "../pages/tenement/Market";
+import Sell from "../pages/tenement/Sell";
+import Rent from "../pages/tenement/Rent";
+import Develop from "../pages/tenement/Develop";
 import Login from "../pages/Login";
 import { useAuth } from "../providers/Authprovider";
 
@@ -25,19 +29,21 @@ const App = () => {
             <Route path="collections" element={<CollectionList />} />
             <Route path="Collection/:id" element={<CollectionEdit />} />
             <Route path="Collection/Add" element={<CollectionAdd />} />
-            {
-              isAdmin && (
-                <>
-                  <Route path="users" element={<UserList />} />
-                  <Route path="User/:user_id" element={<UserEdit />} />
-                  <Route path="user" element={<UserAdd />} />
-                </>
-              )
-            }
+            {isAdmin && (
+              <>
+                <Route path="users" element={<UserList />} />
+                <Route path="User/:user_id" element={<UserEdit />} />
+                <Route path="user" element={<UserAdd />} />
+              </>
+            )}
             <Route path="Calenderlist" element={<CalenderList />} />
             <Route path="Tenement/Add" element={<TenementAdd />} />
             <Route path="Tenement/:id" element={<TenementEdit />} />
             <Route path="Tenements" element={<TenementList />} />
+            <Route path="Tenement/:id/market" element={<Market />} />
+            <Route path="Tenement/:id/sell" element={<Sell />} />
+            <Route path="Tenement/:id/rent" element={<Rent />} />
+            <Route path="Tenement/:id/develop" element={<Develop />} />
           </Route>
         )}
       </Routes>
