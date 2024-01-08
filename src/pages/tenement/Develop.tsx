@@ -24,6 +24,10 @@ const TenemmentAdd = () => {
     bugert_max: "2000000",
     bugert_min: "1000000",
     tenement_status: "1",
+    tenement_address: "台北市大安區",
+    tenement_birthday: "1950-09-01",
+    tenement_hobby: "打球",
+    unregistered_area: "10.00",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",

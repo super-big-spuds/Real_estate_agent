@@ -25,6 +25,10 @@ const TenemmentAdd = () => {
     bugert_max: "2000000",
     bugert_min: "1000000",
     tenement_status: "1",
+    tenement_address: "台北市大安區",
+    tenement_birthday: "1950-09-01",
+    tenement_hobby: "打球",
+    unregistered_area: "10.00",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",
@@ -44,17 +48,17 @@ const TenemmentAdd = () => {
     <TenementInfoEdit formData={formData} setFormData={setFormData}>
       <div>
         {/* 要租要買 select  */}
-        <div className="grid grid-cols-6 gap-1 mb-5 ml-5 text-right">
-          <p className="col-span-1 pt-1 ">要租要買:</p>
+        <div className="grid grid-cols-10 gap-1 mb-5 ml-5 text-right">
+          <p className="col-span-2 pt-1 whitespace-nowrap ">要租要買:</p>
           <Select defaultValue="租房" className="w-20 col-span-1 ">
             <Select.Option value="租房">租房</Select.Option>
             <Select.Option value="買房">買房</Select.Option>
           </Select>
         </div>
         {/* 預算 最大值 最小值 */}
-        <div className="grid grid-cols-5 gap-1 text-right">
+        <div className="grid grid-cols-6 gap-1 text-right">
           <p className="col-span-1 pt-5 ">預算:</p>
-          <div className="inline-flex ">
+          <div className="inline-flex col-span-2 ">
             <InputWithErrorMessage
               value={formData.bugert_min}
               onChange={(e) => handleChange("bugert_min", e.target.value)}
@@ -63,7 +67,7 @@ const TenemmentAdd = () => {
             />
             <span className="pt-5 ">~</span>
           </div>
-          <div>
+          <div className="inline-flex col-span-2 ">
             <InputWithErrorMessage
               value={formData.bugert_max}
               onChange={(e) => handleChange("bugert_max", e.target.value)}

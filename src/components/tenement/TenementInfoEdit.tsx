@@ -6,6 +6,7 @@ import RenterInfo from "./RenterInfo";
 import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
 import { memo, useState } from "react";
+import { set } from "zod";
 
 const SwitchTenementType = memo(
   (props: {
@@ -85,7 +86,7 @@ export default function TenementInfoEdit(props: any) {
   const handleReset = () => {
     setFormData({
       tenement_no: "1234",
-      tenement_type: "可租",
+      tenement_type: tenement_type,
       tenement_face: "Maple Street",
       tenement_host_name: "John",
       tenement_host_telphone: "0987654321",
@@ -104,6 +105,10 @@ export default function TenementInfoEdit(props: any) {
       bugert_max: "2000000",
       bugert_min: "1000000",
       tenement_status: "1",
+      tenement_address: "台北市大安區",
+      tenement_birthday: "1950-09-01",
+      tenement_hobby: "打球",
+      unregistered_area: "10.00",
       tenement_photo: [
         {
           url: "https://example.com/image5.jpg",
@@ -113,7 +118,7 @@ export default function TenementInfoEdit(props: any) {
         },
       ],
       tenement_floor: "4",
-      tenement_style: "面海",
+      tenement_style: "店面",
     });
     setNotices([
       {
@@ -136,6 +141,7 @@ export default function TenementInfoEdit(props: any) {
   const [tenement_type, setTenement_type] = useState(formData.tenement_type);
 
   const handletypeChange = (e: RadioChangeEvent) => {
+    setTenement_type(e.target.value);
     if (
       window.confirm(
         "是否要切換案件型態?(請確實按下處存，避免切換後部分資料會遺失)"
@@ -168,8 +174,8 @@ export default function TenementInfoEdit(props: any) {
   };
 
   return (
-    <div className="flex flex-col w-full h-full ">
-      <div className="flex flex-col w-11/12 h-full px-12 pb-12 mt-12 mb-10 ml-20 bg-white shadow-2xl rounded-xl ">
+    <div className="flex flex-col items-center w-full h-full ">
+      <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
         <button className="flex w-12 h-20 mt-10 ml-5" onClick={handleback}>
           {"< 返回"}
         </button>
@@ -185,9 +191,9 @@ export default function TenementInfoEdit(props: any) {
           <p className="col-span-1 pt-5 ">error...</p>
         ) : (
           <div className="flex flex-row ">
-            <div className="flex flex-col flex-wrap w-1/2 h-full gap-4 px-16 overflow-visible ">
+            <div className="flex flex-col flex-wrap w-1/2 h-full gap-3 overflow-visible pl-7 ">
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">房號:</p>
+                <p className="col-span-1 pt-5 whitespace-nowrap ">房號:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_no}
                   onChange={(e) => handleChange("tenement_no", e.target.value)}
@@ -198,20 +204,23 @@ export default function TenementInfoEdit(props: any) {
 
               {/* 面向 */}
               <div className="grid grid-cols-5 gap-1 ">
-                <p className="text-right whitespace-nowrap">面向:</p>
-                <Radio.Group className="col-span-2">
+                <p className="col-span-1 text-right whitespace-nowrap ">
+                  面向:
+                </p>
+                <Radio.Group className="col-span-4">
                   <Radio value="海景">海景</Radio>
                   <Radio value="中庭">中庭</Radio>
                   <Radio value="三多路">三多路</Radio>
                   <Radio value="自強路">自強路</Radio>
                   <Radio value="市景風洞">市景風洞</Radio>
                   <Radio value="海景風洞">海景風洞</Radio>
+                  <Radio value="其他">其他</Radio>
                 </Radio.Group>
               </div>
               {/* 案件狀態 */}
               <div className="grid grid-cols-5 gap-1 ">
-                <p className="text-right whitespace-nowrap">案件狀態:</p>
-                <Radio.Group className="col-span-2">
+                <p className="text-right whitespace-nowrap">物件狀態:</p>
+                <Radio.Group className="col-span-4">
                   <Radio value="未成交">未成交</Radio>
                   <Radio value="已成交">已成交</Radio>
                   <Radio value="已成交下架">已成交下架</Radio>
@@ -220,11 +229,11 @@ export default function TenementInfoEdit(props: any) {
               </div>
               {/* 案件型態 */}
               <div className="grid grid-cols-5 gap-1 ">
-                <p className="text-right whitespace-nowrap">案件型態:</p>
+                <p className="text-right whitespace-nowrap">物件型態:</p>
                 <Radio.Group
                   onChange={handletypeChange}
                   value={tenement_type}
-                  className="text-right whitespace-nowrap"
+                  className="col-span-4 "
                 >
                   <Radio value="可租">可租</Radio>
                   <Radio value="可售">可售</Radio>
@@ -234,7 +243,7 @@ export default function TenementInfoEdit(props: any) {
               </div>
               {/* 總坪數 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">總坪數:</p>
+                <p className="col-span-1 pt-5 ">權狀坪數:</p>
                 <InputWithErrorMessage
                   value={formData.Total_rating}
                   onChange={(e) => handleChange("Total_rating", e.target.value)}
@@ -244,7 +253,7 @@ export default function TenementInfoEdit(props: any) {
               </div>
               {/* 主建物坪數 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">主建物坪數:</p>
+                <p className="col-span-1 pt-5 whitespace-nowrap ">主建物:</p>
                 <InputWithErrorMessage
                   value={formData.main_building}
                   onChange={(e) =>
@@ -256,7 +265,7 @@ export default function TenementInfoEdit(props: any) {
               </div>
               {/* 附屬建物坪數 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">附屬建物坪數:</p>
+                <p className="col-span-1 pt-5 ">附屬建物:</p>
                 <InputWithErrorMessage
                   value={formData.affiliated_building}
                   onChange={(e) =>
@@ -268,13 +277,25 @@ export default function TenementInfoEdit(props: any) {
               </div>
               {/* 公共設施坪數 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">公共設施坪數:</p>
+                <p className="col-span-1 pt-5 ">公設面積:</p>
                 <InputWithErrorMessage
                   value={formData.public_buliding}
                   onChange={(e) =>
                     handleChange("public_buliding", e.target.value)
                   }
                   isError={formData.public_buliding.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+              </div>
+              {/* 未登記面積 */}
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">未登記面積:</p>
+                <InputWithErrorMessage
+                  value={formData.unregistered_area}
+                  onChange={(e) =>
+                    handleChange("unregistered_area", e.target.value)
+                  }
+                  isError={formData.unregistered_area.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>
@@ -305,12 +326,13 @@ export default function TenementInfoEdit(props: any) {
               </div>
               {/* 房型 */}
               <div className="grid grid-cols-5 gap-1 ">
-                <p className="col-span-1 text-right">房型:</p>
+                <p className="col-span-1 text-right">產品類別:</p>
                 {/* radio */}
                 <Radio.Group className="col-span-2">
-                  <Radio value="面海">面海</Radio>
+                  <Radio value="套房">套房</Radio>
                   <Radio value="店面">店面</Radio>
-                  <Radio value="中庭">中庭</Radio>
+                  <Radio value="辦公室">辦公室</Radio>
+                  <Radio value="其他">其他</Radio>
                 </Radio.Group>
               </div>
             </div>
@@ -394,6 +416,42 @@ export default function TenementInfoEdit(props: any) {
                     handleChange("remittance_account", e.target.value)
                   }
                   isError={formData.remittance_account.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+              </div>
+              {/* 通訊地址 */}
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">通訊地址:</p>
+                <InputWithErrorMessage
+                  value={formData.tenement_address}
+                  onChange={(e) =>
+                    handleChange("tenement_address", e.target.value)
+                  }
+                  isError={formData.tenement_address.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+              </div>
+              {/* 生日 */}
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">生日:</p>
+                <InputWithErrorMessage
+                  value={formData.tenement_birthday}
+                  onChange={(e) =>
+                    handleChange("tenement_birthday", e.target.value)
+                  }
+                  isError={formData.tenement_birthday.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+              </div>
+              {/* 嗜好 */}
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">嗜好:</p>
+                <InputWithErrorMessage
+                  value={formData.tenement_hobby}
+                  onChange={(e) =>
+                    handleChange("tenement_hobby", e.target.value)
+                  }
+                  isError={formData.tenement_hobby.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>

@@ -158,8 +158,8 @@ const useTenementList = () => {
       width: "10%",
       filters: [
         {
-          text: "面海",
-          value: "面海",
+          text: "套房",
+          value: "套房",
         },
         {
           text: "辦公室",
@@ -168,6 +168,10 @@ const useTenementList = () => {
         {
           text: "店面",
           value: "店面",
+        },
+        {
+          text: "其他",
+          value: "其他",
         },
       ],
       onFilter: (value, record) => record.tenement_style.includes(value),
