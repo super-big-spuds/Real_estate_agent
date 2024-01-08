@@ -30,15 +30,19 @@ export default function CalenderTable(props: Props) {
   const getEventType = (classType: string) => {
     switch (classType) {
       case "collection":
-        return "success";
+        return "pink";
       case "rent":
-        return "error";
+        return "orange";
       case "sell":
-        return "default";
+        return "green";
       case "develop":
-        return "processing";
+        return "purple";
       case "market":
-        return "warning";
+        return "gold";
+      case "pay":
+        return "red";
+      case "prepay":
+        return "blue";
     }
   };
 
@@ -109,7 +113,7 @@ export default function CalenderTable(props: Props) {
             onClick={() => navigate(switchparam(item.class, item.id))}
           >
             <Badge
-              status={item.type as BadgeProps["status"]}
+              color={item.type as BadgeProps["color"]}
               text={item.content}
             />
           </li>
@@ -127,28 +131,6 @@ export default function CalenderTable(props: Props) {
 
   return (
     <>
-      <div className="flex p-4 site-calendar-custom-header gap-x-4">
-        <div className="flex">
-          <p className="w-4 h-4 bg-green-400 rounded-full"></p>
-          <p className="text-xs">代收付事項</p>
-        </div>
-        <div className="flex">
-          <p className="w-4 h-4 bg-red-400 rounded-full"></p>
-          <p className="text-xs">租房事項</p>
-        </div>
-        <div className="flex">
-          <p className="w-4 h-4 bg-gray-400 rounded-full"></p>
-          <p className="text-xs">售房事項</p>
-        </div>
-        <div className="flex">
-          <p className="w-4 h-4 bg-blue-400 rounded-full"></p>
-          <p className="text-xs">開發追蹤事項</p>
-        </div>
-        <div className="flex">
-          <p className="w-4 h-4 bg-orange-400 rounded-full"></p>
-          <p className="text-xs">行銷追蹤事項</p>
-        </div>
-      </div>
       <Calendar
         cellRender={cellRender}
         onPanelChange={(date) => handleGetCalenderData(date)}

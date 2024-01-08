@@ -50,7 +50,7 @@ const HouseInformationForm = (props: any) => {
         form={form}
         name="house_information"
         onFinish={onFinish}
-        className="w-2/5 p-10 mt-20 bg-white rounded-md h-3/5"
+        className="w-2/3 p-10 mt-20 bg-white rounded-md h-4/5"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between px-10 mb-8">
@@ -87,13 +87,15 @@ const HouseInformationForm = (props: any) => {
               <Radio value="自強路">自強路</Radio>
               <Radio value="市景風洞">市景風洞</Radio>
               <Radio value="海景風洞">海景風洞</Radio>
+              <Radio value="其他">其他</Radio>
             </Radio.Group>
           </Form.Item>
           <Form.Item name="houseType" label="房型">
             <Radio.Group>
-              <Radio value="面海">面海</Radio>
+              <Radio value="套房">套房</Radio>
               <Radio value="辦公室">辦公室</Radio>
               <Radio value="店面">店面</Radio>
+              <Radio value="其他">其他</Radio>
             </Radio.Group>
           </Form.Item>
           <div className="inline-flex gap-6">

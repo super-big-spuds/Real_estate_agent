@@ -412,6 +412,39 @@ export function usePostCalender() {
   };
 }
 
+export function usePostCalenderCollection() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [dataCalender, setDataCalender] = useState<Calender[]>([]);
+
+  const handleGetCalender = async (formDatas: {
+    year: number;
+    month: number;
+  }) => {
+    setIsLoading(true);
+    try {
+      const res = await getFetch(
+        `/calender/collection/${formDatas.year}/${formDatas.month}`,
+        token
+      );
+      const data = await res.json();
+      setDataCalender(data.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    handleGetCalender,
+    dataCalender,
+  };
+}
+
 export function useDeleteNotice() {
   const token = useToken();
   const [isLoading, setIsLoading] = useState(false);

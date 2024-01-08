@@ -59,7 +59,7 @@ export default function TenementInfo(props: any) {
       },
     ],
     tenement_floor: "4",
-    tenement_style: "面海",
+    tenement_style: "套房",
   });
 
   const { handleDeleteCollection, isLoading, isError } = props;
@@ -136,7 +136,7 @@ export default function TenementInfo(props: any) {
         },
       ],
       tenement_floor: "4",
-      tenement_style: "面海",
+      tenement_style: "套房",
     });
     setNotices([
       {
@@ -284,8 +284,8 @@ export default function TenementInfo(props: any) {
   };
 
   return (
-    <div className="flex flex-col w-full h-full ">
-      <div className="flex flex-col w-11/12 h-full px-12 pb-12 mt-12 mb-10 ml-20 bg-white shadow-2xl rounded-xl ">
+    <div className="flex flex-col items-center w-full h-full ">
+      <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
         <button className="flex w-12 h-20 mt-10 ml-5" onClick={handleback}>
           {"< 返回"}
         </button>
@@ -301,9 +301,9 @@ export default function TenementInfo(props: any) {
           <p className="col-span-1 pt-5 ">error...</p>
         ) : (
           <div className="flex flex-row ">
-            <div className="flex flex-col flex-wrap w-1/2 h-full gap-4 px-16 overflow-visible ">
+            <div className="flex flex-col flex-wrap w-1/2 h-full gap-3 overflow-visible pl-7 ">
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">房號:</p>
+                <p className="col-span-1 pt-5 whitespace-nowrap ">房號:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_no}
                   onChange={(e) => handleChange("tenement_no", e.target.value)}
@@ -311,23 +311,22 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
-
-              {/* 面向 */}
+              {/* 房型 */}
               <div className="grid grid-cols-5 gap-1 ">
-                <p className="text-right whitespace-nowrap">面向:</p>
+                <p className="col-span-1 text-right">產品類別:</p>
+                {/* radio */}
                 <Radio.Group className="col-span-2">
-                  <Radio value="海景">海景</Radio>
-                  <Radio value="中庭">中庭</Radio>
-                  <Radio value="三多路">三多路</Radio>
-                  <Radio value="自強路">自強路</Radio>
-                  <Radio value="市景風洞">市景風洞</Radio>
-                  <Radio value="海景風洞">海景風洞</Radio>
+                  <Radio value="套房">套房</Radio>
+                  <Radio value="店面">店面</Radio>
+                  <Radio value="辦公室">辦公室</Radio>
+                  <Radio value="其他">其他</Radio>
                 </Radio.Group>
               </div>
+
               {/* 案件狀態 */}
               <div className="grid grid-cols-5 gap-1 ">
-                <p className="text-right whitespace-nowrap">案件狀態:</p>
-                <Radio.Group className="col-span-2">
+                <p className="text-right whitespace-nowrap">物件狀態:</p>
+                <Radio.Group className="col-span-4">
                   <Radio value="未成交">未成交</Radio>
                   <Radio value="已成交">已成交</Radio>
                   <Radio value="已成交下架">已成交下架</Radio>
@@ -336,16 +335,32 @@ export default function TenementInfo(props: any) {
               </div>
               {/* 案件型態 */}
               <div className="grid grid-cols-5 gap-1 ">
-                <p className="text-right whitespace-nowrap">案件型態:</p>
+                <p className="text-right whitespace-nowrap">物件型態:</p>
                 <Radio.Group
                   onChange={handletypeChange}
                   value={tenement_type}
-                  className="text-right whitespace-nowrap"
+                  className="col-span-4 "
                 >
                   <Radio value="可租">可租</Radio>
                   <Radio value="可售">可售</Radio>
                   <Radio value="開發追蹤">開發追蹤</Radio>
                   <Radio value="行銷追蹤">行銷追蹤</Radio>
+                </Radio.Group>
+              </div>
+
+              {/* 面向 */}
+              <div className="grid grid-cols-5 gap-1 ">
+                <p className="col-span-1 text-right whitespace-nowrap ">
+                  面向:
+                </p>
+                <Radio.Group className="col-span-4">
+                  <Radio value="海景">海景</Radio>
+                  <Radio value="中庭">中庭</Radio>
+                  <Radio value="三多路">三多路</Radio>
+                  <Radio value="自強路">自強路</Radio>
+                  <Radio value="市景風洞">市景風洞</Radio>
+                  <Radio value="海景風洞">海景風洞</Radio>
+                  <Radio value="其他">其他</Radio>
                 </Radio.Group>
               </div>
               {/* 總坪數 */}
@@ -418,16 +433,6 @@ export default function TenementInfo(props: any) {
                   isError={formData.tenement_floor.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
-              </div>
-              {/* 房型 */}
-              <div className="grid grid-cols-5 gap-1 ">
-                <p className="col-span-1 text-right">房型:</p>
-                {/* radio */}
-                <Radio.Group className="col-span-2">
-                  <Radio value="面海">面海</Radio>
-                  <Radio value="店面">店面</Radio>
-                  <Radio value="中庭">中庭</Radio>
-                </Radio.Group>
               </div>
             </div>
             <div className="flex flex-col w-1/2 h-full ">

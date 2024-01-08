@@ -3,7 +3,7 @@ import Uploadfile from "./Uploadfile";
 
 export default function RenterInfo(props: any) {
   return (
-    <div className="flex flex-col w-full mt-10">
+    <div className="flex flex-col w-full px-5 mt-10">
       <div className="inline-flex col-span-2 mb-5 ml-10">
         <p className="text-4xl font-bold">租客資訊</p>
       </div>
@@ -12,12 +12,12 @@ export default function RenterInfo(props: any) {
         <div className="flex flex-col w-1/3 gap-10 mr-3 ">
           <div className="grid grid-cols-3 gap-1 text-right ">
             <p className="col-span-1 ">起租日期:</p>
-            <DatePicker className="col-span-1" />
+            <DatePicker className="col-span-2" />
           </div>
 
           <div className="grid grid-cols-3 gap-1 text-right ">
             <p className="col-span-1 ">退租日期:</p>
-            <DatePicker className="col-span-1" />
+            <DatePicker className="col-span-2" />
           </div>
 
           <div className="grid grid-cols-3 gap-1 text-right ">

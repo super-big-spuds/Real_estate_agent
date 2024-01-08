@@ -38,7 +38,7 @@ const TenemmentAdd = () => {
       },
     ],
     tenement_floor: "4",
-    tenement_style: "面海",
+    tenement_style: "套房",
   });
   const handleChange = (key: string, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));

@@ -201,22 +201,18 @@ export default function TenementInfoEdit(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
-
-              {/* 面向 */}
+              {/* 房型 */}
               <div className="grid grid-cols-5 gap-1 ">
-                <p className="col-span-1 text-right whitespace-nowrap ">
-                  面向:
-                </p>
-                <Radio.Group className="col-span-4">
-                  <Radio value="海景">海景</Radio>
-                  <Radio value="中庭">中庭</Radio>
-                  <Radio value="三多路">三多路</Radio>
-                  <Radio value="自強路">自強路</Radio>
-                  <Radio value="市景風洞">市景風洞</Radio>
-                  <Radio value="海景風洞">海景風洞</Radio>
+                <p className="col-span-1 text-right">產品類別:</p>
+                {/* radio */}
+                <Radio.Group className="col-span-2">
+                  <Radio value="套房">套房</Radio>
+                  <Radio value="店面">店面</Radio>
+                  <Radio value="辦公室">辦公室</Radio>
                   <Radio value="其他">其他</Radio>
                 </Radio.Group>
               </div>
+
               {/* 案件狀態 */}
               <div className="grid grid-cols-5 gap-1 ">
                 <p className="text-right whitespace-nowrap">物件狀態:</p>
@@ -239,6 +235,22 @@ export default function TenementInfoEdit(props: any) {
                   <Radio value="可售">可售</Radio>
                   <Radio value="開發追蹤">開發追蹤</Radio>
                   <Radio value="行銷追蹤">行銷追蹤</Radio>
+                </Radio.Group>
+              </div>
+
+              {/* 面向 */}
+              <div className="grid grid-cols-5 gap-1 ">
+                <p className="col-span-1 text-right whitespace-nowrap ">
+                  面向:
+                </p>
+                <Radio.Group className="col-span-4">
+                  <Radio value="海景">海景</Radio>
+                  <Radio value="中庭">中庭</Radio>
+                  <Radio value="三多路">三多路</Radio>
+                  <Radio value="自強路">自強路</Radio>
+                  <Radio value="市景風洞">市景風洞</Radio>
+                  <Radio value="海景風洞">海景風洞</Radio>
+                  <Radio value="其他">其他</Radio>
                 </Radio.Group>
               </div>
               {/* 總坪數 */}
@@ -323,17 +335,6 @@ export default function TenementInfoEdit(props: any) {
                   isError={formData.tenement_floor.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
-              </div>
-              {/* 房型 */}
-              <div className="grid grid-cols-5 gap-1 ">
-                <p className="col-span-1 text-right">產品類別:</p>
-                {/* radio */}
-                <Radio.Group className="col-span-2">
-                  <Radio value="套房">套房</Radio>
-                  <Radio value="店面">店面</Radio>
-                  <Radio value="辦公室">辦公室</Radio>
-                  <Radio value="其他">其他</Radio>
-                </Radio.Group>
               </div>
             </div>
             <div className="flex flex-col w-1/2 h-full ">

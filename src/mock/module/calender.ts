@@ -45,4 +45,48 @@ export default [
       ],
     },
   },
+  {
+    url: "/api/calender/collection/:year/:month",
+    method: "get",
+    response: {
+      message: "Successfully update the media",
+      data: [
+        {
+          day: 8,
+          events: [
+            {
+              content: "代付",
+              id: "1",
+              class: "pay",
+            },
+            {
+              content: "代收",
+              id: "54322",
+              class: "prepay",
+            },
+          ],
+        },
+        {
+          day: 10,
+          events: [
+            {
+              content: "代付",
+              id: "54321",
+              class: "pay",
+            },
+            {
+              content: "代收",
+              id: "54323",
+              class: "prepay",
+            },
+            {
+              content: "代收",
+              id: "54323",
+              class: "pay",
+            },
+          ],
+        },
+      ],
+    },
+  },
 ] as MockMethod[];
