@@ -6,7 +6,6 @@ import RenterInfo from "./RenterInfo";
 import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
 import { memo, useState } from "react";
-import { set } from "zod";
 
 const SwitchTenementType = memo(
   (props: {

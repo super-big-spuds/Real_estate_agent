@@ -1,7 +1,11 @@
 import { DatePicker, Input } from "antd";
 import Uploadfile from "./Uploadfile";
 
-export default function RenterInfo(props: any) {
+type RenterInfoProps = {
+  handleChange: (key: string | number | symbol, value: string | number) => void;
+};
+export default function RenterInfo(props: RenterInfoProps) {
+  const { handleChange } = props;
   return (
     <div className="flex flex-col w-full px-5 mt-10">
       <div className="inline-flex col-span-2 mb-5 ml-10">

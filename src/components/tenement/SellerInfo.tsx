@@ -1,7 +1,12 @@
 import { DatePicker, Input } from "antd";
 import Uploadfile from "./Uploadfile";
 
-export default function SellerInfo(props: any) {
+type SellerInfoProps = {
+  handleChange: (key: string | number | symbol, value: string | number) => void;
+};
+
+export default function SellerInfo(props: SellerInfoProps) {
+  const { handleChange } = props;
   return (
     // 買客資訊
     <div className="flex flex-col w-full px-5 mt-10">

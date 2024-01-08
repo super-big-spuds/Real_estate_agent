@@ -7,22 +7,30 @@ import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
 import { memo, useState } from "react";
 
-const SwitchTenementType = memo((props: { tenement_type: string }) => {
-  const { tenement_type } = props;
+const SwitchTenementType = memo(
+  (props: {
+    tenement_type: string;
+    handleChange: (
+      key: string | number | symbol | any,
+      value: string | number
+    ) => void;
+  }) => {
+    const { tenement_type, handleChange } = props;
 
-  switch (tenement_type) {
-    case "可租":
-      return <RenterInfo />;
-    case "可售":
-      return <SellerInfo />;
-    case "開發追蹤":
-      return "";
-    case "行銷追蹤":
-      return "";
-    default:
-      return "";
+    switch (tenement_type) {
+      case "可租":
+        return <RenterInfo handleChange={handleChange} />;
+      case "可售":
+        return <SellerInfo handleChange={handleChange} />;
+      case "開發追蹤":
+        return "";
+      case "行銷追蹤":
+        return "";
+      default:
+        return "";
+    }
   }
-});
+);
 
 export default function TenementInfo(props: any) {
   const navigate = useNavigate();
@@ -50,6 +58,10 @@ export default function TenementInfo(props: any) {
     bugert_max: "2000000",
     bugert_min: "1000000",
     tenement_status: "1",
+    tenement_address: "台北市大安區",
+    tenement_birthday: "1950-09-01",
+    tenement_hobby: "打球",
+    unregistered_area: "10.00",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",
@@ -59,10 +71,10 @@ export default function TenementInfo(props: any) {
       },
     ],
     tenement_floor: "4",
-    tenement_style: "套房",
+    tenement_style: "店面",
   });
 
-  const { handleDeleteCollection, isLoading, isError } = props;
+  const { isLoading, isError } = props;
   const [notices, setNotices] = useState([
     {
       id: "1",
@@ -127,6 +139,10 @@ export default function TenementInfo(props: any) {
       bugert_max: "2000000",
       bugert_min: "1000000",
       tenement_status: "1",
+      tenement_address: "台北市大安區",
+      tenement_birthday: "1950-09-01",
+      tenement_hobby: "打球",
+      unregistered_area: "10.00",
       tenement_photo: [
         {
           url: "https://example.com/image5.jpg",
@@ -136,7 +152,7 @@ export default function TenementInfo(props: any) {
         },
       ],
       tenement_floor: "4",
-      tenement_style: "套房",
+      tenement_style: "店面",
     });
     setNotices([
       {
@@ -163,7 +179,7 @@ export default function TenementInfo(props: any) {
   };
 
   const handleChange = (key: keyof typeof formData, value: string | number) => {
-    setFormData((prev) => ({ ...prev, [key]: value }));
+    setFormData((prev: any) => ({ ...prev, [key]: value }));
   };
 
   const swtitchExtraInfo = (tenement_type: string) => {
@@ -518,11 +534,50 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              {/* 通訊地址 */}
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">通訊地址:</p>
+                <InputWithErrorMessage
+                  value={formData.tenement_address}
+                  onChange={(e) =>
+                    handleChange("tenement_address", e.target.value)
+                  }
+                  isError={formData.tenement_address.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+              </div>
+              {/* 生日 */}
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">生日:</p>
+                <InputWithErrorMessage
+                  value={formData.tenement_birthday}
+                  onChange={(e) =>
+                    handleChange("tenement_birthday", e.target.value)
+                  }
+                  isError={formData.tenement_birthday.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+              </div>
+              {/* 嗜好 */}
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">嗜好:</p>
+                <InputWithErrorMessage
+                  value={formData.tenement_hobby}
+                  onChange={(e) =>
+                    handleChange("tenement_hobby", e.target.value)
+                  }
+                  isError={formData.tenement_hobby.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+              </div>
             </div>
           </div>
         )}
 
-        <SwitchTenementType tenement_type={tenement_type} />
+        <SwitchTenementType
+          tenement_type={tenement_type}
+          handleChange={handleChange}
+        />
         <div className="flex flex-col p-5">
           <div className="inline-flex flex-row gap-5 mb-5 ">
             <p className="text-4xl font-bold whitespace-normal">提醒設定</p>
@@ -554,9 +609,6 @@ export default function TenementInfo(props: any) {
           </Button>
           <Button type="default" onClick={() => handleReset()}>
             回復預設
-          </Button>
-          <Button onClick={() => handleDeleteCollection()} danger>
-            刪除
           </Button>
         </div>
       </div>
