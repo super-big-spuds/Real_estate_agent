@@ -56,12 +56,12 @@ export default [
           events: [
             {
               content: "代付",
-              id: "1",
+              id: "2",
               class: "pay",
             },
             {
               content: "代收",
-              id: "54322",
+              id: "1",
               class: "prepay",
             },
           ],
@@ -71,18 +71,13 @@ export default [
           events: [
             {
               content: "代付",
-              id: "54321",
+              id: "4",
               class: "pay",
             },
             {
               content: "代收",
-              id: "54323",
+              id: "3",
               class: "prepay",
-            },
-            {
-              content: "代收",
-              id: "54323",
-              class: "pay",
             },
           ],
         },

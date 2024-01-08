@@ -88,14 +88,18 @@ export default function CalenderTable(props: Props) {
   const switchparam = (param: string, id: any) => {
     switch (param) {
       case "market":
-        return `/Tenement/Add`;
+        return `/Tenement/${id}/market`;
       case "rent":
-        return `/Tenement/Add`;
+        return `/Tenement/${id}/rent`;
       case "sell":
-        return `/Tenement/Add`;
+        return `/Tenement/${id}/sell`;
       case "develop":
-        return `/Tenement/Add`;
+        return `/Tenement/${id}/develop`;
       case "collection":
+        return `/Collection/${id}`;
+      case "pay":
+        return `/Collection/${id}`;
+      case "prepay":
         return `/Collection/${id}`;
       default:
         return `/Calenderlist`;
