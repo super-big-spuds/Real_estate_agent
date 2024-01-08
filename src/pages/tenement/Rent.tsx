@@ -42,9 +42,36 @@ const TenemmentAdd = () => {
   const handleChange = (key: string, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
+  const [renterData, setRenterData] = useState({
+    rental_start_date: "2021-09-01",
+    rental_end_date: "2021-09-05",
+    renter_name: "John",
+    renter_telphone: "0987654321",
+    renter_job: "護理師",
+    guarantor_name: "John",
+    guarantor_telphone: "0987654321",
+    special_agreement: "無",
+    buyer_photo: [
+      {
+        url: "https://example.com/image5.jpg",
+      },
+      {
+        url: "https://example.com/image6.jpg",
+      },
+    ],
+  });
+
+  const handleRenterChange = (key: string, value: string) => {
+    setRenterData((prev) => ({ ...prev, [key]: value }));
+  };
 
   return (
-    <TenementInfoEdit formData={formData} setFormData={setFormData}>
+    <TenementInfoEdit
+      formData={formData}
+      setFormData={setFormData}
+      renterData={renterData}
+      handleRenterChange={handleRenterChange}
+    >
       <div className="flex flex-col gap-2">
         {/* 租金 */}
         <div className="grid grid-cols-5 gap-1 text-right">

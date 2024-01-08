@@ -8,7 +8,6 @@ import UserList from "../pages/user/UserList";
 import Layout from "../components/Layout";
 import CalenderList from "../pages/calender/CalenderList";
 import TenementAdd from "../pages/tenement/TenementAdd";
-import TenementEdit from "../pages/tenement/TenementEdit";
 import TenementList from "../pages/tenement/TenementList";
 import Market from "../pages/tenement/Market";
 import Sell from "../pages/tenement/Sell";
@@ -43,7 +42,6 @@ const App = () => {
               element={<CalenderList_collection />}
             />
             <Route path="Tenement/Add" element={<TenementAdd />} />
-            <Route path="Tenement/:id" element={<TenementEdit />} />
             <Route path="Tenements" element={<TenementList />} />
             <Route path="Tenement/:id/market" element={<Market />} />
             <Route path="Tenement/:id/sell" element={<Sell />} />

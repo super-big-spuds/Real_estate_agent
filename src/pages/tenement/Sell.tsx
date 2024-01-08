@@ -43,8 +43,32 @@ const TenemmentAdd = () => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
+  const [sellerData, setSellerData] = useState({
+    set_date: "2021-09-01",
+    delivery_date: "2021-09-05",
+    buyer_name: "John",
+    buyer_telphone: "0987654321",
+    buyer_job: "工程師",
+    buyer_photo: [
+      {
+        url: "https://example.com/image5.jpg",
+      },
+      {
+        url: "https://example.com/image6.jpg",
+      },
+    ],
+  });
+  const handleChangeSeller = (key: string, value: string) => {
+    setSellerData((prev) => ({ ...prev, [key]: value }));
+  };
+
   return (
-    <TenementInfoEdit formData={formData} setFormData={setFormData}>
+    <TenementInfoEdit
+      formData={formData}
+      setFormData={setFormData}
+      sellerData={sellerData}
+      handleChangeSeller={handleChangeSeller}
+    >
       <div>
         {/* 售價 */}
         <div className="grid grid-cols-5 gap-1 ">

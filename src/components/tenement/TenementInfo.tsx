@@ -10,18 +10,34 @@ import { memo, useState } from "react";
 const SwitchTenementType = memo(
   (props: {
     tenement_type: string;
-    handleChange: (
-      key: string | number | symbol | any,
-      value: string | number
-    ) => void;
+    sellerData: any;
+    renterData: any;
+    handleChangeSeller: any;
+    handleRenterChange: any;
   }) => {
-    const { tenement_type, handleChange } = props;
+    const {
+      tenement_type,
+      sellerData,
+      handleChangeSeller,
+      renterData,
+      handleRenterChange,
+    } = props;
 
     switch (tenement_type) {
       case "可租":
-        return <RenterInfo handleChange={handleChange} />;
+        return (
+          <RenterInfo
+            renterData={renterData}
+            handleRenterChange={handleRenterChange}
+          />
+        );
       case "可售":
-        return <SellerInfo handleChange={handleChange} />;
+        return (
+          <SellerInfo
+            sellerData={sellerData}
+            handleChangeSeller={handleChangeSeller}
+          />
+        );
       case "開發追蹤":
         return "";
       case "行銷追蹤":
@@ -73,6 +89,47 @@ export default function TenementInfo(props: any) {
     tenement_floor: "4",
     tenement_style: "店面",
   });
+
+  const [renterData, setRenterData] = useState({
+    rental_start_date: "2021-09-01",
+    rental_end_date: "2021-09-05",
+    renter_name: "John",
+    renter_telphone: "0987654321",
+    renter_job: "護理師",
+    guarantor_name: "John",
+    guarantor_telphone: "0987654321",
+    special_agreement: "無",
+    buyer_photo: [
+      {
+        url: "https://example.com/image5.jpg",
+      },
+      {
+        url: "https://example.com/image6.jpg",
+      },
+    ],
+  });
+
+  const [sellerData, setSellerData] = useState({
+    set_date: "2021-09-01",
+    delivery_date: "2021-09-05",
+    buyer_name: "John",
+    buyer_telphone: "0987654321",
+    buyer_job: "工程師",
+    buyer_photo: [
+      {
+        url: "https://example.com/image5.jpg",
+      },
+      {
+        url: "https://example.com/image6.jpg",
+      },
+    ],
+  });
+  const handleChangeSeller = (key: string, value: string) => {
+    setSellerData((prev) => ({ ...prev, [key]: value }));
+  };
+  const handleRenterChange = (key: string, value: string) => {
+    setRenterData((prev) => ({ ...prev, [key]: value }));
+  };
 
   const { isLoading, isError } = props;
   const [notices, setNotices] = useState([
@@ -576,7 +633,10 @@ export default function TenementInfo(props: any) {
 
         <SwitchTenementType
           tenement_type={tenement_type}
-          handleChange={handleChange}
+          sellerData={sellerData}
+          handleChangeSeller={handleChangeSeller}
+          renterData={renterData}
+          handleRenterChange={handleRenterChange}
         />
         <div className="flex flex-col p-5">
           <div className="inline-flex flex-row gap-5 mb-5 ">

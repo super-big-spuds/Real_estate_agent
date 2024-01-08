@@ -10,18 +10,34 @@ import { memo, useState } from "react";
 const SwitchTenementType = memo(
   (props: {
     tenement_type: string;
-    handleChange: (
-      key: string | number | symbol,
-      value: string | number
-    ) => void;
+    sellerData: any;
+    renterData: any;
+    handleChangeSeller: any;
+    handleRenterChange: any;
   }) => {
-    const { tenement_type, handleChange } = props;
+    const {
+      tenement_type,
+      sellerData,
+      handleChangeSeller,
+      renterData,
+      handleRenterChange,
+    } = props;
 
     switch (tenement_type) {
       case "可租":
-        return <RenterInfo handleChange={handleChange} />;
+        return (
+          <RenterInfo
+            renterData={renterData}
+            handleRenterChange={handleRenterChange}
+          />
+        );
       case "可售":
-        return <SellerInfo handleChange={handleChange} />;
+        return (
+          <SellerInfo
+            sellerData={sellerData}
+            handleChangeSeller={handleChangeSeller}
+          />
+        );
       case "開發追蹤":
         return "";
       case "行銷追蹤":
@@ -461,7 +477,10 @@ export default function TenementInfoEdit(props: any) {
 
         <SwitchTenementType
           tenement_type={tenement_type}
-          handleChange={handleChange}
+          sellerData={props.sellerData}
+          renterData={props.renterData}
+          handleChangeSeller={props.handleChangeSeller}
+          handleRenterChange={props.handleRenterChange}
         />
         <div className="flex flex-col p-5">
           <div className="inline-flex flex-row gap-5 mb-5 ">
