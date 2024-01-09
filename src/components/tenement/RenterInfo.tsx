@@ -105,9 +105,15 @@ export default function RenterInfo(props: RenterInfoProps) {
         </div>
         <div className="flex flex-col w-1/3 ml-5">
           <div className="grid grid-cols-5 gap-1 ">
-            <p className="col-span-5 ">特殊約定:</p>
+            <p className="col-span-5 ">備註:</p>
           </div>
-          <Input.TextArea rows={20} />
+          <textarea
+            className="w-full h-40 border border-gray-300"
+            value={renterData.rent_remark}
+            onChange={(e) =>
+              handleRenterChange("rent_remark", e.target.value)
+            }
+          />
         </div>
       </div>
     </div>

@@ -29,6 +29,7 @@ const TenemmentAdd = () => {
     tenement_hobby: "打球",
     unregistered_area: "10.00",
     product_type: "套房",
+    tenement_remark: "備註",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",

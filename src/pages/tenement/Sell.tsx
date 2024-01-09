@@ -29,6 +29,7 @@ const TenemmentAdd = () => {
     tenement_hobby: "打球",
     unregistered_area: "10.00",
     product_type: "店面",
+    tenement_remark: "備註",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",
@@ -50,6 +51,7 @@ const TenemmentAdd = () => {
     buyer_name: "John",
     buyer_telphone: "0987654321",
     buyer_job: "工程師",
+    sell_remark: "無",
     buyer_photo: [
       {
         url: "https://example.com/image5.jpg",

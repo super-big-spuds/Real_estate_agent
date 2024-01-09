@@ -1,4 +1,4 @@
-import { Button, Radio, RadioChangeEvent } from "antd";
+import { Button, Radio, RadioChangeEvent, Input } from "antd";
 import Notice from "../Notice";
 import { useNavigate } from "react-router-dom";
 import InputWithErrorMessage from "../InputWithErrorMessage";
@@ -369,11 +369,11 @@ export default function TenementInfoEdit(props: any) {
                 <Uploadfile />
               </div>
               <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
-                屋主資訊
+                {formData.tenement_type === "行銷追蹤" ?"買客資訊": "屋主資訊"}
               </p>
               {/* 屋主姓名 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">屋主姓名:</p>
+                <p className="col-span-1 pt-5 ">姓名:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_host_name}
                   onChange={(e) =>
@@ -421,7 +421,7 @@ export default function TenementInfoEdit(props: any) {
               </div>
               {/* 屋主匯款資訊 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">屋主匯款銀行:</p>
+                <p className="col-span-1 pt-5 ">匯款銀行:</p>
                 <InputWithErrorMessage
                   value={formData.remittance_bank}
                   onChange={(e) =>
@@ -479,6 +479,19 @@ export default function TenementInfoEdit(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              {/* 備註 */}
+              <div className="grid grid-cols-5 gap-1 text-right mt-3">
+                <p className="col-span-1 pt-5 ">備註:</p>
+                {/* text area */}
+                <Input.TextArea
+                  className="col-span-3"
+                  rows={4}
+                  value={formData.tenement_remark}
+                  onChange={(e) =>
+                    handleChange("tenement_remark", e.target.value)
+                  }
+                />
+                </div>
             </div>
           </div>
         )}

@@ -84,6 +84,7 @@ export default function TenementInfo(props: any) {
     tenement_area_min: "5",
     burget_rent_max: "20000",
     burget_rent_min: "10000",
+    tenement_remark: "每月繳水電",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",
@@ -213,6 +214,7 @@ export default function TenementInfo(props: any) {
       tenement_area_min: "5",
       burget_rent_max: "20000",
       burget_rent_min: "10000",
+      tenement_remark: "每月繳水電",
       tenement_photo: [
         {
           url: "https://example.com/image5.jpg",
@@ -589,11 +591,11 @@ export default function TenementInfo(props: any) {
                 <Uploadfile />
               </div>
               <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
-                屋主資訊
+                {tenement_type==="行銷追蹤"?"買客資訊":"屋主資訊"}
               </p>
               {/* 屋主姓名 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">屋主姓名:</p>
+                <p className="col-span-1 pt-5 ">姓名:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_host_name}
                   onChange={(e) =>
@@ -641,7 +643,7 @@ export default function TenementInfo(props: any) {
               </div>
               {/* 屋主匯款資訊 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">屋主匯款銀行:</p>
+                <p className="col-span-1 pt-5 ">匯款銀行:</p>
                 <InputWithErrorMessage
                   value={formData.remittance_bank}
                   onChange={(e) =>
@@ -699,6 +701,19 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              {/* 備註 */}
+              <div className="grid grid-cols-5 gap-1 text-right mt-5">
+                <p className="col-span-1 pt-5 ">備註:</p>
+                {/* text area */}
+                <Input.TextArea
+                  className="col-span-3"
+                  rows={4}
+                  value={formData.tenement_remark}
+                  onChange={(e) =>
+                    handleChange("tenement_remark", e.target.value)
+                  }
+                />
+                </div>
             </div>
           </div>
         )}

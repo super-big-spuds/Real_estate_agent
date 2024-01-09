@@ -1,6 +1,5 @@
 import TenementInfoEdit from "../../components/tenement/TenementInfoEdit";
 import React, { useState } from "react";
-import InputWithErrorMessage from "../../components/InputWithErrorMessage";
 import { Select, Input } from "antd";
 
 const TenemmentAdd = () => {
@@ -34,6 +33,7 @@ const TenemmentAdd = () => {
     tenement_area_min: "5",
     burget_rent_max: "20000",
     burget_rent_min: "10000",
+    tenement_remark: "備註",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",

@@ -83,6 +83,16 @@ export default function SellerInfo(props: SellerInfoProps) {
           </div>
           <Uploadfile />
         </div>
+        <div className="flex flex-col w-1/3 ml-5">
+          <div className="grid grid-cols-5 gap-1 ">
+            <p className="col-span-5 ">備註:</p>
+          </div>
+          <Input.TextArea
+            className="h-40"
+            value={sellerData.sell_remark}
+            onChange={(e) => handleChangeSeller("sell_remark", e.target.value)}
+          />
+        </div>
       </div>
     </div>
   );
