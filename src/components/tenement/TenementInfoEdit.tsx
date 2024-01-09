@@ -220,7 +220,7 @@ export default function TenementInfoEdit(props: any) {
               <div className="grid grid-cols-5 gap-1 ">
                 <p className="col-span-1 text-right">產品類別:</p>
                 {/* radio */}
-                <Radio.Group className="col-span-2">
+                <Radio.Group className="col-span-4">
                   <Radio value="套房">套房</Radio>
                   <Radio value="店面">店面</Radio>
                   <Radio value="辦公室">辦公室</Radio>

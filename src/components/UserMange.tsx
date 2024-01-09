@@ -33,9 +33,9 @@ export default function CollectionMange(props: any) {
             <div className="inline-flex flex-col ml-5">
               <p className="text-4xl whitespace-normal">使用者管理</p>
             </div>
-            <div className="flex flex-col flex-wrap w-1/3 h-full gap-10 p-10 overflow-visible ">
-              <div className="grid grid-cols-3 gap-1 text-right">
-                <p className="col-span-1 pt-5">使用者名稱:</p>
+            <div className="flex flex-col flex-wrap w-2/3 h-full gap-10 p-10 overflow-visible ">
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-2 pt-5">使用者名稱:</p>
                 <InputWithErrorMessage
                   value={formData.user_name}
                   onChange={(e) => handleChange("user_name", e.target.value)}
@@ -43,8 +43,8 @@ export default function CollectionMange(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
-              <div className="grid grid-cols-3 gap-1 text-right ">
-                <p className="col-span-1 pt-5">使用者信箱:</p>
+              <div className="grid grid-cols-5 gap-1 text-right ">
+                <p className="col-span-2 pt-5">使用者信箱:</p>
                 <InputWithErrorMessage
                   value={formData.user_email}
                   onChange={(e) => handleChange("user_email", e.target.value)}
@@ -52,8 +52,8 @@ export default function CollectionMange(props: any) {
                   errorMessage={"email格式錯誤"}
                 />
               </div>
-              <div className="grid grid-cols-3 gap-1 text-right ">
-                <p className="col-span-1 pt-5">使用者密碼:</p>
+              <div className="grid grid-cols-5 gap-1 text-right ">
+                <p className="col-span-2 pt-5 whitespace-nowrap">使用者密碼:</p>
 
                 <InputWithErrorMessage
                   value={formData.user_password}
@@ -64,21 +64,21 @@ export default function CollectionMange(props: any) {
                   errorMessage={"至少六個字"}
                 />
               </div>
-              <div className="grid grid-cols-3 gap-1 text-right">
-                <p className="col-span-1 ">是否啟用:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-2 ">是否啟用:</p>
                 <Select
                   defaultValue="是"
-                  style={{ width: 60 }}
+                  className="col-span-1"
                   options={[{ value: "是" }, { value: "否" }]}
                   onChange={(value) => handleChange("status", value)}
                   value={formData.status}
                 />
               </div>
-              <div className="grid grid-cols-3 gap-1 text-right">
-                <p className="col-span-1 ">管理員權限:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-2 ">管理員權限:</p>
                 <Select
                   defaultValue="是"
-                  style={{ width: 60 }}
+                  className="col-span-1"
                   options={[{ value: "是" }, { value: "否" }]}
                   onChange={(value) => handleChange("isadmin", value)}
                   value={formData.isadmin}
