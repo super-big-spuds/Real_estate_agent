@@ -22,6 +22,8 @@ export const TenementList = () => {
     switch (title) {
       case "tenement_no":
         return "地址";
+      case "product_type":
+        return "產品類型";
       case "tenement_type":
         return "物件類型";
       case "tenement_face":
