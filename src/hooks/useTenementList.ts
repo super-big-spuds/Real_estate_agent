@@ -71,7 +71,6 @@ const useTenementList = () => {
       dataIndex: "tenement_face",
       key: "tenement_face",
       width: "10%",
-      // 海景 中庭 三多路 自強路 市景風洞 海景風洞
       filters: [
         {
           text: "海景",
@@ -97,11 +96,15 @@ const useTenementList = () => {
           text: "海景風洞",
           value: "海景風洞",
         },
+        {
+          text:"其他",
+          value:"其他"
+        }
       ],
       onFilter: (value, record) => record.tenement_face.includes(value),
     },
     {
-      title: "狀態",
+      title: "物件狀態",
       dataIndex: "tenement_status",
       key: "tenement_status",
       width: "10%",
@@ -123,11 +126,15 @@ const useTenementList = () => {
           text: "過戶完成下架",
           value: "過戶完成下架",
         },
+        {
+          text:"開發中",
+          value:"開發中"
+        }
       ],
       onFilter: (value, record) => record.tenement_status.includes(value),
     },
     {
-      title: "類型",
+      title: "物件型態",
       dataIndex: "tenement_type",
       key: "tenement_type",
       width: "10%",
@@ -152,7 +159,7 @@ const useTenementList = () => {
       onFilter: (value, record) => record.tenement_type.includes(value),
     },
     {
-      title: "型式",
+      title: "產品類別",
       dataIndex: "tenement_style",
       key: "tenement_style",
       width: "10%",
@@ -177,18 +184,11 @@ const useTenementList = () => {
       onFilter: (value, record) => record.tenement_style.includes(value),
     },
     {
-      title: "管理費底價",
+      title: "管理費",
       dataIndex: "management_fee_bottom",
       key: "management_fee_bottom",
       width: "10%",
       sorter: (a, b) => a.management_fee_bottom - b.management_fee_bottom,
-    },
-    {
-      title: "管理樓層",
-      dataIndex: "management_floor_bottom",
-      key: "management_floor_bottom",
-      width: "10%",
-      sorter: (a, b) => a.management_floor_bottom - b.management_floor_bottom,
     },
   ];
 

@@ -1,12 +1,12 @@
 import { Form, Input, Button, Radio } from "antd";
 import { useEffect } from "react";
 
-const HouseInformationForm = (props: any) => {
-  const { handlePopout } = props;
+const FilterModule = (props: any) => {
+  const { handlePopout, handleSelect } = props;
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
+    handleSelect(values);
     handlePopout();
   };
 
@@ -38,8 +38,13 @@ const HouseInformationForm = (props: any) => {
         value: form.getFieldValue("floor-max"),
         errors: ["max 不可小於 min"],
       },
+      {
+        name:["rent-max"],
+        value: form.getFieldValue("rent-max"),
+        errors: ["max 不可小於 min"],
+      }
     ]);
-  }, [form.getFieldValue("budget-"), form.getFieldValue("floor-min")]);
+  }, [form.getFieldValue("budget-"), form.getFieldValue("floor-min"), form.getFieldValue("rent-min")]);
 
   return (
     <div
@@ -60,10 +65,18 @@ const HouseInformationForm = (props: any) => {
           </p>
         </div>
         <div className="px-16 ">
-          <Form.Item name="source" label="房號" className="w-48 ">
+          <Form.Item name="tenement_no" label="房號" className="w-48 ">
             <Input />
           </Form.Item>
-          <Form.Item name="caseType" label="案件型態">
+          <Form.Item name="product_type" label="產品類型">
+            <Radio.Group>
+              <Radio value="套房">套房</Radio>
+              <Radio value="辦公室">辦公室</Radio>
+              <Radio value="店面">店面</Radio>
+              <Radio value="其他">其他</Radio>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item name="tenement_type" label="物件型態">
             <Radio.Group>
               <Radio value="出租">出租</Radio>
               <Radio value="出售">出售</Radio>
@@ -71,7 +84,7 @@ const HouseInformationForm = (props: any) => {
               <Radio value="行銷追蹤">行銷追蹤</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item name="caseStatus" label="案件狀態">
+          <Form.Item name="tenement_status" label="物件狀態">
             <Radio.Group>
               <Radio value="過戶完成下架">過戶完成下架</Radio>
               <Radio value="已開發">已開發</Radio>
@@ -79,7 +92,7 @@ const HouseInformationForm = (props: any) => {
               <Radio value="已退租下架">已退租下架</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item name="orientation" label="面向">
+          <Form.Item name="tenement_face" label="面向">
             <Radio.Group>
               <Radio value="海景">海景</Radio>
               <Radio value="中庭">中庭</Radio>
@@ -90,19 +103,11 @@ const HouseInformationForm = (props: any) => {
               <Radio value="其他">其他</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item name="houseType" label="房型">
-            <Radio.Group>
-              <Radio value="套房">套房</Radio>
-              <Radio value="辦公室">辦公室</Radio>
-              <Radio value="店面">店面</Radio>
-              <Radio value="其他">其他</Radio>
-            </Radio.Group>
-          </Form.Item>
           <div className="inline-flex gap-6">
             <Form.Item
               name="budget-min"
-              label="資金"
-              rules={[{ message: "請輸入資金 min" }]}
+              label="售價"
+              rules={[{ message: "請輸入售價 min" }]}
             >
               <Input type="number" placeholder="mix" />
             </Form.Item>
@@ -110,13 +115,27 @@ const HouseInformationForm = (props: any) => {
             <Form.Item
               name="budget-max"
               rules={[
-                { message: "請輸入資金 max" },
+                { message: "請輸入售價 max" },
                 { validator: validateBudgetMax },
               ]}
             >
               <Input type="number" placeholder="max" />
             </Form.Item>
           </div>
+          <div className="inline-flex gap-6">
+            <Form.Item
+              name="rent-min"
+              label="租金"
+              rules={[{ message: "請輸入租金 min" }]}
+            >
+              <Input type="number" placeholder="mix" />
+            </Form.Item>
+            <p className="mt-1">~</p>
+            <Form.Item name="rent-max" rules={[{ message: "請輸入租金 max" }, { validator: validateBudgetMax }]}>
+              <Input type="number" placeholder="max" />
+            </Form.Item>
+          </div>
+
           <div className="flex gap-6">
             <Form.Item
               name="floor-min"
@@ -147,4 +166,4 @@ const HouseInformationForm = (props: any) => {
   );
 };
 
-export default HouseInformationForm;
+export default FilterModule;

@@ -28,6 +28,7 @@ const TenemmentAdd = () => {
     tenement_birthday: "1950-09-01",
     tenement_hobby: "打球",
     unregistered_area: "10.00",
+    product_type: "店面",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",

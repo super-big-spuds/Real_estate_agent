@@ -229,7 +229,8 @@ export default function TenementInfoEdit(props: any) {
               </div>
 
               {/* 案件狀態 */}
-              <div className="grid grid-cols-5 gap-1 ">
+              {
+                formData.tenement_type==="開發追蹤"?" ":<div className="grid grid-cols-5 gap-1 ">
                 <p className="text-right whitespace-nowrap">物件狀態:</p>
                 <Radio.Group className="col-span-4">
                   <Radio value="未成交">未成交</Radio>
@@ -238,6 +239,7 @@ export default function TenementInfoEdit(props: any) {
                   <Radio value="過戶完成下架">過戶完成下架</Radio>
                 </Radio.Group>
               </div>
+              }
               {/* 案件型態 */}
               <div className="grid grid-cols-5 gap-1 ">
                 <p className="text-right whitespace-nowrap">物件型態:</p>

@@ -56,7 +56,7 @@ export default function TenementInfo(props: any) {
   const [formData, setFormData] = useState({
     tenement_no: "1234",
     tenement_type: "可租",
-    tenement_face: "Maple Street",
+    tenement_face: "海景",
     tenement_host_name: "John",
     tenement_host_telphone: "0987654321",
     tenement_host_phone: "0987654321",
@@ -67,17 +67,19 @@ export default function TenementInfo(props: any) {
     main_building: "2",
     affiliated_building: "1",
     public_buliding: "1",
-    management_fee: "280",
+    management_fee: "0",
     selling_price: "2000000",
     rent: "20000",
     deposit: "30000",
-    bugert_max: "2000000",
-    bugert_min: "1000000",
+    bugert: "2000000",
     tenement_status: "1",
     tenement_address: "台北市大安區",
     tenement_birthday: "1950-09-01",
     tenement_hobby: "打球",
     unregistered_area: "10.00",
+    market_state: "租房",
+    product_type: "套房",
+    plus: "1",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",
@@ -99,6 +101,7 @@ export default function TenementInfo(props: any) {
     guarantor_name: "John",
     guarantor_telphone: "0987654321",
     special_agreement: "無",
+    plus: "1",
     buyer_photo: [
       {
         url: "https://example.com/image5.jpg",
@@ -189,17 +192,19 @@ export default function TenementInfo(props: any) {
       main_building: "2",
       affiliated_building: "1",
       public_buliding: "1",
-      management_fee: "280",
+      management_fee: "0",
       selling_price: "2000000",
       rent: "20000",
       deposit: "30000",
-      bugert_max: "2000000",
-      bugert_min: "1000000",
+      bugert: "2000000",
       tenement_status: "1",
       tenement_address: "台北市大安區",
       tenement_birthday: "1950-09-01",
       tenement_hobby: "打球",
       unregistered_area: "10.00",
+      market_state: "租房",
+      product_type: "套房",
+      plus: "1",
       tenement_photo: [
         {
           url: "https://example.com/image5.jpg",
@@ -272,7 +277,7 @@ export default function TenementInfo(props: any) {
           <div>
             {/* 售價 */}
             <div className="grid grid-cols-5 gap-1 ">
-              <p className="col-span-1 pt-5 text-right ">售價:</p>
+              <p className="col-span-1 pt-5 text-right ">售價(萬):</p>
               <InputWithErrorMessage
                 value={formData.selling_price}
                 onChange={(e) => handleChange("selling_price", e.target.value)}
@@ -287,7 +292,7 @@ export default function TenementInfo(props: any) {
           <div className="flex flex-col ">
             {/* 售價 */}
             <div className="grid grid-cols-5 gap-1 ">
-              <p className="col-span-1 pt-5 text-right">售價:</p>
+              <p className="col-span-1 pt-5 text-right">售價(萬):</p>
               <InputWithErrorMessage
                 value={formData.selling_price}
                 onChange={(e) => handleChange("selling_price", e.target.value)}
@@ -323,28 +328,19 @@ export default function TenementInfo(props: any) {
             {/* 要租要買 select  */}
             <div className="grid grid-cols-6 gap-1 mb-5 ml-5 text-right">
               <p className="col-span-1 pt-1 ">要租要買:</p>
-              <Select defaultValue="租房" className="w-20 col-span-1 ">
+              <Select defaultValue="租房" className="w-20 col-span-1 " value={formData.market_state} onChange={(value) => handleChange("market_state", value)}>
                 <Select.Option value="租房">租房</Select.Option>
                 <Select.Option value="買房">買房</Select.Option>
               </Select>
             </div>
             {/* 預算 最大值 最小值 */}
             <div className="grid grid-cols-5 gap-1 text-right">
-              <p className="col-span-1 pt-5 ">預算:</p>
+              <p className="col-span-1 pt-5 ">{ formData.market_state === "租房" ? "租金" : "售價(萬)"}:</p>
               <div className="inline-flex ">
                 <InputWithErrorMessage
-                  value={formData.bugert_min}
-                  onChange={(e) => handleChange("bugert_min", e.target.value)}
-                  isError={formData.bugert_min.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-                <span className="pt-5 ">~</span>
-              </div>
-              <div>
-                <InputWithErrorMessage
-                  value={formData.bugert_max}
-                  onChange={(e) => handleChange("bugert_max", e.target.value)}
-                  isError={formData.bugert_max.length <= 2}
+                  value={formData.bugert}
+                  onChange={(e) => handleChange("bugert", e.target.value)}
+                  isError={formData.bugert.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>
@@ -438,7 +434,7 @@ export default function TenementInfo(props: any) {
               </div>
               {/* 總坪數 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">總坪數:</p>
+                <p className="col-span-1 pt-5 ">權狀坪數:</p>
                 <InputWithErrorMessage
                   value={formData.Total_rating}
                   onChange={(e) => handleChange("Total_rating", e.target.value)}
@@ -448,7 +444,7 @@ export default function TenementInfo(props: any) {
               </div>
               {/* 主建物坪數 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">主建物坪數:</p>
+                <p className="col-span-1 pt-5 ">主建物:</p>
                 <InputWithErrorMessage
                   value={formData.main_building}
                   onChange={(e) =>
@@ -460,7 +456,7 @@ export default function TenementInfo(props: any) {
               </div>
               {/* 附屬建物坪數 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">附屬建物坪數:</p>
+                <p className="col-span-1 pt-5 ">附屬建物:</p>
                 <InputWithErrorMessage
                   value={formData.affiliated_building}
                   onChange={(e) =>
@@ -472,7 +468,7 @@ export default function TenementInfo(props: any) {
               </div>
               {/* 公共設施坪數 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">公共設施坪數:</p>
+                <p className="col-span-1 pt-5 ">公設面積:</p>
                 <InputWithErrorMessage
                   value={formData.public_buliding}
                   onChange={(e) =>
@@ -482,6 +478,32 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">未登記面積:</p>
+                <InputWithErrorMessage
+                  value={formData.unregistered_area}
+                  onChange={(e) =>
+                    handleChange("unregistered_area", e.target.value)
+                  }
+                  isError={formData.unregistered_area.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+              </div>
+              {/* 輸入倍率 成 total rating去改變管理費*/}
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">管理費倍率:</p>
+                <InputWithErrorMessage
+                  value={formData.plus}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange("management_fee", (parseFloat(e.target.value)*parseFloat(formData.Total_rating)).toString());
+                    handleChange("plus", e.target.value);
+                  }}
+                  isError={formData.management_fee.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+              </div>
+             
+              
               {/* 管理費 */}
               <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">管理費:</p>

@@ -28,6 +28,7 @@ const TenemmentAdd = () => {
     tenement_birthday: "1950-09-01",
     tenement_hobby: "打球",
     unregistered_area: "10.00",
+    product_type: "套房",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",
@@ -48,7 +49,7 @@ const TenemmentAdd = () => {
       <div className="flex flex-col ">
         {/* 售價 */}
         <div className="grid grid-cols-5 gap-1 ">
-          <p className="col-span-1 pt-5 text-right">售價:</p>
+          <p className="col-span-1 pt-5 text-right">售價(萬):</p>
           <InputWithErrorMessage
             value={formData.selling_price}
             onChange={(e) => handleChange("selling_price", e.target.value)}
