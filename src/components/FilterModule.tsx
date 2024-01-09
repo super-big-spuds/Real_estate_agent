@@ -65,7 +65,7 @@ const FilterModule = (props: any) => {
           </p>
         </div>
         <div className="px-16 ">
-          <Form.Item name="tenement_no" label="房號" className="w-48 ">
+          <Form.Item name="tenement_no" label="地址" className="w-48 ">
             <Input />
           </Form.Item>
           <Form.Item name="product_type" label="產品類型">

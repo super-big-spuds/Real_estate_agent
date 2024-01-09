@@ -19,6 +19,7 @@ export type FormData = {
   remittance_account: string;
   cus_remittance_bank: string;
   cus_remittance_account: string;
+  collection_complete: string;
   notices?: NoticeData[];
 };
 

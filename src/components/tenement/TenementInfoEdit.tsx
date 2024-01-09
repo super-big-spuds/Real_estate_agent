@@ -208,7 +208,7 @@ export default function TenementInfoEdit(props: any) {
           <div className="flex flex-row ">
             <div className="flex flex-col flex-wrap w-1/2 h-full gap-3 overflow-visible pl-7 ">
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 whitespace-nowrap ">房號:</p>
+                <p className="col-span-1 pt-5 whitespace-nowrap ">地址:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_no}
                   onChange={(e) => handleChange("tenement_no", e.target.value)}
@@ -230,7 +230,7 @@ export default function TenementInfoEdit(props: any) {
 
               {/* 案件狀態 */}
               {
-                formData.tenement_type==="開發追蹤"?" ":<div className="grid grid-cols-5 gap-1 ">
+                formData.tenement_type==="開發追蹤"||formData.tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 ">
                 <p className="text-right whitespace-nowrap">物件狀態:</p>
                 <Radio.Group className="col-span-4">
                   <Radio value="未成交">未成交</Radio>
@@ -271,7 +271,7 @@ export default function TenementInfoEdit(props: any) {
                 </Radio.Group>
               </div>
               {/* 總坪數 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+             {formData.tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">權狀坪數:</p>
                 <InputWithErrorMessage
                   value={formData.Total_rating}
@@ -280,8 +280,9 @@ export default function TenementInfoEdit(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              }
               {/* 主建物坪數 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+              {formData.tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 whitespace-nowrap ">主建物:</p>
                 <InputWithErrorMessage
                   value={formData.main_building}
@@ -292,8 +293,9 @@ export default function TenementInfoEdit(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              }
               {/* 附屬建物坪數 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+             {formData.tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">附屬建物:</p>
                 <InputWithErrorMessage
                   value={formData.affiliated_building}
@@ -304,8 +306,9 @@ export default function TenementInfoEdit(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              }
               {/* 公共設施坪數 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+             {formData.tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">公設面積:</p>
                 <InputWithErrorMessage
                   value={formData.public_buliding}
@@ -316,8 +319,9 @@ export default function TenementInfoEdit(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              }
               {/* 未登記面積 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+             {formData.tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">未登記面積:</p>
                 <InputWithErrorMessage
                   value={formData.unregistered_area}
@@ -328,8 +332,9 @@ export default function TenementInfoEdit(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              }
               {/* 管理費 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+             {formData.tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">管理費:</p>
                 <InputWithErrorMessage
                   value={formData.management_fee}
@@ -340,10 +345,11 @@ export default function TenementInfoEdit(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              }
               {children}
               {/* 樓層 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">樓層:</p>
+                <p className="col-span-1 pt-5 ">總樓層:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_floor}
                   onChange={(e) =>

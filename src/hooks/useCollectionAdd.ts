@@ -20,6 +20,7 @@ const useCollectionAdd = () => {
     cus_remittance_account: "",
     cus_remittance_bank: "",
     collection_date: nowdatestring,
+    collection_complete: "是",
   });
 
   const handleChange = (key: keyof FormData, value: string) => {
@@ -54,7 +55,7 @@ const useCollectionAdd = () => {
 
   const handleSave = async () => {
     const schemaform = z.object({
-      tenement_no: z.string().min(2, "房號至少兩個字"),
+      tenement_no: z.string().min(2, "地址至少兩個字"),
       collection_name: z.string(),
       collection_id: z.string(),
       collection_type: z.string(),
@@ -66,6 +67,7 @@ const useCollectionAdd = () => {
       cus_remittance_account: z.string(),
       cus_remittance_bank: z.string(),
       collection_date: z.string(),
+      collection_complete: z.string(),
     });
 
     const parseResult = schemaform.safeParse(formData);
@@ -98,6 +100,7 @@ const useCollectionAdd = () => {
       cus_remittance_account: "",
       cus_remittance_bank: "",
       collection_date: nowdatestring,
+      collection_complete: "是",
     });
     setNotices([]);
   };

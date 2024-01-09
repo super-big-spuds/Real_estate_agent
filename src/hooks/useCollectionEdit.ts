@@ -30,6 +30,7 @@ const useCollectionEdit = () => {
     remittance_account: "",
     cus_remittance_account: "",
     cus_remittance_bank: "",
+    collection_complete: "",
   });
   const handleChange = (key: keyof FormData, value: string) => {
     setFormData((prevFormData) => ({
@@ -71,7 +72,7 @@ const useCollectionEdit = () => {
     if (!id) return;
 
     const schemaform = z.object({
-      tenement_no: z.string().min(2, "房號至少兩個字"),
+      tenement_no: z.string().min(2, "地址至少兩個字"),
       collection_name: z.string(),
       collection_type: z.string(),
       price: z.string().nonempty("金額不得為空"),
@@ -82,6 +83,7 @@ const useCollectionEdit = () => {
       remittance_account: z.string(),
       cus_remittance_account: z.string(),
       cus_remittance_bank: z.string(),
+      collection_complete: z.string(),
     });
     const parseResult = schemaform.safeParse(formData);
     if (!parseResult.success) {
@@ -117,6 +119,8 @@ const useCollectionEdit = () => {
       remittance_account: "",
       cus_remittance_account: "",
       cus_remittance_bank: "",
+      collection_complete: "",
+
     });
     setNotices([]);
   };
@@ -160,6 +164,7 @@ const useCollectionEdit = () => {
       collection_date: dataEdit.collection_date,
       cus_remittance_account: dataEdit.cus_remittance_account,
       cus_remittance_bank: dataEdit.cus_remittance_bank,
+      collection_complete: dataEdit.collection_complete,
     });
     setNotices(dataEdit.notices as NoticeData[]);
   }, [dataEdit]);

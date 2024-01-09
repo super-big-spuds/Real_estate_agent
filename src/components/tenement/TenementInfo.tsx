@@ -1,4 +1,4 @@
-import { Button, Radio, RadioChangeEvent, Select } from "antd";
+import { Button, Radio, RadioChangeEvent, Select, Input } from "antd";
 import Notice from "../Notice";
 import { useNavigate } from "react-router-dom";
 import InputWithErrorMessage from "../InputWithErrorMessage";
@@ -80,6 +80,10 @@ export default function TenementInfo(props: any) {
     market_state: "租房",
     product_type: "套房",
     plus: "1",
+    tenement_area_max: "10",
+    tenement_area_min: "5",
+    burget_rent_max: "20000",
+    burget_rent_min: "10000",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",
@@ -205,6 +209,10 @@ export default function TenementInfo(props: any) {
       market_state: "租房",
       product_type: "套房",
       plus: "1",
+      tenement_area_max: "10",
+      tenement_area_min: "5",
+      burget_rent_max: "20000",
+      burget_rent_min: "10000",
       tenement_photo: [
         {
           url: "https://example.com/image5.jpg",
@@ -325,27 +333,56 @@ export default function TenementInfo(props: any) {
       case "行銷追蹤":
         return (
           <div>
-            {/* 要租要買 select  */}
-            <div className="grid grid-cols-6 gap-1 mb-5 ml-5 text-right">
-              <p className="col-span-1 pt-1 ">要租要買:</p>
-              <Select defaultValue="租房" className="w-20 col-span-1 " value={formData.market_state} onChange={(value) => handleChange("market_state", value)}>
-                <Select.Option value="租房">租房</Select.Option>
-                <Select.Option value="買房">買房</Select.Option>
-              </Select>
-            </div>
-            {/* 預算 最大值 最小值 */}
-            <div className="grid grid-cols-5 gap-1 text-right">
-              <p className="col-span-1 pt-5 ">{ formData.market_state === "租房" ? "租金" : "售價(萬)"}:</p>
-              <div className="inline-flex ">
-                <InputWithErrorMessage
-                  value={formData.bugert}
-                  onChange={(e) => handleChange("bugert", e.target.value)}
-                  isError={formData.bugert.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
-            </div>
+       
+
+        {/* 要租要買 select  */}
+        {/* 預期坪數區間 */}
+        <div className="grid grid-cols-5 gap-1 mb-5 ">
+          <p className="col-span-1 pt-5 text-right">預期坪數:</p>
+          <div className=" inline-grid grid-flow-col items-center">
+
+          <Input
+            value={formData.tenement_area_min}
+            onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange("tenement_area_min", e.target.value)}
+            className="col-span-1 h-8 mt-3"
+            placeholder="最小值"
+          />
+          <p className=" pt-3 pl-1 ">~</p>
           </div>
+          <Input
+            value={formData.tenement_area_max}
+            onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange("tenement_area_max", e.target.value)}
+            className="col-span-1 mt-3"
+            placeholder="最大值"
+          />
+        </div>
+        <div className="grid grid-cols-10 gap-1  text-right">
+          <p className="col-span-2 pt-1 whitespace-nowrap ">要租要買:</p>
+          <Select defaultValue="租房" className="w-20 col-span-1 " value={formData.market_state} onChange={(value) => handleChange("market_state", value)}>
+            <Select.Option value="租房">租房</Select.Option>
+            <Select.Option value="買房">買房</Select.Option>
+          </Select>
+        </div>
+        {/* 預算 最大值 最小值 */}
+        <div className="grid grid-cols-5 gap-1 text-right">
+          <p className="col-span-1 pt-5 "> {formData.market_state === "租房" ? "租金預算" : "售價預算(萬)"}:</p>
+          <div className=" inline-grid grid-flow-col items-center">
+          <Input
+            value={formData.burget_rent_min}
+            onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange("burget_rent_min", e.target.value)}
+            className="col-span-1 h-8 mt-3"
+            placeholder="最小值"
+          />
+          <p className="  pt-3 pl-1">~</p>
+          </div>
+          <Input
+            value={formData.burget_rent_max}
+            onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange("burget_rent_max", e.target.value)}
+            className="col-span-1 mt-3"
+            placeholder="最大值"
+          />
+        </div>
+      </div>
         );
       default:
         return "";
@@ -372,7 +409,7 @@ export default function TenementInfo(props: any) {
           <div className="flex flex-row ">
             <div className="flex flex-col flex-wrap w-1/2 h-full gap-3 overflow-visible pl-7 ">
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 whitespace-nowrap ">房號:</p>
+                <p className="col-span-1 pt-5 whitespace-nowrap ">地址:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_no}
                   onChange={(e) => handleChange("tenement_no", e.target.value)}
@@ -393,7 +430,7 @@ export default function TenementInfo(props: any) {
               </div>
 
               {/* 案件狀態 */}
-              <div className="grid grid-cols-5 gap-1 ">
+               { tenement_type==="開發追蹤"||tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 ">
                 <p className="text-right whitespace-nowrap">物件狀態:</p>
                 <Radio.Group className="col-span-4">
                   <Radio value="未成交">未成交</Radio>
@@ -401,7 +438,7 @@ export default function TenementInfo(props: any) {
                   <Radio value="已成交下架">已成交下架</Radio>
                   <Radio value="過戶完成下架">過戶完成下架</Radio>
                 </Radio.Group>
-              </div>
+              </div>}
               {/* 案件型態 */}
               <div className="grid grid-cols-5 gap-1 ">
                 <p className="text-right whitespace-nowrap">物件型態:</p>
@@ -433,7 +470,8 @@ export default function TenementInfo(props: any) {
                 </Radio.Group>
               </div>
               {/* 總坪數 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+              {
+                tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">權狀坪數:</p>
                 <InputWithErrorMessage
                   value={formData.Total_rating}
@@ -442,8 +480,10 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+}
               {/* 主建物坪數 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+              {
+                tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">主建物:</p>
                 <InputWithErrorMessage
                   value={formData.main_building}
@@ -454,8 +494,10 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              }
               {/* 附屬建物坪數 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+              {
+                tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">附屬建物:</p>
                 <InputWithErrorMessage
                   value={formData.affiliated_building}
@@ -466,8 +508,10 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              }
               {/* 公共設施坪數 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+              {
+                tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">公設面積:</p>
                 <InputWithErrorMessage
                   value={formData.public_buliding}
@@ -478,7 +522,9 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
-              <div className="grid grid-cols-5 gap-1 text-right">
+              }
+               {
+                tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">未登記面積:</p>
                 <InputWithErrorMessage
                   value={formData.unregistered_area}
@@ -489,8 +535,10 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+               }
               {/* 輸入倍率 成 total rating去改變管理費*/}
-              <div className="grid grid-cols-5 gap-1 text-right">
+              {
+                tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">管理費倍率:</p>
                 <InputWithErrorMessage
                   value={formData.plus}
@@ -502,10 +550,11 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
-             
+              }
               
               {/* 管理費 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+              {
+                tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">管理費:</p>
                 <InputWithErrorMessage
                   value={formData.management_fee}
@@ -516,10 +565,11 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              }
               {swtitchExtraInfo(tenement_type)}
               {/* 樓層 */}
               <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">樓層:</p>
+                <p className="col-span-1 pt-5 ">總樓層:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_floor}
                   onChange={(e) =>
@@ -529,7 +579,7 @@ export default function TenementInfo(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
-            </div>
+            </div> 
             <div className="flex flex-col w-1/2 h-full ">
               {/* 房屋照片 */}
               <div className="inline-flex flex-col mb-10 ">

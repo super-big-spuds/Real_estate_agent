@@ -47,13 +47,13 @@ export default function CollectionMange(props: any) {
         ) : (
           <div>
             <div className="inline-flex flex-col mb-3 ml-5">
-              <p className="text-4xl font-bold whitespace-normal">代收付管理</p>
+              <p className="text-4xl font-bold whitespace-normal">{formData.collection_type }管理</p>
             </div>
             <p className="ml-5 border-b-2 border-gray-300 "></p>
             <div className="flex flex-row justify-between ">
               <div className="flex flex-col flex-wrap w-2/3 h-full gap-5 pl-10 overflow-visible">
                 <div className="grid grid-cols-5 gap-1 text-right">
-                  <p className="col-span-1 pt-5 ">房號:</p>
+                  <p className="col-span-1 pt-5 ">地址:</p>
                   <InputWithErrorMessage
                     value={formData.tenement_no}
                     onChange={(e) =>
@@ -61,6 +61,19 @@ export default function CollectionMange(props: any) {
                     }
                     isError={formData.tenement_no.length <= 2}
                     errorMessage={"至少兩個字"}
+                  />
+                </div>
+                {/* 是否完成 */}
+                <div className="grid grid-cols-5 gap-1 ">
+                  <p className="col-span-1 text-right ">是否完成:</p>
+                  <Select
+                    defaultValue="否"
+                    style={{ width: 120 }}
+                    options={[{ value: "是" }, { value: "否" }]}
+                    onChange={(value) =>
+                      handleChange("collection_complete", value)
+                    }
+                    value={formData.collection_complete}
                   />
                 </div>
                 <div className="grid grid-cols-5 gap-1 text-right">
@@ -73,6 +86,7 @@ export default function CollectionMange(props: any) {
                     defaultValue={collection_date}
                     className="w-48 col-span-3"
                   />
+      
                 </div>
 
                 <div className="grid grid-cols-5 gap-1 ">
@@ -123,7 +137,7 @@ export default function CollectionMange(props: any) {
                 {formData.payment === "匯款" && (
                   <>
                     <div className="grid grid-cols-5 gap-1 text-right">
-                      <p className="col-span-1 pt-5 ">匯款銀行:</p>
+                      <p className="col-span-1 pt-5 ">大眾匯款銀行:</p>
                       <InputWithErrorMessage
                         value={formData.remittance_bank}
                         onChange={(e) =>
@@ -134,7 +148,7 @@ export default function CollectionMange(props: any) {
                       />
                     </div>
                     <div className="grid grid-cols-5 gap-1 text-right">
-                      <p className="col-span-1 pt-5 ">匯款帳號:</p>
+                      <p className="col-span-1 pt-5 ">大眾匯款帳號:</p>
                       <InputWithErrorMessage
                         value={formData.remittance_account}
                         onChange={(e) =>
@@ -145,7 +159,7 @@ export default function CollectionMange(props: any) {
                       />
                     </div>
                     <div className="grid grid-cols-5 gap-1 text-right">
-                      <p className="col-span-1 pt-5 ">客戶匯款銀行:</p>
+                      <p className="col-span-1 pt-5 ">{ formData.collection_type === "代收" ? "客戶匯款銀行:" : "機構匯款銀行:"}</p>
                       <InputWithErrorMessage
                         value={formData.cus_remittance_bank}
                         onChange={(e) =>
@@ -156,7 +170,7 @@ export default function CollectionMange(props: any) {
                       />
                     </div>
                     <div className="grid grid-cols-5 gap-1 text-right">
-                      <p className="col-span-1 pt-5">客戶匯款帳號:</p>
+                      <p className="col-span-1 pt-5">{ formData.collection_type === "代收" ? "客戶匯款帳號:" : "機構匯款帳號:"}</p>
                       <InputWithErrorMessage
                         value={formData.cus_remittance_account}
                         onChange={(e) =>

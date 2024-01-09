@@ -21,7 +21,7 @@ export const TenementList = () => {
    const switchTitletoChinese = (title:string) => {
     switch (title) {
       case "tenement_no":
-        return "房號";
+        return "地址";
       case "tenement_type":
         return "物件類型";
       case "tenement_face":
