@@ -333,6 +333,21 @@ export default function TenementInfoEdit(props: any) {
                 />
               </div>
               }
+                 {/* 輸入倍率 成 total rating去改變管理費*/}
+                 {
+                tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-1 pt-5 ">管理費倍率:</p>
+                <InputWithErrorMessage
+                  value={formData.plus}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange("management_fee", (parseFloat(e.target.value)*parseFloat(formData.Total_rating)).toString());
+                    handleChange("plus", e.target.value);
+                  }}
+                  isError={formData.management_fee.length <= 2}
+                  errorMessage={"至少兩個字"}
+                />
+              </div>
+              }
               {/* 管理費 */}
              {formData.tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">管理費:</p>

@@ -30,6 +30,7 @@ const TenemmentAdd = () => {
     unregistered_area: "10.00",
     product_type: "店面",
     tenement_remark: "備註",
+    plus: "1",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",

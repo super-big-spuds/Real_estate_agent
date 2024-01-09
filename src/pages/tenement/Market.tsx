@@ -34,6 +34,7 @@ const TenemmentAdd = () => {
     burget_rent_max: "20000",
     burget_rent_min: "10000",
     tenement_remark: "備註",
+    plus: "1",
     tenement_photo: [
       {
         url: "https://example.com/image5.jpg",
