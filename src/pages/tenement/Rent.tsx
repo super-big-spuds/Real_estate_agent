@@ -5,7 +5,7 @@ import InputWithErrorMessage from "../../components/InputWithErrorMessage";
 const TenemmentAdd = () => {
   const [formData, setFormData] = useState({
     tenement_no: "1234",
-    tenement_type: "可租",
+    tenement_type: "出租",
     tenement_face: "Maple Street",
     tenement_host_name: "John",
     tenement_host_telphone: "0987654321",

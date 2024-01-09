@@ -24,14 +24,14 @@ const SwitchTenementType = memo(
     } = props;
 
     switch (tenement_type) {
-      case "可租":
+      case "出租":
         return (
           <RenterInfo
             renterData={renterData}
             handleRenterChange={handleRenterChange}
           />
         );
-      case "可售":
+      case "出售":
         return (
           <SellerInfo
             sellerData={sellerData}
@@ -55,7 +55,7 @@ export default function TenementInfo(props: any) {
   };
   const [formData, setFormData] = useState({
     tenement_no: "1234",
-    tenement_type: "可租",
+    tenement_type: "出租",
     tenement_face: "海景",
     tenement_host_name: "John",
     tenement_host_telphone: "0987654321",
@@ -184,7 +184,7 @@ export default function TenementInfo(props: any) {
   const handleReset = () => {
     setFormData({
       tenement_no: "1234",
-      tenement_type: "可租",
+      tenement_type: "出租",
       tenement_face: "Maple Street",
       tenement_host_name: "John",
       tenement_host_telphone: "0987654321",
@@ -242,7 +242,7 @@ export default function TenementInfo(props: any) {
     ]);
   };
 
-  const [tenement_type, setTenement_type] = useState("可租");
+  const [tenement_type, setTenement_type] = useState("出租");
 
   const handletypeChange = (e: RadioChangeEvent) => {
     setTenement_type(e.target.value);
@@ -254,7 +254,7 @@ export default function TenementInfo(props: any) {
 
   const swtitchExtraInfo = (tenement_type: string) => {
     switch (tenement_type) {
-      case "可租":
+      case "出租":
         return (
           <div className="flex flex-col gap-2">
             {/* 租金 */}
@@ -280,7 +280,7 @@ export default function TenementInfo(props: any) {
           </div>
         );
 
-      case "可售":
+      case "出售":
         return (
           <div>
             {/* 售價 */}
@@ -447,8 +447,8 @@ export default function TenementInfo(props: any) {
                   value={tenement_type}
                   className="col-span-4 "
                 >
-                  <Radio value="可租">可租</Radio>
-                  <Radio value="可售">可售</Radio>
+                  <Radio value="出租">出租</Radio>
+                  <Radio value="出售">出售</Radio>
                   <Radio value="開發追蹤">開發追蹤</Radio>
                   <Radio value="行銷追蹤">行銷追蹤</Radio>
                 </Radio.Group>

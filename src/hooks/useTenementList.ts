@@ -140,12 +140,12 @@ const useTenementList = () => {
       width: "10%",
       filters: [
         {
-          text: "可租",
-          value: "可租",
+          text: "出租",
+          value: "出租",
         },
         {
-          text: "可售",
-          value: "可售",
+          text: "出售",
+          value: "出售",
         },
         {
           text: "開發追蹤",
@@ -214,9 +214,9 @@ const useTenementList = () => {
   const navigate = useNavigate();
   const switchType = (type: string) => {
     switch (type) {
-      case "可租":
+      case "出租":
         return "rent";
-      case "可售":
+      case "出售":
         return "sell";
       case "開發追蹤":
         return "develop";
