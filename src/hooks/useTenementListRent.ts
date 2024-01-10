@@ -1,47 +1,67 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import getColumnSearchProps from "../components/getColumnSearchProps";
-import { useGetTenementList } from "./useAPI";
+import { useGetTenementListRent } from "./useAPI";
 import type { TenementList } from "../type";
 
 const useTenementListRent = () => {
   const [data, setData] = useState<TenementList[]>([
     {
       tenement_no: 54321,
-      tenement_face: "a",
-      tenement_status: "a",
-      tenement_type: "a",
-      tenement_style: "a",
+      tenement_face: "海景",
+      tenement_status: "未成交",
+      tenement_type: "出售",
+      tenement_style: "辦公室",
       management_fee_bottom: 100,
       management_floor_bottom: 7,
+      rent: 100,
+      Total_rating: 100,
+      inside_rating: 100,
+      public_buliding: 100,
+      tenement_floor: 100,
     },
     {
       tenement_no: 54322,
-      tenement_face: "b",
-      tenement_status: "b",
-      tenement_type: "b",
-      tenement_style: "b",
+      tenement_face: "中庭",
+      tenement_status: "已成交",
+      tenement_type: "出租",
+      tenement_style: "店面",
       management_fee_bottom: 120,
       management_floor_bottom: 11,
+      rent: 120,
+      Total_rating: 120,
+      inside_rating: 120,
+      public_buliding: 120,
+      tenement_floor: 120,
     },
     {
       tenement_no: 54323,
-      tenement_face: "c",
-      tenement_status: "c",
-      tenement_type: "c",
-      tenement_style: "c",
+      tenement_face: "三多路",
+      tenement_status: "已退租下架",
+      tenement_type: "開發追蹤",
+      tenement_style: "套房",
       management_fee_bottom: 150,
       management_floor_bottom: 3,
+      rent: 150,
+      Total_rating: 150,
+      inside_rating: 150,
+      public_buliding: 150,
+      tenement_floor: 150,
     },
     {
       tenement_no: 54323,
-      tenement_face: "d",
-      tenement_status: "d",
-      tenement_type: "d",
-      tenement_style: "d",
+      tenement_face: "三多路",
+      tenement_status: "過戶完成下架",
+      tenement_type: "行銷追蹤",
+      tenement_style: "套房",
       management_fee_bottom: 150,
       management_floor_bottom: 3,
-    },
+      rent: 150,
+      Total_rating: 150,
+      inside_rating: 150,
+      public_buliding: 150,
+      tenement_floor: 150,
+    }
   ]);
   type ColumnsType = {
     title: string;
@@ -130,49 +150,42 @@ const useTenementListRent = () => {
     },
     {
       title: "租金",
-      dataIndex: "management_floor_bottom",
-      key: "management_floor_bottom",
+      dataIndex: "rent",
+      key: "rent",
       width: "10%",
-      sorter: (a, b) => a.management_floor_bottom - b.management_floor_bottom,
+      sorter: (a, b) => (a.rent || 0) - (b.rent || 0),
     },
     {
       title: "權狀坪數",
-      dataIndex: "management_floor_bottom",
-      key: "management_floor_bottom",
+      dataIndex: "Total_rating",
+      key: "Total_rating",
       width: "10%",
-      sorter: (a, b) => a.management_floor_bottom - b.management_floor_bottom,
+      sorter: (a, b) => (a.Total_rating || 0) - (b.Total_rating || 0),
     },
     {
       title: "室內面積",
-      dataIndex: "management_floor_bottom",
-      key: "management_floor_bottom",
+      dataIndex: "inside_rating",
+      key: "inside_rating",
       width: "10%",
-      sorter: (a, b) => a.management_floor_bottom - b.management_floor_bottom,
+      sorter: (a, b) => (a.inside_rating || 0) - (b.inside_rating || 0),
     },
     {
       title: "公設面積",
-      dataIndex: "management_floor_bottom",
-      key: "management_floor_bottom",
+      dataIndex: "public_buliding",
+      key: "public_buliding",
       width: "10%",
-      sorter: (a, b) => a.management_floor_bottom - b.management_floor_bottom,
+      sorter: (a, b) => (a.public_buliding || 0) - (b.public_buliding || 0),
     },
     {
-      title: "管理費",
-      dataIndex: "management_fee_bottom",
-      key: "management_fee_bottom",
+      title: "總樓層",
+      dataIndex: "tenement_floor",
+      key: "tenement_floor",
       width: "10%",
-      sorter: (a, b) => a.management_fee_bottom - b.management_fee_bottom,
+      sorter: (a, b) => (a.tenement_floor || 0) - (b.tenement_floor || 0),
     },
-    {
-      title:"樓層",
-      dataIndex:"management_floor_bottom",
-      key:"management_floor_bottom",
-      width: "10%",
-      sorter: (a,b)=> a.management_fee_bottom - b.management_fee_bottom,
-    }
   ];
 
-  const { isLoading, isError, dataTenement } = useGetTenementList();
+  const { isLoading, isError, dataTenement } = useGetTenementListRent();
   useEffect(() => {
     if (dataTenement) {
       const data = dataTenement.map((item) => {
@@ -184,6 +197,11 @@ const useTenementListRent = () => {
           tenement_style: item.tenement_style,
           management_fee_bottom: item.management_fee_bottom,
           management_floor_bottom: item.management_floor_bottom,
+          rent: item.rent,
+          Total_rating: item.Total_rating,
+          inside_rating: item.inside_rating,
+          public_buliding: item.public_buliding,
+          tenement_floor: item.tenement_floor,
           key: item.tenement_no,
         };
       });

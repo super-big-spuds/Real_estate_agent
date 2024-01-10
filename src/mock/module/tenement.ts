@@ -60,6 +60,11 @@ export default [
           tenement_style: "辦公室",
           management_fee_bottom: 100,
           management_floor_bottom: 7,
+          rent: 100,
+          Total_rating: 100,
+          inside_rating: 100,
+          public_buliding: 100,
+          tenement_floor: 100,
         },
         {
           tenement_no: 54322,
@@ -69,6 +74,11 @@ export default [
           tenement_style: "店面",
           management_fee_bottom: 120,
           management_floor_bottom: 11,
+          rent: 120,
+          Total_rating: 120,
+          inside_rating: 120,
+          public_buliding: 120,
+          tenement_floor: 120,
         },
         {
           tenement_no: 54323,
@@ -78,6 +88,11 @@ export default [
           tenement_style: "套房",
           management_fee_bottom: 150,
           management_floor_bottom: 3,
+          rent: 150,
+          Total_rating: 150,
+          inside_rating: 150,
+          public_buliding: 150,
+          tenement_floor: 150,
         },
         {
           tenement_no: 54323,
@@ -87,7 +102,14 @@ export default [
           tenement_style: "套房",
           management_fee_bottom: 150,
           management_floor_bottom: 3,
-        },
+          rent: 150,
+          Total_rating: 150,
+          inside_rating: 150,
+          public_buliding: 150,
+          tenement_floor: 150,
+        }
+
+        
       ],
     },
   },

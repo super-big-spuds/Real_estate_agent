@@ -208,8 +208,6 @@ export const TenementListRent = () => {
             </Form.Item>
           </div>
           
-       
-
         </FilterModule>}
 
     </div>
