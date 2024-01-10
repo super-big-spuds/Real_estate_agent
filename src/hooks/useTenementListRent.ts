@@ -163,6 +163,13 @@ const useTenementListRent = () => {
       width: "10%",
       sorter: (a, b) => a.management_fee_bottom - b.management_fee_bottom,
     },
+    {
+      title:"樓層",
+      dataIndex:"management_floor_bottom",
+      key:"management_floor_bottom",
+      width: "10%",
+      sorter: (a,b)=> a.management_fee_bottom - b.management_fee_bottom,
+    }
   ];
 
   const { isLoading, isError, dataTenement } = useGetTenementList();

@@ -1,9 +1,9 @@
 import Table from "../../components/Table";
-import { Breadcrumb, Button } from "antd";
+import { Breadcrumb, Button, Form, Input, Radio } from "antd";
 import { useNavigate } from "react-router-dom";
 import useTenementList from "../../hooks/useTenementList";
 import FilterModule from "../../components/FilterModule";
-import {  useState } from "react";
+import {  useState, useEffect } from "react";
 
 export const TenementList = () => {
   const navigate = useNavigate();
@@ -59,6 +59,45 @@ export const TenementList = () => {
 
   const { data, columns, onRow, isError, isLoading } = useTenementList();
 
+
+  const [form] = Form.useForm();
+  // 驗證 budget-max 不可小於 budget-
+  const validateBudgetMax = async (_: any, value: any) => {
+    const budgetMin = form.getFieldValue("budget-");
+    if (value < budgetMin) {
+      throw new Error("max 不可小於 min");
+    }
+  };
+
+  // 驗證 floor-max 不可小於 floor-min
+  const validateFloorMax = async (_: any, value: any) => {
+    const floorMin = form.getFieldValue("floor-min");
+    if (value < floorMin) {
+      throw new Error("max 不可小於 min");
+    }
+  };
+
+  useEffect(() => {
+    form.setFields([
+      {
+        name: ["budget-max"],
+        value: form.getFieldValue("budget-max"),
+        errors: ["max 不可小於 min"],
+      },
+      {
+        name: ["floor-max"],
+        value: form.getFieldValue("floor-max"),
+        errors: ["max 不可小於 min"],
+      },
+      {
+        name:["rent-max"],
+        value: form.getFieldValue("rent-max"),
+        errors: ["max 不可小於 min"],
+      }
+    ]);
+  }, [form.getFieldValue("budget-max"), form.getFieldValue("floor-min"), form.getFieldValue("rent-min")]);
+
+
   return (
     <div className="flex flex-col items-center w-4/5 m-10 ">
       <div className="inline-flex items-center mb-10 justify-evenly w-96">
@@ -83,7 +122,49 @@ export const TenementList = () => {
       ) : (
         <Table data={data} columns={columns} onRow={onRow} />
       )}
-      {Popout && <FilterModule handlePopout={handlePopout} handleSelect={handleSelect} />}
+      {Popout && <FilterModule handlePopout={handlePopout} handleSelect={handleSelect} validateBudgetMax={validateBudgetMax} validateFloorMax={validateFloorMax} form={form} type={"房屋"}
+      >
+          <Form.Item name="tenement_type" label="物件型態">
+            <Radio.Group>
+              <Radio value="出租">出租</Radio>
+              <Radio value="出售">出售</Radio>
+              <Radio value="開發追蹤">開發追蹤</Radio>
+              <Radio value="行銷追蹤">行銷追蹤</Radio>
+            </Radio.Group>
+          </Form.Item>
+         <div className="inline-flex gap-6">
+            <Form.Item
+              name="rent-min"
+              label="租金"
+              rules={[{ message: "請輸入租金 min" }]}
+            >
+              <Input type="number" placeholder="mix" />
+            </Form.Item>
+            <p className="mt-1">~</p>
+            <Form.Item name="rent-max" rules={[{ message: "請輸入租金 max" }, { validator: validateBudgetMax }]}>
+              <Input type="number" placeholder="max" />
+            </Form.Item>
+          </div>
+          <div className="inline-flex gap-6">
+            <Form.Item
+              name="budget-min"
+              label="售價"
+              rules={[{ message: "請輸入售價 min" }]}
+            >
+              <Input type="number" placeholder="mix" />
+            </Form.Item>
+            <p className="mt-1">~</p>
+            <Form.Item
+              name="budget-max"
+              rules={[
+                { message: "請輸入售價 max" },
+                { validator: validateBudgetMax },
+              ]}
+            >
+              <Input type="number" placeholder="max" />
+            </Form.Item>
+          </div>
+        </FilterModule>}
     </div>
   );
 };
