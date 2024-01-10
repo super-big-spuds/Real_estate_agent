@@ -55,16 +55,16 @@ const FilterModule = (props: any) => {
         form={form}
         name="house_information"
         onFinish={onFinish}
-        className="w-2/3 p-10 mt-20 bg-white rounded-md h-4/5"
+        className="w-2/3 p-10 my-5 bg-white rounded-md h-4/5 overflow-y-auto "
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between px-10 mb-8">
+        <div className="flex justify-between px-10  h-1/6">
           <p className="text-3xl font-bold">房屋資訊</p>
           <p className="text-xl cursor-pointer" onClick={handlePopout}>
             X
           </p>
         </div>
-        <div className="px-16 ">
+        <div className=" flex flex-col px-16 mb-10 h-4/6 ">
           <Form.Item name="tenement_no" label="地址" className="w-48 ">
             <Input />
           </Form.Item>
