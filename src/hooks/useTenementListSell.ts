@@ -15,6 +15,10 @@ const useTenementListSell = () => {
       management_fee_bottom: 100,
       management_floor_bottom: 7,
       selling_price: 100,
+      Total_rating: 100,
+      inside_rating: 100,
+      public_buliding: 100,
+      tenement_floor: 100,
     },
     {
       tenement_no: 54322,
@@ -25,6 +29,10 @@ const useTenementListSell = () => {
       management_fee_bottom: 120,
       management_floor_bottom: 11,
       selling_price: 120,
+      Total_rating: 120,
+      inside_rating: 120,
+      public_buliding: 120,
+      tenement_floor: 120,
     },
     {
       tenement_no: 54323,
@@ -35,6 +43,10 @@ const useTenementListSell = () => {
       management_fee_bottom: 150,
       management_floor_bottom: 3,
       selling_price: 150,
+      Total_rating: 150,
+      inside_rating: 150,
+      public_buliding: 150,
+      tenement_floor: 150,
     },
     {
       tenement_no: 54323,
@@ -45,6 +57,10 @@ const useTenementListSell = () => {
       management_fee_bottom: 150,
       management_floor_bottom: 3,
       selling_price: 150,
+      Total_rating: 150,
+      inside_rating: 150,
+      public_buliding: 150,
+      tenement_floor: 150,
     },
   ]);
   type ColumnsType = {
@@ -141,39 +157,33 @@ const useTenementListSell = () => {
     },
     {
       title: "權狀坪數",
-      dataIndex: "management_floor_bottom",
-      key: "management_floor_bottom",
+      dataIndex: "Total_rating",
+      key: "Total_rating",
       width: "10%",
-      sorter: (a, b) => a.management_floor_bottom - b.management_floor_bottom,
+      sorter: (a, b) => (a.Total_rating || 0) - (b.Total_rating || 0),
     },
     {
       title: "室內面積",
-      dataIndex: "management_floor_bottom",
-      key: "management_floor_bottom",
+      dataIndex: "inside_rating",
+      key: "inside_rating",
       width: "10%",
-      sorter: (a, b) => a.management_floor_bottom - b.management_floor_bottom,
+      sorter: (a, b) => (a.inside_rating || 0) - (b.inside_rating || 0),
     },
     {
       title: "公設面積",
-      dataIndex: "management_floor_bottom",
-      key: "management_floor_bottom",
+      dataIndex: "public_buliding",
+      key: "public_buliding",
       width: "10%",
-      sorter: (a, b) => a.management_floor_bottom - b.management_floor_bottom,
+      sorter: (a, b) => (a.public_buliding || 0) - (b.public_buliding || 0),
     },
     {
-      title: "管理費",
-      dataIndex: "management_fee_bottom",
-      key: "management_fee_bottom",
+      title: "總樓層",
+      dataIndex: "tenement_floor",
+      key: "tenement_floor",
       width: "10%",
-      sorter: (a, b) => a.management_fee_bottom - b.management_fee_bottom,
+      sorter: (a, b) => (a.tenement_floor || 0) - (b.tenement_floor || 0),
     },
-    {
-      title:"樓層",
-      dataIndex:"management_floor_bottom",
-      key:"management_floor_bottom",
-      width: "10%",
-      sorter: (a,b)=> a.management_fee_bottom - b.management_fee_bottom,
-    }
+
   ];
 
   const { isLoading, isError, dataTenement } = useGetTenementListSell();
@@ -189,6 +199,10 @@ const useTenementListSell = () => {
           management_fee_bottom: item.management_fee_bottom,
           management_floor_bottom: item.management_floor_bottom,
           selling_price: item.selling_price,
+          Total_rating: item.Total_rating,
+          inside_rating: item.inside_rating,
+          public_buliding: item.public_buliding,
+          tenement_floor: item.tenement_floor,
           key: item.tenement_no,
         };
       });
