@@ -28,6 +28,8 @@ const items: MenuProps["items"] = [
     getItem("代收付管理新增", "Collection/Add"),
   ]),
   getItem("房屋管理", "tenementmange", undefined, [
+    getItem("出租列表", "Tenements/Rent"),
+    getItem("出售列表", "Tenements/Sell"),
     getItem("房屋管理列表", "Tenements"),
     getItem("房屋管理新增", "Tenement/Add"),
   ]),

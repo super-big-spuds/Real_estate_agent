@@ -15,6 +15,8 @@ import Rent from "../pages/tenement/Rent";
 import Develop from "../pages/tenement/Develop";
 import Login from "../pages/Login";
 import CalenderList_collection from "../pages/calender/CalenderList_collection";
+import TenementListRent from "../pages/tenement/TenementListRent";
+import TenementListSell from "../pages/tenement/TenementListSell";
 import { useAuth } from "../providers/Authprovider";
 
 const App = () => {
@@ -47,6 +49,9 @@ const App = () => {
             <Route path="Tenement/:id/sell" element={<Sell />} />
             <Route path="Tenement/:id/rent" element={<Rent />} />
             <Route path="Tenement/:id/develop" element={<Develop />} />
+            <Route path="Tenements/Rent" element={<TenementListRent />} />
+            <Route path="Tenements/Sell" element={<TenementListSell />} />
+
           </Route>
         )}
       </Routes>
