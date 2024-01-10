@@ -1,6 +1,7 @@
 import { Form, Input, Button, Radio } from "antd";
 import { useEffect } from "react";
 
+
 const FilterModule = (props: any) => {
   const { handlePopout, handleSelect, form, validateFloorMax, children, type } = props;
   

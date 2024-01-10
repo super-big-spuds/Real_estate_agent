@@ -183,6 +183,14 @@ const useTenementListSell = () => {
       width: "10%",
       sorter: (a, b) => (a.tenement_floor || 0) - (b.tenement_floor || 0),
     },
+    {
+      title: "管理費",
+      dataIndex: "management_fee_bottom",
+      key: "management_fee_bottom",
+      width: "10%",
+      sorter: (a, b) =>
+        (a.management_fee_bottom || 0) - (b.management_fee_bottom || 0),
+    }
 
   ];
 

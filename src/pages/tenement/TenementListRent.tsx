@@ -2,7 +2,7 @@ import Table from "../../components/Table";
 import { Breadcrumb, Button, Form, Input } from "antd";
 import useTenementListRent from "../../hooks/useTenementListRent";
 import FilterModule from "../../components/FilterModule";
-import {  useState, useEffect } from "react";
+import {  useState } from "react";
 
 export const TenementListRent = () => {
   const [Popout, setPopout] = useState(false);
@@ -18,21 +18,37 @@ export const TenementListRent = () => {
       case "tenement_no":
         return "地址";
       case "product_type":
-        return "產品類型";
+        return "產品類別";
       case "tenement_type":
         return "物件類型";
       case "tenement_face":
         return "面向";
-      case "tenement_status":
-        return "物件狀態";
-      case "budget-min":
-        return "售價 min";
-      case "budget-max":
-        return "售價 max";
       case "rent-min":
         return "租金 min";
       case "rent-max":
         return "租金 max";
+      case "Total_rating-min":
+        return "權狀坪數 min";
+      case "Total_rating-max":
+        return "權狀坪數 max";
+      case "inside_rating-min":
+        return "室內面積 min";
+      case "inside_rating-max":
+        return "室內面積 max";
+      case "public_buliding-min":
+        return "公設面積 min";
+      case "public_buliding-max":
+        return "公設面積 max";
+      case "management_fee-min":
+        return "管理費 min";
+      case "management_fee-max":
+        return "管理費 max";
+      case "tenement_status":
+        return "物件狀態";
+      case "floor-min":
+        return "樓層 min";
+      case "floor-max":
+        return "樓層 max";
 
     }
   }
@@ -69,26 +85,6 @@ export const TenementListRent = () => {
       throw new Error("max 不可小於 min");
     }
   };
-
-  useEffect(() => {
-    form.setFields([
-      {
-        name: ["budget-max"],
-        value: form.getFieldValue("budget-max"),
-        errors: ["max 不可小於 min"],
-      },
-      {
-        name: ["floor-max"],
-        value: form.getFieldValue("floor-max"),
-        errors: ["max 不可小於 min"],
-      },
-      {
-        name:["rent-max"],
-        value: form.getFieldValue("rent-max"),
-        errors: ["max 不可小於 min"],
-      }
-    ]);
-  }, [form.getFieldValue("budget-"), form.getFieldValue("floor-min"), form.getFieldValue("rent-min")]);
 
 
   return (
@@ -130,7 +126,7 @@ export const TenementListRent = () => {
           {/* 權狀坪數 */}
           <div className="inline-flex gap-6">
             <Form.Item
-              name="floor-min"
+              name="Total_rating-min"
               label="權狀坪數"
               rules={[{ message: "請輸入樓層 min" }]}
             >
@@ -138,7 +134,7 @@ export const TenementListRent = () => {
             </Form.Item>
             <p className="mt-1">~</p>
             <Form.Item
-              name="floor-max"
+              name="Total_rating-max"
               rules={[
                 { message: "請輸入樓層 max" },
                 { validator: validateFloorMax },
@@ -150,7 +146,7 @@ export const TenementListRent = () => {
           {/* 室內面積 */}
           <div className="inline-flex gap-6">
             <Form.Item
-              name="floor-min"
+              name="inside_rating-min"
               label="室內面積"
               rules={[{ message: "請輸入樓層 min" }]}
             >
@@ -158,7 +154,7 @@ export const TenementListRent = () => {
             </Form.Item>
             <p className="mt-1">~</p>
             <Form.Item
-              name="floor-max"
+              name="inside_rating-max"
               rules={[
                 { message: "請輸入樓層 max" },
                 { validator: validateFloorMax },
@@ -170,7 +166,7 @@ export const TenementListRent = () => {
           {/* 公設面積 */}
           <div className="inline-flex gap-6">
             <Form.Item
-              name="floor-min"
+              name="public_buliding-min"
               label="公設面積"
               rules={[{ message: "請輸入樓層 min" }]}
             >
@@ -178,7 +174,7 @@ export const TenementListRent = () => {
             </Form.Item>
             <p className="mt-1">~</p>
             <Form.Item
-              name="floor-max"
+              name="public_buliding-max"
               rules={[
                 { message: "請輸入樓層 max" },
                 { validator: validateFloorMax },
@@ -190,7 +186,7 @@ export const TenementListRent = () => {
           {/* 管理費 */}
           <div className="inline-flex gap-6">
             <Form.Item
-              name="floor-min"
+              name="management_fee-min"
               label="管理費"
               rules={[{ message: "請輸入樓層 min" }]}
             >
@@ -198,7 +194,7 @@ export const TenementListRent = () => {
             </Form.Item>
             <p className="mt-1">~</p>
             <Form.Item
-              name="floor-max"
+              name="management_fee-max"
               rules={[
                 { message: "請輸入樓層 max" },
                 { validator: validateFloorMax },

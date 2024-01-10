@@ -3,7 +3,7 @@ import { Breadcrumb, Button, Form, Input, Radio } from "antd";
 import { useNavigate } from "react-router-dom";
 import useTenementList from "../../hooks/useTenementList";
 import FilterModule from "../../components/FilterModule";
-import {  useState, useEffect } from "react";
+import {  useState } from "react";
 
 export const TenementList = () => {
   const navigate = useNavigate();
@@ -63,7 +63,7 @@ export const TenementList = () => {
   const [form] = Form.useForm();
   // 驗證 budget-max 不可小於 budget-
   const validateBudgetMax = async (_: any, value: any) => {
-    const budgetMin = form.getFieldValue("budget-");
+    const budgetMin = form.getFieldValue("budget-min");
     if (value < budgetMin) {
       throw new Error("max 不可小於 min");
     }
@@ -76,27 +76,6 @@ export const TenementList = () => {
       throw new Error("max 不可小於 min");
     }
   };
-
-  useEffect(() => {
-    form.setFields([
-      {
-        name: ["budget-max"],
-        value: form.getFieldValue("budget-max"),
-        errors: ["max 不可小於 min"],
-      },
-      {
-        name: ["floor-max"],
-        value: form.getFieldValue("floor-max"),
-        errors: ["max 不可小於 min"],
-      },
-      {
-        name:["rent-max"],
-        value: form.getFieldValue("rent-max"),
-        errors: ["max 不可小於 min"],
-      }
-    ]);
-  }, [form.getFieldValue("budget-max"), form.getFieldValue("floor-min"), form.getFieldValue("rent-min")]);
-
 
   return (
     <div className="flex flex-col items-center w-4/5 m-10 ">
