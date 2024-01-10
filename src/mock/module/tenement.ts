@@ -105,6 +105,7 @@ export default [
             tenement_style: "辦公室",
             management_fee_bottom: 100,
             management_floor_bottom: 7,
+            selling_price: 100,
           },
           {
             tenement_no: 54322,
@@ -114,6 +115,7 @@ export default [
             tenement_style: "店面",
             management_fee_bottom: 120,
             management_floor_bottom: 11,
+            selling_price: 120,
           },
           {
             tenement_no: 54323,
@@ -123,6 +125,7 @@ export default [
             tenement_style: "套房",
             management_fee_bottom: 150,
             management_floor_bottom: 3,
+            selling_price: 150,
           },
           {
             tenement_no: 54323,
@@ -132,6 +135,7 @@ export default [
             tenement_style: "套房",
             management_fee_bottom: 150,
             management_floor_bottom: 3,
+            selling_price: 150,
           },
         ],
       },

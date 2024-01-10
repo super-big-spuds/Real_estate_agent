@@ -505,6 +505,35 @@ export function useGetTenementList() {
   };
 }
 
+export function useGetTenementListSell() {
+  const token = "";
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [dataTenement, setDataTenement] = useState<TenementList[]>([]);
+
+  const handleGetTenement = async () => {
+    setIsLoading(true);
+    try {
+      const res = await getFetch(`/tenements/sell`, token);
+      const data = await res.json();
+      setDataTenement(data.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    handleGetTenement();
+  }, []);
+  return {
+    isLoading,
+    isError,
+    dataTenement,
+  };
+}
+
 export function useLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);

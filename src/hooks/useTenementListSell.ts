@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import getColumnSearchProps from "../components/getColumnSearchProps";
-import { useGetTenementList } from "./useAPI";
+import { useGetTenementListSell } from "./useAPI";
 import type { TenementList } from "../type";
 
 const useTenementListSell = () => {
@@ -14,6 +14,7 @@ const useTenementListSell = () => {
       tenement_style: "a",
       management_fee_bottom: 100,
       management_floor_bottom: 7,
+      selling_price: 100,
     },
     {
       tenement_no: 54322,
@@ -23,6 +24,7 @@ const useTenementListSell = () => {
       tenement_style: "b",
       management_fee_bottom: 120,
       management_floor_bottom: 11,
+      selling_price: 120,
     },
     {
       tenement_no: 54323,
@@ -32,6 +34,7 @@ const useTenementListSell = () => {
       tenement_style: "c",
       management_fee_bottom: 150,
       management_floor_bottom: 3,
+      selling_price: 150,
     },
     {
       tenement_no: 54323,
@@ -41,6 +44,7 @@ const useTenementListSell = () => {
       tenement_style: "d",
       management_fee_bottom: 150,
       management_floor_bottom: 3,
+      selling_price: 150,
     },
   ]);
   type ColumnsType = {
@@ -130,10 +134,10 @@ const useTenementListSell = () => {
     },
     {
       title: "售價",
-      dataIndex: "management_floor_bottom",
-      key: "management_floor_bottom",
+      dataIndex: "selling_price",
+      key: "selling_price",
       width: "10%",
-      sorter: (a, b) => a.management_floor_bottom - b.management_floor_bottom,
+      sorter: (a, b) => (a.selling_price || 0) - (b.selling_price || 0),
     },
     {
       title: "權狀坪數",
@@ -172,7 +176,7 @@ const useTenementListSell = () => {
     }
   ];
 
-  const { isLoading, isError, dataTenement } = useGetTenementList();
+  const { isLoading, isError, dataTenement } = useGetTenementListSell();
   useEffect(() => {
     if (dataTenement) {
       const data = dataTenement.map((item) => {
@@ -184,6 +188,7 @@ const useTenementListSell = () => {
           tenement_style: item.tenement_style,
           management_fee_bottom: item.management_fee_bottom,
           management_floor_bottom: item.management_floor_bottom,
+          selling_price: item.selling_price,
           key: item.tenement_no,
         };
       });
