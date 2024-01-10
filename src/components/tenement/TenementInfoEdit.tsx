@@ -159,7 +159,7 @@ export default function TenementInfoEdit(props: any) {
     setTenement_type(e.target.value);
     if (
       window.confirm(
-        "是否要切換案件型態?(請確實按下處存，避免切換後部分資料會遺失)"
+        "是否要切換案件型態?(請確實按下儲存，避免切換後部分資料會遺失)"
       )
     ) {
       const id = window.location.pathname.split("/")[2];
@@ -363,7 +363,7 @@ export default function TenementInfoEdit(props: any) {
               }
               {children}
               {/* 樓層 */}
-              <div className="grid grid-cols-5 gap-1 text-right">
+              {formData.tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">總樓層:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_floor}
@@ -374,6 +374,7 @@ export default function TenementInfoEdit(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
+              }
             </div>
             <div className="flex flex-col w-1/2 h-full ">
               {/* 房屋照片 */}

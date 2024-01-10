@@ -45,6 +45,8 @@ const TenemmentAdd = () => {
     ],
     tenement_floor: "4",
     tenement_style: "套房",
+    hopefloor_max: "5",
+    hopefloor_min: "2",
   });
   const handleChange = (key: string, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
@@ -54,9 +56,6 @@ const TenemmentAdd = () => {
   return (
     <TenementInfoEdit formData={formData} setFormData={setFormData}>
       <div>
-       
-
-        {/* 要租要買 select  */}
         {/* 預期坪數區間 */}
         <div className="grid grid-cols-5 gap-1 mb-5 ">
           <p className="col-span-1 pt-5 text-right">預期坪數:</p>
@@ -103,6 +102,25 @@ const TenemmentAdd = () => {
             placeholder="最大值"
           />
         </div>
+        {/* 希望的樓層 */}
+        <div className="grid grid-cols-5 gap-1 text-right">
+          <p className="col-span-1 pt-5 ">希望的樓層:</p>
+          <div className=" inline-grid grid-flow-col items-center">
+          <Input
+            value={formData.hopefloor_min}
+            onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange("hopefloor_min", e.target.value)}
+            className="col-span-1 h-8 mt-3"
+            placeholder="最小值"
+          />
+          <p className="  pt-3 pl-1">~</p>
+          </div>
+          <Input
+            value={formData.hopefloor_max}
+            onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleChange("hopefloor_max", e.target.value)}
+            className="col-span-1 mt-3"
+            placeholder="最大值"
+          />
+          </div>
       </div>
     </TenementInfoEdit>
   );
