@@ -72,7 +72,7 @@ export const TenementListRent = () => {
   const [form] = Form.useForm();
   // 驗證 budget-max 不可小於 budget-
   const validateBudgetMax = async (_: any, value: any) => {
-    const budgetMin = form.getFieldValue("budget-");
+    const budgetMin = form.getFieldValue("budget-min");
     if (value < budgetMin) {
       throw new Error("max 不可小於 min");
     }
