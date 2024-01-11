@@ -43,7 +43,7 @@ const items: MenuProps["items"] = [
   ]),
 ];
 
-const App: React.FC = () => {
+const Menus = () => {
   const navigate = useNavigate();
   const { isAdmin } = useAuth();
   if (!isAdmin) {
@@ -69,4 +69,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Menus;

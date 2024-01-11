@@ -62,9 +62,7 @@ const FilterModule = (props: any) => {
               <Checkbox value="其他">其他</Checkbox>
             </Checkbox.Group>
           </Form.Item>
-
-          
-         
+  
           {children}
 
           <div className="flex gap-6">
