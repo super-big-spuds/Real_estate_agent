@@ -1,36 +1,16 @@
-import { Form, Input, Button, Radio } from "antd";
-import { useEffect } from "react";
+import { Form, Input, Button, Checkbox } from "antd";
+
 
 
 const FilterModule = (props: any) => {
-  const { handlePopout, handleSelect, form, validateFloorMax, children, type } = props;
+  const { handlePopout, handleSelect, form, validateMax, children, type } = props;
   
 
   const onFinish = (values: any) => {
     handleSelect(values);
     handlePopout();
   };
-  useEffect(() => {
-    form.setFields([
-      {
-        name: ["budget-max"],
-        value: form.getFieldValue("budget-max"),
-        errors: ["max 不可小於 min"],
-      },
-      {
-        name: ["floor-max"],
-        value: form.getFieldValue("floor-max"),
-        errors: ["max 不可小於 min"],
-      },
-      {
-        name:["rent-max"],
-        value: form.getFieldValue("rent-max"),
-        errors: ["max 不可小於 min"],
-      }
-    ]);
-  }, [form.getFieldValue("budget-max"), form.getFieldValue("floor-min"), form.getFieldValue("rent-min")]);
-
-  
+ 
   return (
     <div
       className="fixed top-0 bottom-0 left-0 right-0 z-50 flex justify-center bg-black bg-opacity-50"
@@ -54,32 +34,35 @@ const FilterModule = (props: any) => {
             <Input />
           </Form.Item>
           <Form.Item name="product_type" label="產品類別">
-            <Radio.Group>
-              <Radio value="套房">套房</Radio>
-              <Radio value="辦公室">辦公室</Radio>
-              <Radio value="店面">店面</Radio>
-              <Radio value="其他">其他</Radio>
-            </Radio.Group>
+            <Checkbox.Group>
+              <Checkbox value="套房">套房</Checkbox>
+              <Checkbox value="辦公室">辦公室</Checkbox>
+              <Checkbox value="店面">店面</Checkbox>
+              <Checkbox value="其他">其他</Checkbox>
+            </Checkbox.Group>
           </Form.Item>
+
           <Form.Item name="tenement_status" label="物件狀態">
-            <Radio.Group>
-              <Radio value="未成交">未成交</Radio>
-              <Radio value="已成交">已成交</Radio>
-              <Radio value="已成交下架">已成交下架</Radio>
-              <Radio value="過戶完成下架">過戶完成下架</Radio>
-            </Radio.Group>
+            <Checkbox.Group>
+              <Checkbox value="未成交">未成交</Checkbox>
+              <Checkbox value="已成交">已成交</Checkbox>
+              <Checkbox value="已成交下架">已成交下架</Checkbox>
+              <Checkbox value="過戶完成下架">過戶完成下架</Checkbox>
+            </Checkbox.Group>
           </Form.Item>
+
           <Form.Item name="tenement_face" label="面向">
-            <Radio.Group>
-              <Radio value="海景">海景</Radio>
-              <Radio value="中庭">中庭</Radio>
-              <Radio value="三多路">三多路</Radio>
-              <Radio value="自強路">自強路</Radio>
-              <Radio value="市景風洞">市景風洞</Radio>
-              <Radio value="海景風洞">海景風洞</Radio>
-              <Radio value="其他">其他</Radio>
-            </Radio.Group>
+            <Checkbox.Group>
+              <Checkbox value="海景">海景</Checkbox>
+              <Checkbox value="中庭">中庭</Checkbox>
+              <Checkbox value="三多路">三多路</Checkbox>
+              <Checkbox value="自強路">自強路</Checkbox>
+              <Checkbox value="市景風洞">市景風洞</Checkbox>
+              <Checkbox value="海景風洞">海景風洞</Checkbox>
+              <Checkbox value="其他">其他</Checkbox>
+            </Checkbox.Group>
           </Form.Item>
+
           
          
           {children}
@@ -97,7 +80,7 @@ const FilterModule = (props: any) => {
               name="floor-max"
               rules={[
                 { message: "請輸入樓層 max" },
-                { validator: validateFloorMax },
+                { validator: validateMax("floor-min", "floor-max") },
               ]}
             >
               <Input type="number" placeholder="max" />
