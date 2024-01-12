@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-type ITenementType = "develop" | "rent" | "sale" | "market";
+type ITenementType = "develop" | "rent" | "sell" | "market";
 
 type INotice = {
   id: string;

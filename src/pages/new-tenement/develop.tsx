@@ -1,4 +1,4 @@
-import { DatePicker, Input, Radio } from "antd";
+import {  Input, Radio } from "antd";
 import Notice from "../../components/Notice";
 import InputWithErrorMessage from "../../components/InputWithErrorMessage";
 import { Button } from "antd";
@@ -6,7 +6,7 @@ import { Button } from "antd";
 import Uploadfile from "../../components/tenement/Uploadfile";
 import useTenementNotice from "../../hooks/new-tenement/useTenementNotice";
 import { useParams } from "react-router-dom";
-import { useTenementRentInfo } from "../../hooks/new-tenement/useTenement";
+import { useTenementDevelopInfo } from "../../hooks/new-tenement/useTenement";
 
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -15,23 +15,23 @@ dayjs.extend(customParseFormat);
 export default function Rent() {
   const { id: tenementId } = useParams();
 
-  const noticeHook = useTenementNotice("rent", tenementId as string);
-  const rentHook = useTenementRentInfo(tenementId as string);
+  const noticeHook = useTenementNotice("develop", tenementId as string);
+  const developHook = useTenementDevelopInfo(tenementId as string);
 
   const onSave = () => {
     noticeHook.handlers.handleSaveNoticeData();
-    rentHook.handlers.handleSave();
+    developHook.handlers.handleSave();
   };
 
-  const isLoading = rentHook.states.isLoading || noticeHook.states.isLoading;
-  const isError = rentHook.states.isError || noticeHook.states.isError;
+  const isLoading = developHook.states.isLoading || noticeHook.states.isLoading;
+  const isError = developHook.states.isError || noticeHook.states.isError;
 
   return (
     <div className="flex flex-col items-center w-full h-full ">
       <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
         <button className="flex w-12 h-20 mt-10 ml-5">{"< 返回"}</button>
         <div className="inline-flex flex-col mb-5 ml-8">
-          <p className="text-4xl font-bold whitespace-normal">出租資料</p>
+          <p className="text-4xl font-bold whitespace-normal">開發追蹤資料</p>
         </div>
         <p className="mb-3 ml-5 border-b-2 border-gray-300"></p>
 
@@ -44,15 +44,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 whitespace-nowrap ">地址:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.tenement_address}
+                    value={developHook.states.developInfo.tenement_address}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_address",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.tenement_address.length <= 2
+                      developHook.states.developInfo.tenement_address.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
@@ -63,9 +63,9 @@ export default function Rent() {
                   {/* radio */}
                   <Radio.Group
                     className="col-span-4"
-                    value={rentHook.states.rentInfo.tenement_product_type}
+                    value={developHook.states.developInfo.tenement_product_type}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_product_type",
                         e.target.value
                       )
@@ -77,32 +77,13 @@ export default function Rent() {
                     <Radio value="其他">其他</Radio>
                   </Radio.Group>
                 </div>
-                {/* 物件狀態 */}
-                <div className="grid grid-cols-5 gap-1 ">
-                  <p className="text-right whitespace-nowrap">物件狀態:</p>
-                  <Radio.Group
-                    className="col-span-4"
-                    value={rentHook.states.rentInfo.tenement_status}
-                    onChange={(e) =>
-                      rentHook.handlers.handleChange(
-                        "tenement_status",
-                        e.target.value
-                      )
-                    }
-                  >
-                    <Radio value="未成交">未成交</Radio>
-                    <Radio value="已成交">已成交</Radio>
-                    <Radio value="已成交下架">已成交下架</Radio>
-                    <Radio value="過戶完成下架">過戶完成下架</Radio>
-                  </Radio.Group>
-                </div>
                 {/* 案件型態 */}
                 <div className="grid grid-cols-5 gap-1 ">
                   <p className="text-right whitespace-nowrap">物件型態:</p>
                   <Radio.Group
-                    value={rentHook.states.rentInfo.tenement_type}
+                    value={developHook.states.developInfo.tenement_type}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_type",
                         e.target.value
                       )
@@ -123,9 +104,9 @@ export default function Rent() {
                   </p>
                   <Radio.Group
                     className="col-span-4"
-                    value={rentHook.states.rentInfo.tenement_face}
+                    value={developHook.states.developInfo.tenement_face}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_face",
                         e.target.value
                       )
@@ -146,14 +127,14 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">權狀坪數:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.total_rating}
+                    value={developHook.states.developInfo.total_rating}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "total_rating",
                         e.target.value
                       )
                     }
-                    isError={rentHook.states.rentInfo.total_rating.length <= 2}
+                    isError={developHook.states.developInfo.total_rating.length <= 2}
                     errorMessage={"至少兩個字"}
                   />
                 </div>
@@ -162,14 +143,14 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 whitespace-nowrap ">主建物:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.main_building}
+                    value={developHook.states.developInfo.main_building}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "main_building",
                         e.target.value
                       )
                     }
-                    isError={rentHook.states.rentInfo.main_building.length <= 2}
+                    isError={developHook.states.developInfo.main_building.length <= 2}
                     errorMessage={"至少兩個字"}
                   />
                 </div>
@@ -178,15 +159,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">附屬建物:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.affiliated_building}
+                    value={developHook.states.developInfo.affiliated_building}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "affiliated_building",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.affiliated_building.length <= 2
+                      developHook.states.developInfo.affiliated_building.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
@@ -196,15 +177,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">公設面積:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.public_buliding}
+                    value={developHook.states.developInfo.public_buliding}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "public_buliding",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.public_buliding.length <= 2
+                      developHook.states.developInfo.public_buliding.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
@@ -215,15 +196,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">未登記面積:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.unregistered_area}
+                    value={developHook.states.developInfo.unregistered_area}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "unregistered_area",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.unregistered_area.length <= 2
+                      developHook.states.developInfo.unregistered_area.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
@@ -234,22 +215,22 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">管理費倍率:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.management_magnification}
+                    value={developHook.states.developInfo.management_magnification}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "management_fee",
                         (
                           parseFloat(e.target.value) *
-                          parseFloat(rentHook.states.rentInfo.total_rating)
+                          parseFloat(developHook.states.developInfo.total_rating)
                         ).toString()
                       );
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "management_magnification",
                         e.target.value
                       );
                     }}
                     isError={
-                      rentHook.states.rentInfo.management_fee.length <= 2
+                      developHook.states.developInfo.management_fee.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
@@ -260,68 +241,74 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">管理費:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.management_fee}
+                    value={developHook.states.developInfo.management_fee}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "management_fee",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.management_fee.length <= 2
+                      developHook.states.developInfo.management_fee.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
                 </div>
-                 {/* 租金 */}
-                  <div className="grid grid-cols-5 gap-1 text-right">
-                    <p className="col-span-1 pt-5 ">租金:</p>
-                    <InputWithErrorMessage
-                      value={rentHook.states.rentInfo.rent_price}
-                      onChange={(e) =>
-                        rentHook.handlers.handleChange(
-                          "rent_price",
-                          e.target.value
-                        )
-                      }
-                      isError={
-                        rentHook.states.rentInfo.rent_price.length <= 2
-                      }
-                      errorMessage={"至少兩個字"}
-                    />
-                  </div>
 
-                  {/* 押金 */}
-                  <div className="grid grid-cols-5 gap-1 text-right">
-                    <p className="col-span-1 pt-5 ">押金:</p>
-                    <InputWithErrorMessage
-                      value={rentHook.states.rentInfo.deposit_price}
-                      onChange={(e) =>
-                        rentHook.handlers.handleChange(
-                          "deposit_price",
-                          e.target.value
-                        )
-                      }
-                      isError={
-                        rentHook.states.rentInfo.deposit_price.length <= 2
-                      }
-                      errorMessage={"至少兩個字"}
-                    />
-                  </div>
+                 {/* 售價 */}
+                 <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">售價(萬):</p>
+                  <InputWithErrorMessage
+                    value={developHook.states.developInfo.selling_price}
+                    onChange={(e) =>
+                      developHook.handlers.handleChange(
+                        "selling_price",
+                        e.target.value
+                      )
+                    }
+                    isError={developHook.states.developInfo.selling_price.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
 
-                {/* 樓層 */}
+
+                {/* 租金 */}
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">租金:</p>
+                  <InputWithErrorMessage
+                    value={developHook.states.developInfo.rent_price}
+                    onChange={(e) =>
+                      developHook.handlers.handleChange("rent_price", e.target.value)
+                    }
+                    isError={developHook.states.developInfo.rent_price.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
+                {/* 押金 */}
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">押金:</p>
+                  <InputWithErrorMessage
+                    value={developHook.states.developInfo.deposit_price}
+                    onChange={(e) =>
+                      developHook.handlers.handleChange("deposit_price", e.target.value)
+                    }
+                    isError={developHook.states.developInfo.deposit_price.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
+
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">總樓層:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.tenement_floor}
+                    value={developHook.states.developInfo.tenement_floor}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_floor",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.tenement_floor.length <= 2
+                      developHook.states.developInfo.tenement_floor.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
@@ -343,15 +330,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">姓名:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.tenement_host_name}
+                    value={developHook.states.developInfo.tenement_host_name}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_host_name",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.tenement_host_name.length <= 2
+                      developHook.states.developInfo.tenement_host_name.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
@@ -360,15 +347,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">行動電話:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.tenement_host_telphone}
+                    value={developHook.states.developInfo.tenement_host_telphone}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_host_telphone",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.tenement_host_telphone.length <=
+                      developHook.states.developInfo.tenement_host_telphone.length <=
                       2
                     }
                     errorMessage={"至少兩個字"}
@@ -378,15 +365,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">電話:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.tenement_host_phone}
+                    value={developHook.states.developInfo.tenement_host_phone}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_host_phone",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.tenement_host_phone.length <= 2
+                      developHook.states.developInfo.tenement_host_phone.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
@@ -395,15 +382,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">Line:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.tenement_host_line}
+                    value={developHook.states.developInfo.tenement_host_line}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_host_line",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.tenement_host_line.length <= 2
+                      developHook.states.developInfo.tenement_host_line.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
@@ -413,16 +400,16 @@ export default function Rent() {
                   <p className="col-span-1 pt-5 ">匯款銀行:</p>
                   <InputWithErrorMessage
                     value={
-                      rentHook.states.rentInfo.tenement_host_remittance_bank
+                      developHook.states.developInfo.tenement_host_remittance_bank
                     }
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_host_remittance_bank",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.tenement_host_remittance_bank
+                      developHook.states.developInfo.tenement_host_remittance_bank
                         .length <= 2
                     }
                     errorMessage={"至少兩個字"}
@@ -433,16 +420,16 @@ export default function Rent() {
                   <p className="col-span-1 pt-5 ">帳號:</p>
                   <InputWithErrorMessage
                     value={
-                      rentHook.states.rentInfo.tenement_host_remittance_account
+                      developHook.states.developInfo.tenement_host_remittance_account
                     }
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_host_remittance_account",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.tenement_host_remittance_account
+                      developHook.states.developInfo.tenement_host_remittance_account
                         .length <= 2
                     }
                     errorMessage={"至少兩個字"}
@@ -452,15 +439,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">通訊地址:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.tenement_host_address}
+                    value={developHook.states.developInfo.tenement_host_address}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_host_address",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.tenement_host_address.length <= 2
+                      developHook.states.developInfo.tenement_host_address.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
@@ -469,15 +456,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">生日:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.tenement_host_birthday}
+                    value={developHook.states.developInfo.tenement_host_birthday}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_host_birthday",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.tenement_host_birthday.length <=
+                      developHook.states.developInfo.tenement_host_birthday.length <=
                       2
                     }
                     errorMessage={"至少兩個字"}
@@ -487,15 +474,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">嗜好:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.tenement_host_hobby}
+                    value={developHook.states.developInfo.tenement_host_hobby}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_host_hobby",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.tenement_host_hobby.length <= 2
+                      developHook.states.developInfo.tenement_host_hobby.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />
@@ -507,9 +494,9 @@ export default function Rent() {
                   <Input.TextArea
                     className="col-span-3"
                     rows={4}
-                    value={rentHook.states.rentInfo.tenement_host_remark}
+                    value={developHook.states.developInfo.tenement_host_remark}
                     onChange={(e) =>
-                      rentHook.handlers.handleChange(
+                      developHook.handlers.handleChange(
                         "tenement_host_remark",
                         e.target.value
                       )
@@ -519,140 +506,8 @@ export default function Rent() {
               </div>
             </div>
 
-            <div className="flex flex-col w-full px-5 mt-10">
-              <div className="inline-flex col-span-2 mb-5 ml-10">
-                <p className="text-4xl font-bold">租客資訊</p>
-              </div>
-              <p className="mb-3 ml-5 border-b-2 border-gray-300"></p>
-              <div className="flex flex-row w-full ">
-                <div className="flex flex-col w-1/3 gap-10 mr-3 ">
-                  <div className="grid grid-cols-3 gap-1 text-right ">
-                    <p className="col-span-1 ">起租日期:</p>
-                    <DatePicker
-                      className="col-span-2"
-                      value={dayjs(
-                        rentHook.states.rentInfo.renter_start_date,
-                        "YYYY-MM-DD"
-                      )}
-                      onChange={(_, dateString) =>
-                        rentHook.handlers.handleChange(
-                          "renter_start_date",
-                          dateString
-                        )
-                      }
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-1 text-right ">
-                    <p className="col-span-1 ">退租日期:</p>
-                    <DatePicker
-                      className="col-span-2"
-                      value={dayjs(
-                        rentHook.states.rentInfo.renter_end_date,
-                        "YYYY-MM-DD"
-                      )}
-                      onChange={(_, dateString) =>
-                        rentHook.handlers.handleChange(
-                          "renter_end_date",
-                          dateString
-                        )
-                      }
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-1 text-right ">
-                    <p className="col-span-1 ">租客姓名:</p>
-                    <Input
-                      className="col-span-2"
-                      value={rentHook.states.rentInfo.renter_name}
-                      onChange={(e) =>
-                        rentHook.handlers.handleChange(
-                          "renter_name",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-1 text-right ">
-                    <p className="col-span-1 ">電話:</p>
-                    <Input
-                      className="col-span-2"
-                      value={rentHook.states.rentInfo.renter_phone}
-                      onChange={(e) =>
-                        rentHook.handlers.handleChange(
-                          "renter_phone",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-1 text-right ">
-                    <p className="col-span-1 ">工作職稱:</p>
-                    <Input
-                      className="col-span-2"
-                      value={rentHook.states.rentInfo.renter_jobtitle}
-                      onChange={(e) =>
-                        rentHook.handlers.handleChange(
-                          "renter_jobtitle",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-1 text-right ">
-                    <p className="col-span-1 ">保證人姓名:</p>
-                    <Input
-                      className="col-span-2"
-                      value={rentHook.states.rentInfo.renter_guarantor_name}
-                      onChange={(e) =>
-                        rentHook.handlers.handleChange(
-                          "renter_guarantor_name",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-1 text-right ">
-                    <p className="col-span-1 ">保證人電話:</p>
-                    <Input
-                      className="col-span-2"
-                      value={rentHook.states.rentInfo.renter_guarantor_phone}
-                      onChange={(e) =>
-                        rentHook.handlers.handleChange(
-                          "renter_guarantor_phone",
-                          e.target.value
-                        )
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col w-1/3 ">
-                  <div className="grid grid-cols-3 gap-1 ">
-                    <p className="col-span-2 ">身分證件翻拍存檔:</p>
-                  </div>
-                  <Uploadfile />
-                </div>
-                <div className="flex flex-col w-1/3 ml-5">
-                  <div className="grid grid-cols-5 gap-1 ">
-                    <p className="col-span-5 ">備註:</p>
-                  </div>
-                  <textarea
-                    className="w-full h-40 border border-gray-300"
-                    value={rentHook.states.rentInfo.renter_remark}
-                    onChange={(e) =>
-                      rentHook.handlers.handleChange(
-                        "renter_remark",
-                        e.target.value
-                      )
-                    }
-                  />
-                </div>
-              </div>
-            </div>
+            
+            
           </>
         )}
 

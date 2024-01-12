@@ -20,6 +20,8 @@ import TenementListSell from "../pages/tenement/TenementListSell";
 import { useAuth } from "../providers/Authprovider";
 import NewMarket from "../pages/new-tenement/market";
 import NewRent from "../pages/new-tenement/rent";
+import NewSell from "../pages/new-tenement/sell";
+import NewDevelop from "../pages/new-tenement/develop"; 
 
 const App = () => {
   const { isLogin, isAdmin } = useAuth();
@@ -57,6 +59,9 @@ const App = () => {
             {/* New Refactor Route */}
             <Route path="/new/tenement/:id/market" element={<NewMarket />} />
             <Route path="/new/tenement/:id/rent" element={<NewRent />} />
+            <Route path="/new/tenement/:id/sell" element={<NewSell />} />
+            <Route path="/new/tenement/:id/develop" element={<NewDevelop />} />
+
           </Route>
         )}
       </Routes>

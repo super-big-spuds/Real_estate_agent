@@ -129,8 +129,8 @@ type ITenementRentInfoType = ITenementBasedInfoType & {
   unregistered_area: string;
   management_magnification: string;
   management_fee: string;
-  rent: string;
-  deposit: string;
+  rent_price: string;
+  deposit_price: string;
   tenement_floor: string;
   tenement_host_name: string;
   tenement_host_telphone: string;
@@ -171,8 +171,8 @@ export function useTenementRentInfo(tenementId: string) {
     unregistered_area: "2",
     management_magnification: "1.5",
     management_fee: "3000",
-    rent: "20000",
-    deposit: "40000",
+    rent_price: "20000",
+    deposit_price: "40000",
     tenement_floor: "7",
     tenement_host_name: "John Doe",
     tenement_host_telphone: "1234567890",
@@ -229,8 +229,8 @@ export function useTenementRentInfo(tenementId: string) {
         unregistered_area: "2",
         management_magnification: "1.5",
         management_fee: "3000",
-        rent: "20000",
-        deposit: "40000",
+        rent_price: "20000",
+        deposit_price: "40000",
         tenement_floor: "7",
         tenement_host_name: "John Doe",
         tenement_host_telphone: "1234567890",
@@ -332,7 +332,7 @@ export function useTenementDevelopInfo(tenementId: string) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const handleChange = (key: keyof ITenementRentInfoType, value: string) => {
+  const handleChange = (key: keyof ITenementDevelopInfoType, value: string) => {
     setDevelopInfo((prev) => {
       if (!prev) return prev;
       return { ...prev, [key]: value };
@@ -474,7 +474,7 @@ export function useTenementSellInfo(tenementId: string) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const handleChange = (key: keyof ITenementRentInfoType, value: string) => {
+  const handleChange = (key: keyof ITenementSellInfoType, value: string) => {
     setSellInfo((prev) => {
       if (!prev) return prev;
       return { ...prev, [key]: value };
