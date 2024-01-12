@@ -110,9 +110,7 @@ export default function RenterInfo(props: RenterInfoProps) {
           <textarea
             className="w-full h-40 border border-gray-300"
             value={renterData.rent_remark}
-            onChange={(e) =>
-              handleRenterChange("rent_remark", e.target.value)
-            }
+            onChange={(e) => handleRenterChange("rent_remark", e.target.value)}
           />
         </div>
       </div>
