@@ -2,10 +2,14 @@ import {  Input, Radio } from "antd";
 import Notice from "../../components/Notice";
 import InputWithErrorMessage from "../../components/InputWithErrorMessage";
 import { Button } from "antd";
+import { RadioChangeEvent } from "antd/lib/radio";
+
+
+
 
 import Uploadfile from "../../components/tenement/Uploadfile";
 import useTenementNotice from "../../hooks/new-tenement/useTenementNotice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTenementDevelopInfo } from "../../hooks/new-tenement/useTenement";
 
 import dayjs from "dayjs";
@@ -25,6 +29,33 @@ export default function Rent() {
 
   const isLoading = developHook.states.isLoading || noticeHook.states.isLoading;
   const isError = developHook.states.isError || noticeHook.states.isError;
+  const navigate = useNavigate();
+  const handletypeChange = (e: RadioChangeEvent) => {
+    
+    if (
+      window.confirm(
+        "是否要切換案件型態?(請確實按下儲存，避免切換後部分資料會遺失)"
+      )
+    ) {
+      const id = window.location.pathname.split("/")[3];
+      switch (e.target.value) {
+        case "出租":
+          navigate("/new/tenement/" + id + "/rent");
+          break;
+        case "出售":
+          navigate("/new/tenement/" + id + "/sell");
+          break;
+        case "開發追蹤":
+          navigate("/new/tenement/" + id + "/develop");
+          break;
+        case "行銷追蹤":
+          navigate("/new/tenement/" + id + "/market");
+          break;
+        default:
+          break;
+      }
+    } else return;
+  };
 
   return (
     <div className="flex flex-col items-center w-full h-full ">
@@ -82,11 +113,8 @@ export default function Rent() {
                   <p className="text-right whitespace-nowrap">物件型態:</p>
                   <Radio.Group
                     value={developHook.states.developInfo.tenement_type}
-                    onChange={(e) =>
-                      developHook.handlers.handleChange(
-                        "tenement_type",
-                        e.target.value
-                      )
+                    onChange={(e) =>{
+                      handletypeChange(e)}
                     }
                     className="col-span-4 "
                   >

@@ -13,7 +13,7 @@ const TableCompoent = (props: any) => {
       }))}
       onRow={onRow}
       size="large"
-      className=" mx-10 "
+      className=" mx-10 w-full "
       rowClassName={"cursor-pointer"}
       
     />

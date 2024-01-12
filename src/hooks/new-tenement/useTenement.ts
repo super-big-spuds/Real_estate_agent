@@ -158,7 +158,7 @@ export function useTenementRentInfo(tenementId: string) {
   const [rentInfo, setRentInfo] = useState<ITenementRentInfoType>({
     tenement_address: "1234",
     tenement_product_type: "套房",
-    tenement_type: "行銷追蹤",
+    tenement_type: "出租",
     tenement_face: "海景",
     tenement_images: [
       "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
@@ -216,7 +216,7 @@ export function useTenementRentInfo(tenementId: string) {
       setRentInfo({
         tenement_address: "1234",
         tenement_product_type: "套房",
-        tenement_type: "行銷追蹤",
+        tenement_type: "出租",
         tenement_face: "海景",
         tenement_images: [
           "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
@@ -301,7 +301,7 @@ export function useTenementDevelopInfo(tenementId: string) {
   const [developInfo, setDevelopInfo] = useState<ITenementDevelopInfoType>({
     tenement_address: "1234",
     tenement_product_type: "套房",
-    tenement_type: "行銷追蹤",
+    tenement_type: "開發追蹤",
     tenement_face: "海景",
     tenement_images: [
       "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
@@ -351,7 +351,7 @@ export function useTenementDevelopInfo(tenementId: string) {
       setDevelopInfo({
         tenement_address: "1234",
         tenement_product_type: "套房",
-        tenement_type: "行銷追蹤",
+        tenement_type: "開發追蹤",
         tenement_face: "海景",
         tenement_images: [
           "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
@@ -436,7 +436,7 @@ export function useTenementSellInfo(tenementId: string) {
   const [sellInfo, setSellInfo] = useState<ITenementSellInfoType>({
     tenement_address: "1234",
     tenement_product_type: "套房",
-    tenement_type: "行銷追蹤",
+    tenement_type: "出售",
     tenement_face: "海景",
     tenement_images: [
       "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
@@ -493,7 +493,7 @@ export function useTenementSellInfo(tenementId: string) {
       setSellInfo({
         tenement_address: "1234",
         tenement_product_type: "套房",
-        tenement_type: "行銷追蹤",
+        tenement_type: "出售",
         tenement_face: "海景",
         tenement_images: [
           "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
