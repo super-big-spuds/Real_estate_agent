@@ -33,7 +33,7 @@ const FilterModule = (props: any) => {
           <Form.Item name="tenement_no" label="地址" className="w-48 ">
             <Input />
           </Form.Item>
-          <Form.Item name="product_type" label="產品類別">
+          <Form.Item name="tenement_product_type" label="產品類別">
             <Checkbox.Group>
               <Checkbox value="套房">套房</Checkbox>
               <Checkbox value="辦公室">辦公室</Checkbox>
@@ -67,7 +67,7 @@ const FilterModule = (props: any) => {
 
           <div className="flex gap-6">
             <Form.Item
-              name="floor-min"
+              name="floor_min"
               label="樓層"
               rules={[{ message: "請輸入樓層 min" }]}
             >
@@ -75,10 +75,10 @@ const FilterModule = (props: any) => {
             </Form.Item>
             <p className="mt-1">~</p>
             <Form.Item
-              name="floor-max"
+              name="floor_max"
               rules={[
                 { message: "請輸入樓層 max" },
-                { validator: validateMax("floor-min", "floor-max") },
+                { validator: validateMax("floor_min", "floor_max") },
               ]}
             >
               <Input type="number" placeholder="max" />

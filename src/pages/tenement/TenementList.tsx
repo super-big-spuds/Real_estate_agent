@@ -21,9 +21,9 @@ export const TenementList = () => {
 
    const switchTitletoChinese = (title:string) => {
     switch (title) {
-      case "tenement_no":
+      case "tenement_address":
         return "地址";
-      case "product_type":
+      case "tenement_product_type":
         return "產品類型";
       case "tenement_type":
         return "物件類型";
@@ -31,17 +31,17 @@ export const TenementList = () => {
         return "面向";
       case "tenement_status":
         return "物件狀態";
-      case "budget-min":
+      case "selling_price_min":
         return "售價 min";
-      case "budget-max":
+      case "sellling_price_max":
         return "售價 max";
-      case "rent-min":
+      case "rent_price_min":
         return "租金 min";
-      case "rent-max":
+      case "rent_price_max":
         return "租金 max";
-      case "floor-min":
+      case "floor_min":
         return "樓層 min";
-      case "floor-max":
+      case "floor_max":
         return "樓層 max";
 
     }
@@ -112,39 +112,40 @@ export const TenementList = () => {
       >
           <Form.Item name="tenement_type" label="物件型態">
             <Checkbox.Group>
-              <Checkbox value="住宅">住宅</Checkbox>
-              <Checkbox value="店面">店面</Checkbox>
-              <Checkbox value="辦公室">辦公室</Checkbox>
-              <Checkbox value="其他">其他</Checkbox>
+              <Checkbox value="出租">出租</Checkbox>
+              <Checkbox value="出售">出售</Checkbox>
+              <Checkbox value="開發追蹤">開發追蹤</Checkbox>
+              <Checkbox value="行銷追蹤">行銷追蹤</Checkbox>
+
             </Checkbox.Group>
           </Form.Item>
          <div className="inline-flex gap-6">
             <Form.Item
-              name="rent-min"
+              name="rent_price_min"
               label="租金"
               rules={[{ message: "請輸入租金 min" }]}
             >
               <Input type="number" placeholder="mix" />
             </Form.Item>
             <p className="mt-1">~</p>
-            <Form.Item name="rent-max" rules={[{ message: "請輸入租金 max" }, { validator: validateMax("rent-min", "rent-max") }]}>
+            <Form.Item name="rent_price_max" rules={[{ message: "請輸入租金 max" }, { validator: validateMax("rent_price_min", "rent_price_max") }]}>
               <Input type="number" placeholder="max" />
             </Form.Item>
           </div>
           <div className="inline-flex gap-6">
             <Form.Item
-              name="budget-min"
+              name="selling_price_min"
               label="售價"
               rules={[{ message: "請輸入售價 min" }]}
             >
-              <Input type="number" placeholder="mix" />
+              <Input type="number" placeholder="min" />
             </Form.Item>
             <p className="mt-1">~</p>
             <Form.Item
-              name="budget-max"
+              name="selling_price_max"
               rules={[
                 { message: "請輸入售價 max" },
-                { validator: validateMax("budget-min", "budget-max") },
+                { validator: validateMax("selling_price_min", "selling_price_max") },
               ]}
             >
               <Input type="number" placeholder="max" />
