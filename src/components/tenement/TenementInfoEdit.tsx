@@ -229,17 +229,20 @@ export default function TenementInfoEdit(props: any) {
               </div>
 
               {/* 案件狀態 */}
-              {
-                formData.tenement_type==="開發追蹤"||formData.tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 ">
-                <p className="text-right whitespace-nowrap">物件狀態:</p>
-                <Radio.Group className="col-span-4">
-                  <Radio value="未成交">未成交</Radio>
-                  <Radio value="已成交">已成交</Radio>
-                  <Radio value="已成交下架">已成交下架</Radio>
-                  <Radio value="過戶完成下架">過戶完成下架</Radio>
-                </Radio.Group>
-              </div>
-              }
+              {formData.tenement_type === "開發追蹤" ||
+              formData.tenement_type === "行銷追蹤" ? (
+                " "
+              ) : (
+                <div className="grid grid-cols-5 gap-1 ">
+                  <p className="text-right whitespace-nowrap">物件狀態:</p>
+                  <Radio.Group className="col-span-4">
+                    <Radio value="未成交">未成交</Radio>
+                    <Radio value="已成交">已成交</Radio>
+                    <Radio value="已成交下架">已成交下架</Radio>
+                    <Radio value="過戶完成下架">過戶完成下架</Radio>
+                  </Radio.Group>
+                </div>
+              )}
               {/* 案件型態 */}
               <div className="grid grid-cols-5 gap-1 ">
                 <p className="text-right whitespace-nowrap">物件型態:</p>
@@ -271,110 +274,141 @@ export default function TenementInfoEdit(props: any) {
                 </Radio.Group>
               </div>
               {/* 總坪數 */}
-             {formData.tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">權狀坪數:</p>
-                <InputWithErrorMessage
-                  value={formData.Total_rating}
-                  onChange={(e) => handleChange("Total_rating", e.target.value)}
-                  isError={formData.Total_rating.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
-              }
+              {formData.tenement_type === "行銷追蹤" ? (
+                " "
+              ) : (
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">權狀坪數:</p>
+                  <InputWithErrorMessage
+                    value={formData.Total_rating}
+                    onChange={(e) =>
+                      handleChange("Total_rating", e.target.value)
+                    }
+                    isError={formData.Total_rating.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
+              )}
               {/* 主建物坪數 */}
-              {formData.tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 whitespace-nowrap ">主建物:</p>
-                <InputWithErrorMessage
-                  value={formData.main_building}
-                  onChange={(e) =>
-                    handleChange("main_building", e.target.value)
-                  }
-                  isError={formData.main_building.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
-              }
+              {formData.tenement_type === "行銷追蹤" ? (
+                " "
+              ) : (
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 whitespace-nowrap ">主建物:</p>
+                  <InputWithErrorMessage
+                    value={formData.main_building}
+                    onChange={(e) =>
+                      handleChange("main_building", e.target.value)
+                    }
+                    isError={formData.main_building.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
+              )}
               {/* 附屬建物坪數 */}
-             {formData.tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">附屬建物:</p>
-                <InputWithErrorMessage
-                  value={formData.affiliated_building}
-                  onChange={(e) =>
-                    handleChange("affiliated_building", e.target.value)
-                  }
-                  isError={formData.affiliated_building.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
-              }
+              {formData.tenement_type === "行銷追蹤" ? (
+                " "
+              ) : (
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">附屬建物:</p>
+                  <InputWithErrorMessage
+                    value={formData.affiliated_building}
+                    onChange={(e) =>
+                      handleChange("affiliated_building", e.target.value)
+                    }
+                    isError={formData.affiliated_building.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
+              )}
               {/* 公共設施坪數 */}
-             {formData.tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">公設面積:</p>
-                <InputWithErrorMessage
-                  value={formData.public_buliding}
-                  onChange={(e) =>
-                    handleChange("public_buliding", e.target.value)
-                  }
-                  isError={formData.public_buliding.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
-              }
+              {formData.tenement_type === "行銷追蹤" ? (
+                " "
+              ) : (
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">公設面積:</p>
+                  <InputWithErrorMessage
+                    value={formData.public_buliding}
+                    onChange={(e) =>
+                      handleChange("public_buliding", e.target.value)
+                    }
+                    isError={formData.public_buliding.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
+              )}
               {/* 未登記面積 */}
-             {formData.tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">未登記面積:</p>
-                <InputWithErrorMessage
-                  value={formData.unregistered_area}
-                  onChange={(e) =>
-                    handleChange("unregistered_area", e.target.value)
-                  }
-                  isError={formData.unregistered_area.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
-              }
-                 {/* 輸入倍率 成 total rating去改變管理費*/}
-                 {
-                tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">管理費倍率:</p>
-                <InputWithErrorMessage
-                  value={formData.plus}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    handleChange("management_fee", (parseFloat(e.target.value)*parseFloat(formData.Total_rating)).toString());
-                    handleChange("plus", e.target.value);
-                  }}
-                  isError={formData.management_fee.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
-              }
+              {formData.tenement_type === "行銷追蹤" ? (
+                " "
+              ) : (
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">未登記面積:</p>
+                  <InputWithErrorMessage
+                    value={formData.unregistered_area}
+                    onChange={(e) =>
+                      handleChange("unregistered_area", e.target.value)
+                    }
+                    isError={formData.unregistered_area.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
+              )}
+              {/* 輸入倍率 成 total rating去改變管理費*/}
+              {tenement_type === "行銷追蹤" ? (
+                " "
+              ) : (
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">管理費倍率:</p>
+                  <InputWithErrorMessage
+                    value={formData.plus}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      handleChange(
+                        "management_fee",
+                        (
+                          parseFloat(e.target.value) *
+                          parseFloat(formData.Total_rating)
+                        ).toString()
+                      );
+                      handleChange("plus", e.target.value);
+                    }}
+                    isError={formData.management_fee.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
+              )}
               {/* 管理費 */}
-             {formData.tenement_type ==="行銷追蹤"?" ": <div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">管理費:</p>
-                <InputWithErrorMessage
-                  value={formData.management_fee}
-                  onChange={(e) =>
-                    handleChange("management_fee", e.target.value)
-                  }
-                  isError={formData.management_fee.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
-              }
+              {formData.tenement_type === "行銷追蹤" ? (
+                " "
+              ) : (
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">管理費:</p>
+                  <InputWithErrorMessage
+                    value={formData.management_fee}
+                    onChange={(e) =>
+                      handleChange("management_fee", e.target.value)
+                    }
+                    isError={formData.management_fee.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
+              )}
               {children}
               {/* 樓層 */}
-              {formData.tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
-                <p className="col-span-1 pt-5 ">總樓層:</p>
-                <InputWithErrorMessage
-                  value={formData.tenement_floor}
-                  onChange={(e) =>
-                    handleChange("tenement_floor", e.target.value)
-                  }
-                  isError={formData.tenement_floor.length <= 2}
-                  errorMessage={"至少兩個字"}
-                />
-              </div>
-              }
+              {formData.tenement_type === "行銷追蹤" ? (
+                " "
+              ) : (
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">總樓層:</p>
+                  <InputWithErrorMessage
+                    value={formData.tenement_floor}
+                    onChange={(e) =>
+                      handleChange("tenement_floor", e.target.value)
+                    }
+                    isError={formData.tenement_floor.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
+              )}
             </div>
             <div className="flex flex-col w-1/2 h-full ">
               {/* 房屋照片 */}
@@ -385,7 +419,9 @@ export default function TenementInfoEdit(props: any) {
                 <Uploadfile />
               </div>
               <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
-                {formData.tenement_type === "行銷追蹤" ?"買客資訊": "屋主資訊"}
+                {formData.tenement_type === "行銷追蹤"
+                  ? "買客資訊"
+                  : "屋主資訊"}
               </p>
               {/* 屋主姓名 */}
               <div className="grid grid-cols-5 gap-1 text-right">
@@ -496,7 +532,7 @@ export default function TenementInfoEdit(props: any) {
                 />
               </div>
               {/* 備註 */}
-              <div className="grid grid-cols-5 gap-1 text-right mt-3">
+              <div className="grid grid-cols-5 gap-1 mt-3 text-right">
                 <p className="col-span-1 pt-5 ">備註:</p>
                 {/* text area */}
                 <Input.TextArea
@@ -507,7 +543,7 @@ export default function TenementInfoEdit(props: any) {
                     handleChange("tenement_remark", e.target.value)
                   }
                 />
-                </div>
+              </div>
             </div>
           </div>
         )}
