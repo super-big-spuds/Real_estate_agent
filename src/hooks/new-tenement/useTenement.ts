@@ -271,3 +271,130 @@ export function useTenementRentInfo(tenementId: string) {
     },
   };
 }
+
+type ITenementDevelopInfoType = ITenementBasedInfoType & {
+  total_rating: string;
+  main_building: string;
+  affiliated_building: string;
+  public_buliding: string;
+  unregistered_area: string;
+  management_magnification: string;
+  management_fee: string;
+  selling_price: string;
+  rent_price: string;
+  deposit_price: string;
+  tenement_floor: string;
+
+  tenement_host_name: string;
+  tenement_host_telphone: string;
+  tenement_host_phone: string;
+  tenement_host_line: string;
+  tenement_host_remittance_bank: string;
+  tenement_host_remittance_account: string;
+  tenement_host_address: string;
+  tenement_host_birthday: string;
+  tenement_host_hobby: string;
+  tenement_host_remark: string;
+};
+
+export function useTenementDevelopInfo(tenementId: string) {
+  const [developInfo, setDevelopInfo] = useState<ITenementDevelopInfoType>({
+    tenement_address: "1234",
+    tenement_product_type: "套房",
+    tenement_type: "行銷追蹤",
+    tenement_face: "海景",
+    tenement_images: [
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+    ],
+    total_rating: "4.5",
+    main_building: "100",
+    affiliated_building: "50",
+    public_buliding: "30",
+    unregistered_area: "20",
+    management_magnification: "1.5",
+    management_fee: "3000",
+    selling_price: "500000",
+    rent_price: "20000",
+    deposit_price: "40000",
+    tenement_floor: "7",
+
+    tenement_host_name: "John Doe",
+    tenement_host_telphone: "1234567890",
+    tenement_host_phone: "0987654321",
+    tenement_host_line: "john_doe",
+    tenement_host_remittance_bank: "Bank of America",
+    tenement_host_remittance_account: "9876543210",
+    tenement_host_address: "123 Main St, City, Country",
+    tenement_host_birthday: "1980-01-01",
+    tenement_host_hobby: "Reading",
+    tenement_host_remark: "No remarks",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleChange = (key: keyof ITenementRentInfoType, value: string) => {
+    setDevelopInfo((prev) => {
+      if (!prev) return prev;
+      return { ...prev, [key]: value };
+    });
+  };
+
+  const handleSave = () => {
+    // handle save data here
+    console.log(developInfo);
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    try {
+      // handle fetch data here based on tenementId
+      setDevelopInfo({
+        tenement_address: "1234",
+        tenement_product_type: "套房",
+        tenement_type: "行銷追蹤",
+        tenement_face: "海景",
+        tenement_images: [
+          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+        ],
+        total_rating: "4.5",
+        main_building: "100",
+        affiliated_building: "50",
+        public_buliding: "30",
+        unregistered_area: "20",
+        management_magnification: "1.5",
+        management_fee: "3000",
+        selling_price: "500000",
+        rent_price: "20000",
+        deposit_price: "40000",
+        tenement_floor: "7",
+
+        tenement_host_name: "John Doe",
+        tenement_host_telphone: "1234567890",
+        tenement_host_phone: "0987654321",
+        tenement_host_line: "john_doe",
+        tenement_host_remittance_bank: "Bank of America",
+        tenement_host_remittance_account: "9876543210",
+        tenement_host_address: "123 Main St, City, Country",
+        tenement_host_birthday: "1980-01-01",
+        tenement_host_hobby: "Reading",
+        tenement_host_remark: "No remarks",
+      });
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsError(true);
+    }
+  }, [tenementId]);
+
+  return {
+    states: {
+      developInfo,
+      isLoading,
+      isError,
+    },
+    handlers: {
+      handleChange,
+      handleSave,
+    },
+  };
+}
