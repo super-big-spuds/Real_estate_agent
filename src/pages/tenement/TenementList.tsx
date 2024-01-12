@@ -47,13 +47,21 @@ export const TenementList = () => {
     }
   }
 
-  const handleSelect = (data:any) => {
+  type item = {
+    title: string;
+    value: string;
+  };
+
+  const handleSelect = (data:[]) => {
     console.log("Received values of form: ", data);
 
     const filterData = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== undefined));
     const filterDataTitle = Object.entries(filterData).map(([k, v]) => ({ title: k, value: v }));
-    filterDataTitle.forEach((item:any) => {
-      item.title = switchTitletoChinese(item.title);
+    filterDataTitle.forEach((item:item) => {
+      const newTitle = switchTitletoChinese(item.title);
+      if (newTitle !== undefined) {
+        item.title = newTitle;
+      }
     });
     setBreadcrumbItems(filterDataTitle);
   }
