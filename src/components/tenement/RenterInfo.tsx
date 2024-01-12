@@ -8,11 +8,12 @@ type RenterInfoProps = {
   renterData: any;
   handleRenterChange: any;
 };
+
 export default function RenterInfo(props: RenterInfoProps) {
   const { renterData, handleRenterChange } = props;
   const dateFormat = "YYYY-MM-DD";
-  const rental_start_date = dayjs(renterData.rental_start_date, dateFormat);
-  const rental_end_date = dayjs(renterData.rental_end_date, dateFormat);
+  const renter_start_date = dayjs(renterData.renter_start_date, dateFormat);
+  const renter_end_date = dayjs(renterData.renter_end_date, dateFormat);
 
   return (
     <div className="flex flex-col w-full px-5 mt-10">
@@ -26,9 +27,9 @@ export default function RenterInfo(props: RenterInfoProps) {
             <p className="col-span-1 ">起租日期:</p>
             <DatePicker
               className="col-span-2"
-              value={rental_start_date}
+              value={renter_start_date}
               onChange={(_, dateString) =>
-                handleRenterChange("rental_start_date", dateString)
+                handleRenterChange("renter_start_date", dateString)
               }
             />
           </div>
@@ -37,9 +38,9 @@ export default function RenterInfo(props: RenterInfoProps) {
             <p className="col-span-1 ">退租日期:</p>
             <DatePicker
               className="col-span-2"
-              value={rental_end_date}
+              value={renter_end_date}
               onChange={(_, dateString) =>
-                handleRenterChange("rental_end_date", dateString)
+                handleRenterChange("renter_end_date", dateString)
               }
             />
           </div>
@@ -59,9 +60,9 @@ export default function RenterInfo(props: RenterInfoProps) {
             <p className="col-span-1 ">電話:</p>
             <Input
               className="col-span-2"
-              value={renterData.renter_telphone}
+              value={renterData.renter_phone}
               onChange={(e) =>
-                handleRenterChange("renter_telphone", e.target.value)
+                handleRenterChange("renter_phone", e.target.value)
               }
             />
           </div>
@@ -70,8 +71,8 @@ export default function RenterInfo(props: RenterInfoProps) {
             <p className="col-span-1 ">工作職稱:</p>
             <Input
               className="col-span-2"
-              value={renterData.renter_job}
-              onChange={(e) => handleRenterChange("renter_job", e.target.value)}
+              value={renterData.renter_jobtitle}
+              onChange={(e) => handleRenterChange("renter_jobtitle", e.target.value)}
             />
           </div>
 
@@ -79,9 +80,9 @@ export default function RenterInfo(props: RenterInfoProps) {
             <p className="col-span-1 ">保證人姓名:</p>
             <Input
               className="col-span-2"
-              value={renterData.guarantor_name}
+              value={renterData.renter_guarantor_name}
               onChange={(e) =>
-                handleRenterChange("guarantor_name", e.target.value)
+                handleRenterChange("renter_guarantor_name", e.target.value)
               }
             />
           </div>
@@ -90,9 +91,9 @@ export default function RenterInfo(props: RenterInfoProps) {
             <p className="col-span-1 ">保證人電話:</p>
             <Input
               className="col-span-2"
-              value={renterData.guarantor_telphone}
+              value={renterData.renter_guarantor_phone}
               onChange={(e) =>
-                handleRenterChange("guarantor_telphone", e.target.value)
+                handleRenterChange("renter_guarantor_phone", e.target.value)
               }
             />
           </div>
@@ -109,8 +110,8 @@ export default function RenterInfo(props: RenterInfoProps) {
           </div>
           <textarea
             className="w-full h-40 border border-gray-300"
-            value={renterData.rent_remark}
-            onChange={(e) => handleRenterChange("rent_remark", e.target.value)}
+            value={renterData.renter_remark}
+            onChange={(e) => handleRenterChange("renter_remark", e.target.value)}
           />
         </div>
       </div>

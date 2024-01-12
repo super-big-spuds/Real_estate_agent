@@ -9,10 +9,6 @@ import Layout from "../components/Layout";
 import CalenderList from "../pages/calender/CalenderList";
 import TenementAdd from "../pages/tenement/TenementAdd";
 import TenementList from "../pages/tenement/TenementList";
-import Market from "../pages/tenement/Market";
-import Sell from "../pages/tenement/Sell";
-import Rent from "../pages/tenement/Rent";
-import Develop from "../pages/tenement/Develop";
 import Login from "../pages/Login";
 import CalenderList_collection from "../pages/calender/CalenderList_collection";
 import TenementListRent from "../pages/tenement/TenementListRent";
@@ -49,18 +45,14 @@ const App = () => {
             />
             <Route path="Tenement/Add" element={<TenementAdd />} />
             <Route path="Tenements" element={<TenementList />} />
-            <Route path="Tenement/:id/market" element={<Market />} />
-            <Route path="Tenement/:id/sell" element={<Sell />} />
-            <Route path="Tenement/:id/rent" element={<Rent />} />
-            <Route path="Tenement/:id/develop" element={<Develop />} />
             <Route path="Tenements/Rent" element={<TenementListRent />} />
             <Route path="Tenements/Sell" element={<TenementListSell />} />
 
             {/* New Refactor Route */}
-            <Route path="/new/tenement/:id/market" element={<NewMarket />} />
-            <Route path="/new/tenement/:id/rent" element={<NewRent />} />
-            <Route path="/new/tenement/:id/sell" element={<NewSell />} />
-            <Route path="/new/tenement/:id/develop" element={<NewDevelop />} />
+            <Route path="/tenement/:id/market" element={<NewMarket />} />
+            <Route path="/tenement/:id/rent" element={<NewRent />} />
+            <Route path="/tenement/:id/sell" element={<NewSell />} />
+            <Route path="/tenement/:id/develop" element={<NewDevelop />} />
 
           </Route>
         )}

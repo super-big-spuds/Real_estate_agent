@@ -12,8 +12,8 @@ type SellerInfoProps = {
 export default function SellerInfo(props: SellerInfoProps) {
   const { sellerData, handleChangeSeller } = props;
   const dateFormat = "YYYY-MM-DD";
-  const set_date = dayjs(sellerData.set_date, dateFormat);
-  const delivery_date = dayjs(sellerData.delivery_date, dateFormat);
+  const buyer_order_date = dayjs(sellerData.buyer_order_date, dateFormat);
+  const buyer_handout_date = dayjs(sellerData.buyer_handout_date, dateFormat);
 
   return (
     // 買客資訊
@@ -29,9 +29,9 @@ export default function SellerInfo(props: SellerInfoProps) {
             <p className="col-span-1 ">下定日期:</p>
             <DatePicker
               className="col-span-2"
-              value={set_date}
+              value={buyer_order_date}
               onChange={(_, dateString) =>
-                handleChangeSeller("set_date", dateString)
+                handleChangeSeller("buyer_order_date", dateString)
               }
             />
           </div>
@@ -40,9 +40,9 @@ export default function SellerInfo(props: SellerInfoProps) {
             <p className="col-span-1 ">交房日期:</p>
             <DatePicker
               className="col-span-2"
-              value={delivery_date}
+              value={buyer_handout_date}
               onChange={(_, dateString) =>
-                handleChangeSeller("delivery_date", dateString)
+                handleChangeSeller("buyer_handout_date", dateString)
               }
             />
           </div>
@@ -60,9 +60,9 @@ export default function SellerInfo(props: SellerInfoProps) {
             <p className="col-span-1 ">電話:</p>
             <Input
               className="col-span-2"
-              value={sellerData.buyer_telphone}
+              value={sellerData.buyer_phone}
               onChange={(e) =>
-                handleChangeSeller("buyer_telphone", e.target.value)
+                handleChangeSeller("buyer_phone", e.target.value)
               }
             />
           </div>
@@ -71,8 +71,8 @@ export default function SellerInfo(props: SellerInfoProps) {
             <p className="col-span-1 ">工作職稱:</p>
             <Input
               className="col-span-2"
-              value={sellerData.buyer_job}
-              onChange={(e) => handleChangeSeller("buyer_job", e.target.value)}
+              value={sellerData.buyer_jobtitle}
+              onChange={(e) => handleChangeSeller("buyer_jobtitle", e.target.value)}
             />
           </div>
         </div>
@@ -89,8 +89,8 @@ export default function SellerInfo(props: SellerInfoProps) {
           </div>
           <Input.TextArea
             className="h-40"
-            value={sellerData.sell_remark}
-            onChange={(e) => handleChangeSeller("sell_remark", e.target.value)}
+            value={sellerData.buyer_remark}
+            onChange={(e) => handleChangeSeller("buyer_remark", e.target.value)}
           />
         </div>
       </div>
