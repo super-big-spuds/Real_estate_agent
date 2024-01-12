@@ -59,7 +59,7 @@ export default function Rent() {
   return (
     <div className="flex flex-col items-center w-full h-full ">
       <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
-        <button className="flex w-12 h-20 mt-10 ml-5">{"< 返回"}</button>
+        <button className="flex w-12 h-20 mt-10 ml-5" onClick={()=>navigate("/Tenements")}>{"< 返回"}</button>
         <div className="inline-flex flex-col mb-5 ml-8">
           <p className="text-4xl font-bold whitespace-normal">出租資料</p>
         </div>
