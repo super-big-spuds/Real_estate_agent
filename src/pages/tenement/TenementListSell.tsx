@@ -34,9 +34,9 @@ export const TenementListSell = () => {
         return "室內面積 min";
       case "inside_rating_max":
         return "室內面積 max";
-      case "public_buliding_min":
+      case "public_building_min":
         return "公設面積 min";
-      case "public_buliding_max":
+      case "public_building_max":
         return "公設面積 max";
       case "management_fee_min":
         return "管理費 min";
@@ -171,7 +171,7 @@ export const TenementListSell = () => {
           {/* 公設面積 */}
           <div className="inline-flex gap-6">
             <Form.Item
-              name="public_buliding_min"
+              name="public_building_min"
               label="公設面積"
               rules={[{ message: "請輸入樓層 min" }]}
             >
@@ -179,10 +179,10 @@ export const TenementListSell = () => {
             </Form.Item>
             <p className="mt-1">~</p>
             <Form.Item
-              name="public_buliding_max"
+              name="public_building_max"
               rules={[
                 { message: "請輸入樓層 max" },
-                { validator: validateMax("public_buliding_min", "public_buliding_max") },
+                { validator: validateMax("public_building_min", "public_building_max") },
               ]}
             >
               <Input type="number" placeholder="max" />

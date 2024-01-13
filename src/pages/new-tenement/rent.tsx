@@ -37,16 +37,16 @@ export default function Rent() {
       const id = window.location.pathname.split("/")[3];
       switch (e.target.value) {
         case "出租":
-          navigate("/new/tenement/" + id + "/rent");
+          navigate("/tenement/" + id + "/rent");
           break;
         case "出售":
-          navigate("/new/tenement/" + id + "/sell");
+          navigate("/tenement/" + id + "/sell");
           break;
         case "開發追蹤":
-          navigate("/new/tenement/" + id + "/develop");
+          navigate("/tenement/" + id + "/develop");
           break;
         case "行銷追蹤":
-          navigate("/new/tenement/" + id + "/market");
+          navigate("/tenement/" + id + "/market");
           break;
         default:
           break;
@@ -224,15 +224,15 @@ export default function Rent() {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">公設面積:</p>
                   <InputWithErrorMessage
-                    value={rentHook.states.rentInfo.public_buliding}
+                    value={rentHook.states.rentInfo.public_building}
                     onChange={(e) =>
                       rentHook.handlers.handleChange(
-                        "public_buliding",
+                        "public_building",
                         e.target.value
                       )
                     }
                     isError={
-                      rentHook.states.rentInfo.public_buliding.length <= 2
+                      rentHook.states.rentInfo.public_building.length <= 2
                     }
                     errorMessage={"至少兩個字"}
                   />

@@ -10,27 +10,27 @@ const useCollectionList = () => {
     {
       collection_name: "代收1",
       collection_type: "代收",
-      tenement_no: "1",
+      tenement_address: "1",
       price: "1000",
       collection_id: 1,
     },
     {
       collection_name: "代付1",
-      tenement_no: "2",
+      tenement_address: "2",
       collection_type: "代付",
       price: "2000",
       collection_id: 2,
     },
     {
       collection_name: "代收2",
-      tenement_no: "3",
+      tenement_address: "3",
       collection_type: "代收",
       price: "3000",
       collection_id: 3,
     },
     {
       collection_name: "代付2",
-      tenement_no: "4",
+      tenement_address: "4",
       collection_type: "代付",
       price: "4000",
       collection_id: 4,
@@ -58,10 +58,10 @@ const useCollectionList = () => {
     },
     {
       title: "房屋編號",
-      dataIndex: "tenement_no",
-      key: "tenement_no",
+      dataIndex: "tenement_address",
+      key: "tenement_address",
       width: "30%",
-      ...getColumnSearchProps("tenement_no"),
+      ...getColumnSearchProps("tenement_address"),
     },
     {
       title: "費用名稱",
@@ -114,7 +114,7 @@ const useCollectionList = () => {
       const newdataCollection = datasa.map((collection) => {
         return {
           collection_id: collection.collection_id,
-          tenement_no: collection.tenement_no,
+          tenement_address: collection.tenement_address,
           collection_name: collection.collection_name,
           collection_type: collection.collection_type,
           price: collection.price,
@@ -129,7 +129,7 @@ const useCollectionList = () => {
   const onRow = (record: Collection) => {
     return {
       onClick: () => {
-        navigate(`/Collection/${record.tenement_no}`);
+        navigate(`/Collection/${record.tenement_address}`);
       },
     };
   };

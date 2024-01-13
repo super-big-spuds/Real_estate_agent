@@ -65,7 +65,7 @@ export default function TenementInfo(props: any) {
     total_rating: "4",
     main_building: "3",
     affiliated_building: "2",
-    public_buliding: "1",
+    public_building: "1",
     unregistered_area: "2",
     management_magnification: "1.5",
     management_fee: "3000",
@@ -183,7 +183,7 @@ export default function TenementInfo(props: any) {
     total_rating: "4",
     main_building: "3",
     affiliated_building: "2",
-    public_buliding: "1",
+    public_building: "1",
     unregistered_area: "2",
     management_magnification: "1.5",
     management_fee: "3000",
@@ -518,11 +518,11 @@ export default function TenementInfo(props: any) {
                 tenement_type ==="行銷追蹤"?" ":<div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">公設面積:</p>
                 <InputWithErrorMessage
-                  value={formData.public_buliding}
+                  value={formData.public_building}
                   onChange={(e) =>
-                    handleChange("public_buliding", e.target.value)
+                    handleChange("public_building", e.target.value)
                   }
-                  isError={formData.public_buliding.length <= 2}
+                  isError={formData.public_building.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>

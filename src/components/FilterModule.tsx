@@ -30,7 +30,7 @@ const FilterModule = (props: any) => {
           </p>
         </div>
         <div className=" flex flex-col px-16 mb-10 h-5/6 ">
-          <Form.Item name="tenement_no" label="地址" className="w-48 ">
+          <Form.Item name="tenement_address" label="地址" className="w-48 ">
             <Input />
           </Form.Item>
           <Form.Item name="tenement_product_type" label="產品類別">

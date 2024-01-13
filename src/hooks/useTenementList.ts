@@ -7,7 +7,7 @@ import type { TenementList } from "../type";
 const useTenementList = () => {
   const [data, setData] = useState<TenementList[]>([
     {
-      tenement_no: 54321,
+      tenement_address: 54321,
       tenement_face: "a",
       tenement_status: "a",
       tenement_type: "a",
@@ -16,7 +16,7 @@ const useTenementList = () => {
       management_floor_bottom: 7,
     },
     {
-      tenement_no: 54322,
+      tenement_address: 54322,
       tenement_face: "b",
       tenement_status: "b",
       tenement_type: "b",
@@ -25,7 +25,7 @@ const useTenementList = () => {
       management_floor_bottom: 11,
     },
     {
-      tenement_no: 54323,
+      tenement_address: 54323,
       tenement_face: "c",
       tenement_status: "c",
       tenement_type: "c",
@@ -34,7 +34,7 @@ const useTenementList = () => {
       management_floor_bottom: 3,
     },
     {
-      tenement_no: 54323,
+      tenement_address: 54323,
       tenement_face: "d",
       tenement_status: "d",
       tenement_type: "d",
@@ -61,10 +61,10 @@ const useTenementList = () => {
   const columns: ColumnsType[] = [
     {
       title: "地址",
-      dataIndex: "tenement_no",
-      key: "tenement_no",
+      dataIndex: "tenement_address",
+      key: "tenement_address",
       width: "10%",
-      ...getColumnSearchProps("tenement_no"),
+      ...getColumnSearchProps("tenement_address"),
     },
     {
       title: "面向",
@@ -197,14 +197,14 @@ const useTenementList = () => {
     if (dataTenement) {
       const data = dataTenement.map((item) => {
         return {
-          tenement_no: item.tenement_no,
+          tenement_address: item.tenement_address,
           tenement_face: item.tenement_face,
           tenement_status: item.tenement_status,
           tenement_type: item.tenement_type,
           tenement_style: item.tenement_style,
           management_fee_bottom: item.management_fee_bottom,
           management_floor_bottom: item.management_floor_bottom,
-          key: item.tenement_no,
+          key: item.tenement_address,
         };
       });
       setData(data);
@@ -230,7 +230,7 @@ const useTenementList = () => {
     return {
       onClick: () => {
         navigate(
-          `/Tenement/${record.tenement_no}/${switchType(record.tenement_type)}`
+          `/Tenement/${record.tenement_address}/${switchType(record.tenement_type)}`
         );
       },
     };

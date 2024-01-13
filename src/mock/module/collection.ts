@@ -7,7 +7,7 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        tenement_no: "51734",
+        tenement_address: "51734",
         collection_name: "水電空調費",
         collection_type: "代收",
         price: "100",
@@ -32,7 +32,7 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        tenement_no: "51734",
+        tenement_address: "51734",
         collection_name: "管理費",
         collection_type: "代付",
         price: "100",
@@ -75,7 +75,7 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        tenement_no: "51734",
+        tenement_address: "51734",
         collection_name: "第四台",
         collection_type: "代收",
         price: "100",
@@ -125,7 +125,7 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        tenement_no: "51734",
+        tenement_address: "51734",
         collection_name: "其他",
         collection_type: "代付",
         price: "100",
@@ -184,21 +184,21 @@ export default [
       data: [
         {
           collection_name: "水電空調費",
-          tenement_no: "1",
+          tenement_address: "1",
           collection_type: "代收",
           price: "1000",
           collection_id: 1,
         },
         {
           collection_name: "管理費",
-          tenement_no: "2",
+          tenement_address: "2",
           collection_type: "代付",
           price: "2000",
           collection_id: 2,
         },
         {
           collection_name: "第四台",
-          tenement_no: "3",
+          tenement_address: "3",
           collection_type: "代收",
           price: "3000",
           collection_id: 3,
@@ -206,7 +206,7 @@ export default [
         {
           collection_id: 4,
           collection_name: "其他費用",
-          tenement_no: "4",
+          tenement_address: "4",
           collection_type: "代付",
           price: "4000",
         },

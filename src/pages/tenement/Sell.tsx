@@ -4,7 +4,7 @@ import InputWithErrorMessage from "../../components/InputWithErrorMessage";
 
 const TenemmentAdd = () => {
   const [formData, setFormData] = useState({
-    tenement_no: "1234",
+    tenement_address: "1234",
     tenement_type: "出售",
     tenement_face: "Maple Street",
     tenement_host_name: "John",
@@ -16,7 +16,7 @@ const TenemmentAdd = () => {
     Total_rating: "4",
     main_building: "2",
     affiliated_building: "1",
-    public_buliding: "1",
+    public_building: "1",
     management_fee: "280",
     selling_price: "2000000",
     rent: "20000",

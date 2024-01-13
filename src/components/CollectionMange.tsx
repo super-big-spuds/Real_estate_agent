@@ -55,11 +55,11 @@ export default function CollectionMange(props: any) {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">地址:</p>
                   <InputWithErrorMessage
-                    value={formData.tenement_no}
+                    value={formData.tenement_address}
                     onChange={(e) =>
-                      handleChange("tenement_no", e.target.value)
+                      handleChange("tenement_address", e.target.value)
                     }
-                    isError={formData.tenement_no.length <= 2}
+                    isError={formData.tenement_address.length <= 2}
                     errorMessage={"至少兩個字"}
                   />
                 </div>

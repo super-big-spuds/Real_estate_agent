@@ -7,7 +7,7 @@ import type { TenementList } from "../type";
 const useTenementListRent = () => {
   const [data, setData] = useState<TenementList[]>([
     {
-      tenement_no: 54321,
+      tenement_address: 54321,
       tenement_face: "海景",
       tenement_status: "未成交",
       tenement_type: "出售",
@@ -17,11 +17,11 @@ const useTenementListRent = () => {
       rent: 100,
       Total_rating: 100,
       inside_rating: 100,
-      public_buliding: 100,
+      public_building: 100,
       tenement_floor: 100,
     },
     {
-      tenement_no: 54322,
+      tenement_address: 54322,
       tenement_face: "中庭",
       tenement_status: "已成交",
       tenement_type: "出租",
@@ -31,11 +31,11 @@ const useTenementListRent = () => {
       rent: 120,
       Total_rating: 120,
       inside_rating: 120,
-      public_buliding: 120,
+      public_building: 120,
       tenement_floor: 120,
     },
     {
-      tenement_no: 54323,
+      tenement_address: 54323,
       tenement_face: "三多路",
       tenement_status: "已退租下架",
       tenement_type: "開發追蹤",
@@ -45,11 +45,11 @@ const useTenementListRent = () => {
       rent: 150,
       Total_rating: 150,
       inside_rating: 150,
-      public_buliding: 150,
+      public_building: 150,
       tenement_floor: 150,
     },
     {
-      tenement_no: 54323,
+      tenement_address: 54323,
       tenement_face: "三多路",
       tenement_status: "過戶完成下架",
       tenement_type: "行銷追蹤",
@@ -59,7 +59,7 @@ const useTenementListRent = () => {
       rent: 150,
       Total_rating: 150,
       inside_rating: 150,
-      public_buliding: 150,
+      public_building: 150,
       tenement_floor: 150,
     }
   ]);
@@ -81,10 +81,10 @@ const useTenementListRent = () => {
   const columns: ColumnsType[] = [
     {
       title: "地址",
-      dataIndex: "tenement_no",
-      key: "tenement_no",
+      dataIndex: "tenement_address",
+      key: "tenement_address",
       width: "10%",
-      ...getColumnSearchProps("tenement_no"),
+      ...getColumnSearchProps("tenement_address"),
     },
     {
       title: "面向",
@@ -171,10 +171,10 @@ const useTenementListRent = () => {
     },
     {
       title: "公設面積",
-      dataIndex: "public_buliding",
-      key: "public_buliding",
+      dataIndex: "public_building",
+      key: "public_building",
       width: "10%",
-      sorter: (a, b) => (a.public_buliding || 0) - (b.public_buliding || 0),
+      sorter: (a, b) => (a.public_building || 0) - (b.public_building || 0),
     },
     {
       title: "總樓層",
@@ -198,7 +198,7 @@ const useTenementListRent = () => {
     if (dataTenement) {
       const data = dataTenement.map((item) => {
         return {
-          tenement_no: item.tenement_no,
+          tenement_address: item.tenement_address,
           tenement_face: item.tenement_face,
           tenement_status: item.tenement_status,
           tenement_type: item.tenement_type,
@@ -208,9 +208,9 @@ const useTenementListRent = () => {
           rent: item.rent,
           Total_rating: item.Total_rating,
           inside_rating: item.inside_rating,
-          public_buliding: item.public_buliding,
+          public_building: item.public_building,
           tenement_floor: item.tenement_floor,
-          key: item.tenement_no,
+          key: item.tenement_address,
         };
       });
       setData(data);
@@ -236,7 +236,7 @@ const useTenementListRent = () => {
     return {
       onClick: () => {
         navigate(
-          `/Tenement/${record.tenement_no}/${switchType(record.tenement_type)}`
+          `/Tenement/${record.tenement_address}/${switchType(record.tenement_type)}`
         );
       },
     };

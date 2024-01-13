@@ -33,16 +33,16 @@ export default function Market() {
       const id = window.location.pathname.split("/")[3];
       switch (e.target.value) {
         case "出租":
-          navigate("/new/tenement/" + id + "/rent");
+          navigate("/tenement/" + id + "/rent");
           break;
         case "出售":
-          navigate("/new/tenement/" + id + "/sell");
+          navigate("/tenement/" + id + "/sell");
           break;
         case "開發追蹤":
-          navigate("/new/tenement/" + id + "/develop");
+          navigate("/tenement/" + id + "/develop");
           break;
         case "行銷追蹤":
-          navigate("/new/tenement/" + id + "/market");
+          navigate("/tenement/" + id + "/market");
           break;
         default:
           break;

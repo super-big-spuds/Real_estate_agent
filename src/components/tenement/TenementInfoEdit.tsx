@@ -100,7 +100,7 @@ export default function TenementInfoEdit(props: any) {
   };
   const handleReset = () => {
     setFormData({
-      tenement_no: "1234",
+      tenement_address: "1234",
       tenement_type: tenement_type,
       tenement_face: "Maple Street",
       tenement_host_name: "John",
@@ -112,7 +112,7 @@ export default function TenementInfoEdit(props: any) {
       Total_rating: "4",
       main_building: "2",
       affiliated_building: "1",
-      public_buliding: "1",
+      public_building: "1",
       management_fee: "280",
       selling_price: "2000000",
       rent: "20000",
@@ -210,9 +210,9 @@ export default function TenementInfoEdit(props: any) {
               <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 whitespace-nowrap ">地址:</p>
                 <InputWithErrorMessage
-                  value={formData.tenement_no}
-                  onChange={(e) => handleChange("tenement_no", e.target.value)}
-                  isError={formData.tenement_no.length <= 2}
+                  value={formData.tenement_address}
+                  onChange={(e) => handleChange("tenement_address", e.target.value)}
+                  isError={formData.tenement_address.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>
@@ -328,11 +328,11 @@ export default function TenementInfoEdit(props: any) {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">公設面積:</p>
                   <InputWithErrorMessage
-                    value={formData.public_buliding}
+                    value={formData.public_building}
                     onChange={(e) =>
-                      handleChange("public_buliding", e.target.value)
+                      handleChange("public_building", e.target.value)
                     }
-                    isError={formData.public_buliding.length <= 2}
+                    isError={formData.public_building.length <= 2}
                     errorMessage={"至少兩個字"}
                   />
                 </div>

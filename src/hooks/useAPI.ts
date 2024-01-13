@@ -6,6 +6,10 @@ import type {
   NoticeData,
   User,
   TenementList,
+  TenementSell,
+  TenementDevelop,
+  TenementRent,
+  TenementMarket
 } from "../type";
 
 const APIBaseURL = process.env.BASE_URL;
@@ -593,5 +597,246 @@ export function useLogin() {
     isError,
     handleLogin,
     isLogin,
+  };
+
+}
+
+export function useGetSellEdit() {
+  const token = "";
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [dataEdit, setData] = useState<TenementSell>();
+
+  const getSellEdit = async (id: string) => {
+    try {
+      const res = await getFetch(`/tenement/edit/sell/${id}`, token);
+      const data = await res.json();
+      console.log(data);
+      
+      setData(data.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    getSellEdit,
+    dataEdit,
+  };
+}
+
+export function usePostSellEdit() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleSaveColumn = async (formDatas: TenementSell) => {
+    setIsLoading(true);
+
+    const jsonFromData = JSON.stringify(formDatas);
+
+    try {
+      const res = await muliteFetch(
+        `/tenement/edit/sell/${formDatas.tenement_id}`,
+        "POST",
+        token,
+        jsonFromData
+      );
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    handleSaveColumn,
+  };
+}
+
+export function useGetDevelopEdit() {
+  const token = "";
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [dataEdit, setData] = useState<TenementDevelop>();
+
+  const getDevelopEdit = async (id: string) => {
+    try {
+      const res = await getFetch(`/tenement/edit/develop/${id}`, token);
+      const data = await res.json();
+      setData(data.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    getDevelopEdit,
+    dataEdit,
+  };
+}
+
+export function usePostDevelopEdit() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleSaveColumn = async (formDatas: TenementDevelop) => {
+    setIsLoading(true);
+
+    const jsonFromData = JSON.stringify(formDatas);
+
+    try {
+      const res = await muliteFetch(
+        `/tenement/edit/develop/${formDatas.tenement_id}`,
+        "POST",
+        token,
+        jsonFromData
+      );
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    handleSaveColumn,
+  };
+}
+export function useGetRentEdit() {
+  const token = "";
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [dataEdit, setData] = useState<TenementRent>();
+
+  const getRentEdit = async (id: string) => {
+    try {
+      const res = await getFetch(`/tenement/edit/rent/${id}`, token);
+      const data = await res.json();
+      setData(data.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    getRentEdit,
+    dataEdit,
+  };
+}
+export function usePostRentEdit() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleSaveColumn = async (formDatas: TenementRent) => {
+    setIsLoading(true);
+
+    const jsonFromData = JSON.stringify(formDatas);
+
+    try {
+      const res = await muliteFetch(
+        `/tenement/edit/rent/${formDatas.tenement_address}`,
+        "POST",
+        token,
+        jsonFromData
+      );
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    handleSaveColumn,
+  };
+}
+
+export function useGetMarketEdit(){
+  const token = "";
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [dataEdit, setData] = useState<TenementMarket>();
+
+  const getMarketEdit = async (id: string) => {
+    try {
+      const res = await getFetch(`/tenement/edit/market/${id}`, token);
+      const data = await res.json();
+      setData(data.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    getMarketEdit,
+    dataEdit,
+  };
+}
+
+export function usePostMarketEdit(){
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const handleSaveColumn = async (formDatas: TenementMarket) => {
+    setIsLoading(true);
+
+    const jsonFromData = JSON.stringify(formDatas);
+
+    try {
+      const res = await muliteFetch(
+        `/tenement/edit/market/${formDatas.tenement_id}`,
+        "POST",
+        token,
+        jsonFromData
+      );
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    handleSaveColumn,
   };
 }

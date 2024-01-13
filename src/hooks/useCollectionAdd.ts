@@ -8,7 +8,7 @@ const useCollectionAdd = () => {
   const nowdatestring = moment().format("YYYY-MM-DD");
   const [notices, setNotices] = useState<NoticeData[]>([]);
   const [formData, setFormData] = useState<FormData>({
-    tenement_no: "",
+    tenement_address: "",
     collection_id: "",
     collection_name: "水電空調費",
     collection_type: "代收",
@@ -55,7 +55,7 @@ const useCollectionAdd = () => {
 
   const handleSave = async () => {
     const schemaform = z.object({
-      tenement_no: z.string().min(2, "地址至少兩個字"),
+      tenement_address: z.string().min(2, "地址至少兩個字"),
       collection_name: z.string(),
       collection_id: z.string(),
       collection_type: z.string(),
@@ -88,7 +88,7 @@ const useCollectionAdd = () => {
 
   const handleReset = () => {
     setFormData({
-      tenement_no: "",
+      tenement_address: "",
       collection_id: "",
       collection_name: "水電空調費",
       collection_type: "代收",
