@@ -63,7 +63,7 @@ export type TenementList = {
 };
 
 export type TenementSell = {
-  tenement_id: string;
+  tenement_id?: string;
   tenement_address: string;
   tenement_face: string;
 
@@ -75,11 +75,10 @@ export type TenementSell = {
   selling_price: string;
   buget_price?: string;
   total_rating: string;
-  inside_rating: string;
   public_building: string;
   tenement_floor: string;
   notices?: NoticeData[];
-  tenement_status: "未成交" | "已成交" | "已成交下架" | "過戶完成下架";
+  tenement_status:string;
   
 
 
@@ -112,7 +111,7 @@ export type TenementSell = {
 };
 
 export type TenementDevelop = {
-  tenement_id: string;
+  tenement_id?: string;
   total_rating: string;
   main_building: string;
   affiliated_building: string;
@@ -148,7 +147,7 @@ export type TenementRent = {
   tenement_type: string;
   tenement_face: string;
   tenement_images: string[];
-  tenement_status: "未成交" | "已成交" | "已成交下架" | "過戶完成下架";
+  tenement_status: string;
   total_rating: string;
   main_building: string;
   affiliated_building: string;
@@ -183,7 +182,7 @@ export type TenementRent = {
 };
 
 export type TenementMarket = {
-  tenement_id: string;
+  tenement_id?: string;
   tenement_address: string;
   tenement_product_type: string;
   tenement_type: string;

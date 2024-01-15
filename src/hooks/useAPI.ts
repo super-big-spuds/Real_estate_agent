@@ -9,7 +9,7 @@ import type {
   TenementSell,
   TenementDevelop,
   TenementRent,
-  TenementMarket
+  TenementMarket,
 } from "../type";
 
 const APIBaseURL = process.env.BASE_URL;
@@ -944,5 +944,44 @@ export function usePutNotice(){
     isError,
     isDone,
     handlePutNotice,
+  };
+}
+
+export function usePostAddTenement(){
+  const token = useToken();
+  const [isDone, setIsDone] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const handlePostAddTenement = async ( type:string, tenement: TenementSell| TenementRent|TenementMarket|TenementDevelop) => {
+    setIsLoading(true);
+    setIsDone(false);
+
+    const jsonFromData = JSON.stringify(tenement);
+
+    try {
+      const res = await muliteFetch(
+        `/tenement/add/${type}`,
+        "POST",
+        token,
+        jsonFromData
+      );
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+      setIsDone(true);
+      console.log(res)
+      
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    isDone,
+    handlePostAddTenement,
   };
 }

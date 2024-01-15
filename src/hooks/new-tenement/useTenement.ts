@@ -124,7 +124,7 @@ export function useTenementMarketInfo(tenementId: string) {
 }
 
 type ITenementRentInfoType = ITenementBasedInfoType & {
-  tenement_status: "未成交" | "已成交" | "已成交下架" | "過戶完成下架";
+  tenement_status: string;
   total_rating: string;
   main_building: string;
   affiliated_building: string;
@@ -408,7 +408,7 @@ export function useTenementDevelopInfo(tenementId: string) {
 }
 
 type ITenementSellInfoType = ITenementBasedInfoType & {
-  tenement_status: "未成交" | "已成交" | "已成交下架" | "過戶完成下架";
+  tenement_status: string;
 
   total_rating: string;
   main_building: string;

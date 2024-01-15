@@ -6,7 +6,7 @@ import RenterInfo from "./RenterInfo";
 import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
 import { memo, useState } from "react";
-import tenement from "../../mock/module/tenement";
+import { usePostAddTenement } from "../../hooks/useAPI";
 
 const SwitchTenementType = memo(
   (props: {
@@ -102,13 +102,10 @@ export default function TenementInfo(props: any) {
     renter_guarantor_name: "John Smith",
     renter_guarantor_phone: "1234567890",
     renter_remark: "No remarks",
-    buyer_photo: [
-      {
-        url: "https://example.com/image5.jpg",
-      },
-      {
-        url: "https://example.com/image6.jpg",
-      },
+    renter_id_images: [
+      "https://example.com/image5.jpg",
+       "https://example.com/image6.jpg",
+    
     ],
   });
 
@@ -167,9 +164,10 @@ export default function TenementInfo(props: any) {
       },
     ]);
   };
+
+  const { handlePostAddTenement} = usePostAddTenement();
   const handleSave = () => {
-    alert("儲存成功");
-    console.log(formData);
+    
     const rentData = {
       tenement_address: formData.tenement_address,
       tenement_product_type: formData.tenement_product_type,
@@ -201,6 +199,11 @@ export default function TenementInfo(props: any) {
     };
     
     const sellData ={
+      tenement_address: formData.tenement_address,
+      tenement_product_type: formData.tenement_product_type,
+      tenement_type: formData.tenement_type,
+      tenement_face: formData.tenement_face,
+      tenement_images: formData.tenement_images,
       tenement_status: formData.tenement_status,
       total_rating: formData.total_rating,
       main_building: formData.main_building,
@@ -211,7 +214,6 @@ export default function TenementInfo(props: any) {
       management_fee: formData.management_fee,
       selling_price: formData.selling_price,
       tenement_floor: formData.tenement_floor,
-      inside_rating: formData.inside_rating,
       tenement_host_name: formData.tenement_host_name,
       tenement_host_telphone: formData.tenement_host_telphone,
       tenement_host_phone: formData.tenement_host_phone,
@@ -222,7 +224,6 @@ export default function TenementInfo(props: any) {
       tenement_host_birthday: formData.tenement_host_birthday,
       tenement_host_hobby: formData.tenement_host_hobby,
       tenement_host_remark: formData.tenement_host_remark,
-      tenement_images: formData.tenement_images,
       ...sellerData,
     }
     const developerData ={
@@ -280,21 +281,21 @@ export default function TenementInfo(props: any) {
     
     switch (formData.tenement_type) {
       case "出租":
-        console.log(rentData);
+        handlePostAddTenement('rent', rentData);
         break;
       case "出售":
-        console.log(sellData);
+        handlePostAddTenement('sell', sellData);
         break;
       case "開發追蹤":
-        console.log(developerData);
-       
+        handlePostAddTenement('developer', developerData);
         break;
       case "行銷追蹤":
-        console.log(marketData);
+        handlePostAddTenement('market', marketData);
         break;
       default:
         break;
     }
+    alert("儲存成功");
 
   };
   const handleReset = () => {

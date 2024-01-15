@@ -238,6 +238,13 @@ export default [
     },
   },
   {
+    url: "/api/tenement/add/sell",
+    method: "post",
+    response: {
+      message: "Successfully add the media",
+    },
+  },
+  {
     url: "/api/tenement/edit/rent/:id",
     method: "get",
     response: {
@@ -291,6 +298,13 @@ export default [
     },
   },
   {
+    url: "/api/tenement/add/rent",
+    method: "post",
+    response: {
+      message: "Successfully add the media",
+    },
+  },
+  {
     url: "/api/tenement/edit/develop/:id",
     method: "get",
     response: {
@@ -339,6 +353,14 @@ export default [
     },
   },
   {
+    url: "/api/tenement/add/develop",
+    method: "post",
+    response: {
+      message: "Successfully add the media",
+    },
+  },
+
+  {
     url: "/api/tenement/edit/market/:id",
     method: "get",
     response: {
@@ -376,6 +398,13 @@ export default [
     method: "post",
     response: {
       message: "Successfully update the media",
+    },
+  },
+  {
+    url: "/api/tenement/add/market",
+    method: "post",
+    response: {
+      message: "Successfully save the media",
     },
   }
  
