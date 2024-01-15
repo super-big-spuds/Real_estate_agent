@@ -6,6 +6,7 @@ import RenterInfo from "./RenterInfo";
 import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
 import { memo, useState } from "react";
+import tenement from "../../mock/module/tenement";
 
 const SwitchTenementType = memo(
   (props: {
@@ -169,6 +170,132 @@ export default function TenementInfo(props: any) {
   const handleSave = () => {
     alert("儲存成功");
     console.log(formData);
+    const rentData = {
+      tenement_address: formData.tenement_address,
+      tenement_product_type: formData.tenement_product_type,
+      tenement_type: formData.tenement_type,
+      tenement_face: formData.tenement_face,
+      tenement_images: formData.tenement_images,
+      tenement_status: formData.tenement_status,
+      total_rating: formData.total_rating,
+      main_building: formData.main_building,
+      affiliated_building: formData.affiliated_building,
+      public_building: formData.public_building,
+      unregistered_area: formData.unregistered_area,
+      management_magnification: formData.management_magnification,
+      management_fee: formData.management_fee,
+      rent_price: formData.rent_price,
+      deposit_price: formData.deposit_price,
+      tenement_floor: formData.tenement_floor,
+      tenement_host_name: formData.tenement_host_name,
+      tenement_host_telphone: formData.tenement_host_telphone,
+      tenement_host_phone: formData.tenement_host_phone,
+      tenement_host_line: formData.tenement_host_line,
+      tenement_host_remittance_bank: formData.tenement_host_remittance_bank,
+      tenement_host_remittance_account: formData.tenement_host_remittance_account,
+      tenement_host_address: formData.tenement_host_address,
+      tenement_host_birthday: formData.tenement_host_birthday,
+      tenement_host_hobby: formData.tenement_host_hobby,
+      tenement_host_remark: formData.tenement_host_remark,
+      ...renterData,
+    };
+    
+    const sellData ={
+      tenement_status: formData.tenement_status,
+      total_rating: formData.total_rating,
+      main_building: formData.main_building,
+      affiliated_building: formData.affiliated_building,
+      public_building: formData.public_building,
+      unregistered_area: formData.unregistered_area,
+      management_magnification: formData.management_magnification,
+      management_fee: formData.management_fee,
+      selling_price: formData.selling_price,
+      tenement_floor: formData.tenement_floor,
+      inside_rating: formData.inside_rating,
+      tenement_host_name: formData.tenement_host_name,
+      tenement_host_telphone: formData.tenement_host_telphone,
+      tenement_host_phone: formData.tenement_host_phone,
+      tenement_host_line: formData.tenement_host_line,
+      tenement_host_remittance_bank: formData.tenement_host_remittance_bank,
+      tenement_host_remittance_account: formData.tenement_host_remittance_account,
+      tenement_host_address: formData.tenement_host_address,
+      tenement_host_birthday: formData.tenement_host_birthday,
+      tenement_host_hobby: formData.tenement_host_hobby,
+      tenement_host_remark: formData.tenement_host_remark,
+      tenement_images: formData.tenement_images,
+      ...sellerData,
+    }
+    const developerData ={
+      tenement_address: formData.tenement_address,
+      tenement_product_type: formData.tenement_product_type,
+      tenement_type: formData.tenement_type,
+      tenement_face: formData.tenement_face,
+      tenement_images: formData.tenement_images,
+      total_rating: formData.total_rating,
+      main_building: formData.main_building,
+      affiliated_building: formData.affiliated_building,
+      public_building: formData.public_building,
+      unregistered_area: formData.unregistered_area,
+      management_magnification: formData.management_magnification,
+      management_fee: formData.management_fee,
+      selling_price: formData.selling_price,
+      rent_price: formData.rent_price,
+      deposit_price: formData.deposit_price,
+      tenement_floor: formData.tenement_floor,
+      tenement_host_name: formData.tenement_host_name,
+      tenement_host_telphone: formData.tenement_host_telphone,
+      tenement_host_phone: formData.tenement_host_phone,
+      tenement_host_line: formData.tenement_host_line,
+      tenement_host_remittance_bank: formData.tenement_host_remittance_bank,
+      tenement_host_remittance_account: formData.tenement_host_remittance_account,
+      tenement_host_address: formData.tenement_host_address,
+      tenement_host_birthday: formData.tenement_host_birthday,
+      tenement_host_hobby: formData.tenement_host_hobby,
+      tenement_host_remark: formData.tenement_host_remark,
+    }
+    const marketData = {
+      tenement_address: formData.tenement_address,
+      tenement_product_type: formData.tenement_product_type,
+      tenement_type: formData.tenement_type,
+      tenement_face: formData.tenement_face,
+      tenement_images: formData.tenement_images,
+      tenement_host_name: formData.tenement_host_name,
+      tenement_host_telphone: formData.tenement_host_telphone,
+      tenement_host_phone: formData.tenement_host_phone,
+      tenement_host_line: formData.tenement_host_line,
+      tenement_host_remittance_bank: formData.tenement_host_remittance_bank,
+      tenement_host_remittance_account: formData.tenement_host_remittance_account,
+      tenement_host_address: formData.tenement_host_address,
+      tenement_host_birthday: formData.tenement_host_birthday,
+      tenement_host_hobby: formData.tenement_host_hobby,
+      tenement_host_remark: formData.tenement_host_remark,
+      tenement_area_max: formData.tenement_area_max,
+      tenement_area_min: formData.tenement_area_min,
+      burget_rent_max: formData.burget_rent_max,
+      burget_rent_min: formData.burget_rent_min,
+      hopefloor_max: formData.hopefloor_max,
+      hopefloor_min: formData.hopefloor_min,
+      market_state: formData.market_state,
+    };
+    
+    switch (formData.tenement_type) {
+      case "出租":
+        console.log(rentData);
+        break;
+      case "出售":
+        console.log(sellData);
+        break;
+      case "開發追蹤":
+        console.log(developerData);
+       
+        break;
+      case "行銷追蹤":
+        console.log(marketData);
+        break;
+      default:
+        break;
+    }
+
   };
   const handleReset = () => {
     setFormData({
