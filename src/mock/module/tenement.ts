@@ -206,7 +206,6 @@ export default [
         rent_price: "20000",
         deposit_price: "40000",
         tenement_floor: "7",
-        inside_rating: "4.5",
         
 
         tenement_host_name: "John Doe",

@@ -419,7 +419,6 @@ type ITenementSellInfoType = ITenementBasedInfoType & {
   management_fee: string;
   selling_price: string;
   tenement_floor: string;
-  inside_rating: string;
   
 
   tenement_host_name: string;
@@ -465,7 +464,6 @@ export function useTenementSellInfo(tenementId: string) {
     management_fee: "3000",
     selling_price: "500000",
     tenement_floor: "7",
-    inside_rating: "4.5",
  
 
     tenement_host_name: "John Doe",
@@ -521,7 +519,6 @@ export function useTenementSellInfo(tenementId: string) {
     setSellInfo({
       tenement_address: dataEdit.tenement_address,
       tenement_product_type: dataEdit.tenement_product_type,
-      inside_rating: dataEdit.inside_rating,
       tenement_type: dataEdit.tenement_type,
       tenement_face: dataEdit.tenement_face,
       tenement_images: dataEdit.tenement_images,
