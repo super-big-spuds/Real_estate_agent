@@ -245,6 +245,14 @@ export default [
     },
   },
   {
+    url: "/api/tenement/delete/sell/:id",
+    method: "DELETE",
+    response: {
+      message: "Successfully delete the media",
+    },
+  },
+
+  {
     url: "/api/tenement/edit/rent/:id",
     method: "get",
     response: {
@@ -305,6 +313,14 @@ export default [
     },
   },
   {
+    url: "/api/tenement/delete/rent/:id",
+    method: "DELETE",
+    response: {
+      message: "Successfully delete the media",
+    },
+  },
+
+  {
     url: "/api/tenement/edit/develop/:id",
     method: "get",
     response: {
@@ -359,6 +375,13 @@ export default [
       message: "Successfully add the media",
     },
   },
+  {
+    url: "/api/tenement/delete/develop/:id",
+    method: "DELETE",
+    response: {
+      message: "Successfully delete the media",
+    },
+  },
 
   {
     url: "/api/tenement/edit/market/:id",
@@ -406,6 +429,12 @@ export default [
     response: {
       message: "Successfully save the media",
     },
+  },
+  {
+    url: "/api/tenement/delete/market/:id",
+    method: "DELETE",
+    response: {
+      message: "Successfully delete the media",
+    },
   }
- 
 ] as MockMethod[];

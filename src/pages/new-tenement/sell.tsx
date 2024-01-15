@@ -26,6 +26,14 @@ export default function Rent() {
     sellHook.handlers.handleSave();
   };
 
+
+  const onDelete = () => {
+    if (window.confirm("確定要刪除嗎?")) {
+      sellHook.handlers.handleDelete();
+    }
+  }
+
+
   const isLoading = sellHook.states.isLoading || noticeHook.states.isLoading;
   const isError = sellHook.states.isError || noticeHook.states.isError;
 
@@ -675,7 +683,7 @@ export default function Rent() {
             儲存
           </Button>
           <Button type="default">回復預設</Button>
-          <Button danger>刪除</Button>
+          <Button danger onClick={onDelete}>刪除</Button>
         </div>
       </div>
     </div>

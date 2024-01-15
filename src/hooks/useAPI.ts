@@ -985,3 +985,41 @@ export function usePostAddTenement(){
     handlePostAddTenement,
   };
 }
+
+export function useDeleteTenement(){
+  const token = useToken();
+  const [isDone, setIsDone] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const handleDeleteTenement = async (  tenement_id:string) => {
+    setIsLoading(true);
+    setIsDone(false);
+
+
+    try {
+      const res = await muliteFetch(
+        `/delete/tenement/${tenement_id}`,
+        "DELETE",
+        token,
+        null
+      );
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+      setIsDone(true);
+      console.log(res)
+      
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    isDone,
+    handleDeleteTenement,
+  };
+}

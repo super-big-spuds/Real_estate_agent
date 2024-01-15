@@ -159,7 +159,13 @@ const useCollectionEdit = () => {
     if (!id) return;
     getNotice(id,'collection');
   }
-  , [id,dataNotice,isDone]);
+  , [id,isDone]);
+
+  useEffect(() => {
+    if (dataNotice) {
+      setNotices(dataNotice);
+    }
+  }, [dataNotice]);
 
   useEffect(() => {
     if (!dataEdit) return;
@@ -178,8 +184,7 @@ const useCollectionEdit = () => {
       cus_remittance_bank: dataEdit.cus_remittance_bank,
       collection_complete: dataEdit.collection_complete,
     });
-    if (!dataNotice) return;
-    setNotices(dataNotice);
+
   }, [dataEdit]);
 
   return {

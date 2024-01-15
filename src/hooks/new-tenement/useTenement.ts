@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGetSellEdit, usePostSellEdit, useGetDevelopEdit, usePostDevelopEdit, useGetRentEdit, usePostRentEdit, useGetMarketEdit, usePostMarketEdit} from "../useAPI";
+import { useGetSellEdit, usePostSellEdit, useGetDevelopEdit, usePostDevelopEdit, useGetRentEdit, usePostRentEdit, useGetMarketEdit, usePostMarketEdit, useDeleteTenement} from "../useAPI";
 
 
 type ITenementBasedInfoType = {
@@ -77,6 +77,13 @@ export function useTenementMarketInfo(tenementId: string) {
     alert("儲存成功");
   };
 
+  const {handleDeleteTenement } = useDeleteTenement();
+  const handleDelete = () => {
+    if (!tenementId) return;
+    handleDeleteTenement(tenementId);
+    alert("刪除成功");
+  };
+
   const { getMarketEdit, dataEdit, isError, isLoading } = useGetMarketEdit();
   useEffect(() => {
     getMarketEdit(tenementId);
@@ -119,6 +126,7 @@ export function useTenementMarketInfo(tenementId: string) {
     handlers: {
       handleChange,
       handleSave,
+      handleDelete
     },
   };
 }
@@ -216,6 +224,12 @@ export function useTenementRentInfo(tenementId: string) {
     handleSaveColumn(rentinfo);
   };
 
+  const {handleDeleteTenement } = useDeleteTenement();
+  const handleDelete = () => {
+    if (!tenementId) return;
+    handleDeleteTenement(tenementId);
+    alert("刪除成功");
+  };
 
   const { getRentEdit, dataEdit, isError, isLoading } = useGetRentEdit();
 
@@ -274,6 +288,7 @@ export function useTenementRentInfo(tenementId: string) {
     handlers: {
       handleChange,
       handleSave,
+      handleDelete
     },
   };
 }
@@ -357,6 +372,13 @@ export function useTenementDevelopInfo(tenementId: string) {
     handleSaveColumn(developinfo);
     alert("儲存成功");
   };
+
+  const {handleDeleteTenement } = useDeleteTenement();
+  const handleDelete = () => {
+    if (!tenementId) return;
+    handleDeleteTenement(tenementId);
+    alert("刪除成功");
+  };
   const { getDevelopEdit, dataEdit,isError,isLoading } = useGetDevelopEdit();
 
   useEffect(() => {
@@ -403,6 +425,7 @@ export function useTenementDevelopInfo(tenementId: string) {
     handlers: {
       handleChange,
       handleSave,
+      handleDelete,
     },
   };
 }
@@ -508,6 +531,13 @@ export function useTenementSellInfo(tenementId: string) {
 
   };
 
+  const {handleDeleteTenement } = useDeleteTenement();
+  const handleDelete = () => {
+    if (!tenementId) return;
+    handleDeleteTenement(tenementId);
+    alert("刪除成功");
+  };
+
   const { getSellEdit, dataEdit,isError,isLoading } = useGetSellEdit();
 
   useEffect(() => {
@@ -562,6 +592,7 @@ export function useTenementSellInfo(tenementId: string) {
     handlers: {
       handleChange,
       handleSave,
+      handleDelete,
     },
   };
 }

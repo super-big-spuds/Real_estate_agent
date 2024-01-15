@@ -33,6 +33,14 @@ export default function CollectionMange(props: any) {
     formData.cus_remittance_bank = "";
     formData.cus_remittance_account = "";
   }
+  const getParams = () => {
+    const parama = window.location.href.split("/")[4];
+    if (parama === "Add") {
+      return false;
+    }
+    return true;
+  }
+    
 
   return (
     <div className="flex flex-col w-full h-full ">
@@ -231,9 +239,11 @@ export default function CollectionMange(props: any) {
           <Button type="default" onClick={() => handleReset()}>
             回復預設
           </Button>
-          <Button onClick={() => handleDeleteCollection()} danger>
+         {
+            getParams() && <Button type="primary" danger onClick={() => handleDeleteCollection()}>
             刪除
           </Button>
+         }
         </div>
       </div>
     </div>
