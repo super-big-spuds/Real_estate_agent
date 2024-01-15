@@ -37,7 +37,7 @@ export default function Rent() {
         "是否要切換案件型態?(請確實按下儲存，避免切換後部分資料會遺失)"
       )
     ) {
-      const id = window.location.pathname.split("/")[3];
+      const id = window.location.pathname.split("/")[2];
       switch (e.target.value) {
         case "出租":
           navigate("/tenement/" + id + "/rent");

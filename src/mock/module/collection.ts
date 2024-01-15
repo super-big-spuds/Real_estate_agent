@@ -14,6 +14,7 @@ export default [
         payment: "現金",
         collection_remark: "10樓以下",
         collection_date: "2023-01-01",
+        collection_complete: "是",
         notices: [
           {
             id: "1",
@@ -43,6 +44,7 @@ export default [
         remittance_account: "123456789",
         cus_remittance_bank: "土地銀行",
         cus_remittance_account: "987654321",
+        collection_complete: "是",
         notices: [
           {
             id: "1",
@@ -86,6 +88,7 @@ export default [
         remittance_account: "123456789",
         cus_remittance_bank: "土地銀行",
         cus_remittance_account: "987654321",
+        collection_complete: "是",
         notices: [
           {
             id: "5",
@@ -136,6 +139,7 @@ export default [
         remittance_account: "123456789",
         cus_remittance_bank: "土地銀行",
         cus_remittance_account: "987654321",
+        collection_complete: "是",
         notices: [
           {
             id: "9",

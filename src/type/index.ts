@@ -29,7 +29,7 @@ export type NoticeData = {
   record: string;
   remindDate: string;
   remind: string;
-  isNew: boolean;
+  isNew?: boolean;
 };
 
 export type User = {

@@ -206,7 +206,7 @@ export function usePostCollectionEdit() {
     setIsLoading(true);
     try {
       const res = await muliteFetch(
-        `/collection/notice/${id}`,
+        `/notices/${id}/collection`,
         "DELETE",
         token,
         id
@@ -214,6 +214,8 @@ export function usePostCollectionEdit() {
       if (!res.ok) {
         throw new Error(res.statusText);
       }
+      console.log(res);
+      
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -454,11 +456,11 @@ export function useDeleteNotice() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const handleDeleteNotice = async (id: string) => {
+  const handleDeleteNoticeApi = async (id: string,type:string) => {
     setIsLoading(true);
     try {
       const res = await muliteFetch(
-        `/collection/notices/${id}`,
+        `/notices/${id}/${type}`,
         "DELETE",
         token,
         id
@@ -476,7 +478,7 @@ export function useDeleteNotice() {
   return {
     isLoading,
     isError,
-    handleDeleteNotice,
+    handleDeleteNoticeApi,
   };
 }
 
@@ -838,5 +840,109 @@ export function usePostMarketEdit(){
     isLoading,
     isError,
     handleSaveColumn,
+  };
+}
+
+export function useGetNotice(){
+  const token = "";
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [dataNotice, setData] = useState<NoticeData[]>([]);
+
+  const getNotice = async (id: string, type:string) => {
+    try {
+      const res = await getFetch(`/notices/${id}/${type}`, token);
+      const data = await res.json();
+      setData(data.data);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    getNotice,
+    dataNotice,
+  };
+}
+
+export function usePostAddNotice(){
+  const token = useToken();
+  const [isDone, setIsDone] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const handlePostAddNotice = async ( type:string, notices:NoticeData[]) => {
+    setIsLoading(true);
+    setIsDone(false);
+
+    const jsonFromData = JSON.stringify(notices);
+
+    try {
+      const res = await muliteFetch(
+        `/notices/${type}`,
+        "POST",
+        token,
+        jsonFromData
+      );
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+      setIsDone(true);
+      console.log(res)
+      
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    isDone,
+    handlePostAddNotice,
+  };
+}
+
+export function usePutNotice(){
+  const token = useToken();
+  const [isDone, setIsDone] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const handlePutNotice = async ( type:string, notices:NoticeData[]) => {
+    setIsLoading(true);
+    setIsDone(false);
+
+    const jsonFromData = JSON.stringify(notices);
+
+    try {
+      const res = await muliteFetch(
+        `/notices/${type}`,
+        "PUT",
+        token,
+        jsonFromData
+      );
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+      setIsDone(true);
+      console.log(res)
+      
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    isDone,
+    handlePutNotice,
   };
 }

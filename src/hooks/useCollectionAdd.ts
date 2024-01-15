@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { usePostCollectionAdd } from "./useAPI";
+import { usePostCollectionAdd,   usePutNotice } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { z } from "zod";
 import moment from "moment";
 const useCollectionAdd = () => {
-  const { handleSaveColumn, handleSaveNotice } = usePostCollectionAdd();
+  const { handleSaveColumn } = usePostCollectionAdd();
   const nowdatestring = moment().format("YYYY-MM-DD");
   const [notices, setNotices] = useState<NoticeData[]>([]);
   const [formData, setFormData] = useState<FormData>({
@@ -52,7 +52,7 @@ const useCollectionAdd = () => {
       return newNotices;
     });
   };
-
+  const { handlePutNotice } = usePutNotice();
   const handleSave = async () => {
     const schemaform = z.object({
       tenement_address: z.string().min(2, "地址至少兩個字"),
@@ -72,6 +72,7 @@ const useCollectionAdd = () => {
 
     const parseResult = schemaform.safeParse(formData);
 
+
     if (!parseResult.success) {
       const errorMessages = parseResult.error.errors.map((error) => {
         return error.message;
@@ -82,7 +83,7 @@ const useCollectionAdd = () => {
     }
 
     await handleSaveColumn(parseResult.data);
-    await handleSaveNotice(notices);
+    await handlePutNotice('collection',notices);
     alert("儲存成功");
   };
 

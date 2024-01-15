@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useGetNotice, usePostAddNotice, usePutNotice, useDeleteNotice } from "../useAPI";
+
 
 type ITenementType = "develop" | "rent" | "sell" | "market";
 
@@ -23,64 +25,54 @@ export default function useTenementNotice(
       remind: "提醒事項1",
     },
   ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-
+  const { isLoading, isError, getNotice, dataNotice } = useGetNotice();
+  const { handlePostAddNotice, isDone } = usePostAddNotice();
+  const { handlePutNotice } = usePutNotice();
+  const handleSaveNoticeData = () => {
+    handlePutNotice( tenementType, notices);
+  };
+  const handleAddNotice = () => {
+    const newNotice = {
+      id:"",
+      visitDate: "",
+      record: "",
+      remindDate: "",
+      remind: "",
+      isNew: true,
+    };
+    handlePostAddNotice( tenementType, [newNotice] );
+  };
+  
+  
   useEffect(() => {
-    setIsLoading(true);
-    try {
-      // handle fetch data here based on tenementId and noticeType
-      console.log(tenementType, tenementId);
+    getNotice( tenementId,tenementType);
 
-      setNotices([
-        {
-          id: "1",
-          visitDate: "2024-01-01",
-          record: "紀錄事項1",
-          remindDate: "2024-01-01",
-          remind: "提醒事項1",
-        },
-        {
-          id: "2",
-          visitDate: "2024-01-01",
-          record: "紀錄事項2",
-          remindDate: "2024-01-01",
-          remind: "提醒事項2",
-        },
-      ]);
-      setIsLoading(false);
-    } catch (error) {
-      setIsError(true);
+  }, [ tenementType, tenementId, isDone ]);
+  
+  useEffect(() => {
+    if (dataNotice) {
+      setNotices(dataNotice);
     }
-  }, [tenementType, tenementId]);
-
+  }, [dataNotice]);
+  
+  
   const handleNoticeChange = (index: number, key: string, value: string) => {
     setNotices((prev) =>
-      prev.map((notice, i) =>
-        i === index ? { ...notice, [key]: value } : notice
+    prev.map((notice, i) =>
+    i === index ? { ...notice, [key]: value } : notice
       )
     );
   };
+
+  const { handleDeleteNoticeApi} = useDeleteNotice();
   const handleDeleteNotice = (index: number) => {
+    handleDeleteNoticeApi(  notices[index].id,tenementType);
     setNotices((prev) => prev.filter((_, i) => i !== index));
   };
-  const handleAddNotice = () => {
-    setNotices((prev) => [
-      ...prev,
-      {
-        id: "",
-        visitDate: "2024-01-01",
-        record: "",
-        remindDate: "2024-01-01",
-        remind: "",
-      },
-    ]);
-  };
+  
+ 
+  
 
-  const handleSaveNoticeData = () => {
-    // handle save data here
-    console.log(notices);
-  };
 
   return {
     states: {

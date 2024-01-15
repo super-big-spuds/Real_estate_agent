@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useGetCollectionEdit, usePostCollectionEdit } from "./useAPI";
+import { useGetCollectionEdit, usePostCollectionEdit, useGetNotice, usePostAddNotice, usePutNotice, useDeleteNotice } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { useParams } from "react-router-dom";
 import { z } from "zod";
@@ -10,10 +10,16 @@ const useCollectionEdit = () => {
     useGetCollectionEdit();
   const {
     handleSaveColumn,
-    handleSaveNotice,
+
     handleDeleteNoticeFetch,
     handleDeleteCollectionFetch,
   } = usePostCollectionEdit();
+
+  const { handlePutNotice } = usePutNotice();
+  const { handlePostAddNotice,isDone } = usePostAddNotice();
+  const { getNotice,dataNotice } = useGetNotice();
+  const { handleDeleteNoticeApi} = useDeleteNotice();
+
   const nowdatestring = moment().format("YYYY-MM-DD");
   const { id } = useParams();
   const [notices, setNotices] = useState<NoticeData[]>([]);
@@ -55,6 +61,7 @@ const useCollectionEdit = () => {
   };
 
   const handleDeleteNotice = (index: number) => {
+    handleDeleteNoticeApi(  notices[index].id,'collection');
     setNotices((prevNotices) => {
       const newNotices = [...prevNotices];
       newNotices.splice(index, 1);
@@ -100,7 +107,7 @@ const useCollectionEdit = () => {
     };
     await handleSaveColumn(newformdata);
     if (notices.length > 0) {
-      await handleSaveNotice(notices);
+      await  handlePutNotice( 'collection', notices);
     }
     alert("儲存成功");
   };
@@ -123,21 +130,19 @@ const useCollectionEdit = () => {
 
     });
     setNotices([]);
+    
   };
 
   const handleAddNotice = () => {
-    setNotices((prevNotices) => {
-      const newNotices = [...prevNotices];
-      newNotices.push({
-        id: Math.random().toString(),
-        visitDate: nowdatestring,
-        record: "",
-        remindDate: nowdatestring,
-        remind: "",
-        isNew: true,
-      });
-      return newNotices;
-    });
+    const newNotice = {
+      id:"",
+      visitDate: "",
+      record: "",
+      remindDate: "",
+      remind: "",
+      isNew: true,
+    };
+    handlePostAddNotice( 'collection', [newNotice] );
   };
 
   const getapi = async () => {
@@ -147,7 +152,14 @@ const useCollectionEdit = () => {
 
   useEffect(() => {
     getapi();
+    
   }, []);
+
+  useEffect(() => {
+    if (!id) return;
+    getNotice(id,'collection');
+  }
+  , [id,dataNotice,isDone]);
 
   useEffect(() => {
     if (!dataEdit) return;
@@ -166,7 +178,8 @@ const useCollectionEdit = () => {
       cus_remittance_bank: dataEdit.cus_remittance_bank,
       collection_complete: dataEdit.collection_complete,
     });
-    setNotices(dataEdit.notices as NoticeData[]);
+    if (!dataNotice) return;
+    setNotices(dataNotice);
   }, [dataEdit]);
 
   return {

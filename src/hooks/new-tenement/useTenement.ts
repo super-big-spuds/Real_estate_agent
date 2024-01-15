@@ -326,7 +326,6 @@ export function useTenementDevelopInfo(tenementId: string) {
     deposit_price: "40000",
     tenement_floor: "7",
 
-
     tenement_host_name: "John Doe",
     tenement_host_telphone: "1234567890",
     tenement_host_phone: "0987654321",
