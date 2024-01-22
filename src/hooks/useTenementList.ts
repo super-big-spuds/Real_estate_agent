@@ -1,48 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+
 import getColumnSearchProps from "../components/getColumnSearchProps";
-import { useGetTenementList } from "./useAPI";
+
 import type { TenementList } from "../type";
 
 const useTenementList = () => {
-  const [data, setData] = useState<TenementList[]>([
-    {
-      tenement_address: 54321,
-      tenement_face: "a",
-      tenement_status: "a",
-      tenement_type: "a",
-      tenement_style: "a",
-      management_fee_bottom: 100,
-      management_floor_bottom: 7,
-    },
-    {
-      tenement_address: 54322,
-      tenement_face: "b",
-      tenement_status: "b",
-      tenement_type: "b",
-      tenement_style: "b",
-      management_fee_bottom: 120,
-      management_floor_bottom: 11,
-    },
-    {
-      tenement_address: 54323,
-      tenement_face: "c",
-      tenement_status: "c",
-      tenement_type: "c",
-      tenement_style: "c",
-      management_fee_bottom: 150,
-      management_floor_bottom: 3,
-    },
-    {
-      tenement_address: 54323,
-      tenement_face: "d",
-      tenement_status: "d",
-      tenement_type: "d",
-      tenement_style: "d",
-      management_fee_bottom: 150,
-      management_floor_bottom: 3,
-    },
-  ]);
   type ColumnsType = {
     title: string;
     dataIndex: string;
@@ -97,9 +59,9 @@ const useTenementList = () => {
           value: "海景風洞",
         },
         {
-          text:"其他",
-          value:"其他"
-        }
+          text: "其他",
+          value: "其他",
+        },
       ],
       onFilter: (value, record) => record.tenement_face.includes(value),
     },
@@ -127,9 +89,9 @@ const useTenementList = () => {
           value: "過戶完成下架",
         },
         {
-          text:"開發中",
-          value:"開發中"
-        }
+          text: "開發中",
+          value: "開發中",
+        },
       ],
       onFilter: (value, record) => record.tenement_status.includes(value),
     },
@@ -192,25 +154,6 @@ const useTenementList = () => {
     },
   ];
 
-  const { isLoading, isError, dataTenement } = useGetTenementList();
-  useEffect(() => {
-    if (dataTenement) {
-      const data = dataTenement.map((item) => {
-        return {
-          tenement_address: item.tenement_address,
-          tenement_face: item.tenement_face,
-          tenement_status: item.tenement_status,
-          tenement_type: item.tenement_type,
-          tenement_style: item.tenement_style,
-          management_fee_bottom: item.management_fee_bottom,
-          management_floor_bottom: item.management_floor_bottom,
-          key: item.tenement_address,
-        };
-      });
-      setData(data);
-    }
-  }, [dataTenement]);
-
   const navigate = useNavigate();
   const switchType = (type: string) => {
     switch (type) {
@@ -230,17 +173,16 @@ const useTenementList = () => {
     return {
       onClick: () => {
         navigate(
-          `/Tenement/${record.tenement_address}/${switchType(record.tenement_type)}`
+          `/Tenement/${record.tenement_address}/${switchType(
+            record.tenement_type
+          )}`
         );
       },
     };
   };
   return {
-    data,
     columns,
     onRow,
-    isLoading,
-    isError,
   };
 };
 

@@ -3,6 +3,7 @@ import { MockMethod } from "vite-plugin-mock";
 export default [
   {
     url: "/api/tenements",
+    // 這裡會有query string 要在utf-8編碼下才能正確解析 例如: /api/tenements?tenement_status=已成交
     method: "get",
     response: {
       message: "Successfully update the media",
@@ -46,8 +47,10 @@ export default [
       ],
     },
   },
+
   {
     url: "/api/tenements/rent",
+    // 這裡會有query string 要在utf-8編碼下才能正確解析 例如: /api/tenements?tenement_status=已成交
     method: "get",
     response: {
       message: "Successfully update the media",
@@ -107,79 +110,76 @@ export default [
           inside_rating: 150,
           public_building: 150,
           tenement_floor: 150,
-        }
-
-        
+        },
       ],
     },
   },
-    {
-      url: "/api/tenements/sell",
-      method: "get",
-      response: {
-        message: "Successfully update the media",
-        data: [
-          {
-            tenement_address: 54321,
-            tenement_face: "海景",
-            tenement_status: "未成交",
-            tenement_type: "出售",
-            tenement_style: "辦公室",
-            management_fee_bottom: 100,
-            management_floor_bottom: 7,
-            selling_price: 100,
-            Total_rating: 100,
-            inside_rating: 100,
-            public_building: 100,
-            tenement_floor: 100,
-          },
-          {
-            tenement_address: 54322,
-            tenement_face: "中庭",
-            tenement_status: "已成交",
-            tenement_type: "出租",
-            tenement_style: "店面",
-            management_fee_bottom: 120,
-            management_floor_bottom: 11,
-            selling_price: 120,
-            Total_rating: 120,
-            inside_rating: 120,
-            public_building: 120,
-            tenement_floor: 120,
-          },
-          {
-            tenement_address: 54323,
-            tenement_face: "三多路",
-            tenement_status: "已退租下架",
-            tenement_type: "開發追蹤",
-            tenement_style: "套房",
-            management_fee_bottom: 150,
-            management_floor_bottom: 3,
-            selling_price: 150,
-            Total_rating: 150,
-            inside_rating: 150,
-            public_building: 150,
-            tenement_floor: 150,
-            
-          },
-          {
-            tenement_address: 54323,
-            tenement_face: "三多路",
-            tenement_status: "過戶完成下架",
-            tenement_type: "行銷追蹤",
-            tenement_style: "套房",
-            management_fee_bottom: 150,
-            management_floor_bottom: 3,
-            selling_price: 150,
-            Total_rating: 150,
-            inside_rating: 150,
-            public_building: 150,
-            tenement_floor: 150,
-          },
-        ],
-      },
-
+  {
+    url: "/api/tenements/sell",
+    // 這裡會有query string 要在utf-8編碼下才能正確解析 例如: /api/tenements?tenement_status=已成交
+    method: "get",
+    response: {
+      message: "Successfully update the media",
+      data: [
+        {
+          tenement_address: 54321,
+          tenement_face: "海景",
+          tenement_status: "未成交",
+          tenement_type: "出售",
+          tenement_style: "辦公室",
+          management_fee_bottom: 100,
+          management_floor_bottom: 7,
+          selling_price: 100,
+          Total_rating: 100,
+          inside_rating: 100,
+          public_building: 100,
+          tenement_floor: 100,
+        },
+        {
+          tenement_address: 54322,
+          tenement_face: "中庭",
+          tenement_status: "已成交",
+          tenement_type: "出租",
+          tenement_style: "店面",
+          management_fee_bottom: 120,
+          management_floor_bottom: 11,
+          selling_price: 120,
+          Total_rating: 120,
+          inside_rating: 120,
+          public_building: 120,
+          tenement_floor: 120,
+        },
+        {
+          tenement_address: 54323,
+          tenement_face: "三多路",
+          tenement_status: "已退租下架",
+          tenement_type: "開發追蹤",
+          tenement_style: "套房",
+          management_fee_bottom: 150,
+          management_floor_bottom: 3,
+          selling_price: 150,
+          Total_rating: 150,
+          inside_rating: 150,
+          public_building: 150,
+          tenement_floor: 150,
+        },
+        {
+          tenement_address: 54323,
+          tenement_face: "三多路",
+          tenement_status: "過戶完成下架",
+          tenement_type: "行銷追蹤",
+          tenement_style: "套房",
+          management_fee_bottom: 150,
+          management_floor_bottom: 3,
+          selling_price: 150,
+          Total_rating: 150,
+          inside_rating: 150,
+          public_building: 150,
+          tenement_floor: 150,
+        },
+      ],
     },
+  },
 
   {
     url: "/api/tenement/edit/sell/:id",
@@ -206,7 +206,6 @@ export default [
         rent_price: "20000",
         deposit_price: "40000",
         tenement_floor: "7",
-        
 
         tenement_host_name: "John Doe",
         tenement_host_telphone: "1234567890",
@@ -228,7 +227,6 @@ export default [
         buyer_remark: "No remarks",
       },
     },
-  
   },
   {
     url: "/api/tenement/edit/sell/:id",
@@ -344,9 +342,7 @@ export default [
         rent_price: "20000",
         deposit_price: "40000",
         tenement_floor: "7",
-        
-    
-    
+
         tenement_host_name: "John Doe",
         tenement_host_telphone: "1234567890",
         tenement_host_phone: "0987654321",
@@ -436,5 +432,5 @@ export default [
     response: {
       message: "Successfully delete the media",
     },
-  }
+  },
 ] as MockMethod[];

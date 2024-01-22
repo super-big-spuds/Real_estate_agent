@@ -3,10 +3,13 @@ import { Breadcrumb, Button, Form, Input, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
 import useTenementList from "../../hooks/useTenementList";
 import FilterModule from "../../components/FilterModule";
-import {  useState } from "react";
-import { RuleObject } from 'rc-field-form/lib/interface';
 
-export const TenementList = () => {
+import { RuleObject } from "rc-field-form/lib/interface";
+import { useEffect, useState } from "react";
+import { useGetTenementList } from "../../hooks/useAPI";
+import type { TenementList } from "../../type";
+
+export const TenementLists = () => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/Tenement/Add");
@@ -15,11 +18,11 @@ export const TenementList = () => {
   const handlePopout = () => {
     setPopout(!Popout);
   };
-  const [breadcrumbItems, setBreadcrumbItems] = useState<{ [x: string]: unknown; }[]>([
-    { title: "全部房屋", value: "房屋列表" },
-  ]);
+  const [breadcrumbItems, setBreadcrumbItems] = useState<
+    { [x: string]: unknown }[]
+  >([{ title: "全部房屋", value: "房屋列表" }]);
 
-   const switchTitletoChinese = (title:string) => {
+  const switchTitletoChinese = (title: string) => {
     switch (title) {
       case "tenement_address":
         return "地址";
@@ -43,36 +46,98 @@ export const TenementList = () => {
         return "樓層 min";
       case "floor_max":
         return "樓層 max";
-
     }
-  }
+  };
 
   type item = {
     title: string;
     value: string;
   };
 
-  const handleSelect = (data:[]) => {
-    console.log("Received values of form: ", data);
+  const { columns, onRow } = useTenementList();
+  const [data, setData] = useState<TenementList[]>([
+    {
+      tenement_address: 54321,
+      tenement_face: "a",
+      tenement_status: "a",
+      tenement_type: "a",
+      tenement_style: "a",
+      management_fee_bottom: 100,
+      management_floor_bottom: 7,
+    },
+    {
+      tenement_address: 54322,
+      tenement_face: "b",
+      tenement_status: "b",
+      tenement_type: "b",
+      tenement_style: "b",
+      management_fee_bottom: 120,
+      management_floor_bottom: 11,
+    },
+    {
+      tenement_address: 54323,
+      tenement_face: "c",
+      tenement_status: "c",
+      tenement_type: "c",
+      tenement_style: "c",
+      management_fee_bottom: 150,
+      management_floor_bottom: 3,
+    },
+    {
+      tenement_address: 54323,
+      tenement_face: "d",
+      tenement_status: "d",
+      tenement_type: "d",
+      tenement_style: "d",
+      management_fee_bottom: 150,
+      management_floor_bottom: 3,
+    },
+  ]);
+  const { isLoading, isError, dataTenement, handleGetTenement } =
+    useGetTenementList();
+  useEffect(() => {
+    handleGetTenement("");
+  }, []);
 
-    const filterData = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== undefined));
-    const filterDataTitle = Object.entries(filterData).map(([k, v]) => ({ title: k, value: v }));
-    filterDataTitle.forEach((item:item) => {
+  useEffect(() => {
+    if (!dataTenement) return;
+    const data = dataTenement.map((item) => {
+      return {
+        tenement_address: item.tenement_address,
+        tenement_face: item.tenement_face,
+        tenement_status: item.tenement_status,
+        tenement_type: item.tenement_type,
+        tenement_style: item.tenement_style,
+        management_fee_bottom: item.management_fee_bottom,
+        management_floor_bottom: item.management_floor_bottom,
+        key: item.tenement_address,
+      };
+    });
+    setData(data);
+  }, [dataTenement]);
+
+  const handleSelect = (data: []) => {
+    handleGetTenement(data);
+    const filterData = Object.fromEntries(
+      Object.entries(data).filter(([_, v]) => v !== undefined)
+    );
+    const filterDataTitle = Object.entries(filterData).map(([k, v]) => ({
+      title: k,
+      value: v,
+    }));
+    filterDataTitle.forEach((item: item) => {
       const newTitle = switchTitletoChinese(item.title);
       if (newTitle !== undefined) {
         item.title = newTitle;
       }
     });
     setBreadcrumbItems(filterDataTitle);
-  }
+  };
   const handleReset = () => {
     setBreadcrumbItems([{ title: "全部房屋", value: "房屋列表" }]);
     form.resetFields();
-  }
-  
-
-  const { data, columns, onRow, isError, isLoading } = useTenementList();
-
+    handleGetTenement("");
+  };
 
   const [form] = Form.useForm();
   const validateMax = (minKey: string, maxKey: string) => {
@@ -99,8 +164,9 @@ export const TenementList = () => {
         </Button>
       </div>
       {/* breadcrumb */}
-      <span>篩選條件</span><Breadcrumb className="mb-5" items={breadcrumbItems} />
-  
+      <span>篩選條件</span>
+      <Breadcrumb className="mb-5" items={breadcrumbItems} />
+
       {isLoading ? (
         <p>loading...</p>
       ) : isError ? (
@@ -108,18 +174,23 @@ export const TenementList = () => {
       ) : (
         <Table data={data} columns={columns} onRow={onRow} />
       )}
-      {Popout && <FilterModule handlePopout={handlePopout} handleSelect={handleSelect} validateMax={validateMax} form={form} type={"房屋"}
-      >
+      {Popout && (
+        <FilterModule
+          handlePopout={handlePopout}
+          handleSelect={handleSelect}
+          validateMax={validateMax}
+          form={form}
+          type={"房屋"}
+        >
           <Form.Item name="tenement_type" label="物件型態">
             <Checkbox.Group>
               <Checkbox value="出租">出租</Checkbox>
               <Checkbox value="出售">出售</Checkbox>
               <Checkbox value="開發追蹤">開發追蹤</Checkbox>
               <Checkbox value="行銷追蹤">行銷追蹤</Checkbox>
-
             </Checkbox.Group>
           </Form.Item>
-         <div className="inline-flex gap-6">
+          <div className="inline-flex gap-6">
             <Form.Item
               name="rent_price_min"
               label="租金"
@@ -128,7 +199,13 @@ export const TenementList = () => {
               <Input type="number" placeholder="mix" />
             </Form.Item>
             <p className="mt-1">~</p>
-            <Form.Item name="rent_price_max" rules={[{ message: "請輸入租金 max" }, { validator: validateMax("rent_price_min", "rent_price_max") }]}>
+            <Form.Item
+              name="rent_price_max"
+              rules={[
+                { message: "請輸入租金 max" },
+                { validator: validateMax("rent_price_min", "rent_price_max") },
+              ]}
+            >
               <Input type="number" placeholder="max" />
             </Form.Item>
           </div>
@@ -145,14 +222,20 @@ export const TenementList = () => {
               name="selling_price_max"
               rules={[
                 { message: "請輸入售價 max" },
-                { validator: validateMax("selling_price_min", "selling_price_max") },
+                {
+                  validator: validateMax(
+                    "selling_price_min",
+                    "selling_price_max"
+                  ),
+                },
               ]}
             >
               <Input type="number" placeholder="max" />
             </Form.Item>
           </div>
-        </FilterModule>}
+        </FilterModule>
+      )}
     </div>
   );
 };
-export default TenementList;
+export default TenementLists;
