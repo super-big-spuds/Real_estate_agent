@@ -530,10 +530,19 @@ export function useGetTenementListSell() {
   const [isError, setIsError] = useState(false);
   const [dataTenement, setDataTenement] = useState<TenementList[]>([]);
 
-  const handleGetTenement = async () => {
+  const handleGetTenement = async (
+    query: { [s: string]: string } | ArrayLike<string> | undefined
+  ) => {
     setIsLoading(true);
+    // drop undefined
+    const querys = Object.fromEntries(
+      Object.entries(query || {}).filter(([, value]) => value !== undefined)
+    );
+    const queryString = Object.keys(querys)
+      .map((key) => `${key}=${querys[key]}`)
+      .join("&");
     try {
-      const res = await getFetch(`/tenements/sell`, token);
+      const res = await getFetch(`/tenements/sell?${queryString}`, token);
       const data = await res.json();
       setDataTenement(data.data);
     } catch (error) {
@@ -543,13 +552,11 @@ export function useGetTenementListSell() {
       setIsLoading(false);
     }
   };
-  useEffect(() => {
-    handleGetTenement();
-  }, []);
   return {
     isLoading,
     isError,
     dataTenement,
+    handleGetTenement,
   };
 }
 
@@ -571,7 +578,7 @@ export function useGetTenementListRent() {
       .map((key) => `${key}=${querys[key]}`)
       .join("&");
     try {
-      const res = await getFetch(`/tenements?${queryString}`, token);
+      const res = await getFetch(`/tenements/rent?${queryString}`, token);
       const data = await res.json();
       setDataTenement(data.data);
     } catch (error) {

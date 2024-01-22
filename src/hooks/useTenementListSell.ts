@@ -1,68 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import getColumnSearchProps from "../components/getColumnSearchProps";
-import { useGetTenementListSell } from "./useAPI";
 import type { TenementList } from "../type";
 
 const useTenementListSell = () => {
-  const [data, setData] = useState<TenementList[]>([
-    {
-      tenement_address: 54321,
-      tenement_face: "a",
-      tenement_status: "a",
-      tenement_type: "a",
-      tenement_style: "a",
-      management_fee_bottom: 100,
-      management_floor_bottom: 7,
-      selling_price: 100,
-      Total_rating: 100,
-      inside_rating: 100,
-      public_building: 100,
-      tenement_floor: 100,
-    },
-    {
-      tenement_address: 54322,
-      tenement_face: "b",
-      tenement_status: "b",
-      tenement_type: "b",
-      tenement_style: "b",
-      management_fee_bottom: 120,
-      management_floor_bottom: 11,
-      selling_price: 120,
-      Total_rating: 120,
-      inside_rating: 120,
-      public_building: 120,
-      tenement_floor: 120,
-    },
-    {
-      tenement_address: 54323,
-      tenement_face: "c",
-      tenement_status: "c",
-      tenement_type: "c",
-      tenement_style: "c",
-      management_fee_bottom: 150,
-      management_floor_bottom: 3,
-      selling_price: 150,
-      Total_rating: 150,
-      inside_rating: 150,
-      public_building: 150,
-      tenement_floor: 150,
-    },
-    {
-      tenement_address: 54323,
-      tenement_face: "d",
-      tenement_status: "d",
-      tenement_type: "d",
-      tenement_style: "d",
-      management_fee_bottom: 150,
-      management_floor_bottom: 3,
-      selling_price: 150,
-      Total_rating: 150,
-      inside_rating: 150,
-      public_building: 150,
-      tenement_floor: 150,
-    },
-  ]);
   type ColumnsType = {
     title: string;
     dataIndex: string;
@@ -117,9 +57,9 @@ const useTenementListSell = () => {
           value: "海景風洞",
         },
         {
-          text:"其他",
-          value:"其他"
-        }
+          text: "其他",
+          value: "其他",
+        },
       ],
       onFilter: (value, record) => record.tenement_face.includes(value),
     },
@@ -190,33 +130,8 @@ const useTenementListSell = () => {
       width: "10%",
       sorter: (a, b) =>
         (a.management_fee_bottom || 0) - (b.management_fee_bottom || 0),
-    }
-
+    },
   ];
-
-  const { isLoading, isError, dataTenement } = useGetTenementListSell();
-  useEffect(() => {
-    if (dataTenement) {
-      const data = dataTenement.map((item) => {
-        return {
-          tenement_address: item.tenement_address,
-          tenement_face: item.tenement_face,
-          tenement_status: item.tenement_status,
-          tenement_type: item.tenement_type,
-          tenement_style: item.tenement_style,
-          management_fee_bottom: item.management_fee_bottom,
-          management_floor_bottom: item.management_floor_bottom,
-          selling_price: item.selling_price,
-          Total_rating: item.Total_rating,
-          inside_rating: item.inside_rating,
-          public_building: item.public_building,
-          tenement_floor: item.tenement_floor,
-          key: item.tenement_address,
-        };
-      });
-      setData(data);
-    }
-  }, [dataTenement]);
 
   const navigate = useNavigate();
   const switchType = (type: string) => {
@@ -237,17 +152,16 @@ const useTenementListSell = () => {
     return {
       onClick: () => {
         navigate(
-          `/Tenement/${record.tenement_address}/${switchType(record.tenement_type)}`
+          `/Tenement/${record.tenement_address}/${switchType(
+            record.tenement_type
+          )}`
         );
       },
     };
   };
   return {
-    data,
     columns,
     onRow,
-    isLoading,
-    isError,
   };
 };
 
