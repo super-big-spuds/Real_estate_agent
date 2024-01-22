@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
-import { useGetNotice, usePostAddNotice, usePutNotice, useDeleteNotice } from "../useAPI";
-
+import {
+  useGetNotice,
+  usePostAddNotice,
+  usePutNotice,
+  useDeleteNotice,
+} from "../useAPI";
+import dayjs from "dayjs";
 
 type ITenementType = "develop" | "rent" | "sell" | "market";
 
@@ -25,54 +30,50 @@ export default function useTenementNotice(
       remind: "提醒事項1",
     },
   ]);
+
   const { isLoading, isError, getNotice, dataNotice } = useGetNotice();
-  const { handlePostAddNotice, isDone } = usePostAddNotice();
+  const { handlePostAddNotice } = usePostAddNotice();
   const { handlePutNotice } = usePutNotice();
   const handleSaveNoticeData = () => {
-    handlePutNotice( tenementType, notices);
+    handlePutNotice(tenementType, notices);
   };
   const handleAddNotice = () => {
+    const timeformat = "YYYY-MM-DD";
+    const today = dayjs().format(timeformat);
     const newNotice = {
-      id:"",
-      visitDate: "",
+      id: "",
+      visitDate: today,
       record: "",
-      remindDate: "",
+      remindDate: today,
       remind: "",
       isNew: true,
     };
-    handlePostAddNotice( tenementType, [newNotice] );
+    handlePostAddNotice(tenementType, [newNotice]);
+    setNotices((prev) => [...prev, newNotice]);
   };
-  
-  
-  useEffect(() => {
-    getNotice( tenementId,tenementType);
 
-  }, [ tenementType, tenementId, isDone ]);
-  
   useEffect(() => {
-    if (dataNotice) {
-      setNotices(dataNotice);
-    }
+    getNotice(tenementType, tenementId);
+  }, []);
+
+  useEffect(() => {
+    if (!dataNotice) return;
+    setNotices(dataNotice);
   }, [dataNotice]);
-  
-  
+
   const handleNoticeChange = (index: number, key: string, value: string) => {
     setNotices((prev) =>
-    prev.map((notice, i) =>
-    i === index ? { ...notice, [key]: value } : notice
+      prev.map((notice, i) =>
+        i === index ? { ...notice, [key]: value } : notice
       )
     );
   };
 
-  const { handleDeleteNoticeApi} = useDeleteNotice();
+  const { handleDeleteNoticeApi } = useDeleteNotice();
   const handleDeleteNotice = (index: number) => {
-    handleDeleteNoticeApi(  notices[index].id,tenementType);
+    handleDeleteNoticeApi(notices[index].id, tenementType);
     setNotices((prev) => prev.filter((_, i) => i !== index));
   };
-  
- 
-  
-
 
   return {
     states: {

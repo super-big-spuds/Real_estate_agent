@@ -10,8 +10,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTenementRentInfo } from "../../hooks/new-tenement/useTenement";
 
 import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-dayjs.extend(customParseFormat);
 
 export default function Rent() {
   const { id: tenementId } = useParams();
@@ -28,13 +26,12 @@ export default function Rent() {
     if (window.confirm("確定要刪除嗎?")) {
       rentHook.handlers.handleDelete();
     }
-  }
+  };
 
   const isLoading = rentHook.states.isLoading || noticeHook.states.isLoading;
   const isError = rentHook.states.isError || noticeHook.states.isError;
   const navigate = useNavigate();
   const handletypeChange = (e: RadioChangeEvent) => {
-    
     if (
       window.confirm(
         "是否要切換案件型態?(請確實按下儲存，避免切換後部分資料會遺失)"
@@ -58,14 +55,17 @@ export default function Rent() {
           break;
       }
     } else return;
-    
-   
   };
 
   return (
     <div className="flex flex-col items-center w-full h-full ">
       <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
-        <button className="flex w-12 h-20 mt-10 ml-5" onClick={()=>navigate("/Tenements")}>{"< 返回"}</button>
+        <button
+          className="flex w-12 h-20 mt-10 ml-5"
+          onClick={() => navigate("/Tenements")}
+        >
+          {"< 返回"}
+        </button>
         <div className="inline-flex flex-col mb-5 ml-8">
           <p className="text-4xl font-bold whitespace-normal">出租資料</p>
         </div>
@@ -137,10 +137,9 @@ export default function Rent() {
                   <p className="text-right whitespace-nowrap">物件型態:</p>
                   <Radio.Group
                     value={rentHook.states.rentInfo.tenement_type}
-                    onChange={(e) =>{
-                      handletypeChange(e)
-                      }
-                    }
+                    onChange={(e) => {
+                      handletypeChange(e);
+                    }}
                     className="col-span-4 "
                   >
                     <Radio value="出租">出租</Radio>
@@ -307,41 +306,37 @@ export default function Rent() {
                     errorMessage={"至少兩個字"}
                   />
                 </div>
-                 {/* 租金 */}
-                  <div className="grid grid-cols-5 gap-1 text-right">
-                    <p className="col-span-1 pt-5 ">租金:</p>
-                    <InputWithErrorMessage
-                      value={rentHook.states.rentInfo.rent_price}
-                      onChange={(e) =>
-                        rentHook.handlers.handleChange(
-                          "rent_price",
-                          e.target.value
-                        )
-                      }
-                      isError={
-                        rentHook.states.rentInfo.rent_price.length <= 2
-                      }
-                      errorMessage={"至少兩個字"}
-                    />
-                  </div>
+                {/* 租金 */}
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">租金:</p>
+                  <InputWithErrorMessage
+                    value={rentHook.states.rentInfo.rent_price}
+                    onChange={(e) =>
+                      rentHook.handlers.handleChange(
+                        "rent_price",
+                        e.target.value
+                      )
+                    }
+                    isError={rentHook.states.rentInfo.rent_price.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
 
-                  {/* 押金 */}
-                  <div className="grid grid-cols-5 gap-1 text-right">
-                    <p className="col-span-1 pt-5 ">押金:</p>
-                    <InputWithErrorMessage
-                      value={rentHook.states.rentInfo.deposit_price}
-                      onChange={(e) =>
-                        rentHook.handlers.handleChange(
-                          "deposit_price",
-                          e.target.value
-                        )
-                      }
-                      isError={
-                        rentHook.states.rentInfo.deposit_price.length <= 2
-                      }
-                      errorMessage={"至少兩個字"}
-                    />
-                  </div>
+                {/* 押金 */}
+                <div className="grid grid-cols-5 gap-1 text-right">
+                  <p className="col-span-1 pt-5 ">押金:</p>
+                  <InputWithErrorMessage
+                    value={rentHook.states.rentInfo.deposit_price}
+                    onChange={(e) =>
+                      rentHook.handlers.handleChange(
+                        "deposit_price",
+                        e.target.value
+                      )
+                    }
+                    isError={rentHook.states.rentInfo.deposit_price.length <= 2}
+                    errorMessage={"至少兩個字"}
+                  />
+                </div>
 
                 {/* 樓層 */}
                 <div className="grid grid-cols-5 gap-1 text-right">
@@ -720,7 +715,9 @@ export default function Rent() {
             儲存
           </Button>
           <Button type="default">回復預設</Button>
-          <Button danger onClick={onDelete}>刪除</Button>
+          <Button danger onClick={onDelete}>
+            刪除
+          </Button>
         </div>
       </div>
     </div>
