@@ -1,68 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+
 import getColumnSearchProps from "../components/getColumnSearchProps";
-import { useGetTenementListRent } from "./useAPI";
+
 import type { TenementList } from "../type";
 
 const useTenementListRent = () => {
-  const [data, setData] = useState<TenementList[]>([
-    {
-      tenement_address: 54321,
-      tenement_face: "海景",
-      tenement_status: "未成交",
-      tenement_type: "出售",
-      tenement_style: "辦公室",
-      management_fee_bottom: 100,
-      management_floor_bottom: 7,
-      rent: 100,
-      Total_rating: 100,
-      inside_rating: 100,
-      public_building: 100,
-      tenement_floor: 100,
-    },
-    {
-      tenement_address: 54322,
-      tenement_face: "中庭",
-      tenement_status: "已成交",
-      tenement_type: "出租",
-      tenement_style: "店面",
-      management_fee_bottom: 120,
-      management_floor_bottom: 11,
-      rent: 120,
-      Total_rating: 120,
-      inside_rating: 120,
-      public_building: 120,
-      tenement_floor: 120,
-    },
-    {
-      tenement_address: 54323,
-      tenement_face: "三多路",
-      tenement_status: "已退租下架",
-      tenement_type: "開發追蹤",
-      tenement_style: "套房",
-      management_fee_bottom: 150,
-      management_floor_bottom: 3,
-      rent: 150,
-      Total_rating: 150,
-      inside_rating: 150,
-      public_building: 150,
-      tenement_floor: 150,
-    },
-    {
-      tenement_address: 54323,
-      tenement_face: "三多路",
-      tenement_status: "過戶完成下架",
-      tenement_type: "行銷追蹤",
-      tenement_style: "套房",
-      management_fee_bottom: 150,
-      management_floor_bottom: 3,
-      rent: 150,
-      Total_rating: 150,
-      inside_rating: 150,
-      public_building: 150,
-      tenement_floor: 150,
-    }
-  ]);
   type ColumnsType = {
     title: string;
     dataIndex: string;
@@ -117,9 +59,9 @@ const useTenementListRent = () => {
           value: "海景風洞",
         },
         {
-          text:"其他",
-          value:"其他"
-        }
+          text: "其他",
+          value: "其他",
+        },
       ],
       onFilter: (value, record) => record.tenement_face.includes(value),
     },
@@ -190,32 +132,8 @@ const useTenementListRent = () => {
       width: "10%",
       sorter: (a, b) =>
         (a.management_fee_bottom || 0) - (b.management_fee_bottom || 0),
-    }
+    },
   ];
-
-  const { isLoading, isError, dataTenement } = useGetTenementListRent();
-  useEffect(() => {
-    if (dataTenement) {
-      const data = dataTenement.map((item) => {
-        return {
-          tenement_address: item.tenement_address,
-          tenement_face: item.tenement_face,
-          tenement_status: item.tenement_status,
-          tenement_type: item.tenement_type,
-          tenement_style: item.tenement_style,
-          management_fee_bottom: item.management_fee_bottom,
-          management_floor_bottom: item.management_floor_bottom,
-          rent: item.rent,
-          Total_rating: item.Total_rating,
-          inside_rating: item.inside_rating,
-          public_building: item.public_building,
-          tenement_floor: item.tenement_floor,
-          key: item.tenement_address,
-        };
-      });
-      setData(data);
-    }
-  }, [dataTenement]);
 
   const navigate = useNavigate();
   const switchType = (type: string) => {
@@ -236,17 +154,16 @@ const useTenementListRent = () => {
     return {
       onClick: () => {
         navigate(
-          `/Tenement/${record.tenement_address}/${switchType(record.tenement_type)}`
+          `/Tenement/${record.tenement_address}/${switchType(
+            record.tenement_type
+          )}`
         );
       },
     };
   };
   return {
-    data,
     columns,
     onRow,
-    isLoading,
-    isError,
   };
 };
 
