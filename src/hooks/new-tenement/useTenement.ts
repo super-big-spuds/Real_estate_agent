@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
-import { useGetSellEdit, usePostSellEdit, useGetDevelopEdit, usePostDevelopEdit, useGetRentEdit, usePostRentEdit, useGetMarketEdit, usePostMarketEdit, useDeleteTenement} from "../useAPI";
-
+import {
+  useGetSellEdit,
+  usePostSellEdit,
+  useGetDevelopEdit,
+  usePostDevelopEdit,
+  useGetRentEdit,
+  usePostRentEdit,
+  useGetMarketEdit,
+  usePostMarketEdit,
+  useDeleteTenement,
+} from "../useAPI";
 
 type ITenementBasedInfoType = {
   tenement_address: string;
@@ -65,7 +74,7 @@ export function useTenementMarketInfo(tenementId: string) {
     });
   };
 
-  const {handleSaveColumn } = usePostMarketEdit();
+  const { handleSaveColumn } = usePostMarketEdit();
   const handleSave = () => {
     if (!tenementId) return;
     // marketinfo add tenement_id
@@ -77,7 +86,7 @@ export function useTenementMarketInfo(tenementId: string) {
     alert("儲存成功");
   };
 
-  const {handleDeleteTenement } = useDeleteTenement();
+  const { handleDeleteTenement } = useDeleteTenement();
   const handleDelete = () => {
     if (!tenementId) return;
     handleDeleteTenement(tenementId);
@@ -126,7 +135,7 @@ export function useTenementMarketInfo(tenementId: string) {
     handlers: {
       handleChange,
       handleSave,
-      handleDelete
+      handleDelete,
     },
   };
 }
@@ -213,7 +222,7 @@ export function useTenementRentInfo(tenementId: string) {
     });
   };
 
-  const {handleSaveColumn } = usePostRentEdit();
+  const { handleSaveColumn } = usePostRentEdit();
   const handleSave = () => {
     if (!tenementId) return;
     // rentinfo add tenement_id
@@ -224,7 +233,7 @@ export function useTenementRentInfo(tenementId: string) {
     handleSaveColumn(rentinfo);
   };
 
-  const {handleDeleteTenement } = useDeleteTenement();
+  const { handleDeleteTenement } = useDeleteTenement();
   const handleDelete = () => {
     if (!tenementId) return;
     handleDeleteTenement(tenementId);
@@ -288,12 +297,10 @@ export function useTenementRentInfo(tenementId: string) {
     handlers: {
       handleChange,
       handleSave,
-      handleDelete
+      handleDelete,
     },
   };
 }
-
-
 
 type ITenementDevelopInfoType = ITenementBasedInfoType & {
   total_rating: string;
@@ -352,7 +359,6 @@ export function useTenementDevelopInfo(tenementId: string) {
     tenement_host_hobby: "Reading",
     tenement_host_remark: "No remarks",
   });
-  
 
   const handleChange = (key: keyof ITenementDevelopInfoType, value: string) => {
     setDevelopInfo((prev) => {
@@ -360,7 +366,7 @@ export function useTenementDevelopInfo(tenementId: string) {
       return { ...prev, [key]: value };
     });
   };
-  const {handleSaveColumn } = usePostDevelopEdit();
+  const { handleSaveColumn } = usePostDevelopEdit();
 
   const handleSave = () => {
     if (!tenementId) return;
@@ -373,13 +379,13 @@ export function useTenementDevelopInfo(tenementId: string) {
     alert("儲存成功");
   };
 
-  const {handleDeleteTenement } = useDeleteTenement();
+  const { handleDeleteTenement } = useDeleteTenement();
   const handleDelete = () => {
     if (!tenementId) return;
     handleDeleteTenement(tenementId);
     alert("刪除成功");
   };
-  const { getDevelopEdit, dataEdit,isError,isLoading } = useGetDevelopEdit();
+  const { getDevelopEdit, dataEdit, isError, isLoading } = useGetDevelopEdit();
 
   useEffect(() => {
     getDevelopEdit(tenementId);
@@ -442,7 +448,6 @@ type ITenementSellInfoType = ITenementBasedInfoType & {
   management_fee: string;
   selling_price: string;
   tenement_floor: string;
-  
 
   tenement_host_name: string;
   tenement_host_telphone: string;
@@ -470,12 +475,11 @@ export function useTenementSellInfo(tenementId: string) {
     tenement_address: "aaaaa",
     tenement_product_type: "套房",
     tenement_type: "出售",
-    
+
     tenement_face: "海景",
     tenement_images: [
       "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-
+      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     ],
     tenement_status: "已成交",
     total_rating: "4.5",
@@ -487,7 +491,6 @@ export function useTenementSellInfo(tenementId: string) {
     management_fee: "3000",
     selling_price: "500000",
     tenement_floor: "7",
- 
 
     tenement_host_name: "John Doe",
     tenement_host_telphone: "1234567890",
@@ -509,7 +512,6 @@ export function useTenementSellInfo(tenementId: string) {
     buyer_remark: "No remarks",
   });
 
-
   const handleChange = (key: keyof ITenementSellInfoType, value: string) => {
     setSellInfo((prev) => {
       if (!prev) return prev;
@@ -517,7 +519,7 @@ export function useTenementSellInfo(tenementId: string) {
     });
   };
 
-  const {handleSaveColumn } = usePostSellEdit();
+  const { handleSaveColumn } = usePostSellEdit();
 
   const handleSave = () => {
     if (!tenementId) return;
@@ -528,17 +530,16 @@ export function useTenementSellInfo(tenementId: string) {
     };
     handleSaveColumn(sellinfo);
     alert("儲存成功");
-
   };
 
-  const {handleDeleteTenement } = useDeleteTenement();
+  const { handleDeleteTenement } = useDeleteTenement();
   const handleDelete = () => {
     if (!tenementId) return;
     handleDeleteTenement(tenementId);
     alert("刪除成功");
   };
 
-  const { getSellEdit, dataEdit,isError,isLoading } = useGetSellEdit();
+  const { getSellEdit, dataEdit, isError, isLoading } = useGetSellEdit();
 
   useEffect(() => {
     getSellEdit(tenementId);
@@ -581,8 +582,7 @@ export function useTenementSellInfo(tenementId: string) {
       buyer_jobtitle: dataEdit.buyer_jobtitle,
       buyer_remark: dataEdit.buyer_remark,
     });
-  }
-  , [dataEdit]);
+  }, [dataEdit]);
   return {
     states: {
       sellInfo,

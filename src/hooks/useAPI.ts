@@ -24,7 +24,7 @@ const getFetch = (url: string, token: string) => {
   });
 };
 
-const muliteFetch = <T>(
+const mutableFetch = <T>(
   url: string,
   method: string,
   token: string,
@@ -89,9 +89,10 @@ export function usePostCollectionAdd() {
   const handleSaveColumn = async (formDatas: FormData) => {
     setIsLoading(true);
     try {
-      const res = await muliteFetch("/collections", "POST", token, formDatas);
+      const res = await mutableFetch("/collections", "POST", token, formDatas);
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -104,7 +105,7 @@ export function usePostCollectionAdd() {
   const handleSaveNotice = async (notices: NoticeData[]) => {
     setIsLoading(true);
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         "/collection/notices",
         "POST",
         token,
@@ -112,6 +113,7 @@ export function usePostCollectionAdd() {
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -162,17 +164,16 @@ export function usePostCollectionEdit() {
   const handleSaveColumn = async (formDatas: FormData) => {
     setIsLoading(true);
 
-    const jsonFromData = JSON.stringify(formDatas);
-
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/collection/${formDatas.collection_id}`,
         "PUT",
         token,
-        jsonFromData
+        formDatas
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -184,16 +185,16 @@ export function usePostCollectionEdit() {
 
   const handleSaveNotice = async (notices: NoticeData[]) => {
     setIsLoading(true);
-    const jsonNotices = JSON.stringify(notices);
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         "/collection/notices",
         "POST",
         token,
-        jsonNotices
+        notices
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -205,7 +206,7 @@ export function usePostCollectionEdit() {
   const handleDeleteNoticeFetch = async (id: string) => {
     setIsLoading(true);
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/notices/${id}/collection`,
         "DELETE",
         token,
@@ -213,9 +214,9 @@ export function usePostCollectionEdit() {
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
       console.log(res);
-      
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -227,9 +228,10 @@ export function usePostCollectionEdit() {
   const handleDeleteCollectionFetch = async (id: string) => {
     setIsLoading(true);
     try {
-      const res = await muliteFetch(`/collection/${id}`, "DELETE", token, id);
+      const res = await mutableFetch(`/collection/${id}`, "DELETE", token, id);
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -287,9 +289,10 @@ export function usePostUserAdd() {
     setIsLoading(true);
 
     try {
-      const res = await muliteFetch("/user", "POST", token, formDatas);
+      const res = await mutableFetch("/user", "POST", token, formDatas);
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -314,7 +317,7 @@ export function usePostUserEdit() {
   const handleSaveUser = async (formDatas: User) => {
     setIsLoading(true);
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/user/${formDatas.user_id}`,
         "PUT",
         token,
@@ -322,6 +325,7 @@ export function usePostUserEdit() {
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -333,7 +337,7 @@ export function usePostUserEdit() {
   const handleDeleteUserFetch = async (user_id: string) => {
     setIsLoading(true);
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/user/${user_id}`,
         "DELETE",
         token,
@@ -341,6 +345,7 @@ export function usePostUserEdit() {
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -456,10 +461,10 @@ export function useDeleteNotice() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const handleDeleteNoticeApi = async (id: string,type:string) => {
+  const handleDeleteNoticeApi = async (id: string, type: string) => {
     setIsLoading(true);
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/notices/${id}/${type}`,
         "DELETE",
         token,
@@ -467,6 +472,7 @@ export function useDeleteNotice() {
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -569,7 +575,6 @@ export function useGetTenementListRent() {
   };
 }
 
-
 export function useLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -581,7 +586,7 @@ export function useLogin() {
   }) => {
     setIsLoading(true);
     try {
-      const res = await muliteFetch("/user/login", "POST", "", formDatas);
+      const res = await mutableFetch("/user/login", "POST", "", formDatas);
       const data = await res.json();
       if (data.token) {
         localStorage.setItem("token", data.token);
@@ -600,7 +605,6 @@ export function useLogin() {
     handleLogin,
     isLogin,
   };
-
 }
 
 export function useGetSellEdit() {
@@ -614,7 +618,7 @@ export function useGetSellEdit() {
       const res = await getFetch(`/tenement/edit/sell/${id}`, token);
       const data = await res.json();
       console.log(data);
-      
+
       setData(data.data);
     } catch (error) {
       console.error(error);
@@ -639,17 +643,16 @@ export function usePostSellEdit() {
   const handleSaveColumn = async (formDatas: TenementSell) => {
     setIsLoading(true);
 
-    const jsonFromData = JSON.stringify(formDatas);
-
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/tenement/edit/sell/${formDatas.tenement_id}`,
         "POST",
         token,
-        jsonFromData
+        formDatas
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -698,18 +701,16 @@ export function usePostDevelopEdit() {
 
   const handleSaveColumn = async (formDatas: TenementDevelop) => {
     setIsLoading(true);
-
-    const jsonFromData = JSON.stringify(formDatas);
-
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/tenement/edit/develop/${formDatas.tenement_id}`,
         "POST",
         token,
-        jsonFromData
+        formDatas
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -756,18 +757,16 @@ export function usePostRentEdit() {
 
   const handleSaveColumn = async (formDatas: TenementRent) => {
     setIsLoading(true);
-
-    const jsonFromData = JSON.stringify(formDatas);
-
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/tenement/edit/rent/${formDatas.tenement_address}`,
         "POST",
         token,
-        jsonFromData
+        formDatas
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -783,7 +782,7 @@ export function usePostRentEdit() {
   };
 }
 
-export function useGetMarketEdit(){
+export function useGetMarketEdit() {
   const token = "";
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -809,7 +808,7 @@ export function useGetMarketEdit(){
   };
 }
 
-export function usePostMarketEdit(){
+export function usePostMarketEdit() {
   const token = useToken();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -817,17 +816,16 @@ export function usePostMarketEdit(){
   const handleSaveColumn = async (formDatas: TenementMarket) => {
     setIsLoading(true);
 
-    const jsonFromData = JSON.stringify(formDatas);
-
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/tenement/edit/market/${formDatas.tenement_id}`,
         "POST",
         token,
-        jsonFromData
+        formDatas
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
     } catch (error) {
       console.error(error);
@@ -843,13 +841,13 @@ export function usePostMarketEdit(){
   };
 }
 
-export function useGetNotice(){
+export function useGetNotice() {
   const token = "";
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [dataNotice, setData] = useState<NoticeData[]>([]);
 
-  const getNotice = async (id: string, type:string) => {
+  const getNotice = async (id: string, type: string) => {
     try {
       const res = await getFetch(`/notices/${id}/${type}`, token);
       const data = await res.json();
@@ -869,30 +867,27 @@ export function useGetNotice(){
   };
 }
 
-export function usePostAddNotice(){
+export function usePostAddNotice() {
   const token = useToken();
   const [isDone, setIsDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const handlePostAddNotice = async ( type:string, notices:NoticeData[]) => {
+  const handlePostAddNotice = async (type: string, notices: NoticeData[]) => {
     setIsLoading(true);
     setIsDone(false);
 
-    const jsonFromData = JSON.stringify(notices);
-
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/notices/${type}`,
         "POST",
         token,
-        jsonFromData
+        notices
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
       setIsDone(true);
-      console.log(res)
-      
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -908,30 +903,23 @@ export function usePostAddNotice(){
   };
 }
 
-export function usePutNotice(){
+export function usePutNotice() {
   const token = useToken();
   const [isDone, setIsDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const handlePutNotice = async ( type:string, notices:NoticeData[]) => {
+  const handlePutNotice = async (type: string, notices: NoticeData[]) => {
     setIsLoading(true);
     setIsDone(false);
 
-    const jsonFromData = JSON.stringify(notices);
-
     try {
-      const res = await muliteFetch(
-        `/notices/${type}`,
-        "PUT",
-        token,
-        jsonFromData
-      );
+      const res = await mutableFetch(`/notices/${type}`, "PUT", token, notices);
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
       setIsDone(true);
-      console.log(res)
-      
+      console.log(res);
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -947,30 +935,31 @@ export function usePutNotice(){
   };
 }
 
-export function usePostAddTenement(){
+export function usePostAddTenement() {
   const token = useToken();
   const [isDone, setIsDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const handlePostAddTenement = async ( type:string, tenement: TenementSell| TenementRent|TenementMarket|TenementDevelop) => {
+  const handlePostAddTenement = async (
+    type: string,
+    tenement: TenementSell | TenementRent | TenementMarket | TenementDevelop
+  ) => {
     setIsLoading(true);
     setIsDone(false);
 
-    const jsonFromData = JSON.stringify(tenement);
-
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/tenement/add/${type}`,
         "POST",
         token,
-        jsonFromData
+        tenement
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
       setIsDone(true);
-      console.log(res)
-      
+      console.log(res);
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -986,18 +975,17 @@ export function usePostAddTenement(){
   };
 }
 
-export function useDeleteTenement(){
+export function useDeleteTenement() {
   const token = useToken();
   const [isDone, setIsDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const handleDeleteTenement = async (  tenement_id:string) => {
+  const handleDeleteTenement = async (tenement_id: string) => {
     setIsLoading(true);
     setIsDone(false);
 
-
     try {
-      const res = await muliteFetch(
+      const res = await mutableFetch(
         `/delete/tenement/${tenement_id}`,
         "DELETE",
         token,
@@ -1005,10 +993,10 @@ export function useDeleteTenement(){
       );
       if (!res.ok) {
         throw new Error(res.statusText);
+        alert("操作失敗");
       }
       setIsDone(true);
-      console.log(res)
-      
+      console.log(res);
     } catch (error) {
       console.error(error);
       setIsError(true);
