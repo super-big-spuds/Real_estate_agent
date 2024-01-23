@@ -892,6 +892,7 @@ export function useGetNotice() {
 export function usePostAddNotice() {
   const token = useToken();
   const [isDone, setIsDone] = useState(false);
+  const [newNotices, setNotices] = useState<NoticeData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const handlePostAddNotice = async (type: string, notices: NoticeData[]) => {
@@ -909,6 +910,8 @@ export function usePostAddNotice() {
         throw new Error(res.statusText);
         alert("操作失敗");
       }
+      const data = await res.json();
+      setNotices(data.data);
       setIsDone(true);
     } catch (error) {
       console.error(error);
@@ -922,6 +925,7 @@ export function usePostAddNotice() {
     isError,
     isDone,
     handlePostAddNotice,
+    newNotices,
   };
 }
 

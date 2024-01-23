@@ -27,7 +27,7 @@ export default [
   {
     url: "/api/notices/:type",
     /*
-    id: "",
+     id: "",
       visitDate: today,
       record: "",
       remindDate: today,
@@ -37,6 +37,15 @@ export default [
     method: "post",
     response: {
       message: "notices saved",
+      data: [
+        {
+          id: "1",
+          visitDate: "2024-01-01",
+          record: "紀錄事項1",
+          remindDate: "2024-01-01",
+          remind: "提醒事項1",
+        },
+      ],
     },
   },
   {

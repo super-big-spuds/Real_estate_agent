@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { useGetCollectionEdit, usePostCollectionEdit, useGetNotice, usePostAddNotice, usePutNotice, useDeleteNotice } from "./useAPI";
+import {
+  useGetCollectionEdit,
+  usePostCollectionEdit,
+  usePostAddNotice,
+  usePutNotice,
+  useDeleteNotice,
+} from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { useParams } from "react-router-dom";
 import { z } from "zod";
@@ -16,9 +22,8 @@ const useCollectionEdit = () => {
   } = usePostCollectionEdit();
 
   const { handlePutNotice } = usePutNotice();
-  const { handlePostAddNotice,isDone } = usePostAddNotice();
-  const { getNotice,dataNotice } = useGetNotice();
-  const { handleDeleteNoticeApi} = useDeleteNotice();
+  const { handlePostAddNotice, newNotices } = usePostAddNotice();
+  const { handleDeleteNoticeApi } = useDeleteNotice();
 
   const nowdatestring = moment().format("YYYY-MM-DD");
   const { id } = useParams();
@@ -61,7 +66,7 @@ const useCollectionEdit = () => {
   };
 
   const handleDeleteNotice = (index: number) => {
-    handleDeleteNoticeApi(  notices[index].id,'collection');
+    handleDeleteNoticeApi(notices[index].id, "collection");
     setNotices((prevNotices) => {
       const newNotices = [...prevNotices];
       newNotices.splice(index, 1);
@@ -107,7 +112,7 @@ const useCollectionEdit = () => {
     };
     await handleSaveColumn(newformdata);
     if (notices.length > 0) {
-      await  handlePutNotice( 'collection', notices);
+      await handlePutNotice("collection", notices);
     }
     alert("儲存成功");
   };
@@ -127,23 +132,30 @@ const useCollectionEdit = () => {
       cus_remittance_account: "",
       cus_remittance_bank: "",
       collection_complete: "",
-
     });
     setNotices([]);
-    
   };
+  // get param id from url
+  const getparamid = useParams<{ id: string }>().id;
 
   const handleAddNotice = () => {
     const newNotice = {
-      id:"",
-      visitDate: "",
+      id: "",
+      visitDate: nowdatestring,
       record: "",
-      remindDate: "",
+      remindDate: nowdatestring,
       remind: "",
+      collection_id: getparamid,
       isNew: true,
     };
-    handlePostAddNotice( 'collection', [newNotice] );
+
+    handlePostAddNotice("collection", [newNotice]);
   };
+  useEffect(() => {
+    if (newNotices.length > 0) {
+      setNotices((prevNotices) => [...prevNotices, ...newNotices]);
+    }
+  }, [newNotices]);
 
   const getapi = async () => {
     if (!id) return;
@@ -152,20 +164,7 @@ const useCollectionEdit = () => {
 
   useEffect(() => {
     getapi();
-    
   }, []);
-
-  useEffect(() => {
-    if (!id) return;
-    getNotice(id,'collection');
-  }
-  , [id,isDone]);
-
-  useEffect(() => {
-    if (dataNotice) {
-      setNotices(dataNotice);
-    }
-  }, [dataNotice]);
 
   useEffect(() => {
     if (!dataEdit) return;
@@ -184,7 +183,6 @@ const useCollectionEdit = () => {
       cus_remittance_bank: dataEdit.cus_remittance_bank,
       collection_complete: dataEdit.collection_complete,
     });
-
   }, [dataEdit]);
 
   return {

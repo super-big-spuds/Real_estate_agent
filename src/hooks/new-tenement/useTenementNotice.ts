@@ -32,7 +32,7 @@ export default function useTenementNotice(
   ]);
 
   const { isLoading, isError, getNotice, dataNotice } = useGetNotice();
-  const { handlePostAddNotice } = usePostAddNotice();
+  const { handlePostAddNotice, newNotices } = usePostAddNotice();
   const { handlePutNotice } = usePutNotice();
   const handleSaveNoticeData = () => {
     handlePutNotice(tenementType, notices);
@@ -46,11 +46,16 @@ export default function useTenementNotice(
       record: "",
       remindDate: today,
       remind: "",
+      tenement_id: tenementId,
       isNew: true,
     };
     handlePostAddNotice(tenementType, [newNotice]);
-    setNotices((prev) => [...prev, newNotice]);
   };
+  useEffect(() => {
+    if (newNotices.length > 0) {
+      setNotices((prevNotices) => [...prevNotices, ...newNotices]);
+    }
+  }, [newNotices]);
 
   useEffect(() => {
     getNotice(tenementType, tenementId);

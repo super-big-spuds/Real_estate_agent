@@ -7,6 +7,7 @@ import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
 import { memo, useState } from "react";
 import { usePostAddTenement } from "../../hooks/useAPI";
+import { usePutNotice } from "../../hooks/useAPI";
 
 const SwitchTenementType = memo(
   (props: {
@@ -123,24 +124,16 @@ export default function TenementInfo(props: any) {
   const handleRenterChange = (key: string, value: string) => {
     setRenterData((prev) => ({ ...prev, [key]: value }));
   };
-
+  type Notice = {
+    id: string;
+    visitDate: string;
+    record: string;
+    remindDate: string;
+    remind: string;
+    isNew?: boolean;
+  };
   const { isLoading, isError } = props;
-  const [notices, setNotices] = useState([
-    {
-      id: "1",
-      visitDate: "2023-01-01",
-      record: "看房子",
-      remindDate: "2023-02-01",
-      remind: "提醒",
-    },
-    {
-      id: "2",
-      visitDate: "2023-01-01",
-      record: "繳水電",
-      remindDate: "2023-02-01",
-      remind: "繳房租",
-    },
-  ]);
+  const [notices, setNotices] = useState<Notice[]>([]);
   const handleNoticeChange = (index: number, key: string, value: any) => {
     setNotices((prev) =>
       prev.map((notice, i) =>
@@ -160,11 +153,13 @@ export default function TenementInfo(props: any) {
         record: "",
         remindDate: "2024-01-01",
         remind: "",
+        isNew: true,
       },
     ]);
   };
 
   const { handlePostAddTenement } = usePostAddTenement();
+  const { handlePutNotice } = usePutNotice();
   const handleSave = () => {
     const rentData = {
       tenement_address: formData.tenement_address,
@@ -280,23 +275,29 @@ export default function TenementInfo(props: any) {
       hopefloor_min: formData.hopefloor_min,
       market_state: formData.market_state,
     };
+    console.log(formData.tenement_type);
 
     switch (formData.tenement_type) {
       case "出租":
         handlePostAddTenement("rent", rentData);
+        handlePutNotice("rent", notices);
         break;
       case "出售":
         handlePostAddTenement("sell", sellData);
+        handlePutNotice("sell", notices);
         break;
       case "開發追蹤":
-        handlePostAddTenement("developer", developerData);
+        handlePostAddTenement("develop", developerData);
+        handlePutNotice("develop", notices);
         break;
       case "行銷追蹤":
         handlePostAddTenement("market", marketData);
+        handlePutNotice("market", notices);
         break;
       default:
         break;
     }
+
     alert("儲存成功");
   };
   const handleReset = () => {
@@ -359,6 +360,7 @@ export default function TenementInfo(props: any) {
   const [tenement_type, setTenement_type] = useState("出租");
 
   const handletypeChange = (e: RadioChangeEvent) => {
+    setFormData((prev: any) => ({ ...prev, tenement_type: e.target.value }));
     setTenement_type(e.target.value);
   };
 

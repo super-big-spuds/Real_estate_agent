@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { usePostCollectionAdd,   usePutNotice } from "./useAPI";
+import { usePostCollectionAdd, usePutNotice } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { z } from "zod";
 import moment from "moment";
@@ -72,7 +72,6 @@ const useCollectionAdd = () => {
 
     const parseResult = schemaform.safeParse(formData);
 
-
     if (!parseResult.success) {
       const errorMessages = parseResult.error.errors.map((error) => {
         return error.message;
@@ -83,7 +82,7 @@ const useCollectionAdd = () => {
     }
 
     await handleSaveColumn(parseResult.data);
-    await handlePutNotice('collection',notices);
+    await handlePutNotice("collection", notices);
     alert("儲存成功");
   };
 
