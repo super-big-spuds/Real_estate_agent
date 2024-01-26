@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,7 @@ function getItem(
   } as MenuItem;
 }
 
-const items: MenuProps["items"] = [
+const isAdminMenuItems: MenuItem[] = [
   getItem("代收付管理", "collectionmange", undefined, [
     getItem("代收付管理列表", "collections"),
     getItem("代收付管理新增", "Collection/Add"),
@@ -43,12 +43,17 @@ const items: MenuProps["items"] = [
   ]),
 ];
 
+const isNotAdminMenuItems: MenuItem[] = [...isAdminMenuItems.slice(0, 3)];
+
 const Menus = () => {
   const navigate = useNavigate();
   const { isAdmin } = useAuth();
-  if (!isAdmin) {
-    items.splice(3, 1);
-  }
+
+  const [menuItems, setMenuItems] = useState<MenuProps["items"]>([]);
+
+  useEffect(() => {
+    setMenuItems(isAdmin ? isAdminMenuItems : isNotAdminMenuItems);
+  }, [isAdmin]);
 
   const onClick: MenuProps["onClick"] = (e) => {
     if (e.key && e.key.toString() !== "") {
@@ -63,7 +68,7 @@ const Menus = () => {
       defaultSelectedKeys={["1"]}
       defaultOpenKeys={["sub1"]}
       mode="inline"
-      items={items}
+      items={menuItems}
       className="sticky top-0 h-screen pt-20 bg-blue-100 "
     />
   );

@@ -1395,3 +1395,39 @@ export function useDeleteTenement() {
     handleDeleteTenement,
   };
 }
+
+export function useGetUserRole() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+
+  const getUserRole = async () => {
+    try {
+      const res = await getFetch(`/user/auth`, token);
+      const data = await res.json();
+
+      const validSchema = basicZodSchema(
+        zod.object({
+          isadmin: zod.boolean(),
+        })
+      );
+
+      const validData = validSchema.parse(data);
+
+      setIsAdmin(validData.data.isadmin);
+    } catch (error) {
+      console.error(error);
+      alert("取得資料失敗");
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    isAdmin,
+    getUserRole,
+  };
+}

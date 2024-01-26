@@ -5,12 +5,11 @@ import {
   ReactNode,
   useContext,
 } from "react";
+import { useGetUserRole } from "../hooks/useAPI";
 
 interface AuthContextType {
   isLogin: boolean;
-  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
   isAdmin: boolean;
-  setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -21,19 +20,19 @@ interface AuthProviderProps {
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLogin, setIsLogin] = useState<boolean>(false);
-  // isAdmin 
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
-
+  // isAdmin
+  const userRoleHook = useGetUserRole();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsLogin(true);
+      userRoleHook.getUserRole();
     }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isLogin, setIsLogin, setIsAdmin, isAdmin }}>
+    <AuthContext.Provider value={{ isLogin, isAdmin: userRoleHook.isAdmin }}>
       {children}
     </AuthContext.Provider>
   );

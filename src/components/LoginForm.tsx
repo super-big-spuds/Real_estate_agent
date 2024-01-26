@@ -1,27 +1,14 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { useLogin } from "../hooks/useAPI";
-import { useAuth } from "../providers/Authprovider";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { handleLogin, isLogin, isError } = useLogin();
-  const { setIsLogin, setIsAdmin } = useAuth();
+  const { handleLogin, isError } = useLogin();
   const onFinish = (values: { user_email: string; user_password: string }) => {
     handleLogin(values);
-    if (values.user_email === "admin@gmail.com") {
-      setIsAdmin(true);
-    }
-    else {
-      setIsAdmin(false);
-    }
-
-    if (!isLogin) {
-      setIsLogin(true);
-      
-      navigate("/Calenderlist");
-    }
+    navigate("/Calenderlist");
     if (isError) {
       alert("帳號或密碼錯誤");
     }

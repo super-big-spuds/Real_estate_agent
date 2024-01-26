@@ -17,7 +17,7 @@ import { useAuth } from "../providers/Authprovider";
 import NewMarket from "../pages/new-tenement/market";
 import NewRent from "../pages/new-tenement/rent";
 import NewSell from "../pages/new-tenement/sell";
-import NewDevelop from "../pages/new-tenement/develop"; 
+import NewDevelop from "../pages/new-tenement/develop";
 
 const App = () => {
   const { isLogin, isAdmin } = useAuth();
@@ -53,7 +53,6 @@ const App = () => {
             <Route path="/tenement/:id/rent" element={<NewRent />} />
             <Route path="/tenement/:id/sell" element={<NewSell />} />
             <Route path="/tenement/:id/develop" element={<NewDevelop />} />
-
           </Route>
         )}
       </Routes>
