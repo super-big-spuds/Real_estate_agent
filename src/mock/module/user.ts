@@ -127,7 +127,9 @@ export default [
     method: "post",
     response: {
       message: "Successfully login the media",
-      token: "123456",
+      data: {
+        token: "123456",
+      },
     },
   },
 ] as MockMethod[];

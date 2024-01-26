@@ -11,6 +11,7 @@ import type {
   TenementRent,
   TenementMarket,
 } from "../type";
+import * as zod from "zod";
 
 const APIBaseURL = process.env.BASE_URL;
 
@@ -40,6 +41,15 @@ const mutableFetch = <T>(
   });
 };
 
+function basicZodSchema<T extends zod.ZodTypeAny>(
+  zodSchema: T
+): zod.ZodObject<{ message: zod.ZodString; data: T }> {
+  return zod.object({
+    message: zod.string(),
+    data: zodSchema,
+  });
+}
+
 export function useToken() {
   const [token, setToken] = useState<string>("");
 
@@ -64,7 +74,21 @@ export function useGetCollectionList() {
       try {
         const res = await getFetch("/collections", token);
         const newData = await res.json();
-        setData(newData.data);
+
+        const validSchema = basicZodSchema(
+          zod
+            .object({
+              collection_name: zod.string(),
+              tenement_address: zod.string(),
+              collection_type: zod.string(),
+              price: zod.string(),
+              collection_id: zod.number(),
+            })
+            .array()
+        );
+
+        const validData = validSchema.parse(newData);
+        setData(validData.data);
       } catch (error) {
         console.error(error);
         setIsError(true);
@@ -91,8 +115,8 @@ export function usePostCollectionAdd() {
     try {
       const res = await mutableFetch("/collections", "POST", token, formDatas);
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -112,8 +136,8 @@ export function usePostCollectionAdd() {
         notices
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -141,7 +165,39 @@ export const useGetCollectionEdit = () => {
     try {
       const res = await getFetch(`/collection/${id}`, token);
       const data = await res.json();
-      setData(data.data);
+
+      const validSchema = basicZodSchema(
+        zod.object({
+          tenement_address: zod.string(),
+          collection_name: zod.string(),
+          collection_type: zod.string(),
+          price: zod.string(),
+          payment: zod.string(),
+          collection_remark: zod.string(),
+          collection_date: zod.string(),
+          remittance_bank: zod.string(),
+          remittance_account: zod.string(),
+          cus_remittance_bank: zod.string(),
+          cus_remittance_account: zod.string(),
+          collection_complete: zod.string(),
+          notices: zod
+            .object({
+              id: zod.string(),
+              visitDate: zod.string(),
+              record: zod.string(),
+              remindDate: zod.string(),
+              remind: zod.string(),
+            })
+            .array(),
+        })
+      );
+
+      const validData = validSchema.parse(data);
+
+      setData({
+        ...validData.data,
+        collection_id: id,
+      });
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -172,8 +228,8 @@ export function usePostCollectionEdit() {
         formDatas
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -193,8 +249,8 @@ export function usePostCollectionEdit() {
         notices
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -213,8 +269,8 @@ export function usePostCollectionEdit() {
         id
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
       console.log(res);
     } catch (error) {
@@ -230,8 +286,8 @@ export function usePostCollectionEdit() {
     try {
       const res = await mutableFetch(`/collection/${id}`, "DELETE", token, id);
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -261,7 +317,21 @@ export function useGetUserList() {
     try {
       const res = await getFetch("/users", token);
       const newData = await res.json();
-      setDataUser(newData.data);
+
+      const validSchema = basicZodSchema(
+        zod
+          .object({
+            user_id: zod.string(),
+            user_name: zod.string(),
+            user_email: zod.string(),
+            status: zod.string(),
+          })
+          .array()
+      );
+
+      const validData = validSchema.parse(newData);
+
+      setDataUser(validData.data);
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -291,8 +361,8 @@ export function usePostUserAdd() {
     try {
       const res = await mutableFetch("/user", "POST", token, formDatas);
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -324,8 +394,8 @@ export function usePostUserEdit() {
         formDatas
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -344,8 +414,8 @@ export function usePostUserEdit() {
         user_id
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -374,7 +444,20 @@ export function useGetUserEdit() {
       const res = await getFetch(`/user/${user_id}`, token);
       const data = await res.json();
 
-      setData(data.data);
+      const validSchema = basicZodSchema(
+        zod.object({
+          user_name: zod.string(),
+          user_email: zod.string(),
+          status: zod.string(),
+          user_password: zod.string(),
+          user_id: zod.string(),
+          isadmin: zod.string(),
+        })
+      );
+
+      const validData = validSchema.parse(data);
+
+      setData(validData.data);
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -407,9 +490,28 @@ export function usePostCalender() {
         token
       );
       const data = await res.json();
-      setDataCalender(data.data);
+
+      const validSchema = basicZodSchema(
+        zod
+          .object({
+            day: zod.number(),
+            events: zod
+              .object({
+                content: zod.string(),
+                id: zod.string(),
+                class: zod.string(),
+              })
+              .array(),
+          })
+          .array()
+      );
+
+      const validData = validSchema.parse(data);
+
+      setDataCalender(validData.data);
     } catch (error) {
       console.error(error);
+      alert("取得資料失敗");
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -440,9 +542,28 @@ export function usePostCalenderCollection() {
         token
       );
       const data = await res.json();
-      setDataCalender(data.data);
+
+      const validSchema = basicZodSchema(
+        zod
+          .object({
+            day: zod.number(),
+            events: zod
+              .object({
+                content: zod.string(),
+                id: zod.string(),
+                class: zod.string(),
+              })
+              .array(),
+          })
+          .array()
+      );
+
+      const validData = validSchema.parse(data);
+
+      setDataCalender(validData.data);
     } catch (error) {
       console.error(error);
+      alert("取得資料失敗");
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -471,8 +592,8 @@ export function useDeleteNotice() {
         id
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -508,9 +629,26 @@ export function useGetTenementList() {
     try {
       const res = await getFetch(`/tenements?${queryString}`, token);
       const data = await res.json();
-      setDataTenement(data.data);
+
+      const validSchema = basicZodSchema(
+        zod
+          .object({
+            tenement_address: zod.number(),
+            tenement_face: zod.string(),
+            tenement_status: zod.string(),
+            tenement_type: zod.string(),
+            tenement_style: zod.string(),
+            management_fee_bottom: zod.number(),
+            management_floor_bottom: zod.number(),
+          })
+          .array()
+      );
+      const validData = validSchema.parse(data);
+
+      setDataTenement(validData.data);
     } catch (error) {
       console.error(error);
+      alert("取得資料失敗");
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -544,9 +682,31 @@ export function useGetTenementListSell() {
     try {
       const res = await getFetch(`/tenements/sell?${queryString}`, token);
       const data = await res.json();
-      setDataTenement(data.data);
+
+      const validSchema = basicZodSchema(
+        zod
+          .object({
+            tenement_address: zod.number(),
+            tenement_face: zod.string(),
+            tenement_status: zod.string(),
+            tenement_type: zod.string(),
+            tenement_style: zod.string(),
+            management_fee_bottom: zod.number(),
+            management_floor_bottom: zod.number(),
+            selling_price: zod.number(),
+            Total_rating: zod.number(),
+            inside_rating: zod.number(),
+            public_building: zod.number(),
+            tenement_floor: zod.number(),
+          })
+          .array()
+      );
+      const validData = validSchema.parse(data);
+
+      setDataTenement(validData.data);
     } catch (error) {
       console.error(error);
+      alert("取得資料失敗");
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -580,9 +740,31 @@ export function useGetTenementListRent() {
     try {
       const res = await getFetch(`/tenements/rent?${queryString}`, token);
       const data = await res.json();
-      setDataTenement(data.data);
+
+      const validSchema = basicZodSchema(
+        zod
+          .object({
+            tenement_address: zod.number(),
+            tenement_face: zod.string(),
+            tenement_status: zod.string(),
+            tenement_type: zod.string(),
+            tenement_style: zod.string(),
+            management_fee_bottom: zod.number(),
+            management_floor_bottom: zod.number(),
+            rent: zod.number(),
+            Total_rating: zod.number(),
+            inside_rating: zod.number(),
+            public_building: zod.number(),
+            tenement_floor: zod.number(),
+          })
+          .array()
+      );
+      const validData = validSchema.parse(data);
+
+      setDataTenement(validData.data);
     } catch (error) {
       console.error(error);
+      alert("取得資料失敗");
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -610,12 +792,19 @@ export function useLogin() {
     try {
       const res = await mutableFetch("/user/login", "POST", "", formDatas);
       const data = await res.json();
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        setIsLogin(true);
-      }
+      const validSchema = basicZodSchema(
+        zod.object({
+          token: zod.string(),
+        })
+      );
+
+      const validData = validSchema.parse(data);
+
+      localStorage.setItem("token", validData.data.token);
+      setIsLogin(true);
     } catch (error) {
       console.error(error);
+      alert("登入失敗");
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -639,11 +828,54 @@ export function useGetSellEdit() {
     try {
       const res = await getFetch(`/tenement/edit/sell/${id}`, token);
       const data = await res.json();
-      console.log(data);
 
-      setData(data.data);
+      const validSchema = basicZodSchema(
+        zod.object({
+          tenement_address: zod.string(),
+          tenement_product_type: zod.string(),
+          tenement_type: zod.string(),
+          tenement_status: zod.string(),
+          tenement_face: zod.string(),
+          tenement_images: zod.string().array(),
+          total_rating: zod.string(),
+          main_building: zod.string(),
+          affiliated_building: zod.string(),
+          public_building: zod.string(),
+          unregistered_area: zod.string(),
+          management_magnification: zod.string(),
+          management_fee: zod.string(),
+          selling_price: zod.string(),
+          rent_price: zod.string(),
+          deposit_price: zod.string(),
+          tenement_floor: zod.string(),
+
+          tenement_host_name: zod.string(),
+          tenement_host_telphone: zod.string(),
+          tenement_host_phone: zod.string(),
+          tenement_host_line: zod.string(),
+          tenement_host_remittance_bank: zod.string(),
+          tenement_host_remittance_account: zod.string(),
+          tenement_host_address: zod.string(),
+          tenement_host_birthday: zod.string(),
+          tenement_host_hobby: zod.string(),
+          tenement_host_remark: zod.string(),
+
+          buyer_order_date: zod.string(),
+          buyer_handout_date: zod.string(),
+          buyer_name: zod.string(),
+          buyer_id_images: zod.string().array(),
+          buyer_phone: zod.string(),
+          buyer_jobtitle: zod.string(),
+          buyer_remark: zod.string(),
+        })
+      );
+
+      const validData = validSchema.parse(data);
+
+      setData(validData.data);
     } catch (error) {
       console.error(error);
+      alert("取得資料失敗");
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -673,8 +905,8 @@ export function usePostSellEdit() {
         formDatas
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -700,7 +932,42 @@ export function useGetDevelopEdit() {
     try {
       const res = await getFetch(`/tenement/edit/develop/${id}`, token);
       const data = await res.json();
-      setData(data.data);
+
+      const validSchema = basicZodSchema(
+        zod.object({
+          tenement_address: zod.string(),
+          tenement_product_type: zod.string(),
+          tenement_type: zod.string(),
+          tenement_face: zod.string(),
+          tenement_images: zod.string().array(),
+          total_rating: zod.string(),
+          main_building: zod.string(),
+          affiliated_building: zod.string(),
+          public_building: zod.string(),
+          unregistered_area: zod.string(),
+          management_magnification: zod.string(),
+          management_fee: zod.string(),
+          selling_price: zod.string(),
+          rent_price: zod.string(),
+          deposit_price: zod.string(),
+          tenement_floor: zod.string(),
+
+          tenement_host_name: zod.string(),
+          tenement_host_telphone: zod.string(),
+          tenement_host_phone: zod.string(),
+          tenement_host_line: zod.string(),
+          tenement_host_remittance_bank: zod.string(),
+          tenement_host_remittance_account: zod.string(),
+          tenement_host_address: zod.string(),
+          tenement_host_birthday: zod.string(),
+          tenement_host_hobby: zod.string(),
+          tenement_host_remark: zod.string(),
+        })
+      );
+
+      const validData = validSchema.parse(data);
+
+      setData(validData.data);
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -731,8 +998,8 @@ export function usePostDevelopEdit() {
         formDatas
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -757,9 +1024,53 @@ export function useGetRentEdit() {
     try {
       const res = await getFetch(`/tenement/edit/rent/${id}`, token);
       const data = await res.json();
-      setData(data.data);
+
+      const validSchema = basicZodSchema(
+        zod.object({
+          tenement_address: zod.string(),
+          tenement_product_type: zod.string(),
+          tenement_type: zod.string(),
+          tenement_face: zod.string(),
+          tenement_images: zod.string().array(),
+          tenement_status: zod.string(),
+          total_rating: zod.string(),
+          main_building: zod.string(),
+          affiliated_building: zod.string(),
+          public_building: zod.string(),
+          unregistered_area: zod.string(),
+          management_magnification: zod.string(),
+          management_fee: zod.string(),
+          rent_price: zod.string(),
+          deposit_price: zod.string(),
+          tenement_floor: zod.string(),
+          tenement_host_name: zod.string(),
+          tenement_host_telphone: zod.string(),
+          tenement_host_phone: zod.string(),
+          tenement_host_line: zod.string(),
+          tenement_host_remittance_bank: zod.string(),
+          tenement_host_remittance_account: zod.string(),
+          tenement_host_address: zod.string(),
+          tenement_host_birthday: zod.string(),
+          tenement_host_hobby: zod.string(),
+          tenement_host_remark: zod.string(),
+          renter_start_date: zod.string(),
+          renter_end_date: zod.string(),
+          renter_name: zod.string(),
+          renter_id_images: zod.string().array(),
+          renter_phone: zod.string(),
+          renter_jobtitle: zod.string(),
+          renter_guarantor_name: zod.string(),
+          renter_guarantor_phone: zod.string(),
+          renter_remark: zod.string(),
+        })
+      );
+
+      const validData = validSchema.parse(data);
+
+      setData(validData.data);
     } catch (error) {
       console.error(error);
+      alert("取得資料失敗");
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -787,8 +1098,8 @@ export function usePostRentEdit() {
         formDatas
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -814,9 +1125,40 @@ export function useGetMarketEdit() {
     try {
       const res = await getFetch(`/tenement/edit/market/${id}`, token);
       const data = await res.json();
-      setData(data.data);
+
+      const validSchema = basicZodSchema(
+        zod.object({
+          tenement_address: zod.string(),
+          tenement_product_type: zod.string(),
+          tenement_type: zod.string(),
+          tenement_face: zod.string(),
+          tenement_images: zod.string().array(),
+          tenement_host_name: zod.string(),
+          tenement_host_telphone: zod.string(),
+          tenement_host_phone: zod.string(),
+          tenement_host_line: zod.string(),
+          tenement_host_remittance_bank: zod.string(),
+          tenement_host_remittance_account: zod.string(),
+          tenement_host_address: zod.string(),
+          tenement_host_birthday: zod.string(),
+          tenement_host_hobby: zod.string(),
+          tenement_host_remark: zod.string(),
+          tenement_area_max: zod.string(),
+          tenement_area_min: zod.string(),
+          burget_rent_max: zod.string(),
+          burget_rent_min: zod.string(),
+          hopefloor_max: zod.string(),
+          hopefloor_min: zod.string(),
+          market_state: zod.string(),
+        })
+      );
+
+      const validData = validSchema.parse(data);
+
+      setData(validData.data);
     } catch (error) {
       console.error(error);
+      alert("取得資料失敗");
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -846,8 +1188,8 @@ export function usePostMarketEdit() {
         formDatas
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
     } catch (error) {
       console.error(error);
@@ -873,9 +1215,25 @@ export function useGetNotice() {
     try {
       const res = await getFetch(`/notices/${id}/${type}`, token);
       const data = await res.json();
-      setData(data.data);
+
+      const validSchema = basicZodSchema(
+        zod
+          .object({
+            id: zod.string(),
+            visitDate: zod.string(),
+            record: zod.string(),
+            remindDate: zod.string(),
+            remind: zod.string(),
+          })
+          .array()
+      );
+
+      const validData = validSchema.parse(data);
+
+      setData(validData.data);
     } catch (error) {
       console.error(error);
+      alert("取得資料失敗");
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -907,8 +1265,8 @@ export function usePostAddNotice() {
         notices
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
       const data = await res.json();
       setNotices(data.data);
@@ -941,8 +1299,8 @@ export function usePutNotice() {
     try {
       const res = await mutableFetch(`/notices/${type}`, "PUT", token, notices);
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
       setIsDone(true);
       console.log(res);
@@ -981,8 +1339,8 @@ export function usePostAddTenement() {
         tenement
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
       setIsDone(true);
       console.log(res);
@@ -1018,8 +1376,8 @@ export function useDeleteTenement() {
         null
       );
       if (!res.ok) {
-        throw new Error(res.statusText);
         alert("操作失敗");
+        throw new Error(res.statusText);
       }
       setIsDone(true);
       console.log(res);

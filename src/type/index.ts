@@ -43,7 +43,11 @@ export type User = {
 
 export type Calender = {
   day: number;
-  events: Event[];
+  events: {
+    content: string;
+    id: string;
+    class: string;
+  }[];
 };
 
 export type TenementList = {
@@ -78,17 +82,14 @@ export type TenementSell = {
   public_building: string;
   tenement_floor: string;
   notices?: NoticeData[];
-  tenement_status:string;
-  
-
+  tenement_status: string;
 
   main_building: string;
   affiliated_building: string;
-  
+
   unregistered_area: string;
   management_magnification: string;
   management_fee: string;
-  
 
   tenement_host_name: string;
   tenement_host_telphone: string;
@@ -139,7 +140,7 @@ export type TenementDevelop = {
   tenement_type: string;
   tenement_face: string;
   tenement_images: string[];
-}
+};
 
 export type TenementRent = {
   tenement_address: string;
@@ -178,7 +179,6 @@ export type TenementRent = {
   renter_guarantor_name: string;
   renter_guarantor_phone: string;
   renter_remark: string;
-
 };
 
 export type TenementMarket = {
