@@ -5,13 +5,16 @@ import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const { handleLogin, isError } = useLogin();
+  const { handleLogin } = useLogin();
   const onFinish = (values: { user_email: string; user_password: string }) => {
-    handleLogin(values);
-    navigate("/Calenderlist");
-    if (isError) {
-      alert("帳號或密碼錯誤");
-    }
+    handleLogin(values)
+      .then(() => {
+        navigate("/Calenderlist");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("帳號或密碼錯誤");
+      });
   };
 
   return (

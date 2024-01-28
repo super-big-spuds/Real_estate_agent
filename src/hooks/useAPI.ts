@@ -781,7 +781,6 @@ export function useGetTenementListRent() {
 
 export function useLogin() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
   const handleLogin = async (formDatas: {
@@ -789,30 +788,20 @@ export function useLogin() {
     user_password: string;
   }) => {
     setIsLoading(true);
-    try {
-      const res = await mutableFetch("/user/login", "POST", "", formDatas);
-      const data = await res.json();
-      const validSchema = basicZodSchema(
-        zod.object({
-          token: zod.string(),
-        })
-      );
+    const res = await mutableFetch("/user/login", "POST", "", formDatas);
+    const data = await res.json();
+    const validSchema = basicZodSchema(
+      zod.object({
+        token: zod.string(),
+      })
+    );
+    const validData = validSchema.parse(data);
 
-      const validData = validSchema.parse(data);
-
-      localStorage.setItem("token", validData.data.token);
-      setIsLogin(true);
-    } catch (error) {
-      console.error(error);
-      alert("登入失敗");
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
-    }
+    localStorage.setItem("token", validData.data.token);
+    setIsLogin(true);
   };
   return {
     isLoading,
-    isError,
     handleLogin,
     isLogin,
   };
