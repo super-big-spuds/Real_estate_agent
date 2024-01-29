@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { usePostCollectionAdd, usePutNotice } from "./useAPI";
+import { usePostAddNotice, usePostCollectionAdd } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { z } from "zod";
 import moment from "moment";
@@ -52,7 +52,7 @@ const useCollectionAdd = () => {
       return newNotices;
     });
   };
-  const { handlePutNotice } = usePutNotice();
+  const { handlePostAddNotice } = usePostAddNotice();
   const handleSave = async () => {
     const schemaform = z.object({
       tenement_address: z.string().min(2, "地址至少兩個字"),
@@ -81,9 +81,23 @@ const useCollectionAdd = () => {
       return;
     }
 
-    await handleSaveColumn(parseResult.data);
-    await handlePutNotice("collection", notices);
-    alert("儲存成功");
+    const columnData = await handleSaveColumn(parseResult.data);
+    if (!columnData) {
+      alert("儲存失敗");
+      return;
+    }
+
+    const noticeData = notices.map((notice) => {
+      return {
+        visitDate: notice.visitDate,
+        record: notice.record,
+        remindDate: notice.remindDate,
+        remind: notice.remind,
+        collection_id: columnData.data.collection_id,
+      };
+    });
+
+    await handlePostAddNotice("collection", noticeData);
   };
 
   const handleReset = () => {

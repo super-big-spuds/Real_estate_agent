@@ -164,10 +164,11 @@ export default [
     },
   },
   {
-    url: "/api/collections",
+    url: "/api/collection",
     method: "post",
     response: {
       message: "Successfully add the media",
+      collection_id: 1,
     },
   },
   {
@@ -185,7 +186,7 @@ export default [
     },
   },
   {
-    url: "/api/collections",
+    url: "/api/collection",
     method: "get",
     response: {
       message: "Successfully get the media",

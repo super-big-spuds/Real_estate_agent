@@ -54,16 +54,15 @@ export function useToken() {
   return localStorage.getItem("token") as string;
 }
 export function useGetCollectionList() {
-  const token = "";
+  const token = useToken();
   const [datasa, setData] = useState<Collection[]>();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     (async () => {
-      if (token) return;
       try {
-        const res = await getFetch("/collections", token);
+        const res = await getFetch("/collection", token);
         const newData = await res.json();
 
         const validSchema = basicZodSchema(
@@ -104,11 +103,28 @@ export function usePostCollectionAdd() {
   const handleSaveColumn = async (formDatas: FormData) => {
     setIsLoading(true);
     try {
-      const res = await mutableFetch("/collections", "POST", token, formDatas);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { tenement_address, collection_id, ...sendData } = formDatas;
+
+      const res = await mutableFetch("/collection", "POST", token, {
+        ...sendData,
+        tenement_no: tenement_address.toString(),
+      });
       if (!res.ok) {
         alert("操作失敗");
         throw new Error(res.statusText);
       }
+
+      const data = await res.json();
+      const validSchema = basicZodSchema(
+        zod.object({
+          collection_id: zod.number(),
+        })
+      );
+
+      const validData = validSchema.parse(data);
+
+      return validData;
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -299,7 +315,7 @@ export function usePostCollectionEdit() {
 }
 
 export function useGetUserList() {
-  const token = "";
+  const token = useToken();
   const [dataUser, setDataUser] = useState<User[]>();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -601,7 +617,7 @@ export function useDeleteNotice() {
 }
 
 export function useGetTenementList() {
-  const token = "";
+  const token = useToken();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [dataTenement, setDataTenement] = useState<TenementList[]>([]);
@@ -654,7 +670,7 @@ export function useGetTenementList() {
 }
 
 export function useGetTenementListSell() {
-  const token = "";
+  const token = useToken();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [dataTenement, setDataTenement] = useState<TenementList[]>([]);
@@ -799,7 +815,7 @@ export function useLogin() {
 }
 
 export function useGetSellEdit() {
-  const token = "";
+  const token = useToken();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [dataEdit, setData] = useState<TenementSell>();
@@ -903,7 +919,7 @@ export function usePostSellEdit() {
 }
 
 export function useGetDevelopEdit() {
-  const token = "";
+  const token = useToken();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [dataEdit, setData] = useState<TenementDevelop>();
@@ -995,7 +1011,7 @@ export function usePostDevelopEdit() {
   };
 }
 export function useGetRentEdit() {
-  const token = "";
+  const token = useToken();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [dataEdit, setData] = useState<TenementRent>();
@@ -1096,7 +1112,7 @@ export function usePostRentEdit() {
 }
 
 export function useGetMarketEdit() {
-  const token = "";
+  const token = useToken();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [dataEdit, setData] = useState<TenementMarket>();
@@ -1186,7 +1202,7 @@ export function usePostMarketEdit() {
 }
 
 export function useGetNotice() {
-  const token = "";
+  const token = useToken();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [dataNotice, setData] = useState<NoticeData[]>([]);
@@ -1233,7 +1249,10 @@ export function usePostAddNotice() {
   const [newNotices, setNotices] = useState<NoticeData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const handlePostAddNotice = async (type: string, notices: NoticeData[]) => {
+  const handlePostAddNotice = async (
+    type: string,
+    notices: ICreateOrUpdateNotice[]
+  ) => {
     setIsLoading(true);
     setIsDone(false);
 
@@ -1267,17 +1286,33 @@ export function usePostAddNotice() {
   };
 }
 
+type ICreateOrUpdateNotice = Omit<NoticeData, "id" | "isNew"> & {
+  collection_id: number;
+};
+
 export function usePutNotice() {
   const token = useToken();
   const [isDone, setIsDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const handlePutNotice = async (type: string, notices: NoticeData[]) => {
+  const handlePutNotice = async (
+    type: string,
+    notices: NoticeData[],
+    collectionId: number
+  ) => {
     setIsLoading(true);
     setIsDone(false);
 
     try {
-      const res = await mutableFetch(`/notices/${type}`, "PUT", token, notices);
+      const body: ICreateOrUpdateNotice[] = notices.map((notice) => ({
+        visitDate: notice.visitDate,
+        record: notice.record,
+        remindDate: notice.remindDate,
+        remind: notice.remind,
+        collection_id: collectionId,
+      }));
+
+      const res = await mutableFetch(`/notices/${type}`, "PUT", token, body);
       if (!res.ok) {
         alert("操作失敗");
         throw new Error(res.statusText);
