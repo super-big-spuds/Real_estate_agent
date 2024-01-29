@@ -41,7 +41,6 @@ export default function useTenementNotice(
     const timeformat = "YYYY-MM-DD";
     const today = dayjs().format(timeformat);
     const newNotice = {
-      id: Math.random(),
       visitDate: today,
       record: "",
       remindDate: today,
