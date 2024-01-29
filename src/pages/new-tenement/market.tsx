@@ -24,13 +24,12 @@ export default function Market() {
     if (window.confirm("確定要刪除嗎?")) {
       marketHook.handlers.handleDelete();
     } else return;
-  }
+  };
 
   const isLoading = marketHook.states.isLoading || noticeHook.states.isLoading;
   const isError = marketHook.states.isError || noticeHook.states.isError;
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
   const handletypeChange = (e: RadioChangeEvent) => {
-    
     if (
       window.confirm(
         "是否要切換案件型態?(請確實按下儲存，避免切換後部分資料會遺失)"
@@ -59,7 +58,12 @@ export default function Market() {
   return (
     <div className="flex flex-col items-center w-full h-full ">
       <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
-        <button className="flex w-12 h-20 mt-10 ml-5" onClick={()=>navigate("/Tenements")}>{"< 返回"}</button>
+        <button
+          className="flex w-12 h-20 mt-10 ml-5"
+          onClick={() => navigate("/Tenements")}
+        >
+          {"< 返回"}
+        </button>
         <div className="inline-flex flex-col mb-5 ml-8">
           <p className="text-4xl font-bold whitespace-normal">行銷追蹤資料</p>
         </div>
@@ -111,10 +115,9 @@ export default function Market() {
                 <p className="text-right whitespace-nowrap">物件型態:</p>
                 <Radio.Group
                   value={marketHook.states.marketInfo.tenement_type}
-                  onChange={(e) =>{
-                      handletypeChange(e)
-                    }
-                  }
+                  onChange={(e) => {
+                    handletypeChange(e);
+                  }}
                   className="col-span-4 "
                 >
                   <Radio value="出租">出租</Radio>
@@ -268,7 +271,15 @@ export default function Market() {
                 <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                   房屋照片
                 </p>
-                <Uploadfile />
+                <Uploadfile
+                  fileList={marketHook.states.marketInfo.tenement_images}
+                  setFileList={(newFilelist) => {
+                    marketHook.handlers.handleChange(
+                      "tenement_images",
+                      newFilelist
+                    );
+                  }}
+                />
               </div>
               <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                 買客資訊
@@ -486,7 +497,9 @@ export default function Market() {
             儲存
           </Button>
           <Button type="default">回復預設</Button>
-          <Button danger onClick={onDelete}>刪除</Button>
+          <Button danger onClick={onDelete}>
+            刪除
+          </Button>
         </div>
       </div>
     </div>

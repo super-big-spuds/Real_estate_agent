@@ -2,42 +2,64 @@ import React from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Upload } from "antd";
 import type { UploadFile } from "antd/es/upload/interface";
+import { deleteFile } from "../../hooks/useAPI";
 
-const fileList: UploadFile[] = [
-  {
-    uid: "0",
-    name: "xxx.png",
-    status: "done",
-    percent: 33,
-  },
-  {
-    uid: "-1",
-    name: "yyy.png",
-    status: "done",
-    url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    thumbUrl:
-      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-  },
-  {
-    uid: "-2",
-    name: "zzz.png",
-    status: "done",
-  },
-];
+type UploadFileProps = {
+  fileList: string[];
+  setFileList: (fileList: string[]) => void;
+};
 
-const App: React.FC = () => (
-  <>
-    <Upload
-      action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-      listType="picture"
-      defaultFileList={[...fileList]}
-      className="upload-list-inline"
-    >
-      <Button type="primary" className="bg-blue-600 " icon={<UploadOutlined />}>
-        新增照片
-      </Button>
-    </Upload>
-  </>
-);
+const App = (props: UploadFileProps) => {
+  const url = `${import.meta.env.VITE_API_BASE_URL}/api/files/upload`;
+
+  const organizedFileList: UploadFile[] = props.fileList.map((url) => {
+    return {
+      uid: url,
+      name: url,
+      status: "done",
+      url: url,
+    };
+  });
+
+  return (
+    <>
+      <Upload
+        action={url}
+        headers={{
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        }}
+        listType="picture"
+        fileList={organizedFileList}
+        onChange={(info) => {
+          const { status } = info.file;
+          if (status !== "uploading") {
+            const fileList = [...props.fileList, info.file.response.url];
+            props.setFileList(fileList);
+          }
+          if (status === "done") {
+            console.log(`${info.file.name} file uploaded successfully.`);
+          } else if (status === "error") {
+            console.log(`${info.file.name} file upload failed.`);
+          }
+        }}
+        onRemove={async (file) => {
+          await deleteFile(file.url as string);
+
+          const fileList = props.fileList.filter((url) => url !== file.url);
+          props.setFileList(fileList);
+        }}
+        className="upload-list-inline"
+      >
+        <Button
+          type="primary"
+          className="bg-blue-600 "
+          icon={<UploadOutlined />}
+        >
+          新增照片
+        </Button>
+      </Upload>
+    </>
+  );
+};
 
 export default App;

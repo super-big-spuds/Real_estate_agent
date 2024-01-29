@@ -13,7 +13,7 @@ import type {
 } from "../type";
 import * as zod from "zod";
 
-const APIBaseURL = process.env.BASE_URL;
+const APIBaseURL = process.env.VITE_API_BASE_URL;
 
 const getFetch = (url: string, token: string) => {
   return fetch(`${APIBaseURL}/api${url}`, {
@@ -1492,4 +1492,20 @@ export function useGetUserRole(token: string) {
     isAdmin,
     getUserRole,
   };
+}
+
+export async function deleteFile(fileName: string) {
+  const token = localStorage.getItem("token") as string;
+
+  const res = await mutableFetch(
+    `/files/delete/${fileName}`,
+    "DELETE",
+    token,
+    null
+  );
+
+  if (!res.ok) {
+    alert("操作失敗");
+    throw new Error(res.statusText);
+  }
 }

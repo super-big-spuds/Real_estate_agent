@@ -363,7 +363,15 @@ export default function Rent() {
                   <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                     房屋照片
                   </p>
-                  <Uploadfile />
+                  <Uploadfile
+                    fileList={rentHook.states.rentInfo.tenement_images}
+                    setFileList={(fileList) =>
+                      rentHook.handlers.handleChange(
+                        "tenement_images",
+                        fileList
+                      )
+                    }
+                  />
                 </div>
                 <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                   屋主資訊
@@ -663,7 +671,15 @@ export default function Rent() {
                   <div className="grid grid-cols-3 gap-1 ">
                     <p className="col-span-2 ">身分證件翻拍存檔:</p>
                   </div>
-                  <Uploadfile />
+                  <Uploadfile
+                    fileList={rentHook.states.rentInfo.renter_id_images}
+                    setFileList={(newFilelist) => {
+                      rentHook.handlers.handleChange(
+                        "renter_id_images",
+                        newFilelist
+                      );
+                    }}
+                  />
                 </div>
                 <div className="flex flex-col w-1/3 ml-5">
                   <div className="grid grid-cols-5 gap-1 ">

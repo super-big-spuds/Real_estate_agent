@@ -10,7 +10,6 @@ import useTenementNotice from "../../hooks/new-tenement/useTenementNotice";
 import { useParams } from "react-router-dom";
 import { useTenementSellInfo } from "../../hooks/new-tenement/useTenement";
 
-
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
@@ -26,20 +25,17 @@ export default function Rent() {
     sellHook.handlers.handleSave();
   };
 
-
   const onDelete = () => {
     if (window.confirm("確定要刪除嗎?")) {
       sellHook.handlers.handleDelete();
     }
-  }
-
+  };
 
   const isLoading = sellHook.states.isLoading || noticeHook.states.isLoading;
   const isError = sellHook.states.isError || noticeHook.states.isError;
 
   const navigate = useNavigate();
   const handletypeChange = (e: RadioChangeEvent) => {
-    
     if (
       window.confirm(
         "是否要切換案件型態?(請確實按下儲存，避免切換後部分資料會遺失)"
@@ -64,11 +60,16 @@ export default function Rent() {
       }
     } else return;
   };
-  
+
   return (
     <div className="flex flex-col items-center w-full h-full ">
       <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
-        <button className="flex w-12 h-20 mt-10 ml-5" onClick={()=>navigate("/Tenements")} >{"< 返回"}</button>
+        <button
+          className="flex w-12 h-20 mt-10 ml-5"
+          onClick={() => navigate("/Tenements")}
+        >
+          {"< 返回"}
+        </button>
         <div className="inline-flex flex-col mb-5 ml-8">
           <p className="text-4xl font-bold whitespace-normal">出售資料</p>
         </div>
@@ -140,11 +141,9 @@ export default function Rent() {
                   <p className="text-right whitespace-nowrap">物件型態:</p>
                   <Radio.Group
                     value={sellHook.states.sellInfo.tenement_type}
-                    onChange={(e) =>{
-                        handletypeChange(e)
-                    }
-                      
-                    }
+                    onChange={(e) => {
+                      handletypeChange(e);
+                    }}
                     className="col-span-4 "
                   >
                     <Radio value="出租">出租</Radio>
@@ -353,7 +352,15 @@ export default function Rent() {
                   <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                     房屋照片
                   </p>
-                  <Uploadfile />
+                  <Uploadfile
+                    fileList={sellHook.states.sellInfo.tenement_images}
+                    setFileList={(newFilelist) => {
+                      sellHook.handlers.handleChange(
+                        "tenement_images",
+                        newFilelist
+                      );
+                    }}
+                  />
                 </div>
                 <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                   屋主資訊
@@ -544,56 +551,59 @@ export default function Rent() {
               </div>
               <p className="mb-3 ml-5 border-b-2 border-gray-300"></p>
               <div className="flex flex-row w-full ">
-              <div className="flex flex-col w-1/3 gap-5 mr-3 ">
-
-              {/* buyer_order_date */}
-                <div className="grid grid-cols-5 gap-1 text-right">
+                <div className="flex flex-col w-1/3 gap-5 mr-3 ">
+                  {/* buyer_order_date */}
+                  <div className="grid grid-cols-5 gap-1 text-right">
                     <p className="col-span-1 pt-5 ">下定日期:</p>
                     <DatePicker
                       className="col-span-3"
                       value={dayjs(
                         sellHook.states.sellInfo.buyer_order_date,
-                        "YYYY-MM-DD")}
-                        onChange={(_, dateString) =>
-                            sellHook.handlers.handleChange(
-                                "buyer_order_date",
-                                dateString
-                            )}
+                        "YYYY-MM-DD"
+                      )}
+                      onChange={(_, dateString) =>
+                        sellHook.handlers.handleChange(
+                          "buyer_order_date",
+                          dateString
+                        )
+                      }
                     />
-                </div>
-                
-                {/* buyer_handout_date */}  
-                <div className="grid grid-cols-5 gap-1 text-right">
+                  </div>
+
+                  {/* buyer_handout_date */}
+                  <div className="grid grid-cols-5 gap-1 text-right">
                     <p className="col-span-1 pt-5 ">交房日期:</p>
                     <DatePicker
                       className="col-span-3"
                       value={dayjs(
                         sellHook.states.sellInfo.buyer_handout_date,
-                        "YYYY-MM-DD")}
-                        onChange={(_, dateString) =>
-                            sellHook.handlers.handleChange(
-                                "buyer_handout_date",
-                                dateString
-                            )}
+                        "YYYY-MM-DD"
+                      )}
+                      onChange={(_, dateString) =>
+                        sellHook.handlers.handleChange(
+                          "buyer_handout_date",
+                          dateString
+                        )
+                      }
                     />
-                </div>
-                {/* buyer_name */}
-                <div className="grid grid-cols-5 gap-1 text-right">
-                  <p className="col-span-1 pt-5 ">姓名:</p>
-                  <InputWithErrorMessage
-                    value={sellHook.states.sellInfo.buyer_name}
-                    onChange={(e) =>
-                      sellHook.handlers.handleChange(
-                        "buyer_name",
-                        e.target.value
-                      )
-                    }
-                    isError={sellHook.states.sellInfo.buyer_name.length <= 2}
-                    errorMessage={"至少兩個字"}
-                  />
+                  </div>
+                  {/* buyer_name */}
+                  <div className="grid grid-cols-5 gap-1 text-right">
+                    <p className="col-span-1 pt-5 ">姓名:</p>
+                    <InputWithErrorMessage
+                      value={sellHook.states.sellInfo.buyer_name}
+                      onChange={(e) =>
+                        sellHook.handlers.handleChange(
+                          "buyer_name",
+                          e.target.value
+                        )
+                      }
+                      isError={sellHook.states.sellInfo.buyer_name.length <= 2}
+                      errorMessage={"至少兩個字"}
+                    />
                   </div>
                   {/* buyer_phone */}
-                    <div className="grid grid-cols-5 gap-1 text-right">
+                  <div className="grid grid-cols-5 gap-1 text-right">
                     <p className="col-span-1 pt-5 ">行動電話:</p>
                     <InputWithErrorMessage
                       value={sellHook.states.sellInfo.buyer_phone}
@@ -605,10 +615,10 @@ export default function Rent() {
                       }
                       isError={sellHook.states.sellInfo.buyer_phone.length <= 2}
                       errorMessage={"至少兩個字"}
-                    />  
-                    </div>
-                    {/* buyer_jobtitle */}
-                    <div className="grid grid-cols-5 gap-1 text-right">
+                    />
+                  </div>
+                  {/* buyer_jobtitle */}
+                  <div className="grid grid-cols-5 gap-1 text-right">
                     <p className="col-span-1 pt-5 ">職稱:</p>
                     <InputWithErrorMessage
                       value={sellHook.states.sellInfo.buyer_jobtitle}
@@ -618,16 +628,26 @@ export default function Rent() {
                           e.target.value
                         )
                       }
-                      isError={sellHook.states.sellInfo.buyer_jobtitle.length <= 2}
+                      isError={
+                        sellHook.states.sellInfo.buyer_jobtitle.length <= 2
+                      }
                       errorMessage={"至少兩個字"}
                     />
-                    </div>
-                    </div>
-                    <div className="flex flex-col w-1/3 ">
+                  </div>
+                </div>
+                <div className="flex flex-col w-1/3 ">
                   <div className="grid grid-cols-3 gap-1 ">
                     <p className="col-span-2 ">身分證件翻拍存檔:</p>
                   </div>
-                  <Uploadfile />
+                  <Uploadfile
+                    fileList={sellHook.states.sellInfo.buyer_id_images}
+                    setFileList={(newFilelist) => {
+                      sellHook.handlers.handleChange(
+                        "buyer_id_images",
+                        newFilelist
+                      );
+                    }}
+                  />
                 </div>
                 <div className="flex flex-col w-1/3 ml-5">
                   <div className="grid grid-cols-5 gap-1 ">
@@ -644,12 +664,8 @@ export default function Rent() {
                     }
                   />
                 </div>
-
-
-                
-                </div>
+              </div>
             </div>
-            
           </>
         )}
 
@@ -683,7 +699,9 @@ export default function Rent() {
             儲存
           </Button>
           <Button type="default">回復預設</Button>
-          <Button danger onClick={onDelete}>刪除</Button>
+          <Button danger onClick={onDelete}>
+            刪除
+          </Button>
         </div>
       </div>
     </div>

@@ -184,7 +184,10 @@ export default function TenementInfoEdit(props: any) {
     }
   };
 
-  const handleChange = (key: keyof typeof formData, value: string | number) => {
+  const handleChange = (
+    key: keyof typeof formData,
+    value: string | number | string[]
+  ) => {
     setFormData((prev: any) => ({ ...prev, [key]: value }));
   };
 
@@ -418,7 +421,12 @@ export default function TenementInfoEdit(props: any) {
                 <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                   房屋照片
                 </p>
-                <Uploadfile />
+                <Uploadfile
+                  fileList={formData.tenement_photo}
+                  setFileList={(newFilelist) => {
+                    handleChange("tenement_photo", newFilelist);
+                  }}
+                />
               </div>
               <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                 {formData.tenement_type === "行銷追蹤"

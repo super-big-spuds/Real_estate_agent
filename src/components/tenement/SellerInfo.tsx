@@ -72,7 +72,9 @@ export default function SellerInfo(props: SellerInfoProps) {
             <Input
               className="col-span-2"
               value={sellerData.buyer_jobtitle}
-              onChange={(e) => handleChangeSeller("buyer_jobtitle", e.target.value)}
+              onChange={(e) =>
+                handleChangeSeller("buyer_jobtitle", e.target.value)
+              }
             />
           </div>
         </div>
@@ -81,7 +83,12 @@ export default function SellerInfo(props: SellerInfoProps) {
           <div className="grid grid-cols-3 gap-1 ">
             <p className="col-span-2 ">身分證件翻拍存檔:</p>
           </div>
-          <Uploadfile />
+          <Uploadfile
+            fileList={sellerData.buyer_photo}
+            setFileList={(newFilelist) => {
+              handleChangeSeller("buyer_photo", newFilelist);
+            }}
+          />
         </div>
         <div className="flex flex-col w-1/3 ml-5">
           <div className="grid grid-cols-5 gap-1 ">

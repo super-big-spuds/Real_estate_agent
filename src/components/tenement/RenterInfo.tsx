@@ -72,7 +72,9 @@ export default function RenterInfo(props: RenterInfoProps) {
             <Input
               className="col-span-2"
               value={renterData.renter_jobtitle}
-              onChange={(e) => handleRenterChange("renter_jobtitle", e.target.value)}
+              onChange={(e) =>
+                handleRenterChange("renter_jobtitle", e.target.value)
+              }
             />
           </div>
 
@@ -102,7 +104,12 @@ export default function RenterInfo(props: RenterInfoProps) {
           <div className="grid grid-cols-3 gap-1 ">
             <p className="col-span-2 ">身分證件翻拍存檔:</p>
           </div>
-          <Uploadfile />
+          <Uploadfile
+            fileList={renterData.renter_id_images}
+            setFileList={(fileList: string[]) =>
+              handleRenterChange("renter_id_images", fileList)
+            }
+          />
         </div>
         <div className="flex flex-col w-1/3 ml-5">
           <div className="grid grid-cols-5 gap-1 ">
@@ -111,7 +118,9 @@ export default function RenterInfo(props: RenterInfoProps) {
           <textarea
             className="w-full h-40 border border-gray-300"
             value={renterData.renter_remark}
-            onChange={(e) => handleRenterChange("renter_remark", e.target.value)}
+            onChange={(e) =>
+              handleRenterChange("renter_remark", e.target.value)
+            }
           />
         </div>
       </div>

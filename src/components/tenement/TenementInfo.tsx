@@ -61,9 +61,7 @@ export default function TenementInfo(props: any) {
     tenement_product_type: "套房",
     tenement_type: "出租",
     tenement_face: "海景",
-    tenement_images: [
-      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    ],
+    tenement_images: [],
     tenement_status: "已成交",
     total_rating: "0.0",
     main_building: "0.0",
@@ -104,10 +102,7 @@ export default function TenementInfo(props: any) {
     renter_guarantor_name: "John Smith",
     renter_guarantor_phone: "1234567890",
     renter_remark: "No remarks",
-    renter_id_images: [
-      "https://example.com/image5.jpg",
-      "https://example.com/image6.jpg",
-    ],
+    renter_id_images: [],
   });
 
   const [sellerData, setSellerData] = useState({
@@ -300,9 +295,7 @@ export default function TenementInfo(props: any) {
       tenement_product_type: "套房",
       tenement_type: "出租",
       tenement_face: "海景",
-      tenement_images: [
-        "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      ],
+      tenement_images: [],
       tenement_status: "已成交",
       total_rating: "4",
       main_building: "3",
@@ -358,7 +351,10 @@ export default function TenementInfo(props: any) {
     setTenement_type(e.target.value);
   };
 
-  const handleChange = (key: keyof typeof formData, value: string | number) => {
+  const handleChange = (
+    key: keyof typeof formData,
+    value: string | number | string[]
+  ) => {
     setFormData((prev: any) => ({ ...prev, [key]: value }));
   };
 
@@ -760,7 +756,12 @@ export default function TenementInfo(props: any) {
                 <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                   房屋照片
                 </p>
-                <Uploadfile />
+                <Uploadfile
+                  fileList={formData.tenement_images}
+                  setFileList={(newFilelist) =>
+                    handleChange("tenement_images", newFilelist)
+                  }
+                />
               </div>
               <p className="mt-2 mb-3 text-3xl font-bold whitespace-normal">
                 {tenement_type === "行銷追蹤" ? "買客資訊" : "屋主資訊"}

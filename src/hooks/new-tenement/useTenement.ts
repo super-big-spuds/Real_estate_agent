@@ -69,7 +69,10 @@ export function useTenementMarketInfo(tenementId: string) {
     market_state: "租房",
   });
 
-  const handleChange = (key: keyof ITenementMarketInfoType, value: string) => {
+  const handleChange = (
+    key: keyof ITenementMarketInfoType,
+    value: string | string[]
+  ) => {
     setMarketInfo((prev) => {
       if (!prev) return prev;
       return { ...prev, [key]: value };
@@ -102,7 +105,7 @@ export function useTenementMarketInfo(tenementId: string) {
   useEffect(() => {
     if (!dataEdit) return;
     setMarketInfo({
-      tenement_id: 1,
+      tenement_id: Number(dataEdit.tenement_id),
       tenement_address: dataEdit.tenement_address,
       tenement_product_type: dataEdit.tenement_product_type,
       tenement_type: dataEdit.tenement_type,
@@ -179,13 +182,12 @@ type ITenementRentInfoType = ITenementBasedInfoType & {
 
 export function useTenementRentInfo(tenementId: string) {
   const [rentInfo, setRentInfo] = useState<ITenementRentInfoType>({
+    tenement_id: 1,
     tenement_address: "1234",
     tenement_product_type: "套房",
     tenement_type: "出租",
     tenement_face: "海景",
-    tenement_images: [
-      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    ],
+    tenement_images: [],
     tenement_status: "已成交",
     total_rating: "4",
     main_building: "3",
@@ -218,7 +220,10 @@ export function useTenementRentInfo(tenementId: string) {
     renter_remark: "No remarks",
   });
 
-  const handleChange = (key: keyof ITenementRentInfoType, value: string) => {
+  const handleChange = (
+    key: keyof ITenementRentInfoType,
+    value: string | string[]
+  ) => {
     setRentInfo((prev) => {
       if (!prev) return prev;
       return { ...prev, [key]: value };
@@ -231,7 +236,7 @@ export function useTenementRentInfo(tenementId: string) {
     // rentinfo add tenement_id
     const rentinfo = {
       ...rentInfo,
-      tenement_id: tenementId,
+      tenement_id: Number(tenementId),
     };
     handleSaveColumn(rentinfo);
   };
@@ -252,6 +257,7 @@ export function useTenementRentInfo(tenementId: string) {
   useEffect(() => {
     if (!dataEdit) return;
     setRentInfo({
+      tenement_id: dataEdit.tenement_id,
       tenement_address: dataEdit.tenement_address,
       tenement_product_type: dataEdit.tenement_product_type,
       tenement_type: dataEdit.tenement_type,
@@ -364,7 +370,10 @@ export function useTenementDevelopInfo(tenementId: string) {
     tenement_host_remark: "No remarks",
   });
 
-  const handleChange = (key: keyof ITenementDevelopInfoType, value: string) => {
+  const handleChange = (
+    key: keyof ITenementDevelopInfoType,
+    value: string | string[]
+  ) => {
     setDevelopInfo((prev) => {
       if (!prev) return prev;
       return { ...prev, [key]: value };
@@ -517,7 +526,10 @@ export function useTenementSellInfo(tenementId: string) {
     buyer_remark: "No remarks",
   });
 
-  const handleChange = (key: keyof ITenementSellInfoType, value: string) => {
+  const handleChange = (
+    key: keyof ITenementSellInfoType,
+    value: string | string[]
+  ) => {
     setSellInfo((prev) => {
       if (!prev) return prev;
       return { ...prev, [key]: value };
