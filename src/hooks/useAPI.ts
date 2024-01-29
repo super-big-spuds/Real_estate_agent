@@ -232,7 +232,20 @@ export function usePostCollectionEdit() {
         `/collection/${formDatas.collection_id}`,
         "PUT",
         token,
-        formDatas
+        {
+          tenement_no: formDatas.tenement_address.toString(),
+          collection_name: formDatas.collection_name,
+          collection_type: formDatas.collection_type,
+          price: formDatas.price,
+          payment: formDatas.payment,
+          collection_remark: formDatas.collection_remark,
+          collection_date: formDatas.collection_date,
+          remittance_bank: formDatas.remittance_bank,
+          remittance_account: formDatas.remittance_account,
+          cus_remittance_bank: formDatas.cus_remittance_bank,
+          cus_remittance_account: formDatas.cus_remittance_account,
+          collection_complete: formDatas.collection_complete,
+        }
       );
       if (!res.ok) {
         alert("操作失敗");
@@ -1297,19 +1310,19 @@ export function usePutNotice() {
   const [isError, setIsError] = useState(false);
   const handlePutNotice = async (
     type: string,
-    notices: NoticeData[],
-    collectionId: number
+    notices: NoticeData[]
   ) => {
     setIsLoading(true);
     setIsDone(false);
 
     try {
-      const body: ICreateOrUpdateNotice[] = notices.map((notice) => ({
+      const body = notices.map((notice) => ({
+        id: notice.id,
         visitDate: notice.visitDate,
         record: notice.record,
         remindDate: notice.remindDate,
         remind: notice.remind,
-        collection_id: collectionId,
+        isNew: notice.isNew,
       }));
 
       const res = await mutableFetch(`/notices/${type}`, "PUT", token, body);

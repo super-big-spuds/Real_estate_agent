@@ -115,7 +115,7 @@ const useCollectionEdit = () => {
     };
     await handleSaveColumn(newformdata);
     if (notices.length > 0) {
-      await handlePutNotice("collection", notices, Number(getparamid));
+      await handlePutNotice("collection", notices);
     }
     alert("儲存成功");
   };
