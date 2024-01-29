@@ -51,16 +51,7 @@ function basicZodSchema<T extends zod.ZodTypeAny>(
 }
 
 export function useToken() {
-  const [token, setToken] = useState<string>("");
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setToken(token);
-    }
-  }, []);
-
-  return token;
+  return localStorage.getItem("token") as string;
 }
 export function useGetCollectionList() {
   const token = "";
@@ -721,7 +712,7 @@ export function useGetTenementListSell() {
 }
 
 export function useGetTenementListRent() {
-  const token = "";
+  const token = useToken();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [dataTenement, setDataTenement] = useState<TenementList[]>([]);
@@ -1385,37 +1376,25 @@ export function useDeleteTenement() {
   };
 }
 
-export function useGetUserRole() {
-  const token = useToken();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+export function useGetUserRole(token: string) {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   const getUserRole = async () => {
-    try {
-      const res = await getFetch(`/user/auth`, token);
-      const data = await res.json();
+    if (!token) return;
+    const res = await getFetch(`/user/auth`, token);
+    const data = await res.json();
 
-      const validSchema = basicZodSchema(
-        zod.object({
-          isadmin: zod.boolean(),
-        })
-      );
+    const validSchema = basicZodSchema(
+      zod.object({
+        isadmin: zod.boolean(),
+      })
+    );
 
-      const validData = validSchema.parse(data);
+    const validData = validSchema.parse(data);
 
-      setIsAdmin(validData.data.isadmin);
-    } catch (error) {
-      console.error(error);
-      alert("取得資料失敗");
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
-    }
+    setIsAdmin(validData.data.isadmin);
   };
   return {
-    isLoading,
-    isError,
     isAdmin,
     getUserRole,
   };
