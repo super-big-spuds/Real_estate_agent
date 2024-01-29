@@ -79,7 +79,7 @@ export type TenementSell = {
   rent_price?: string;
   selling_price: string;
   buget_price?: string;
-  total_rating: number;
+  total_rating: string;
   public_building: string;
   tenement_floor: string;
   notices?: NoticeData[];
@@ -114,7 +114,7 @@ export type TenementSell = {
 
 export type TenementDevelop = {
   tenement_id?: number;
-  total_rating: number;
+  total_rating: string;
   main_building: string;
   affiliated_building: string;
   public_building: string;
@@ -144,7 +144,7 @@ export type TenementDevelop = {
 };
 
 export type TenementRent = {
-  tenement_id: number;
+  tenement_id?: number;
   tenement_address: string;
   tenement_product_type: string;
   tenement_type: string;
