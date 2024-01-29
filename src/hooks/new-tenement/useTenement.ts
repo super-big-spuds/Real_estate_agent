@@ -12,6 +12,7 @@ import {
 } from "../useAPI";
 
 type ITenementBasedInfoType = {
+  tenement_id: number;
   tenement_address: string;
   tenement_product_type: string;
   tenement_type: string;
@@ -41,6 +42,7 @@ type ITenementMarketInfoType = ITenementBasedInfoType & {
 
 export function useTenementMarketInfo(tenementId: string) {
   const [marketInfo, setMarketInfo] = useState<ITenementMarketInfoType>({
+    tenement_id: 1,
     tenement_address: "1234",
     tenement_product_type: "套房",
     tenement_type: "行銷追蹤",
@@ -100,6 +102,7 @@ export function useTenementMarketInfo(tenementId: string) {
   useEffect(() => {
     if (!dataEdit) return;
     setMarketInfo({
+      tenement_id: 1,
       tenement_address: dataEdit.tenement_address,
       tenement_product_type: dataEdit.tenement_product_type,
       tenement_type: dataEdit.tenement_type,
@@ -329,6 +332,7 @@ type ITenementDevelopInfoType = ITenementBasedInfoType & {
 
 export function useTenementDevelopInfo(tenementId: string) {
   const [developInfo, setDevelopInfo] = useState<ITenementDevelopInfoType>({
+    tenement_id: 1,
     tenement_address: "1234",
     tenement_product_type: "套房",
     tenement_type: "開發追蹤",
@@ -472,6 +476,7 @@ type ITenementSellInfoType = ITenementBasedInfoType & {
 
 export function useTenementSellInfo(tenementId: string) {
   const [sellInfo, setSellInfo] = useState<ITenementSellInfoType>({
+    tenement_id: 1,
     tenement_address: "aaaaa",
     tenement_product_type: "套房",
     tenement_type: "出售",

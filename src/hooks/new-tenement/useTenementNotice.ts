@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 type ITenementType = "develop" | "rent" | "sell" | "market";
 
 type INotice = {
-  id: string;
+  id: number;
   visitDate: string;
   record: string;
   remindDate: string;
@@ -23,7 +23,7 @@ export default function useTenementNotice(
 ) {
   const [notices, setNotices] = useState<INotice[]>([
     {
-      id: "1",
+      id: 1,
       visitDate: "2024-01-01",
       record: "紀錄事項1",
       remindDate: "2024-01-01",
@@ -41,12 +41,12 @@ export default function useTenementNotice(
     const timeformat = "YYYY-MM-DD";
     const today = dayjs().format(timeformat);
     const newNotice = {
-      id: "",
+      id: Math.random(),
       visitDate: today,
       record: "",
       remindDate: today,
       remind: "",
-      tenement_id: tenementId,
+      collection_id: Number(tenementId),
       isNew: true,
     };
     handlePostAddNotice(tenementType, [newNotice]);

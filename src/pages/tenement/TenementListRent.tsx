@@ -62,7 +62,8 @@ export const TenementListRent = () => {
     useGetTenementListRent();
   const [data, setData] = useState<TenementList[]>([
     {
-      tenement_address: 54321,
+      tenement_id: 1,
+      tenement_address: "地址",
       tenement_face: "海景",
       tenement_status: "未成交",
       tenement_type: "出售",
@@ -76,7 +77,8 @@ export const TenementListRent = () => {
       tenement_floor: 100,
     },
     {
-      tenement_address: 54322,
+      tenement_id: 2,
+      tenement_address: "地址",
       tenement_face: "中庭",
       tenement_status: "已成交",
       tenement_type: "出租",
@@ -90,7 +92,8 @@ export const TenementListRent = () => {
       tenement_floor: 120,
     },
     {
-      tenement_address: 54323,
+      tenement_id: 3,
+      tenement_address: "地址",
       tenement_face: "三多路",
       tenement_status: "已退租下架",
       tenement_type: "開發追蹤",
@@ -104,7 +107,8 @@ export const TenementListRent = () => {
       tenement_floor: 150,
     },
     {
-      tenement_address: 54323,
+      tenement_id: 4,
+      tenement_address: "地址",
       tenement_face: "三多路",
       tenement_status: "過戶完成下架",
       tenement_type: "行銷追蹤",

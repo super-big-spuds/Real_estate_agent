@@ -173,9 +173,7 @@ const useTenementList = () => {
     return {
       onClick: () => {
         navigate(
-          `/Tenement/${record.tenement_address}/${switchType(
-            record.tenement_type
-          )}`
+          `/Tenement/${record.tenement_id}/${switchType(record.tenement_type)}`
         );
       },
     };

@@ -51,7 +51,8 @@ export type Calender = {
 };
 
 export type TenementList = {
-  tenement_address: number;
+  tenement_id: number;
+  tenement_address: string;
   tenement_face: string;
   tenement_status: string;
   tenement_type: string;
@@ -67,7 +68,7 @@ export type TenementList = {
 };
 
 export type TenementSell = {
-  tenement_id?: string;
+  tenement_id?: number;
   tenement_address: string;
   tenement_face: string;
 
@@ -78,7 +79,7 @@ export type TenementSell = {
   rent_price?: string;
   selling_price: string;
   buget_price?: string;
-  total_rating: string;
+  total_rating: number;
   public_building: string;
   tenement_floor: string;
   notices?: NoticeData[];
@@ -112,8 +113,8 @@ export type TenementSell = {
 };
 
 export type TenementDevelop = {
-  tenement_id?: string;
-  total_rating: string;
+  tenement_id?: number;
+  total_rating: number;
   main_building: string;
   affiliated_building: string;
   public_building: string;
@@ -143,6 +144,7 @@ export type TenementDevelop = {
 };
 
 export type TenementRent = {
+  tenement_id: number;
   tenement_address: string;
   tenement_product_type: string;
   tenement_type: string;

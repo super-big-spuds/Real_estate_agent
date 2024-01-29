@@ -652,7 +652,8 @@ export function useGetTenementList() {
       const validSchema = basicZodSchema(
         zod
           .object({
-            tenement_address: zod.number(),
+            tenement_id: zod.number(),
+            tenement_address: zod.string(),
             tenement_face: zod.string(),
             tenement_status: zod.string(),
             tenement_type: zod.string(),
@@ -705,7 +706,8 @@ export function useGetTenementListSell() {
       const validSchema = basicZodSchema(
         zod
           .object({
-            tenement_address: zod.number(),
+            tenement_id: zod.number(),
+            tenement_address: zod.string(),
             tenement_face: zod.string(),
             tenement_status: zod.string(),
             tenement_type: zod.string(),
@@ -763,7 +765,8 @@ export function useGetTenementListRent() {
       const validSchema = basicZodSchema(
         zod
           .object({
-            tenement_address: zod.number(),
+            tenement_id: zod.number(),
+            tenement_address: zod.string(),
             tenement_face: zod.string(),
             tenement_status: zod.string(),
             tenement_type: zod.string(),
@@ -839,6 +842,7 @@ export function useGetSellEdit() {
 
       const validSchema = basicZodSchema(
         zod.object({
+          tenement_id: zod.number(),
           tenement_address: zod.string(),
           tenement_product_type: zod.string(),
           tenement_type: zod.string(),
@@ -880,7 +884,10 @@ export function useGetSellEdit() {
 
       const validData = validSchema.parse(data);
 
-      setData(validData.data);
+      setData({
+        ...validData.data,
+        total_rating: Number(validData.data.total_rating),
+      });
     } catch (error) {
       console.error(error);
       alert("取得資料失敗");
@@ -943,6 +950,7 @@ export function useGetDevelopEdit() {
 
       const validSchema = basicZodSchema(
         zod.object({
+          tenement_id: zod.number(),
           tenement_address: zod.string(),
           tenement_product_type: zod.string(),
           tenement_type: zod.string(),
@@ -975,7 +983,10 @@ export function useGetDevelopEdit() {
 
       const validData = validSchema.parse(data);
 
-      setData(validData.data);
+      setData({
+        ...validData.data,
+        total_rating: Number(validData.data.total_rating),
+      });
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -1035,22 +1046,23 @@ export function useGetRentEdit() {
 
       const validSchema = basicZodSchema(
         zod.object({
+          tenement_id: zod.number(),
           tenement_address: zod.string(),
           tenement_product_type: zod.string(),
           tenement_type: zod.string(),
           tenement_face: zod.string(),
           tenement_images: zod.string().array(),
           tenement_status: zod.string(),
-          total_rating: zod.string(),
-          main_building: zod.string(),
-          affiliated_building: zod.string(),
-          public_building: zod.string(),
-          unregistered_area: zod.string(),
-          management_magnification: zod.string(),
-          management_fee: zod.string(),
-          rent_price: zod.string(),
-          deposit_price: zod.string(),
-          tenement_floor: zod.string(),
+          total_rating: zod.number(),
+          main_building: zod.number(),
+          affiliated_building: zod.number(),
+          public_building: zod.number(),
+          unregistered_area: zod.number(),
+          management_magnification: zod.number(),
+          management_fee: zod.number(),
+          rent_price: zod.number(),
+          deposit_price: zod.number(),
+          tenement_floor: zod.number(),
           tenement_host_name: zod.string(),
           tenement_host_telphone: zod.string(),
           tenement_host_phone: zod.string(),
@@ -1075,7 +1087,20 @@ export function useGetRentEdit() {
 
       const validData = validSchema.parse(data);
 
-      setData(validData.data);
+      setData({
+        ...validData.data,
+        total_rating: validData.data.total_rating.toString(),
+        main_building: validData.data.main_building.toString(),
+        affiliated_building: validData.data.affiliated_building.toString(),
+        public_building: validData.data.public_building.toString(),
+        unregistered_area: validData.data.unregistered_area.toString(),
+        management_magnification:
+          validData.data.management_magnification.toString(),
+        management_fee: validData.data.management_fee.toString(),
+        rent_price: validData.data.rent_price.toString(),
+        deposit_price: validData.data.deposit_price.toString(),
+        tenement_floor: validData.data.tenement_floor.toString(),
+      });
     } catch (error) {
       console.error(error);
       alert("取得資料失敗");
@@ -1100,7 +1125,7 @@ export function usePostRentEdit() {
     setIsLoading(true);
     try {
       const res = await mutableFetch(
-        `/tenement/edit/rent/${formDatas.tenement_address}`,
+        `/tenement/edit/rent/${formDatas.tenement_id}`,
         "POST",
         token,
         formDatas
@@ -1221,7 +1246,7 @@ export function useGetNotice() {
 
   const getNotice = async (id: string, type: string) => {
     try {
-      const res = await getFetch(`/notices/${id}/${type}`, token);
+      const res = await getFetch(`/notices/${type}/${id}`, token);
       const data = await res.json();
 
       const validSchema = basicZodSchema(
@@ -1268,12 +1293,26 @@ export function usePostAddNotice() {
     setIsLoading(true);
     setIsDone(false);
 
+    const organzedNotices = notices.map(({ collection_id, ...rest }) => {
+      if (type === "collection") {
+        return {
+          ...rest,
+          collection_id: Number(collection_id),
+        };
+      } else {
+        return {
+          ...rest,
+          tenement_id: Number(collection_id),
+        };
+      }
+    });
+
     try {
       const res = await mutableFetch(
         `/notices/${type}`,
         "POST",
         token,
-        notices
+        organzedNotices
       );
       const data = await res.json();
 
@@ -1310,7 +1349,7 @@ export function usePostAddNotice() {
 }
 
 type ICreateOrUpdateNotice = Omit<NoticeData, "id" | "isNew"> & {
-  collection_id: number;
+  collection_id?: number;
 };
 
 export function usePutNotice() {
