@@ -646,7 +646,7 @@ export function useGetTenementList() {
       .map((key) => `${key}=${querys[key]}`)
       .join("&");
     try {
-      const res = await getFetch(`/tenements?${queryString}`, token);
+      const res = await getFetch(`/tenement?${queryString}`, token);
       const data = await res.json();
 
       const validSchema = basicZodSchema(
@@ -699,7 +699,7 @@ export function useGetTenementListSell() {
       .map((key) => `${key}=${querys[key]}`)
       .join("&");
     try {
-      const res = await getFetch(`/tenements/sell?${queryString}`, token);
+      const res = await getFetch(`/tenement/sell?${queryString}`, token);
       const data = await res.json();
 
       const validSchema = basicZodSchema(
@@ -757,7 +757,7 @@ export function useGetTenementListRent() {
       .map((key) => `${key}=${querys[key]}`)
       .join("&");
     try {
-      const res = await getFetch(`/tenements/rent?${queryString}`, token);
+      const res = await getFetch(`/tenement/rent?${queryString}`, token);
       const data = await res.json();
 
       const validSchema = basicZodSchema(
