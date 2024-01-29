@@ -40,7 +40,7 @@ const TenemmentAdd = () => {
     ],
     tenement_floor: "4",
     plus: "1",
-    tenement_style: "套房",
+    tenement_product_type: "套房",
   });
   const handleChange = (key: string, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));

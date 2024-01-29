@@ -65,8 +65,8 @@ const useTenementListSell = () => {
     },
     {
       title: "產品類別",
-      dataIndex: "tenement_style",
-      key: "tenement_style",
+      dataIndex: "tenement_product_type",
+      key: "tenement_product_type",
       width: "10%",
       filters: [
         {
@@ -86,7 +86,7 @@ const useTenementListSell = () => {
           value: "其他",
         },
       ],
-      onFilter: (value, record) => record.tenement_style.includes(value),
+      onFilter: (value, record) => record.tenement_product_type.includes(value),
     },
     {
       title: "售價",

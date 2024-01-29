@@ -18,7 +18,7 @@ interface DataType {
   tenement_type?: string;
   tenement_status?: string;
   tenement_note?: string;
-  tenement_style?: string;
+  tenement_product_type?: string;
   management_fee_bottom?: string;
   management_floor_bottom?: string;
 }

@@ -5,7 +5,7 @@ export default [
     url: "/api/tenements",
     // 這裡會有query string 要在utf-8編碼下才能正確解析 例如: /api/tenements?tenement_status=已成交
     // tenement_address: string;
-    // tenement_style: "辦公室" | "店面" | "套房" |"其他";
+    // tenement_product_type: "辦公室" | "店面" | "套房" |"其他";
     // tenement_status: "已成交" | "未成交" | "已退租下架" | "過戶完成下架";
     // tenement_face: "海景" | "中庭" | "三多路" .....
     // tenement_type: "出售" | "出租" | "開發追蹤" | "行銷追蹤";
@@ -25,7 +25,7 @@ export default [
           tenement_face: "海景",
           tenement_status: "未成交",
           tenement_type: "出售",
-          tenement_style: "辦公室",
+          tenement_product_type: "辦公室",
           management_fee_bottom: 100,
           management_floor_bottom: 7,
         },
@@ -34,7 +34,7 @@ export default [
           tenement_face: "中庭",
           tenement_status: "已成交",
           tenement_type: "出租",
-          tenement_style: "店面",
+          tenement_product_type: "店面",
           management_fee_bottom: 120,
           management_floor_bottom: 11,
         },
@@ -43,7 +43,7 @@ export default [
           tenement_face: "三多路",
           tenement_status: "已退租下架",
           tenement_type: "開發追蹤",
-          tenement_style: "套房",
+          tenement_product_type: "套房",
           management_fee_bottom: 150,
           management_floor_bottom: 3,
         },
@@ -52,7 +52,7 @@ export default [
           tenement_face: "三多路",
           tenement_status: "過戶完成下架",
           tenement_type: "行銷追蹤",
-          tenement_style: "套房",
+          tenement_product_type: "套房",
           management_fee_bottom: 150,
           management_floor_bottom: 3,
         },
@@ -64,7 +64,7 @@ export default [
     url: "/api/tenements/rent",
     // 這裡會有query string 要在utf-8編碼下才能正確解析 例如: /api/tenements?tenement_status=已成交
     // tenement_address: string;
-    // tenement_style: "辦公室" | "店面" | "套房" |"其他";
+    // tenement_product_type: "辦公室" | "店面" | "套房" |"其他";
     // tenement_status: "已成交" | "未成交" | "已退租下架" | "過戶完成下架";
     // tenement_face: "海景" | "中庭" | "三多路" .....
     // floor_min: number;
@@ -89,7 +89,7 @@ export default [
           tenement_face: "海景",
           tenement_status: "未成交",
           tenement_type: "出售",
-          tenement_style: "辦公室",
+          tenement_product_type: "辦公室",
           management_fee_bottom: 100,
           management_floor_bottom: 7,
           rent: 100,
@@ -103,7 +103,7 @@ export default [
           tenement_face: "中庭",
           tenement_status: "已成交",
           tenement_type: "出租",
-          tenement_style: "店面",
+          tenement_product_type: "店面",
           management_fee_bottom: 120,
           management_floor_bottom: 11,
           rent: 120,
@@ -117,7 +117,7 @@ export default [
           tenement_face: "三多路",
           tenement_status: "已退租下架",
           tenement_type: "開發追蹤",
-          tenement_style: "套房",
+          tenement_product_type: "套房",
           management_fee_bottom: 150,
           management_floor_bottom: 3,
           rent: 150,
@@ -131,7 +131,7 @@ export default [
           tenement_face: "三多路",
           tenement_status: "過戶完成下架",
           tenement_type: "行銷追蹤",
-          tenement_style: "套房",
+          tenement_product_type: "套房",
           management_fee_bottom: 150,
           management_floor_bottom: 3,
           rent: 150,
@@ -147,7 +147,7 @@ export default [
     url: "/api/tenements/sell",
     // 這裡會有query string 要在utf-8編碼下才能正確解析 例如: /api/tenements?tenement_status=已成交
     // tenement_address: string;
-    // tenement_style: "辦公室" | "店面" | "套房" |"其他";
+    // tenement_product_type: "辦公室" | "店面" | "套房" |"其他";
     // tenement_status: "已成交" | "未成交" | "已退租下架" | "過戶完成下架";
     // tenement_face: "海景" | "中庭" | "三多路" .....
     // floor_min: number;
@@ -172,7 +172,7 @@ export default [
           tenement_face: "海景",
           tenement_status: "未成交",
           tenement_type: "出售",
-          tenement_style: "辦公室",
+          tenement_product_type: "辦公室",
           management_fee_bottom: 100,
           management_floor_bottom: 7,
           selling_price: 100,
@@ -186,7 +186,7 @@ export default [
           tenement_face: "中庭",
           tenement_status: "已成交",
           tenement_type: "出租",
-          tenement_style: "店面",
+          tenement_product_type: "店面",
           management_fee_bottom: 120,
           management_floor_bottom: 11,
           selling_price: 120,
@@ -200,7 +200,7 @@ export default [
           tenement_face: "三多路",
           tenement_status: "已退租下架",
           tenement_type: "開發追蹤",
-          tenement_style: "套房",
+          tenement_product_type: "套房",
           management_fee_bottom: 150,
           management_floor_bottom: 3,
           selling_price: 150,
@@ -214,7 +214,7 @@ export default [
           tenement_face: "三多路",
           tenement_status: "過戶完成下架",
           tenement_type: "行銷追蹤",
-          tenement_style: "套房",
+          tenement_product_type: "套房",
           management_fee_bottom: 150,
           management_floor_bottom: 3,
           selling_price: 150,

@@ -55,7 +55,7 @@ export type TenementList = {
   tenement_face: string;
   tenement_status: string;
   tenement_type: string;
-  tenement_style: string;
+  tenement_product_type: string;
   management_fee_bottom: number;
   management_floor_bottom: number;
   rent?: number;

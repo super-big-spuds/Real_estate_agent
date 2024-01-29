@@ -133,7 +133,7 @@ export default function TenementInfoEdit(props: any) {
         },
       ],
       tenement_floor: "4",
-      tenement_style: "店面",
+      tenement_product_type: "店面",
     });
     setNotices([
       {
@@ -211,7 +211,9 @@ export default function TenementInfoEdit(props: any) {
                 <p className="col-span-1 pt-5 whitespace-nowrap ">地址:</p>
                 <InputWithErrorMessage
                   value={formData.tenement_address}
-                  onChange={(e) => handleChange("tenement_address", e.target.value)}
+                  onChange={(e) =>
+                    handleChange("tenement_address", e.target.value)
+                  }
                   isError={formData.tenement_address.length <= 2}
                   errorMessage={"至少兩個字"}
                 />

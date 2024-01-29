@@ -8,6 +8,7 @@ import SellerInfo from "./SellerInfo";
 import { memo, useState } from "react";
 import { usePostAddTenement } from "../../hooks/useAPI";
 import { usePutNotice } from "../../hooks/useAPI";
+import { NoticeData } from "../../type";
 
 const SwitchTenementType = memo(
   (props: {
@@ -124,16 +125,9 @@ export default function TenementInfo(props: any) {
   const handleRenterChange = (key: string, value: string) => {
     setRenterData((prev) => ({ ...prev, [key]: value }));
   };
-  type Notice = {
-    id: string;
-    visitDate: string;
-    record: string;
-    remindDate: string;
-    remind: string;
-    isNew?: boolean;
-  };
+
   const { isLoading, isError } = props;
-  const [notices, setNotices] = useState<Notice[]>([]);
+  const [notices, setNotices] = useState<NoticeData[]>([]);
   const handleNoticeChange = (index: number, key: string, value: any) => {
     setNotices((prev) =>
       prev.map((notice, i) =>
@@ -148,7 +142,7 @@ export default function TenementInfo(props: any) {
     setNotices((prev) => [
       ...prev,
       {
-        id: "",
+        id: Math.random(),
         visitDate: "2024-01-01",
         record: "",
         remindDate: "2024-01-01",
@@ -341,14 +335,14 @@ export default function TenementInfo(props: any) {
     });
     setNotices([
       {
-        id: "1",
+        id: 1,
         visitDate: "2023-01-01",
         record: "看房子",
         remindDate: "2023-02-01",
         remind: "提醒",
       },
       {
-        id: "2",
+        id: 2,
         visitDate: "2023-01-01",
         record: "繳水電",
         remindDate: "2023-02-01",
