@@ -25,6 +25,9 @@ const useCollectionEdit = () => {
   const { handlePostAddNotice, newNotices } = usePostAddNotice();
   const { handleDeleteNoticeApi } = useDeleteNotice();
 
+  // get param id from url
+  const getparamid = useParams<{ id: string }>().id as string;
+
   const nowdatestring = moment().format("YYYY-MM-DD");
   const { id } = useParams();
   const [notices, setNotices] = useState<NoticeData[]>([]);
@@ -112,7 +115,7 @@ const useCollectionEdit = () => {
     };
     await handleSaveColumn(newformdata);
     if (notices.length > 0) {
-      await handlePutNotice("collection", notices);
+      await handlePutNotice("collection", notices, Number(getparamid));
     }
     alert("儲存成功");
   };
@@ -135,18 +138,14 @@ const useCollectionEdit = () => {
     });
     setNotices([]);
   };
-  // get param id from url
-  const getparamid = useParams<{ id: string }>().id;
 
   const handleAddNotice = () => {
     const newNotice = {
-      id: "",
       visitDate: nowdatestring,
       record: "",
       remindDate: nowdatestring,
       remind: "",
-      collection_id: getparamid,
-      isNew: true,
+      collection_id: Number(getparamid),
     };
 
     handlePostAddNotice("collection", [newNotice]);
@@ -167,7 +166,7 @@ const useCollectionEdit = () => {
   }, []);
 
   useEffect(() => {
-    if (!dataEdit) return;
+    if (!dataEdit || dataEdit.notices === undefined) return;
     setFormData({
       tenement_address: dataEdit.tenement_address,
       collection_id: dataEdit.collection_id,
@@ -183,6 +182,7 @@ const useCollectionEdit = () => {
       cus_remittance_bank: dataEdit.cus_remittance_bank,
       collection_complete: dataEdit.collection_complete,
     });
+    setNotices(dataEdit.notices);
   }, [dataEdit]);
 
   return {

@@ -4,7 +4,6 @@ import getColumnSearchProps from "../components/getColumnSearchProps";
 import { useGetCollectionList } from "./useAPI";
 import type { Collection } from "../type";
 
-
 const useCollectionList = () => {
   const [data, setData] = useState<Collection[]>([
     {
@@ -129,7 +128,7 @@ const useCollectionList = () => {
   const onRow = (record: Collection) => {
     return {
       onClick: () => {
-        navigate(`/Collection/${record.tenement_address}`);
+        navigate(`/Collection/${record.collection_id}`);
       },
     };
   };

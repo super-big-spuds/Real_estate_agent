@@ -189,7 +189,7 @@ export const useGetCollectionEdit = () => {
           collection_complete: zod.string(),
           notices: zod
             .object({
-              id: zod.string(),
+              id: zod.number(),
               visitDate: zod.string(),
               record: zod.string(),
               remindDate: zod.string(),
@@ -266,7 +266,7 @@ export function usePostCollectionEdit() {
       setIsLoading(false);
     }
   };
-  const handleDeleteNoticeFetch = async (id: string) => {
+  const handleDeleteNoticeFetch = async (id: number) => {
     setIsLoading(true);
     try {
       const res = await mutableFetch(
@@ -589,7 +589,7 @@ export function useDeleteNotice() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const handleDeleteNoticeApi = async (id: string, type: string) => {
+  const handleDeleteNoticeApi = async (id: number, type: string) => {
     setIsLoading(true);
     try {
       const res = await mutableFetch(
@@ -1215,7 +1215,7 @@ export function useGetNotice() {
       const validSchema = basicZodSchema(
         zod
           .object({
-            id: zod.string(),
+            id: zod.number(),
             visitDate: zod.string(),
             record: zod.string(),
             remindDate: zod.string(),

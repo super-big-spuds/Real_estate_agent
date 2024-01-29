@@ -24,7 +24,7 @@ export type FormData = {
 };
 
 export type NoticeData = {
-  id: string;
+  id: number;
   visitDate: string;
   record: string;
   remindDate: string;
