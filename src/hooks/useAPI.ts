@@ -286,13 +286,12 @@ export function usePostCollectionEdit() {
         `/notices/${id}/collection`,
         "DELETE",
         token,
-        id
+        {}
       );
       if (!res.ok) {
         alert("操作失敗");
         throw new Error(res.statusText);
       }
-      console.log(res);
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -1276,12 +1275,23 @@ export function usePostAddNotice() {
         token,
         notices
       );
-      if (!res.ok) {
-        alert("操作失敗");
-        throw new Error(res.statusText);
-      }
       const data = await res.json();
-      setNotices(data.data);
+
+      const validSchema = basicZodSchema(
+        zod
+          .object({
+            id: zod.number(),
+            visitDate: zod.string(),
+            record: zod.string(),
+            remindDate: zod.string(),
+            remind: zod.string(),
+          })
+          .array()
+      );
+
+      const validData = validSchema.parse(data);
+
+      setNotices((prev) => [...prev, validData.data[0]]);
       setIsDone(true);
     } catch (error) {
       console.error(error);
@@ -1308,10 +1318,7 @@ export function usePutNotice() {
   const [isDone, setIsDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const handlePutNotice = async (
-    type: string,
-    notices: NoticeData[]
-  ) => {
+  const handlePutNotice = async (type: string, notices: NoticeData[]) => {
     setIsLoading(true);
     setIsDone(false);
 
