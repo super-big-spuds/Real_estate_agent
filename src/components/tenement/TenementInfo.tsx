@@ -1,11 +1,11 @@
 import { Button, Radio, RadioChangeEvent, Select, Input } from "antd";
 import Notice from "../Notice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import InputWithErrorMessage from "../InputWithErrorMessage";
 import RenterInfo from "./RenterInfo";
 import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { usePostAddNotice, usePostAddTenement } from "../../hooks/useAPI";
 import { NoticeData } from "../../type";
 
@@ -55,6 +55,51 @@ export default function TenementInfo(props: any) {
   const handleback = () => {
     navigate("/tenements");
   };
+
+  const [searchParams] = useSearchParams();
+  const handlePutDataWithQuery = (searchParams: URLSearchParams) => {
+    return {
+      tenement_address: searchParams.get("tenement_address") || "",
+      tenement_product_type: searchParams.get("tenement_product_type") || "",
+      tenement_type: searchParams.get("tenement_type") || "",
+      tenement_face: searchParams.get("tenement_face") || "",
+      tenement_images:
+        JSON.parse(searchParams.get("tenement_images") as string) || [],
+      tenement_status: searchParams.get("tenement_status") || "",
+      total_rating: searchParams.get("total_rating") || "",
+      main_building: searchParams.get("main_building") || "",
+      affiliated_building: searchParams.get("affiliated_building") || "",
+      public_building: searchParams.get("public_building") || "",
+      unregistered_area: searchParams.get("unregistered_area") || "",
+      management_magnification:
+        searchParams.get("management_magnification") || "",
+      management_fee: searchParams.get("management_fee") || "",
+      rent_price: searchParams.get("rent_price") || "",
+      deposit_price: searchParams.get("deposit_price") || "",
+      tenement_floor: searchParams.get("tenement_floor") || "",
+      tenement_host_name: searchParams.get("tenement_host_name") || "",
+      tenement_host_telphone: searchParams.get("tenement_host_telphone") || "",
+      tenement_host_phone: searchParams.get("tenement_host_phone") || "",
+      tenement_host_line: searchParams.get("tenement_host_line") || "",
+      tenement_host_remittance_bank:
+        searchParams.get("tenement_host_remittance_bank") || "",
+      tenement_host_remittance_account:
+        searchParams.get("tenement_host_remittance_account") || "",
+      tenement_host_address: searchParams.get("tenement_host_address") || "",
+      tenement_host_birthday: searchParams.get("tenement_host_birthday") || "",
+      tenement_host_hobby: searchParams.get("tenement_host_hobby") || "",
+      tenement_host_remark: searchParams.get("tenement_host_remark") || "",
+      tenement_area_max: searchParams.get("tenement_area_max") || "",
+      tenement_area_min: searchParams.get("tenement_area_min") || "",
+      burget_rent_max: searchParams.get("burget_rent_max") || "",
+      burget_rent_min: searchParams.get("burget_rent_min") || "",
+      hopefloor_max: searchParams.get("hopefloor_max") || "",
+      hopefloor_min: searchParams.get("hopefloor_min") || "",
+      market_state: searchParams.get("market_state") || "",
+      selling_price: searchParams.get("selling_price") || "",
+    };
+  };
+
   const [formData, setFormData] = useState({
     tenement_address: "",
     tenement_product_type: "套房",
@@ -119,6 +164,11 @@ export default function TenementInfo(props: any) {
   const handleRenterChange = (key: string, value: string) => {
     setRenterData((prev) => ({ ...prev, [key]: value }));
   };
+
+  useEffect(() => {
+    const newFormData = handlePutDataWithQuery(searchParams);
+    setFormData(newFormData);
+  }, [searchParams]);
 
   const { isLoading, isError } = props;
   const [notices, setNotices] = useState<NoticeData[]>([]);

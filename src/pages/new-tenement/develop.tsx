@@ -11,6 +11,7 @@ import { useTenementDevelopInfo } from "../../hooks/new-tenement/useTenement";
 
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { useGetSellEdit } from "../../hooks/useAPI";
 dayjs.extend(customParseFormat);
 
 export default function Rent() {
@@ -18,6 +19,8 @@ export default function Rent() {
 
   const noticeHook = useTenementNotice("develop", tenementId as string);
   const developHook = useTenementDevelopInfo(tenementId as string);
+
+  const getSellHook = useGetSellEdit();
 
   const onSave = () => {
     noticeHook.handlers.handleSaveNoticeData();
@@ -33,7 +36,8 @@ export default function Rent() {
   const isLoading = developHook.states.isLoading || noticeHook.states.isLoading;
   const isError = developHook.states.isError || noticeHook.states.isError;
   const navigate = useNavigate();
-  const handletypeChange = (e: RadioChangeEvent) => {
+  const handletypeChange = async (e: RadioChangeEvent) => {
+    const queryString = "";
     if (
       window.confirm(
         "是否要切換案件型態?(請確實按下儲存，避免切換後部分資料會遺失)"
@@ -44,9 +48,15 @@ export default function Rent() {
         case "出租":
           navigate("/tenement/" + id + "/rent");
           break;
-        case "出售":
-          navigate("/tenement/" + id + "/sell");
+        case "出售": {
+          await getSellHook.getSellEdit(id);
+          if (getSellHook.dataEdit) {
+            navigate("/tenement/" + id + "/sell");
+            return;
+          }
+          navigate("/tenement/Add" + queryString);
           break;
+        }
         case "開發追蹤":
           navigate("/tenement/" + id + "/develop");
           break;
