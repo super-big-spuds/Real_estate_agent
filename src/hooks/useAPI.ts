@@ -604,11 +604,12 @@ export function useDeleteNotice() {
   const handleDeleteNoticeApi = async (id: number, type: string) => {
     setIsLoading(true);
     try {
+      const deleteType = type === "collection" ? "collection" : "tenement";
       const res = await mutableFetch(
-        `/notices/${id}/${type}`,
+        `/notices/${id}/${deleteType}`,
         "DELETE",
         token,
-        id
+        {}
       );
       if (!res.ok) {
         alert("操作失敗");
