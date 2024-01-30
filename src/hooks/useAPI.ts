@@ -1197,19 +1197,27 @@ export function useGetMarketEdit() {
           tenement_host_birthday: zod.string(),
           tenement_host_hobby: zod.string(),
           tenement_host_remark: zod.string(),
-          tenement_area_max: zod.string(),
-          tenement_area_min: zod.string(),
-          burget_rent_max: zod.string(),
-          burget_rent_min: zod.string(),
-          hopefloor_max: zod.string(),
-          hopefloor_min: zod.string(),
+          tenement_area_max: zod.number(),
+          tenement_area_min: zod.number(),
+          burget_rent_max: zod.number(),
+          burget_rent_min: zod.number(),
+          hopefloor_max: zod.number(),
+          hopefloor_min: zod.number(),
           market_state: zod.string(),
         })
       );
 
       const validData = validSchema.parse(data);
 
-      setData(validData.data);
+      setData({
+        ...validData.data,
+        tenement_area_max: validData.data.tenement_area_max.toString(),
+        tenement_area_min: validData.data.tenement_area_min.toString(),
+        burget_rent_max: validData.data.burget_rent_max.toString(),
+        burget_rent_min: validData.data.burget_rent_min.toString(),
+        hopefloor_max: validData.data.hopefloor_max.toString(),
+        hopefloor_min: validData.data.hopefloor_min.toString(),
+      });
     } catch (error) {
       console.error(error);
       alert("取得資料失敗");
