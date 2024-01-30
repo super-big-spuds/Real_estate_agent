@@ -7,15 +7,27 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        tenement_id: "51734",
+        tenement_address: "51734",
         collection_name: "水電空調費",
         collection_type: "代收",
         price: "100",
-        payment: "匯款",
-        collection_remark: "10樓以下",
+        payment: "現金",
         remittance_bank: "中國信託",
         remittance_account: "123456789",
-        notices: [],
+        cus_remittance_bank: "土地銀行",
+        cus_remittance_account: "987654321",
+        collection_remark: "10樓以下",
+        collection_date: "2023-01-01",
+        collection_complete: "是",
+        notices: [
+          {
+            id: "1",
+            visitDate: "2023-01-01",
+            record: "看房子",
+            remindDate: "2023-02-01",
+            remind: "提醒",
+          },
+        ],
       },
     },
   },
@@ -25,14 +37,18 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        tenement_id: "51734",
+        tenement_address: "51734",
         collection_name: "管理費",
         collection_type: "代付",
         price: "100",
-        payment: "現金",
+        payment: "匯款",
         collection_remark: "10樓以下",
+        collection_date: "2023-01-01",
         remittance_bank: "中國信託",
         remittance_account: "123456789",
+        cus_remittance_bank: "土地銀行",
+        cus_remittance_account: "987654321",
+        collection_complete: "是",
         notices: [
           {
             id: "1",
@@ -65,14 +81,18 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        tenement_id: "51734",
+        tenement_address: "51734",
         collection_name: "第四台",
         collection_type: "代收",
         price: "100",
-        payment: "現金",
+        payment: "匯款",
         collection_remark: "10樓以下",
+        collection_date: "2023-01-01",
         remittance_bank: "中國信託",
         remittance_account: "123456789",
+        cus_remittance_bank: "土地銀行",
+        cus_remittance_account: "987654321",
+        collection_complete: "是",
         notices: [
           {
             id: "5",
@@ -112,14 +132,18 @@ export default [
     response: {
       message: "Successfully get the media",
       data: {
-        tenement_id: "51734",
-        collection_name: "其他費用",
+        tenement_address: "51734",
+        collection_name: "其他",
         collection_type: "代付",
         price: "100",
-        payment: "現金",
+        payment: "匯款",
         collection_remark: "10樓以下",
+        collection_date: "2023-01-01",
         remittance_bank: "中國信託",
         remittance_account: "123456789",
+        cus_remittance_bank: "土地銀行",
+        cus_remittance_account: "987654321",
+        collection_complete: "是",
         notices: [
           {
             id: "9",
@@ -140,10 +164,11 @@ export default [
     },
   },
   {
-    url: "/api/collections",
+    url: "/api/collection",
     method: "post",
     response: {
       message: "Successfully add the media",
+      collection_id: 1,
     },
   },
   {
@@ -161,28 +186,28 @@ export default [
     },
   },
   {
-    url: "/api/collections",
+    url: "/api/collection",
     method: "get",
     response: {
       message: "Successfully get the media",
       data: [
         {
           collection_name: "水電空調費",
-          tenement_id: "1",
+          tenement_address: "1",
           collection_type: "代收",
           price: "1000",
           collection_id: 1,
         },
         {
           collection_name: "管理費",
-          tenement_id: "2",
+          tenement_address: "2",
           collection_type: "代付",
           price: "2000",
           collection_id: 2,
         },
         {
           collection_name: "第四台",
-          tenement_id: "3",
+          tenement_address: "3",
           collection_type: "代收",
           price: "3000",
           collection_id: 3,
@@ -190,7 +215,7 @@ export default [
         {
           collection_id: 4,
           collection_name: "其他費用",
-          tenement_id: "4",
+          tenement_address: "4",
           collection_type: "代付",
           price: "4000",
         },

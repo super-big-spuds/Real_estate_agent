@@ -1,8 +1,9 @@
+import * as Mock from "mockjs";
 import { MockMethod } from "vite-plugin-mock";
 
 export default [
   {
-    url: "/api/users",
+    url: "/api/user/list",
     method: "get",
     response: {
       message: "Successfully get the media",
@@ -120,6 +121,26 @@ export default [
     method: "delete",
     response: {
       message: "Successfully delete the media",
+    },
+  },
+  {
+    url: "/api/user/login",
+    method: "post",
+    response: {
+      message: "Successfully login the media",
+      data: {
+        token: "123456",
+      },
+    },
+  },
+  {
+    url: "/api/user/auth",
+    method: "get",
+    response: {
+      message: "Successfully get the media",
+      data: {
+        isadmin: Mock.Random.boolean(),
+      },
     },
   },
 ] as MockMethod[];

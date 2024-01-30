@@ -20,22 +20,22 @@ export default function CollectionMange(props: any) {
 
   return (
     <div className="flex flex-col w-full h-full ">
-      <div className="flex flex-col w-full h-full pt-12 pl-12 pr-16">
+      <div className="flex flex-col w-4/5 h-full p-10 mt-12 bg-white shadow-2xl mx-36 rounded-xl ">
         <button className="flex w-12 h-20" onClick={handleback}>
           {"< 返回"}
         </button>
         {isLoading ? (
-          <p>loading...</p>
+          <p className="col-span-1 ">loading...</p>
         ) : isError ? (
-          <p>error...</p>
+          <p className="col-span-1 ">error...</p>
         ) : (
           <div>
             <div className="inline-flex flex-col ml-5">
               <p className="text-4xl whitespace-normal">使用者管理</p>
             </div>
-            <div className="flex flex-col flex-wrap w-full h-full gap-10 p-10 overflow-visible ">
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>使用者名稱:</p>
+            <div className="flex flex-col flex-wrap w-2/3 h-full gap-10 p-10 overflow-visible ">
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-2 pt-5">使用者名稱:</p>
                 <InputWithErrorMessage
                   value={formData.user_name}
                   onChange={(e) => handleChange("user_name", e.target.value)}
@@ -43,9 +43,8 @@ export default function CollectionMange(props: any) {
                   errorMessage={"至少兩個字"}
                 />
               </div>
-              <div className="inline-flex items-center whitespace-nowrap w-96">
-                <p>使用者信箱:</p>
-
+              <div className="grid grid-cols-5 gap-1 text-right ">
+                <p className="col-span-2 pt-5">使用者信箱:</p>
                 <InputWithErrorMessage
                   value={formData.user_email}
                   onChange={(e) => handleChange("user_email", e.target.value)}
@@ -53,34 +52,33 @@ export default function CollectionMange(props: any) {
                   errorMessage={"email格式錯誤"}
                 />
               </div>
-              <div className="inline-flex items-center whitespace-nowrap w-96 ">
-                <p>使用者密碼:</p>
+              <div className="grid grid-cols-5 gap-1 text-right ">
+                <p className="col-span-2 pt-5 whitespace-nowrap">使用者密碼:</p>
 
                 <InputWithErrorMessage
                   value={formData.user_password}
                   onChange={(e) =>
                     handleChange("user_password", e.target.value)
                   }
-                  isError={formData.user_password.length < 2}
+                  isError={false}
                   errorMessage={"至少六個字"}
                 />
               </div>
-              <div className="inline-flex items-center whitespace-nowrap">
-                <p>&nbsp;&nbsp;&nbsp;</p>
-                <p>是否啟用:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-2 ">是否啟用:</p>
                 <Select
                   defaultValue="是"
-                  style={{ width: 120 }}
+                  className="col-span-1"
                   options={[{ value: "是" }, { value: "否" }]}
                   onChange={(value) => handleChange("status", value)}
                   value={formData.status}
                 />
               </div>
-              <div className="inline-flex items-center whitespace-nowrap">
-                <p>管理員權限:</p>
+              <div className="grid grid-cols-5 gap-1 text-right">
+                <p className="col-span-2 ">管理員權限:</p>
                 <Select
                   defaultValue="是"
-                  style={{ width: 120 }}
+                  className="col-span-1"
                   options={[{ value: "是" }, { value: "否" }]}
                   onChange={(value) => handleChange("isadmin", value)}
                   value={formData.isadmin}
@@ -89,18 +87,17 @@ export default function CollectionMange(props: any) {
             </div>
           </div>
         )}
-      </div>
-
-      <div className="flex justify-end gap-5 m-10 ">
-        <Button className="bg-blue-600 " type="primary" onClick={handleSave}>
-          儲存
-        </Button>
-        <Button type="default" onClick={() => handleReset()}>
-          回復預設
-        </Button>
-        <Button danger onClick={() => handleDeleteUser()}>
-          刪除
-        </Button>
+        <div className="flex justify-end gap-5 m-10 ">
+          <Button className="bg-blue-600 " type="primary" onClick={handleSave}>
+            儲存
+          </Button>
+          <Button type="default" onClick={() => handleReset()}>
+            回復預設
+          </Button>
+          <Button danger onClick={() => handleDeleteUser()}>
+            刪除
+          </Button>
+        </div>
       </div>
     </div>
   );

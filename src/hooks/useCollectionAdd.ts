@@ -1,18 +1,14 @@
 import { useState } from "react";
-import { usePostCollectionAdd } from "./useAPI";
+import { usePostAddNotice, usePostCollectionAdd } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { z } from "zod";
-
+import moment from "moment";
 const useCollectionAdd = () => {
-  const { handleSaveColumn, handleSaveNotice } = usePostCollectionAdd();
-  const nowdate = new Date();
-  const nowyear = nowdate.getFullYear();
-  const nowmonth = nowdate.getMonth() + 1;
-  const nowday = nowdate.getDate();
-  const nowdatestring = `${nowyear}-${nowmonth}-${nowday}`;
+  const { handleSaveColumn } = usePostCollectionAdd();
+  const nowdatestring = moment().format("YYYY-MM-DD");
   const [notices, setNotices] = useState<NoticeData[]>([]);
   const [formData, setFormData] = useState<FormData>({
-    tenement_id: "",
+    tenement_address: "",
     collection_id: "",
     collection_name: "水電空調費",
     collection_type: "代收",
@@ -21,6 +17,10 @@ const useCollectionAdd = () => {
     collection_remark: "",
     remittance_bank: "",
     remittance_account: "",
+    cus_remittance_account: "",
+    cus_remittance_bank: "",
+    collection_date: nowdatestring,
+    collection_complete: "是",
   });
 
   const handleChange = (key: keyof FormData, value: string) => {
@@ -52,10 +52,10 @@ const useCollectionAdd = () => {
       return newNotices;
     });
   };
-
+  const { handlePostAddNotice } = usePostAddNotice();
   const handleSave = async () => {
     const schemaform = z.object({
-      tenement_id: z.string().min(2, "房號至少兩個字"),
+      tenement_address: z.string().min(2, "地址至少兩個字"),
       collection_name: z.string(),
       collection_id: z.string(),
       collection_type: z.string(),
@@ -64,6 +64,10 @@ const useCollectionAdd = () => {
       collection_remark: z.string(),
       remittance_bank: z.string(),
       remittance_account: z.string(),
+      cus_remittance_account: z.string(),
+      cus_remittance_bank: z.string(),
+      collection_date: z.string(),
+      collection_complete: z.string(),
     });
 
     const parseResult = schemaform.safeParse(formData);
@@ -77,14 +81,28 @@ const useCollectionAdd = () => {
       return;
     }
 
-    await handleSaveColumn(parseResult.data);
-    await handleSaveNotice(notices);
-    alert("儲存成功");
+    const columnData = await handleSaveColumn(parseResult.data);
+    if (!columnData) {
+      alert("儲存失敗");
+      return;
+    }
+
+    const noticeData = notices.map((notice) => {
+      return {
+        visitDate: notice.visitDate,
+        record: notice.record,
+        remindDate: notice.remindDate,
+        remind: notice.remind,
+        collection_id: columnData.data.collection_id,
+      };
+    });
+
+    await handlePostAddNotice("collection", noticeData);
   };
 
   const handleReset = () => {
     setFormData({
-      tenement_id: "",
+      tenement_address: "",
       collection_id: "",
       collection_name: "水電空調費",
       collection_type: "代收",
@@ -93,17 +111,12 @@ const useCollectionAdd = () => {
       collection_remark: "",
       remittance_bank: "",
       remittance_account: "",
+      cus_remittance_account: "",
+      cus_remittance_bank: "",
+      collection_date: nowdatestring,
+      collection_complete: "是",
     });
-    setNotices([
-      {
-        id: Math.random().toString(),
-        visitDate: nowdatestring,
-        record: "",
-        remindDate: nowdatestring,
-        remind: "",
-        isNew: true,
-      },
-    ]);
+    setNotices([]);
   };
 
   const handleAddNotice = () => {

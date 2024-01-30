@@ -1,4 +1,6 @@
 import { Table } from "antd";
+// import index css
+import '../index.css'
 const TableCompoent = (props: any) => {
   const { columns, data, onRow } = props;
 
@@ -11,14 +13,19 @@ const TableCompoent = (props: any) => {
       }))}
       onRow={onRow}
       size="large"
-      className="w-4/5 "
+      className=" mx-10 w-full "
       rowClassName={"cursor-pointer"}
+      
     />
   );
 };
+
+
+
 export default TableCompoent;
 // TODO: 這裡要加上分頁、排序、搜尋等功能串接後端API
 //onChange={(pagination, filter, sort) => {
 //  console.log(pagination, filter, sort);
 //  console.log("change");
 //}}
+

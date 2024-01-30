@@ -1,35 +1,50 @@
 import { useState, useEffect } from "react";
-import { useGetCollectionEdit, usePostCollectionEdit } from "./useAPI";
+import {
+  useGetCollectionEdit,
+  usePostCollectionEdit,
+  usePostAddNotice,
+  usePutNotice,
+  useDeleteNotice,
+} from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { useParams } from "react-router-dom";
 import { z } from "zod";
+import moment from "moment";
 
 const useCollectionEdit = () => {
   const { getCollectionEdit, isError, isLoading, dataEdit } =
     useGetCollectionEdit();
   const {
     handleSaveColumn,
-    handleSaveNotice,
+
     handleDeleteNoticeFetch,
     handleDeleteCollectionFetch,
   } = usePostCollectionEdit();
-  const nowdate = new Date();
-  const nowyear = nowdate.getFullYear();
-  const nowmonth = nowdate.getMonth() + 1;
-  const nowday = nowdate.getDate();
-  const nowdatestring = `${nowyear}-${nowmonth}-${nowday}`;
+
+  const { handlePutNotice } = usePutNotice();
+  const { handlePostAddNotice, newNotices } = usePostAddNotice();
+  const { handleDeleteNoticeApi } = useDeleteNotice();
+
+  // get param id from url
+  const getparamid = useParams<{ id: string }>().id as string;
+
+  const nowdatestring = moment().format("YYYY-MM-DD");
   const { id } = useParams();
   const [notices, setNotices] = useState<NoticeData[]>([]);
   const [formData, setFormData] = useState<FormData>({
-    tenement_id: "",
+    tenement_address: "",
     collection_id: "",
-    collection_name: "水費",
-    collection_type: "代收",
+    collection_name: "",
+    collection_type: "",
     price: "",
-    payment: "現金",
+    payment: "",
     collection_remark: "",
+    collection_date: nowdatestring,
     remittance_bank: "",
     remittance_account: "",
+    cus_remittance_account: "",
+    cus_remittance_bank: "",
+    collection_complete: "",
   });
   const handleChange = (key: keyof FormData, value: string) => {
     setFormData((prevFormData) => ({
@@ -54,6 +69,7 @@ const useCollectionEdit = () => {
   };
 
   const handleDeleteNotice = (index: number) => {
+    handleDeleteNoticeApi(notices[index].id, "collection");
     setNotices((prevNotices) => {
       const newNotices = [...prevNotices];
       newNotices.splice(index, 1);
@@ -71,14 +87,18 @@ const useCollectionEdit = () => {
     if (!id) return;
 
     const schemaform = z.object({
-      tenement_id: z.string().min(2, "房號至少兩個字"),
+      tenement_address: z.string().min(2, "地址至少兩個字"),
       collection_name: z.string(),
       collection_type: z.string(),
       price: z.string().nonempty("金額不得為空"),
       payment: z.string(),
       collection_remark: z.string(),
+      collection_date: z.string(),
       remittance_bank: z.string(),
       remittance_account: z.string(),
+      cus_remittance_account: z.string(),
+      cus_remittance_bank: z.string(),
+      collection_complete: z.string(),
     });
     const parseResult = schemaform.safeParse(formData);
     if (!parseResult.success) {
@@ -95,49 +115,46 @@ const useCollectionEdit = () => {
     };
     await handleSaveColumn(newformdata);
     if (notices.length > 0) {
-      await handleSaveNotice(notices);
+      await handlePutNotice("collection", notices);
     }
     alert("儲存成功");
   };
 
   const handleReset = () => {
     setFormData({
-      tenement_id: "",
+      tenement_address: "",
       collection_id: "",
       collection_name: "水費",
       collection_type: "代收",
       price: "",
       payment: "現金",
       collection_remark: "",
+      collection_date: nowdatestring,
       remittance_bank: "",
       remittance_account: "",
+      cus_remittance_account: "",
+      cus_remittance_bank: "",
+      collection_complete: "",
     });
-    setNotices([
-      {
-        id: Math.random().toString(),
-        visitDate: nowdatestring,
-        record: "",
-        remindDate: nowdatestring,
-        remind: "",
-        isNew: true,
-      },
-    ]);
+    setNotices([]);
   };
 
   const handleAddNotice = () => {
-    setNotices((prevNotices) => {
-      const newNotices = [...prevNotices];
-      newNotices.push({
-        id: Math.random().toString(),
-        visitDate: nowdatestring,
-        record: "",
-        remindDate: nowdatestring,
-        remind: "",
-        isNew: true,
-      });
-      return newNotices;
-    });
+    const newNotice = {
+      visitDate: nowdatestring,
+      record: "",
+      remindDate: nowdatestring,
+      remind: "",
+      collection_id: Number(getparamid),
+    };
+
+    handlePostAddNotice("collection", [newNotice]);
   };
+  useEffect(() => {
+    if (newNotices.length > 0) {
+      setNotices((prevNotices) => [...prevNotices, ...newNotices]);
+    }
+  }, [newNotices]);
 
   const getapi = async () => {
     if (!id) return;
@@ -149,9 +166,9 @@ const useCollectionEdit = () => {
   }, []);
 
   useEffect(() => {
-    if (!dataEdit) return;
+    if (!dataEdit || dataEdit.notices === undefined) return;
     setFormData({
-      tenement_id: dataEdit.tenement_id,
+      tenement_address: dataEdit.tenement_address,
       collection_id: dataEdit.collection_id,
       collection_name: dataEdit.collection_name,
       collection_type: dataEdit.collection_type,
@@ -160,8 +177,12 @@ const useCollectionEdit = () => {
       collection_remark: dataEdit.collection_remark,
       remittance_bank: dataEdit.remittance_bank,
       remittance_account: dataEdit.remittance_account,
+      collection_date: dataEdit.collection_date,
+      cus_remittance_account: dataEdit.cus_remittance_account,
+      cus_remittance_bank: dataEdit.cus_remittance_bank,
+      collection_complete: dataEdit.collection_complete,
     });
-    setNotices(dataEdit.notices as NoticeData[]);
+    setNotices(dataEdit.notices);
   }, [dataEdit]);
 
   return {

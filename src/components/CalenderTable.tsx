@@ -30,15 +30,19 @@ export default function CalenderTable(props: Props) {
   const getEventType = (classType: string) => {
     switch (classType) {
       case "collection":
-        return "success";
+        return "pink";
       case "rent":
-        return "error";
+        return "orange";
       case "sell":
-        return "default";
+        return "green";
       case "develop":
-        return "processing";
+        return "purple";
       case "market":
-        return "warning";
+        return "gold";
+      case "pay":
+        return "red";
+      case "prepay":
+        return "blue";
     }
   };
 
@@ -81,18 +85,24 @@ export default function CalenderTable(props: Props) {
         }))
       : [];
   };
-  const switchparam = (param: string) => {
+  const switchparam = (param: string, id: any) => {
     switch (param) {
       case "market":
-        return "house";
+        return `/Tenement/${id}/market`;
       case "rent":
-        return "house";
+        return `/Tenement/${id}/rent`;
       case "sell":
-        return "house";
+        return `/Tenement/${id}/sell`;
       case "develop":
-        return "house";
+        return `/Tenement/${id}/develop`;
       case "collection":
-        return "collection";
+        return `/Collection/${id}`;
+      case "pay":
+        return `/Collection/${id}`;
+      case "prepay":
+        return `/Collection/${id}`;
+      default:
+        return `/Calenderlist`;
     }
   };
   const dateCellRender = (value: Dayjs) => {
@@ -104,10 +114,10 @@ export default function CalenderTable(props: Props) {
         {listData.map((item: any, index: any) => (
           <li
             key={index}
-            onClick={() => navigate(`/${switchparam(item.class)}/${item.id}`)}
+            onClick={() => navigate(switchparam(item.class, item.id))}
           >
             <Badge
-              status={item.type as BadgeProps["status"]}
+              color={item.type as BadgeProps["color"]}
               text={item.content}
             />
           </li>
@@ -124,9 +134,11 @@ export default function CalenderTable(props: Props) {
   }, []);
 
   return (
-    <Calendar
-      cellRender={cellRender}
-      onPanelChange={(date) => handleGetCalenderData(date)}
-    />
+    <>
+      <Calendar
+        cellRender={cellRender}
+        onPanelChange={(date) => handleGetCalenderData(date)}
+      />
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import UserMange from "../../components/UserMange";
 import useUserEdit from "../../hooks/useUserEdit";
-export const Collection = () => {
+export const UserEdit = () => {
   const {
     formData,
     handleChange,
@@ -22,4 +22,4 @@ export const Collection = () => {
     />
   );
 };
-export default Collection;
+export default UserEdit;
