@@ -505,7 +505,7 @@ export function usePostCalender() {
     setIsLoading(true);
     try {
       const res = await getFetch(
-        `/calender/${formDatas.year}/${formDatas.month}`,
+        `/calendar/${formDatas.year}/${formDatas.month}`,
         token
       );
       const data = await res.json();
@@ -557,7 +557,7 @@ export function usePostCalenderCollection() {
     setIsLoading(true);
     try {
       const res = await getFetch(
-        `/calender/collection/${formDatas.year}/${formDatas.month}`,
+        `/calendar/collection/${formDatas.year}/${formDatas.month}`,
         token
       );
       const data = await res.json();
