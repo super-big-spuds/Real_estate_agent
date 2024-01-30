@@ -129,6 +129,7 @@ export const TenementListRent = () => {
     if (!dataTenement) return;
     const data = dataTenement.map((item) => {
       return {
+        tenement_id: item.tenement_id,
         tenement_address: item.tenement_address,
         tenement_face: item.tenement_face,
         tenement_status: item.tenement_status,
