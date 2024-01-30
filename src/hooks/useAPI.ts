@@ -1546,12 +1546,12 @@ export function useGetUserRole(token: string) {
 export async function deleteFile(fileName: string) {
   const token = localStorage.getItem("token") as string;
 
-  const res = await mutableFetch(
-    `/files/delete/${fileName}`,
-    "DELETE",
-    token,
-    null
-  );
+  const res = await fetch(`${APIBaseURL}/api/files/delete/${fileName}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    method: "DELETE",
+  });
 
   if (!res.ok) {
     alert("操作失敗");

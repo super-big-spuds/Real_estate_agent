@@ -15,17 +15,35 @@ type IUploadFileResponse = {
   url: string;
 };
 
+function checkIsImageExist(url: string) {
+  const http = new XMLHttpRequest();
+
+  http.open("HEAD", url, false);
+  http.send();
+
+  return http.status !== 404;
+}
+
 const App = (props: UploadFileProps) => {
   const url = `${import.meta.env.VITE_API_BASE_URL}/api/files/upload`;
   const [progress, setProgress] = useState(0);
-  const organizedFileList: UploadFile[] = props.fileList.map((url) => {
-    return {
-      uid: url,
-      name: url,
-      status: "done",
-      url: url,
-    };
-  });
+  const organizedFileList: UploadFile[] = props.fileList.reduce((acc, cur) => {
+    const isThisImageExist = checkIsImageExist(cur);
+    if (!isThisImageExist) {
+      props.setFileList(props.fileList.filter((url) => url !== cur));
+      return acc;
+    }
+
+    return [
+      ...acc,
+      {
+        uid: cur,
+        name: cur,
+        status: "done",
+        url: cur,
+      },
+    ];
+  }, [] as UploadFile[]);
 
   type IBeforeUpload = React.ComponentProps<typeof Upload>["beforeUpload"];
   const beforeUpload: IBeforeUpload = (file) => {
