@@ -33,6 +33,7 @@ export default function Rent() {
   const onSave = () => {
     noticeHook.handlers.handleSaveNoticeData();
     developHook.handlers.handleSave();
+    alert("儲存成功");
   };
 
   const onDelete = () => {

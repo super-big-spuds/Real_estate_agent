@@ -28,6 +28,7 @@ export default function Market() {
   const onSave = () => {
     noticeHook.handlers.handleSaveNoticeData();
     marketHook.handlers.handleSave();
+    alert("儲存成功");
   };
 
   const onDelete = () => {

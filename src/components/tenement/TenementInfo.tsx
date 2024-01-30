@@ -644,7 +644,12 @@ export default function TenementInfo(props: any) {
               <div className="grid grid-cols-5 gap-1 ">
                 <p className="col-span-1 text-right">產品類別:</p>
                 {/* radio */}
-                <Radio.Group className="col-span-4" defaultValue="套房">
+                <Radio.Group
+                  className="col-span-4"
+                  onChange={(e) =>
+                    handleChange("tenement_product_type", e.target.value)
+                  }
+                >
                   <Radio value="套房">套房</Radio>
                   <Radio value="店面">店面</Radio>
                   <Radio value="辦公室">辦公室</Radio>
@@ -658,7 +663,13 @@ export default function TenementInfo(props: any) {
               ) : (
                 <div className="grid grid-cols-5 gap-1 ">
                   <p className="text-right whitespace-nowrap">物件狀態:</p>
-                  <Radio.Group className="col-span-4">
+                  <Radio.Group
+                    className="col-span-4"
+                    onChange={(e) =>
+                      handleChange("tenement_status", e.target.value)
+                    }
+                    value={formData.tenement_status}
+                  >
                     <Radio value="未成交">未成交</Radio>
                     <Radio value="已成交">已成交</Radio>
                     <Radio value="已成交下架">已成交下架</Radio>
@@ -686,7 +697,13 @@ export default function TenementInfo(props: any) {
                 <p className="col-span-1 text-right whitespace-nowrap ">
                   面向:
                 </p>
-                <Radio.Group className="col-span-4">
+                <Radio.Group
+                  className="col-span-4"
+                  onChange={(e) =>
+                    handleChange("tenement_face", e.target.value)
+                  }
+                  value={formData.tenement_face}
+                >
                   <Radio value="海景">海景</Radio>
                   <Radio value="中庭">中庭</Radio>
                   <Radio value="三多路">三多路</Radio>
@@ -708,7 +725,7 @@ export default function TenementInfo(props: any) {
                       handleChange("total_rating", e.target.value)
                     }
                     isError={formData.total_rating.length <= 2}
-                    errorMessage={"至少兩個字"}
+                    errorMessage={"請輸入到小數點後二位"}
                   />
                 </div>
               )}
@@ -724,7 +741,7 @@ export default function TenementInfo(props: any) {
                       handleChange("main_building", e.target.value)
                     }
                     isError={formData.main_building.length <= 2}
-                    errorMessage={"至少兩個字"}
+                    errorMessage={"請輸入到小數點後二位"}
                   />
                 </div>
               )}
@@ -740,7 +757,7 @@ export default function TenementInfo(props: any) {
                       handleChange("affiliated_building", e.target.value)
                     }
                     isError={formData.affiliated_building.length <= 2}
-                    errorMessage={"至少兩個字"}
+                    errorMessage={"請輸入到小數點後二位"}
                   />
                 </div>
               )}
@@ -756,7 +773,7 @@ export default function TenementInfo(props: any) {
                       handleChange("public_building", e.target.value)
                     }
                     isError={formData.public_building.length <= 2}
-                    errorMessage={"至少兩個字"}
+                    errorMessage={"請輸入到小數點後二位"}
                   />
                 </div>
               )}
@@ -771,7 +788,7 @@ export default function TenementInfo(props: any) {
                       handleChange("unregistered_area", e.target.value)
                     }
                     isError={formData.unregistered_area.length <= 2}
-                    errorMessage={"至少兩個字"}
+                    errorMessage={"請輸入到小數點後二位"}
                   />
                 </div>
               )}
@@ -810,8 +827,8 @@ export default function TenementInfo(props: any) {
                     onChange={(e) =>
                       handleChange("management_fee", e.target.value)
                     }
-                    isError={formData.management_fee.length <= 2}
-                    errorMessage={"至少兩個字"}
+                    isError={formData.management_fee.length <= 0}
+                    errorMessage={"至少一個字"}
                   />
                 </div>
               )}
@@ -824,8 +841,8 @@ export default function TenementInfo(props: any) {
                   onChange={(e) =>
                     handleChange("tenement_floor", e.target.value)
                   }
-                  isError={formData.tenement_floor.length <= 2}
-                  errorMessage={"至少兩個字"}
+                  isError={formData.tenement_floor.length <= 0}
+                  errorMessage={"至少一個字"}
                 />
               </div>
             </div>

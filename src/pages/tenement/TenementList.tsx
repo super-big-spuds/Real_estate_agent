@@ -57,16 +57,18 @@ export const TenementLists = () => {
   const { columns, onRow } = useTenementList();
   const [data, setData] = useState<TenementList[]>([
     {
-      tenement_address: 54321,
+      tenement_address: "54321",
       tenement_face: "a",
       tenement_status: "a",
       tenement_type: "a",
       tenement_product_type: "a",
       management_fee_bottom: 100,
       management_floor_bottom: 7,
+      tenement_id: 1,
     },
     {
-      tenement_address: 54322,
+      tenement_id: 2,
+      tenement_address: "54322",
       tenement_face: "b",
       tenement_status: "b",
       tenement_type: "b",
@@ -75,7 +77,8 @@ export const TenementLists = () => {
       management_floor_bottom: 11,
     },
     {
-      tenement_address: 54323,
+      tenement_id: 3,
+      tenement_address: "54323",
       tenement_face: "c",
       tenement_status: "c",
       tenement_type: "c",
@@ -84,7 +87,8 @@ export const TenementLists = () => {
       management_floor_bottom: 3,
     },
     {
-      tenement_address: 54323,
+      tenement_id: 4,
+      tenement_address: "54323",
       tenement_face: "d",
       tenement_status: "d",
       tenement_type: "d",
@@ -101,6 +105,7 @@ export const TenementLists = () => {
 
   useEffect(() => {
     if (!dataTenement) return;
+
     const data = dataTenement.map((item) => {
       return {
         tenement_id: item.tenement_id,
