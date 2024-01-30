@@ -37,7 +37,7 @@ export default function RenterInfo(props: RenterInfoProps) {
             <p className="col-span-1 ">起租日期:</p>
             <DatePicker
               className="col-span-2"
-              value={renter_start_date}
+              defaultValue={renter_start_date}
               onChange={(_, dateString) =>
                 handleRenterChange("renter_start_date", dateString)
               }
@@ -48,7 +48,7 @@ export default function RenterInfo(props: RenterInfoProps) {
             <p className="col-span-1 ">退租日期:</p>
             <DatePicker
               className="col-span-2"
-              value={renter_end_date}
+              defaultValue={renter_end_date}
               onChange={(_, dateString) =>
                 handleRenterChange("renter_end_date", dateString)
               }

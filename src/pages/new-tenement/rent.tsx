@@ -8,7 +8,12 @@ import Uploadfile from "../../components/tenement/Uploadfile";
 import useTenementNotice from "../../hooks/new-tenement/useTenementNotice";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTenementRentInfo } from "../../hooks/new-tenement/useTenement";
-
+import {
+  useGetSellEdit,
+  useGetMarketEdit,
+  useGetRentEdit,
+  useGetDevelopEdit,
+} from "../../hooks/useAPI";
 import dayjs from "dayjs";
 
 export default function Rent() {
@@ -16,6 +21,11 @@ export default function Rent() {
 
   const noticeHook = useTenementNotice("rent", tenementId as string);
   const rentHook = useTenementRentInfo(tenementId as string);
+
+  const getRentHook = useGetRentEdit();
+  const getSellHook = useGetSellEdit();
+  const getDevelopHook = useGetDevelopEdit();
+  const getMarketHook = useGetMarketEdit();
 
   const onSave = () => {
     noticeHook.handlers.handleSaveNoticeData();
@@ -31,30 +41,67 @@ export default function Rent() {
   const isLoading = rentHook.states.isLoading || noticeHook.states.isLoading;
   const isError = rentHook.states.isError || noticeHook.states.isError;
   const navigate = useNavigate();
-  const handletypeChange = (e: RadioChangeEvent) => {
+  const handletypeChange = async (e: RadioChangeEvent) => {
+    const rentData = rentHook.states.rentInfo;
+    const urlParams = new URLSearchParams();
+    // add new tenement_images add drop old tenement_images
+    if (rentData.tenement_images.length > 0) {
+      urlParams.append(
+        "tenement_images",
+        JSON.stringify(rentData.tenement_images)
+      );
+    } else {
+      urlParams.append("tenement_images", JSON.stringify([]));
+    }
+
+    for (const key in rentData) {
+      if (rentData.hasOwnProperty(key) && rentData[key] !== "") {
+        urlParams.append(key, rentData[key] as string);
+      }
+    }
+
+    const queryString = urlParams.toString();
+
+    async function switchAndNavigate(type: string, id: string) {
+      let data;
+      switch (type) {
+        case "出租":
+          await getRentHook.getRentEdit(id);
+          data = getRentHook.dataEdit;
+          break;
+        case "出售":
+          await getSellHook.getSellEdit(id);
+          data = getSellHook.dataEdit;
+          break;
+        case "開發追蹤":
+          await getDevelopHook.getDevelopEdit(id);
+          data = getDevelopHook.dataEdit;
+          break;
+        case "行銷追蹤":
+          await getMarketHook.getMarketEdit(id);
+          data = getMarketHook.dataEdit;
+          break;
+        default:
+          break;
+      }
+
+      if (data) {
+        navigate(`/tenement/${id}/${type}`);
+      } else {
+        navigate(`/Tenement/Add?${queryString}`);
+      }
+    }
+
     if (
       window.confirm(
         "是否要切換案件型態?(請確實按下儲存，避免切換後部分資料會遺失)"
       )
     ) {
       const id = window.location.pathname.split("/")[2];
-      switch (e.target.value) {
-        case "出租":
-          navigate("/tenement/" + id + "/rent");
-          break;
-        case "出售":
-          navigate("/tenement/" + id + "/sell");
-          break;
-        case "開發追蹤":
-          navigate("/tenement/" + id + "/develop");
-          break;
-        case "行銷追蹤":
-          navigate("/tenement/" + id + "/market");
-          break;
-        default:
-          break;
-      }
-    } else return;
+      await switchAndNavigate(e.target.value, id);
+    } else {
+      return;
+    }
   };
 
   return (

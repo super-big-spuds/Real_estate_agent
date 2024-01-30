@@ -11,7 +11,12 @@ import { useTenementDevelopInfo } from "../../hooks/new-tenement/useTenement";
 
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { useGetSellEdit } from "../../hooks/useAPI";
+import {
+  useGetSellEdit,
+  useGetMarketEdit,
+  useGetRentEdit,
+  useGetDevelopEdit,
+} from "../../hooks/useAPI";
 dayjs.extend(customParseFormat);
 
 export default function Rent() {
@@ -21,6 +26,9 @@ export default function Rent() {
   const developHook = useTenementDevelopInfo(tenementId as string);
 
   const getSellHook = useGetSellEdit();
+  const getRentHook = useGetRentEdit();
+  const getDevelopHook = useGetDevelopEdit();
+  const getMarketHook = useGetMarketEdit();
 
   const onSave = () => {
     noticeHook.handlers.handleSaveNoticeData();
@@ -37,36 +45,66 @@ export default function Rent() {
   const isError = developHook.states.isError || noticeHook.states.isError;
   const navigate = useNavigate();
   const handletypeChange = async (e: RadioChangeEvent) => {
-    const queryString = "";
+    const developData = developHook.states.developInfo;
+    const urlParams = new URLSearchParams();
+    // add new tenement_images add drop old tenement_images
+    if (developData.tenement_images.length > 0) {
+      urlParams.append(
+        "tenement_images",
+        JSON.stringify(developData.tenement_images)
+      );
+    } else {
+      urlParams.append("tenement_images", JSON.stringify([]));
+    }
+
+    for (const key in developData) {
+      if (developData.hasOwnProperty(key) && developData[key] !== "") {
+        urlParams.append(key, developData[key] as string);
+      }
+    }
+
+    const queryString = urlParams.toString();
+
+    async function switchAndNavigate(type: string, id: string) {
+      let data;
+      switch (type) {
+        case "出租":
+          await getRentHook.getRentEdit(id);
+          data = getRentHook.dataEdit;
+          break;
+        case "出售":
+          await getSellHook.getSellEdit(id);
+          data = getSellHook.dataEdit;
+          break;
+        case "開發追蹤":
+          await getDevelopHook.getDevelopEdit(id);
+          data = getDevelopHook.dataEdit;
+          break;
+        case "行銷追蹤":
+          await getMarketHook.getMarketEdit(id);
+          data = getMarketHook.dataEdit;
+          break;
+        default:
+          break;
+      }
+
+      if (data) {
+        navigate(`/tenement/${id}/${type}`);
+      } else {
+        navigate(`/Tenement/Add?${queryString}`);
+      }
+    }
+
     if (
       window.confirm(
         "是否要切換案件型態?(請確實按下儲存，避免切換後部分資料會遺失)"
       )
     ) {
       const id = window.location.pathname.split("/")[2];
-      switch (e.target.value) {
-        case "出租":
-          navigate("/tenement/" + id + "/rent");
-          break;
-        case "出售": {
-          await getSellHook.getSellEdit(id);
-          if (getSellHook.dataEdit) {
-            navigate("/tenement/" + id + "/sell");
-            return;
-          }
-          navigate("/tenement/Add" + queryString);
-          break;
-        }
-        case "開發追蹤":
-          navigate("/tenement/" + id + "/develop");
-          break;
-        case "行銷追蹤":
-          navigate("/tenement/" + id + "/market");
-          break;
-        default:
-          break;
-      }
-    } else return;
+      await switchAndNavigate(e.target.value, id);
+    } else {
+      return;
+    }
   };
 
   return (

@@ -5,7 +5,8 @@ import {
   usePutNotice,
   useDeleteNotice,
 } from "../useAPI";
-import dayjs from "dayjs";
+
+import moment from "moment";
 
 type ITenementType = "develop" | "rent" | "sell" | "market";
 
@@ -21,12 +22,13 @@ export default function useTenementNotice(
   tenementType: ITenementType,
   tenementId: string
 ) {
+  const nowdatestring = moment().format("YYYY-MM-DD");
   const [notices, setNotices] = useState<INotice[]>([
     {
       id: 1,
-      visitDate: "2024-01-01",
+      visitDate: nowdatestring,
       record: "紀錄事項1",
-      remindDate: "2024-01-01",
+      remindDate: nowdatestring,
       remind: "提醒事項1",
     },
   ]);
@@ -38,12 +40,10 @@ export default function useTenementNotice(
     handlePutNotice(tenementType, notices);
   };
   const handleAddNotice = () => {
-    const timeformat = "YYYY-MM-DD";
-    const today = dayjs().format(timeformat);
     const newNotice = {
-      visitDate: today,
+      visitDate: nowdatestring,
       record: "",
-      remindDate: today,
+      remindDate: nowdatestring,
       remind: "",
       collection_id: Number(tenementId),
       isNew: true,

@@ -21,6 +21,7 @@ type ITenementBasedInfoType = {
 };
 
 type ITenementMarketInfoType = ITenementBasedInfoType & {
+  [key: string]: string | string[] | unknown;
   tenement_host_name: string;
   tenement_host_telphone: string;
   tenement_host_phone: string;
@@ -145,6 +146,7 @@ export function useTenementMarketInfo(tenementId: string) {
 }
 
 type ITenementRentInfoType = ITenementBasedInfoType & {
+  [key: string]: string | string[] | unknown;
   tenement_status: string;
   total_rating: string;
   main_building: string;
@@ -310,6 +312,7 @@ export function useTenementRentInfo(tenementId: string) {
 }
 
 type ITenementDevelopInfoType = ITenementBasedInfoType & {
+  [key: string]: string | string[] | unknown;
   total_rating: string;
   main_building: string;
   affiliated_building: string;
@@ -442,6 +445,7 @@ export function useTenementDevelopInfo(tenementId: string) {
 }
 
 type ITenementSellInfoType = ITenementBasedInfoType & {
+  [key: string]: string | string[] | unknown;
   tenement_status: string;
 
   total_rating: string;

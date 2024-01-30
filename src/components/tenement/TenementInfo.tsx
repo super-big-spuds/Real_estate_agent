@@ -8,6 +8,7 @@ import SellerInfo from "./SellerInfo";
 import { memo, useEffect, useState } from "react";
 import { usePostAddNotice, usePostAddTenement } from "../../hooks/useAPI";
 import { NoticeData } from "../../type";
+import moment from "moment";
 
 const SwitchTenementType = memo(
   (props: {
@@ -51,6 +52,7 @@ const SwitchTenementType = memo(
 );
 
 export default function TenementInfo(props: any) {
+  const nowdatestring = moment().format("YYYY-MM-DD");
   const navigate = useNavigate();
   const handleback = () => {
     navigate("/tenements");
@@ -59,6 +61,7 @@ export default function TenementInfo(props: any) {
   const [searchParams] = useSearchParams();
   const handlePutDataWithQuery = (searchParams: URLSearchParams) => {
     return {
+      tenement_id: searchParams.get("tenement_id") || "",
       tenement_address: searchParams.get("tenement_address") || "",
       tenement_product_type: searchParams.get("tenement_product_type") || "",
       tenement_type: searchParams.get("tenement_type") || "",
@@ -138,8 +141,8 @@ export default function TenementInfo(props: any) {
   });
 
   const [renterData, setRenterData] = useState({
-    renter_start_date: "2022-01-01",
-    renter_end_date: "2023-01-01",
+    renter_start_date: nowdatestring,
+    renter_end_date: nowdatestring,
     renter_name: "Jane Doe",
     renter_phone: "0987654321",
     renter_jobtitle: "Software Engineer",
@@ -150,8 +153,8 @@ export default function TenementInfo(props: any) {
   });
 
   const [sellerData, setSellerData] = useState({
-    buyer_order_date: "2022-01-01",
-    buyer_handout_date: "2022-02-01",
+    buyer_order_date: nowdatestring,
+    buyer_handout_date: nowdatestring,
     buyer_name: "Jane Doe",
     buyer_id_images: [],
     buyer_phone: "0987654321",
@@ -182,14 +185,15 @@ export default function TenementInfo(props: any) {
   const handleDeleteNotice = (index: number) => {
     setNotices((prev) => prev.filter((_, i) => i !== index));
   };
+
   const handleAddNotice = () => {
     setNotices((prev) => [
       ...prev,
       {
         id: Math.random(),
-        visitDate: "2024-01-01",
+        visitDate: nowdatestring,
         record: "",
-        remindDate: "2024-01-01",
+        remindDate: nowdatestring,
         remind: "",
         isNew: true,
       },
@@ -404,16 +408,16 @@ export default function TenementInfo(props: any) {
     setNotices([
       {
         id: 1,
-        visitDate: "2023-01-01",
+        visitDate: nowdatestring,
         record: "看房子",
-        remindDate: "2023-02-01",
+        remindDate: nowdatestring,
         remind: "提醒",
       },
       {
         id: 2,
-        visitDate: "2023-01-01",
+        visitDate: nowdatestring,
         record: "繳水電",
-        remindDate: "2023-02-01",
+        remindDate: nowdatestring,
         remind: "繳房租",
       },
     ]);
@@ -925,11 +929,11 @@ export default function TenementInfo(props: any) {
               <div className="grid grid-cols-5 gap-1 text-right">
                 <p className="col-span-1 pt-5 ">通訊地址:</p>
                 <InputWithErrorMessage
-                  value={formData.tenement_address}
+                  value={formData.tenement_host_address}
                   onChange={(e) =>
-                    handleChange("tenement_address", e.target.value)
+                    handleChange("tenement_host_address", e.target.value)
                   }
-                  isError={formData.tenement_address.length <= 2}
+                  isError={formData.tenement_host_address.length <= 2}
                   errorMessage={"至少兩個字"}
                 />
               </div>

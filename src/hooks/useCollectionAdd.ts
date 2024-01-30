@@ -98,6 +98,7 @@ const useCollectionAdd = () => {
     });
 
     await handlePostAddNotice("collection", noticeData);
+    alert("儲存成功");
   };
 
   const handleReset = () => {
