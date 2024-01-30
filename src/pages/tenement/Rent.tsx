@@ -31,14 +31,7 @@ const TenemmentAdd = () => {
     product_type: "店面",
     tenement_remark: "備註",
     plus: "1",
-    tenement_photo: [
-      {
-        url: "https://example.com/image5.jpg",
-      },
-      {
-        url: "https://example.com/image6.jpg",
-      },
-    ],
+    tenement_photo: [],
     tenement_floor: "4",
     tenement_product_type: "店面",
   });
@@ -54,14 +47,7 @@ const TenemmentAdd = () => {
     guarantor_name: "John",
     guarantor_telphone: "0987654321",
     rent_remark: "無",
-    buyer_photo: [
-      {
-        url: "https://example.com/image5.jpg",
-      },
-      {
-        url: "https://example.com/image6.jpg",
-      },
-    ],
+    buyer_photo: [],
   });
 
   const handleRenterChange = (key: string, value: string) => {

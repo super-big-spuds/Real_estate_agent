@@ -5,7 +5,17 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
 type RenterInfoProps = {
-  renterData: any;
+  renterData: {
+    renter_start_date: string;
+    renter_end_date: string;
+    renter_name: string;
+    renter_phone: string;
+    renter_jobtitle: string;
+    renter_guarantor_name: string;
+    renter_guarantor_phone: string;
+    renter_remark: string;
+    renter_id_images: string[];
+  };
   handleRenterChange: any;
 };
 

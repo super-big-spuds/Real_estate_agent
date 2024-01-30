@@ -109,7 +109,7 @@ export default function TenementInfo(props: any) {
     buyer_order_date: "2022-01-01",
     buyer_handout_date: "2022-02-01",
     buyer_name: "Jane Doe",
-    buyer_id_images: ["image1.jpg", "image2.jpg"],
+    buyer_id_images: [],
     buyer_phone: "0987654321",
     buyer_jobtitle: "Software Engineer",
     buyer_remark: "No remarks",

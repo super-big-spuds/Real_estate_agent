@@ -100,7 +100,6 @@ export default function TenementInfoEdit(props: any) {
   };
   const handleReset = () => {
     setFormData({
-      tenement_address: "1234",
       tenement_type: tenement_type,
       tenement_face: "Maple Street",
       tenement_host_name: "John",

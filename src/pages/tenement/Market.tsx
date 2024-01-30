@@ -35,14 +35,7 @@ const TenemmentAdd = () => {
     burget_rent_min: "10000",
     tenement_remark: "備註",
     plus: "1",
-    tenement_photo: [
-      {
-        url: "https://example.com/image5.jpg",
-      },
-      {
-        url: "https://example.com/image6.jpg",
-      },
-    ],
+    tenement_photo: [],
     tenement_floor: "4",
     tenement_product_type: "套房",
     hopefloor_max: "5",
@@ -58,16 +51,16 @@ const TenemmentAdd = () => {
         {/* 預期坪數區間 */}
         <div className="grid grid-cols-5 gap-1 mb-5 ">
           <p className="col-span-1 pt-5 text-right">預期坪數:</p>
-          <div className=" inline-grid grid-flow-col items-center">
+          <div className="inline-grid items-center grid-flow-col ">
             <Input
               value={formData.tenement_area_min}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handleChange("tenement_area_min", e.target.value)
               }
-              className="col-span-1 h-8 mt-3"
+              className="h-8 col-span-1 mt-3"
               placeholder="最小值"
             />
-            <p className=" pt-3 pl-1 ">~</p>
+            <p className="pt-3 pl-1 ">~</p>
           </div>
           <Input
             value={formData.tenement_area_max}
@@ -78,7 +71,7 @@ const TenemmentAdd = () => {
             placeholder="最大值"
           />
         </div>
-        <div className="grid grid-cols-10 gap-1  text-right">
+        <div className="grid grid-cols-10 gap-1 text-right">
           <p className="col-span-2 pt-1 whitespace-nowrap ">要租要買:</p>
           <Select
             defaultValue="租房"
@@ -96,16 +89,16 @@ const TenemmentAdd = () => {
             {" "}
             {formData.market_state === "租房" ? "租金預算" : "售價預算(萬)"}:
           </p>
-          <div className=" inline-grid grid-flow-col items-center">
+          <div className="inline-grid items-center grid-flow-col ">
             <Input
               value={formData.burget_rent_min}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handleChange("burget_rent_min", e.target.value)
               }
-              className="col-span-1 h-8 mt-3"
+              className="h-8 col-span-1 mt-3"
               placeholder="最小值"
             />
-            <p className="  pt-3 pl-1">~</p>
+            <p className="pt-3 pl-1 ">~</p>
           </div>
           <Input
             value={formData.burget_rent_max}
@@ -119,16 +112,16 @@ const TenemmentAdd = () => {
         {/* 希望的樓層 */}
         <div className="grid grid-cols-5 gap-1 text-right">
           <p className="col-span-1 pt-5 ">希望的樓層:</p>
-          <div className=" inline-grid grid-flow-col items-center">
+          <div className="inline-grid items-center grid-flow-col ">
             <Input
               value={formData.hopefloor_min}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handleChange("hopefloor_min", e.target.value)
               }
-              className="col-span-1 h-8 mt-3"
+              className="h-8 col-span-1 mt-3"
               placeholder="最小值"
             />
-            <p className="  pt-3 pl-1">~</p>
+            <p className="pt-3 pl-1 ">~</p>
           </div>
           <Input
             value={formData.hopefloor_max}

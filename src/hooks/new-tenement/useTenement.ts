@@ -47,9 +47,7 @@ export function useTenementMarketInfo(tenementId: string) {
     tenement_product_type: "套房",
     tenement_type: "行銷追蹤",
     tenement_face: "海景",
-    tenement_images: [
-      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    ],
+    tenement_images: [],
     tenement_host_name: "John",
     tenement_host_telphone: "0987654321",
     tenement_host_phone: "0987654321",
@@ -212,7 +210,7 @@ export function useTenementRentInfo(tenementId: string) {
     renter_start_date: "2022-01-01",
     renter_end_date: "2023-01-01",
     renter_name: "Jane Doe",
-    renter_id_images: ["image1.jpg", "image2.jpg"],
+    renter_id_images: [],
     renter_phone: "0987654321",
     renter_jobtitle: "Software Engineer",
     renter_guarantor_name: "John Smith",
@@ -257,7 +255,7 @@ export function useTenementRentInfo(tenementId: string) {
   useEffect(() => {
     if (!dataEdit) return;
     setRentInfo({
-      tenement_id: dataEdit.tenement_id,
+      tenement_id: dataEdit.tenement_id as number,
       tenement_address: dataEdit.tenement_address,
       tenement_product_type: dataEdit.tenement_product_type,
       tenement_type: dataEdit.tenement_type,
@@ -343,9 +341,7 @@ export function useTenementDevelopInfo(tenementId: string) {
     tenement_product_type: "套房",
     tenement_type: "開發追蹤",
     tenement_face: "海景",
-    tenement_images: [
-      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    ],
+    tenement_images: [],
     total_rating: "4.5",
     main_building: "100",
     affiliated_building: "50",
@@ -383,12 +379,7 @@ export function useTenementDevelopInfo(tenementId: string) {
 
   const handleSave = () => {
     if (!tenementId) return;
-    // developinfo add tenement_id
-    const developinfo = {
-      ...developInfo,
-      tenement_id: tenementId,
-    };
-    handleSaveColumn(developinfo);
+    handleSaveColumn(developInfo);
     alert("儲存成功");
   };
 
@@ -406,6 +397,7 @@ export function useTenementDevelopInfo(tenementId: string) {
   useEffect(() => {
     if (!dataEdit) return;
     setDevelopInfo({
+      tenement_id: Number(dataEdit.tenement_id),
       tenement_address: dataEdit.tenement_address,
       tenement_product_type: dataEdit.tenement_product_type,
       tenement_type: dataEdit.tenement_type,
@@ -491,10 +483,7 @@ export function useTenementSellInfo(tenementId: string) {
     tenement_type: "出售",
 
     tenement_face: "海景",
-    tenement_images: [
-      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    ],
+    tenement_images: [],
     tenement_status: "已成交",
     total_rating: "4.5",
     main_building: "100",
@@ -520,7 +509,7 @@ export function useTenementSellInfo(tenementId: string) {
     buyer_order_date: "2022-01-01",
     buyer_handout_date: "2022-02-01",
     buyer_name: "Jane Doe",
-    buyer_id_images: ["image1.jpg", "image2.jpg"],
+    buyer_id_images: [],
     buyer_phone: "0987654321",
     buyer_jobtitle: "Software Engineer",
     buyer_remark: "No remarks",
@@ -541,11 +530,7 @@ export function useTenementSellInfo(tenementId: string) {
   const handleSave = () => {
     if (!tenementId) return;
     // sellinfo add tenement_id
-    const sellinfo = {
-      ...sellInfo,
-      tenement_id: tenementId,
-    };
-    handleSaveColumn(sellinfo);
+    handleSaveColumn(sellInfo);
     alert("儲存成功");
   };
 
@@ -565,6 +550,7 @@ export function useTenementSellInfo(tenementId: string) {
   useEffect(() => {
     if (!dataEdit) return;
     setSellInfo({
+      tenement_id: Number(dataEdit.tenement_id),
       tenement_address: dataEdit.tenement_address,
       tenement_product_type: dataEdit.tenement_product_type,
       tenement_type: dataEdit.tenement_type,

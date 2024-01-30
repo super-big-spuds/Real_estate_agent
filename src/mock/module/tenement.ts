@@ -238,9 +238,7 @@ export default [
         tenement_type: "出售",
         tenement_status: "未成交",
         tenement_face: "海景",
-        tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-        ],
+        tenement_images: [],
         total_rating: "4.5",
         main_building: "100",
         affiliated_building: "50",
@@ -267,7 +265,7 @@ export default [
         buyer_order_date: "2022-01-01",
         buyer_handout_date: "2022-02-01",
         buyer_name: "Jane Doe",
-        buyer_id_images: ["image1.jpg", "image2.jpg"],
+        buyer_id_images: [],
         buyer_phone: "0987654321",
         buyer_jobtitle: "Software Engineer",
         buyer_remark: "No remarks",
@@ -283,7 +281,7 @@ export default [
         tenement_status: "未成交",
         tenement_face: "海景",
         tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+          
         ],
         total_rating: "4.5",
         main_building: "100",
@@ -311,7 +309,7 @@ export default [
         buyer_order_date: "2022-01-01",
         buyer_handout_date: "2022-02-01",
         buyer_name: "Jane Doe",
-        buyer_id_images: ["image1.jpg", "image2.jpg"],
+        buyer_id_images: [],
         buyer_phone: "0987654321",
         buyer_jobtitle: "Software Engineer",
         buyer_remark: "No remarks",
@@ -330,7 +328,7 @@ export default [
         tenement_status: "未成交",
         tenement_face: "海景",
         tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+          
         ],
         total_rating: "4.5",
         main_building: "100",
@@ -358,7 +356,7 @@ export default [
         buyer_order_date: "2022-01-01",
         buyer_handout_date: "2022-02-01",
         buyer_name: "Jane Doe",
-        buyer_id_images: ["image1.jpg", "image2.jpg"],
+        buyer_id_images: [],
         buyer_phone: "0987654321",
         buyer_jobtitle: "Software Engineer",
         buyer_remark: "No remarks",
@@ -386,9 +384,7 @@ export default [
         tenement_product_type: "套房",
         tenement_type: "出租",
         tenement_face: "海景",
-        tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-        ],
+        tenement_images: [],
         tenement_status: "已成交",
         total_rating: "4",
         main_building: "3",
@@ -413,7 +409,7 @@ export default [
         renter_start_date: "2022-01-01",
         renter_end_date: "2023-01-01",
         renter_name: "Jane Doe",
-        renter_id_images: ["image1.jpg", "image2.jpg"],
+        renter_id_images: [],
         renter_phone: "0987654321",
         renter_jobtitle: "Software Engineer",
         renter_guarantor_name: "John Smith",
@@ -430,7 +426,7 @@ export default [
         tenement_type: "出租",
         tenement_face: "海景",
         tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+          
         ],
         tenement_status: "已成交",
         total_rating: "4",
@@ -456,7 +452,7 @@ export default [
         renter_start_date: "2022-01-01",
         renter_end_date: "2023-01-01",
         renter_name: "Jane Doe",
-        renter_id_images: ["image1.jpg", "image2.jpg"],
+        renter_id_images: [],
         renter_phone: "0987654321",
         renter_jobtitle: "Software Engineer",
         renter_guarantor_name: "John Smith",
@@ -476,7 +472,7 @@ export default [
         tenement_type: "出租",
         tenement_face: "海景",
         tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+          
         ],
         tenement_status: "已成交",
         total_rating: "4",
@@ -502,7 +498,7 @@ export default [
         renter_start_date: "2022-01-01",
         renter_end_date: "2023-01-01",
         renter_name: "Jane Doe",
-        renter_id_images: ["image1.jpg", "image2.jpg"],
+        renter_id_images: [],
         renter_phone: "0987654321",
         renter_jobtitle: "Software Engineer",
         renter_guarantor_name: "John Smith",
@@ -532,9 +528,7 @@ export default [
         tenement_product_type: "套房",
         tenement_type: "開發追蹤",
         tenement_face: "海景",
-        tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-        ],
+        tenement_images: [],
         total_rating: "4.5",
         main_building: "100",
         affiliated_building: "50",
@@ -568,7 +562,7 @@ export default [
         tenement_type: "開發追蹤",
         tenement_face: "海景",
         tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+          
         ],
         total_rating: "4.5",
         main_building: "100",
@@ -604,7 +598,7 @@ export default [
         tenement_type: "開發追蹤",
         tenement_face: "海景",
         tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+          
         ],
         total_rating: "4.5",
         main_building: "100",
@@ -651,9 +645,7 @@ export default [
         tenement_product_type: "套房",
         tenement_type: "行銷追蹤",
         tenement_face: "海景",
-        tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-        ],
+        tenement_images: [],
         tenement_host_name: "John",
         tenement_host_telphone: "0987654321",
         tenement_host_phone: "0987654321",
@@ -681,7 +673,7 @@ export default [
         tenement_type: "行銷追蹤",
         tenement_face: "海景",
         tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+          
         ],
         tenement_host_name: "John",
         tenement_host_telphone: "0987654321",
@@ -712,7 +704,7 @@ export default [
         tenement_type: "行銷追蹤",
         tenement_face: "海景",
         tenement_images: [
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+          
         ],
         tenement_host_name: "John",
         tenement_host_telphone: "0987654321",

@@ -30,14 +30,7 @@ const TenemmentAdd = () => {
     unregistered_area: "10.00",
     product_type: "店面",
     tenement_remark: "備註",
-    tenement_photo: [
-      {
-        url: "https://example.com/image5.jpg",
-      },
-      {
-        url: "https://example.com/image6.jpg",
-      },
-    ],
+    tenement_photo: [],
     tenement_floor: "4",
     plus: "1",
     tenement_product_type: "套房",
@@ -53,14 +46,7 @@ const TenemmentAdd = () => {
     buyer_telphone: "0987654321",
     buyer_job: "工程師",
     sell_remark: "無",
-    buyer_photo: [
-      {
-        url: "https://example.com/image5.jpg",
-      },
-      {
-        url: "https://example.com/image6.jpg",
-      },
-    ],
+    buyer_photo: [],
   });
   const handleChangeSeller = (key: string, value: string) => {
     setSellerData((prev) => ({ ...prev, [key]: value }));
