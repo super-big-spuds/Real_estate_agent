@@ -60,7 +60,7 @@ export default function CollectionMange(props: any) {
                   onChange={(e) =>
                     handleChange("user_password", e.target.value)
                   }
-                  isError={formData.user_password.length < 2}
+                  isError={false}
                   errorMessage={"至少六個字"}
                 />
               </div>

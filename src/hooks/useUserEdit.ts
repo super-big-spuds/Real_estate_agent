@@ -35,7 +35,7 @@ const useCollectionEdit = () => {
       user_name: z.string().min(2, "請輸入至少兩個以上的名字"),
       user_email: z.string().email("不符合Email格式"),
       status: z.string(),
-      user_password: z.string().min(6, "請輸入至少六個以上的密碼"),
+      user_password: z.string(),
       isadmin: z.string(),
       user_id: z.string(),
     });

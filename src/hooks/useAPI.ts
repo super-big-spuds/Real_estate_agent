@@ -334,23 +334,29 @@ export function useGetUserList() {
 
   const getUserList = async () => {
     try {
-      const res = await getFetch("/users", token);
+      const res = await getFetch("/user/list", token);
       const newData = await res.json();
 
       const validSchema = basicZodSchema(
         zod
           .object({
-            user_id: zod.string(),
+            user_id: zod.number(),
             user_name: zod.string(),
             user_email: zod.string(),
-            status: zod.string(),
+            status: zod.boolean(),
           })
           .array()
       );
 
       const validData = validSchema.parse(newData);
 
-      setDataUser(validData.data);
+      const organizedData = validData.data.map((item) => ({
+        ...item,
+        status: item.status ? "是" : "否",
+        user_id: item.user_id.toString(),
+      }));
+
+      setDataUser(organizedData);
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -378,7 +384,12 @@ export function usePostUserAdd() {
     setIsLoading(true);
 
     try {
-      const res = await mutableFetch("/user", "POST", token, formDatas);
+      const res = await mutableFetch("/user", "POST", token, {
+        ...formDatas,
+        status: formDatas.status === "是",
+        isadmin: formDatas.isadmin === "是",
+        isDelete: false,
+      });
       if (!res.ok) {
         alert("操作失敗");
         throw new Error(res.statusText);
@@ -406,11 +417,19 @@ export function usePostUserEdit() {
   const handleSaveUser = async (formDatas: User) => {
     setIsLoading(true);
     try {
+      const newFormData = {
+        user_name: formDatas.user_name,
+        user_email: formDatas.user_email,
+        status: formDatas.status === "是",
+        isadmin: formDatas.isadmin === "是",
+        user_password: formDatas.user_password,
+      };
+
       const res = await mutableFetch(
         `/user/${formDatas.user_id}`,
         "PUT",
         token,
-        formDatas
+        newFormData
       );
       if (!res.ok) {
         alert("操作失敗");
@@ -426,12 +445,7 @@ export function usePostUserEdit() {
   const handleDeleteUserFetch = async (user_id: string) => {
     setIsLoading(true);
     try {
-      const res = await mutableFetch(
-        `/user/${user_id}`,
-        "DELETE",
-        token,
-        user_id
-      );
+      const res = await mutableFetch(`/user/${user_id}`, "DELETE", token, {});
       if (!res.ok) {
         alert("操作失敗");
         throw new Error(res.statusText);
@@ -467,16 +481,21 @@ export function useGetUserEdit() {
         zod.object({
           user_name: zod.string(),
           user_email: zod.string(),
-          status: zod.string(),
-          user_password: zod.string(),
-          user_id: zod.string(),
-          isadmin: zod.string(),
+          status: zod.boolean(),
+          user_id: zod.number(),
+          isadmin: zod.boolean(),
         })
       );
 
       const validData = validSchema.parse(data);
 
-      setData(validData.data);
+      setData({
+        ...validData.data,
+        status: validData.data.status ? "是" : "否",
+        isadmin: validData.data.isadmin ? "是" : "否",
+        user_id: user_id.toString(),
+        user_password: "",
+      });
     } catch (error) {
       console.error(error);
       setIsError(true);
