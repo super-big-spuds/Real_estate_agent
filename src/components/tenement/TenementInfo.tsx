@@ -6,8 +6,7 @@ import RenterInfo from "./RenterInfo";
 import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
 import { memo, useState } from "react";
-import { usePostAddTenement } from "../../hooks/useAPI";
-import { usePutNotice } from "../../hooks/useAPI";
+import { usePostAddNotice, usePostAddTenement } from "../../hooks/useAPI";
 import { NoticeData } from "../../type";
 
 const SwitchTenementType = memo(
@@ -148,8 +147,8 @@ export default function TenementInfo(props: any) {
   };
 
   const { handlePostAddTenement } = usePostAddTenement();
-  const { handlePutNotice } = usePutNotice();
-  const handleSave = () => {
+  const { handlePostAddNotice } = usePostAddNotice();
+  const handleSave = async () => {
     const rentData = {
       tenement_address: formData.tenement_address,
       tenement_product_type: formData.tenement_product_type,
@@ -264,28 +263,54 @@ export default function TenementInfo(props: any) {
       hopefloor_min: formData.hopefloor_min,
       market_state: formData.market_state,
     };
-    console.log(formData.tenement_type);
 
-    switch (formData.tenement_type) {
-      case "出租":
-        handlePostAddTenement("rent", rentData);
-        handlePutNotice("rent", notices);
-        break;
-      case "出售":
-        handlePostAddTenement("sell", sellData);
-        handlePutNotice("sell", notices);
-        break;
-      case "開發追蹤":
-        handlePostAddTenement("develop", developerData);
-        handlePutNotice("develop", notices);
-        break;
-      case "行銷追蹤":
-        handlePostAddTenement("market", marketData);
-        handlePutNotice("market", notices);
-        break;
-      default:
-        break;
+    function getNoticeWithTenementId(
+      notices: NoticeData[],
+      tenementId: number
+    ) {
+      return notices.map((notice) => ({
+        visitDate: notice.visitDate,
+        record: notice.record,
+        remindDate: notice.remindDate,
+        remind: notice.remind,
+        collection_id: tenementId,
+      }));
     }
+
+    async function startCreateTenement(
+      tenement_type: string,
+      tenementData: any
+    ) {
+      const tenementId = await handlePostAddTenement(
+        tenement_type,
+        tenementData
+      );
+      if (tenementId) {
+        const newNotices = getNoticeWithTenementId(notices, tenementId);
+        handlePostAddNotice(tenement_type, newNotices);
+      }
+    }
+
+    async function handleCreateTenmentInfo(tenement_type: string) {
+      switch (tenement_type) {
+        case "出租":
+          await startCreateTenement("rent", rentData);
+          break;
+        case "出售":
+          await startCreateTenement("sell", sellData);
+          break;
+        case "開發追蹤":
+          await startCreateTenement("develop", developerData);
+          break;
+        case "行銷追蹤":
+          await startCreateTenement("market", marketData);
+          break;
+        default:
+          break;
+      }
+    }
+
+    await handleCreateTenmentInfo(formData.tenement_type);
 
     alert("儲存成功");
   };

@@ -1461,12 +1461,18 @@ export function usePostAddTenement() {
         token,
         tenement
       );
-      if (!res.ok) {
-        alert("操作失敗");
-        throw new Error(res.statusText);
-      }
+
+      const data = await res.json();
+
+      const validSchema = basicZodSchema(
+        zod.object({
+          tenement_id: zod.number(),
+        })
+      );
+      const validData = validSchema.parse(data);
+
       setIsDone(true);
-      console.log(res);
+      return validData.data.tenement_id;
     } catch (error) {
       console.error(error);
       setIsError(true);
