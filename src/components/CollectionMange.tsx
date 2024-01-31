@@ -39,8 +39,7 @@ export default function CollectionMange(props: any) {
       return false;
     }
     return true;
-  }
-    
+  };
 
   return (
     <div className="flex flex-col w-full h-full ">
@@ -55,7 +54,9 @@ export default function CollectionMange(props: any) {
         ) : (
           <div>
             <div className="inline-flex flex-col mb-3 ml-5">
-              <p className="text-4xl font-bold whitespace-normal">{formData.collection_type }管理</p>
+              <p className="text-4xl font-bold whitespace-normal">
+                {formData.collection_type}管理
+              </p>
             </div>
             <p className="ml-5 border-b-2 border-gray-300 "></p>
             <div className="flex flex-row justify-between ">
@@ -63,6 +64,7 @@ export default function CollectionMange(props: any) {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">地址:</p>
                   <InputWithErrorMessage
+                    name="tenement_address"
                     value={formData.tenement_address}
                     onChange={(e) =>
                       handleChange("tenement_address", e.target.value)
@@ -94,7 +96,6 @@ export default function CollectionMange(props: any) {
                     defaultValue={collection_date}
                     className="w-48 col-span-3"
                   />
-      
                 </div>
 
                 <div className="grid grid-cols-5 gap-1 ">
@@ -126,6 +127,7 @@ export default function CollectionMange(props: any) {
                 <div className="grid grid-cols-5 gap-1 text-right">
                   <p className="col-span-1 pt-5 ">費用金額:</p>
                   <InputWithErrorMessage
+                    name="price"
                     value={formData.price}
                     onChange={(e) => handleChange("price", e.target.value)}
                     isError={formData.price.length <= 2}
@@ -147,6 +149,7 @@ export default function CollectionMange(props: any) {
                     <div className="grid grid-cols-5 gap-1 text-right">
                       <p className="col-span-1 pt-5 ">大眾匯款銀行:</p>
                       <InputWithErrorMessage
+                        name="remittance_bank"
                         value={formData.remittance_bank}
                         onChange={(e) =>
                           handleChange("remittance_bank", e.target.value)
@@ -158,6 +161,7 @@ export default function CollectionMange(props: any) {
                     <div className="grid grid-cols-5 gap-1 text-right">
                       <p className="col-span-1 pt-5 ">大眾匯款帳號:</p>
                       <InputWithErrorMessage
+                        name="remittance_account"
                         value={formData.remittance_account}
                         onChange={(e) =>
                           handleChange("remittance_account", e.target.value)
@@ -167,8 +171,13 @@ export default function CollectionMange(props: any) {
                       />
                     </div>
                     <div className="grid grid-cols-5 gap-1 text-right">
-                      <p className="col-span-1 pt-5 ">{ formData.collection_type === "代收" ? "客戶匯款銀行:" : "機構匯款銀行:"}</p>
+                      <p className="col-span-1 pt-5 ">
+                        {formData.collection_type === "代收"
+                          ? "客戶匯款銀行:"
+                          : "機構匯款銀行:"}
+                      </p>
                       <InputWithErrorMessage
+                        name="cus_remittance_bank"
                         value={formData.cus_remittance_bank}
                         onChange={(e) =>
                           handleChange("cus_remittance_bank", e.target.value)
@@ -178,8 +187,13 @@ export default function CollectionMange(props: any) {
                       />
                     </div>
                     <div className="grid grid-cols-5 gap-1 text-right">
-                      <p className="col-span-1 pt-5">{ formData.collection_type === "代收" ? "客戶匯款帳號:" : "機構匯款帳號:"}</p>
+                      <p className="col-span-1 pt-5">
+                        {formData.collection_type === "代收"
+                          ? "客戶匯款帳號:"
+                          : "機構匯款帳號:"}
+                      </p>
                       <InputWithErrorMessage
+                        name="cus_remittance_account"
                         value={formData.cus_remittance_account}
                         onChange={(e) =>
                           handleChange("cus_remittance_account", e.target.value)
@@ -194,6 +208,7 @@ export default function CollectionMange(props: any) {
               <div className="inline-flex flex-col w-1/3 mt-5 ">
                 <p className="col-span-1 whitespace-nowrap ">備註:</p>
                 <TextArea
+                  name="collection_remark"
                   placeholder="請輸入內容"
                   rows={15}
                   className="h-full w-96"
@@ -239,11 +254,15 @@ export default function CollectionMange(props: any) {
           <Button type="default" onClick={() => handleReset()}>
             回復預設
           </Button>
-         {
-            getParams() && <Button type="primary" danger onClick={() => handleDeleteCollection()}>
-            刪除
-          </Button>
-         }
+          {getParams() && (
+            <Button
+              type="primary"
+              danger
+              onClick={() => handleDeleteCollection()}
+            >
+              刪除
+            </Button>
+          )}
         </div>
       </div>
     </div>

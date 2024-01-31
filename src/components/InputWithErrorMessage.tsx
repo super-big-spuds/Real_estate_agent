@@ -1,6 +1,7 @@
 import { Input } from "antd";
 
 type Props = {
+  name?: string;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
   isError: boolean;
@@ -8,6 +9,7 @@ type Props = {
 };
 
 export default function InputWithErrorMessage({
+  name,
   value,
   onChange,
   isError,
@@ -16,7 +18,12 @@ export default function InputWithErrorMessage({
   return (
     <div className="col-span-3">
       <div className="relative my-4">
-        <Input placeholder="請輸入內容" value={value} onChange={onChange} />
+        <Input
+          placeholder="請輸入內容"
+          name={name}
+          value={value}
+          onChange={onChange}
+        />
         <span className="absolute left-0 text-red-500 top-full">
           {isError ? errorMessage : ""}
         </span>
