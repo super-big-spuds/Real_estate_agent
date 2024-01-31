@@ -52,7 +52,14 @@ export default function useTenementNotice(
   };
   useEffect(() => {
     if (newNotices.length > 0) {
-      setNotices((prevNotices) => [...prevNotices, ...newNotices]);
+      setNotices((prevNotices) => {
+        const filteredNotices = newNotices.filter((newNotice) => {
+          return !prevNotices.some(
+            (prevNotice) => prevNotice.id === newNotice.id
+          );
+        });
+        return [...prevNotices, ...filteredNotices];
+      });
     }
   }, [newNotices]);
 

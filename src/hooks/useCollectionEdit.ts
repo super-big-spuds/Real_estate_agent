@@ -5,6 +5,7 @@ import {
   usePostAddNotice,
   usePutNotice,
   useDeleteNotice,
+  handlePostAddNotice,
 } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { useParams } from "react-router-dom";
@@ -17,12 +18,11 @@ const useCollectionEdit = () => {
   const {
     handleSaveColumn,
 
-    handleDeleteNoticeFetch,
     handleDeleteCollectionFetch,
   } = usePostCollectionEdit();
 
   const { handlePutNotice } = usePutNotice();
-  const { handlePostAddNotice, newNotices } = usePostAddNotice();
+  const { newNotices } = usePostAddNotice();
   const { handleDeleteNoticeApi } = useDeleteNotice();
 
   // get param id from url
@@ -76,7 +76,7 @@ const useCollectionEdit = () => {
       return newNotices;
     });
     if (notices[index].isNew) return;
-    handleDeleteNoticeFetch(notices[index].id);
+    // handleDeleteNoticeFetch(notices[index].id);
   };
   const handleDeleteCollection = () => {
     confirm("確定要刪除嗎？");
@@ -139,7 +139,7 @@ const useCollectionEdit = () => {
     setNotices([]);
   };
 
-  const handleAddNotice = () => {
+  const handleAddNotice = async () => {
     const newNotice = {
       visitDate: nowdatestring,
       record: "",
@@ -148,13 +148,14 @@ const useCollectionEdit = () => {
       collection_id: Number(getparamid),
     };
 
-    handlePostAddNotice("collection", [newNotice]);
+    const newNoticeData = await handlePostAddNotice("collection", [newNotice]);
+
+    if (newNoticeData === undefined) return;
+
+    setNotices((prevNotices) => {
+      return [...prevNotices, ...newNoticeData];
+    });
   };
-  useEffect(() => {
-    if (newNotices.length > 0) {
-      setNotices((prevNotices) => [...prevNotices, ...newNotices]);
-    }
-  }, [newNotices]);
 
   const getapi = async () => {
     if (!id) return;

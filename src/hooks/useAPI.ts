@@ -1329,6 +1329,54 @@ export function useGetNotice() {
   };
 }
 
+export async function handlePostAddNotice(
+  type: string,
+  notices: ICreateOrUpdateNotice[]
+) {
+  const organzedNotices = notices.map(({ collection_id, ...rest }) => {
+    if (type === "collection") {
+      return {
+        ...rest,
+        collection_id: Number(collection_id),
+      };
+    } else {
+      return {
+        ...rest,
+        tenement_id: Number(collection_id),
+      };
+    }
+  });
+  const token = localStorage.getItem("token") as string;
+
+  try {
+    const res = await mutableFetch(
+      `/notices/${type}`,
+      "POST",
+      token,
+      organzedNotices
+    );
+    const data = await res.json();
+
+    const validSchema = basicZodSchema(
+      zod
+        .object({
+          id: zod.number(),
+          visitDate: zod.string(),
+          record: zod.string(),
+          remindDate: zod.string(),
+          remind: zod.string(),
+        })
+        .array()
+    );
+
+    const validData = validSchema.parse(data);
+
+    return validData.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export function usePostAddNotice() {
   const token = useToken();
   const [isDone, setIsDone] = useState(false);
@@ -1342,44 +1390,13 @@ export function usePostAddNotice() {
     setIsLoading(true);
     setIsDone(false);
 
-    const organzedNotices = notices.map(({ collection_id, ...rest }) => {
-      if (type === "collection") {
-        return {
-          ...rest,
-          collection_id: Number(collection_id),
-        };
-      } else {
-        return {
-          ...rest,
-          tenement_id: Number(collection_id),
-        };
-      }
-    });
-
     try {
-      const res = await mutableFetch(
-        `/notices/${type}`,
-        "POST",
-        token,
-        organzedNotices
-      );
-      const data = await res.json();
+      const validData = await handlePostAddNotice(type, notices);
 
-      const validSchema = basicZodSchema(
-        zod
-          .object({
-            id: zod.number(),
-            visitDate: zod.string(),
-            record: zod.string(),
-            remindDate: zod.string(),
-            remind: zod.string(),
-          })
-          .array()
-      );
+      if (validData === undefined) throw new Error("validData is undefined");
 
-      const validData = validSchema.parse(data);
+      setNotices((prev) => [...prev, validData[0]]);
 
-      setNotices((prev) => [...prev, validData.data[0]]);
       setIsDone(true);
     } catch (error) {
       console.error(error);
@@ -1409,6 +1426,7 @@ export function usePutNotice() {
   const handlePutNotice = async (type: string, notices: NoticeData[]) => {
     setIsLoading(true);
     setIsDone(false);
+    console.log(notices);
 
     try {
       const body = notices.map((notice) => ({
