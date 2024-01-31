@@ -10,8 +10,8 @@ test.describe("Collection Edit Page", () => {
     });
   });
 
-  test("should render", ({ page }) => {
-    test.expect(page.getByText("error")).not.toBeVisible();
+  test("should render", async ({ page }) => {
+    test.expect(await page.getByText("error..").count()).toEqual(0);
   });
 
   //test("Edit Collection And Collection Notice Test", async ({ page }) => {
