@@ -16,6 +16,4 @@ test.describe("Collection Page", () => {
 
     expect(response.status()).toBe(200);
   });
-
-  // TODO - Clicked collection and check the detail page
 });
