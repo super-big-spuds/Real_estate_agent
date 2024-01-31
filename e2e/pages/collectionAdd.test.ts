@@ -47,12 +47,18 @@ test.describe("Collection Add Page", () => {
 
     await page.getByRole("button", { name: "新增提醒" }).click();
 
-    await page.getByRole("button", { name: "儲 存" }).click();
+    page.getByRole("button", { name: "儲 存" }).click();
 
-    const response = await page.waitForResponse((response) =>
-      response.url().includes("/api/collection")
-    );
+    const [collectionResponse, noticeResponse] = await Promise.all([
+      await page.waitForResponse((response) =>
+        response.url().includes("collection")
+      ),
+      await page.waitForResponse((response) =>
+        response.url().includes("notices")
+      ),
+    ]);
 
-    test.expect(response.status()).toBe(201);
+    test.expect(collectionResponse.status()).toBe(201);
+    test.expect(noticeResponse.status()).toBe(201);
   });
 });
