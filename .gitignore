@@ -29,3 +29,4 @@ dist-ssr
 /blob-report/
 /playwright/.cache/
 e2e/screenshots/
+e2e/storage-state.json

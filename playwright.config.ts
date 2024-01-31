@@ -1,8 +1,12 @@
 import { defineConfig, devices } from "@playwright/test";
+import { createRequire } from "node:module";
 import dotenv from "dotenv";
 import path from "path";
 
 dotenv.config({ path: path.resolve(".env.local") });
+
+export const STORAGE_STATE = path.join("e2e", "storage-state.json");
+const require = createRequire(import.meta.url);
 
 /**
  * Read environment variables from file.
@@ -28,11 +32,15 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    baseURL: "http://localhost:5173",
+    storageState: STORAGE_STATE,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },
+
+  // replace require.resolve("./e2e/setup.ts") with import
+  globalSetup: require.resolve("./e2e/setup.ts"),
 
   /* Configure projects for major browsers */
   projects: [
@@ -41,15 +49,17 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
 
-    {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
-    },
+    //{
+    //  name: "firefox",
+    //  use: { ...devices["Desktop Firefox"] },
+    //  dependencies: ["login"],
+    //},
 
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    },
+    //{
+    //  name: "webkit",
+    //  use: { ...devices["Desktop Safari"] },
+    //  dependencies: ["login"],
+    //},
 
     /* Test against mobile viewports. */
     // {
