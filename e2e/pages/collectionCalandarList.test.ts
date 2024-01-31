@@ -1,11 +1,11 @@
 import { test } from "@playwright/test";
 import { constants } from "../util";
 
-test.describe("Notice Calandar Page", () => {
+test.describe("Collection Calandar Page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${constants.frontendURL}/Calenderlist`);
+    await page.goto(`${constants.frontendURL}/Calenderlist_collection`);
     await page.screenshot({
-      path: constants.getScreenShotPath("NoticeCalandar"),
+      path: constants.getScreenShotPath("CollectionCalandar"),
     });
   });
 
@@ -13,7 +13,7 @@ test.describe("Notice Calandar Page", () => {
     test.expect(await page.getByText("error..").count()).toEqual(0);
   });
 
-  test("get notice calandar API test", async ({ page }) => {
+  test("get collection calandar API test", async ({ page }) => {
     await page.reload();
 
     const response = await page.waitForResponse((response) => {
