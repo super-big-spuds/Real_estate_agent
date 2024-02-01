@@ -149,20 +149,35 @@ export const TenementListRent = () => {
   }, [dataTenement]);
   const handleSelect = (data: []) => {
     handleGetTenement(data);
-    const filterData = Object.fromEntries(
-      Object.entries(data).filter(([_, v]) => v !== undefined && v !== "")
-    );
-    const filterDataTitle = Object.entries(filterData).map(([k, v]) => ({
-      title: k,
-      value: v,
-    }));
-    filterDataTitle.forEach((item: item) => {
-      const newTitle = switchTitletoChinese(item.title);
-      if (newTitle !== undefined) {
-        item.title = newTitle;
-      }
-    });
 
+    const filterData = Object.fromEntries(
+      Object.entries(data).filter(
+        ([_, v]) => v !== undefined && v !== "" && v !== 0
+      )
+    );
+    const removeFunction = (item: any) => {
+      if (!item) return;
+      if (item.value.length === 0) {
+        return false;
+      }
+      if (item.value === undefined) {
+        return false;
+      } else return true;
+    };
+    const filterDataTitles = Object.entries(filterData)
+      .map(([k, v]) => ({
+        title: k,
+        value: v,
+      }))
+      .filter(removeFunction);
+    const filterDataTitle = filterDataTitles.map((item: item) => ({
+      title: switchTitletoChinese(item.title),
+      value: item.value,
+    }));
+    if (filterDataTitle.length === 0) {
+      setBreadcrumbItems([{ title: "全部房屋", value: "房屋列表" }]);
+      return;
+    }
     setBreadcrumbItems(filterDataTitle);
   };
   const handleReset = () => {
