@@ -60,6 +60,10 @@ const Menus = () => {
     if (e.key && e.key.toString() !== "") {
       navigate("/" + e.key.toString());
     }
+    if (e.key === "login") {
+      localStorage.removeItem("token");
+      navigate("/login");
+    }
   };
 
   return (
