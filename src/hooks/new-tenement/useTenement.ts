@@ -381,7 +381,6 @@ export function useTenementDevelopInfo(tenementId: string) {
   const handleSave = () => {
     if (!tenementId) return;
     handleSaveColumn(developInfo);
-    alert("儲存成功");
   };
 
   const { handleDeleteTenement } = useDeleteTenement();
