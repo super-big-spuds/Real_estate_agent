@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { usePostAddNotice, usePostCollectionAdd } from "./useAPI";
+import {
+  usePostAddNotice,
+  usePostCollectionAdd,
+  handlePostAddNotice,
+} from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { z } from "zod";
 import moment from "moment";
@@ -52,7 +56,7 @@ const useCollectionAdd = () => {
       return newNotices;
     });
   };
-  const { handlePostAddNotice } = usePostAddNotice();
+  // const { handlePostAddNotice } = usePostAddNotice();
   const handleSave = async () => {
     const schemaform = z.object({
       tenement_address: z.string().min(2, "地址至少兩個字"),
