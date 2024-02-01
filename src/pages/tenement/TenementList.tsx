@@ -140,9 +140,11 @@ export const TenementLists = () => {
     setBreadcrumbItems(filterDataTitle);
   };
   const handleReset = () => {
-    setBreadcrumbItems([{ title: "全部房屋", value: "房屋列表" }]);
-    form.resetFields();
-    handleGetTenement("");
+    // setBreadcrumbItems([{ title: "全部房屋", value: "房屋列表" }]);
+    // form.resetFields();
+    // handleGetTenement("");
+    // // reload
+    window.location.reload();
   };
 
   const [form] = Form.useForm();
