@@ -878,8 +878,6 @@ export function useGetSellEdit() {
           management_magnification: zod.number(),
           management_fee: zod.number(),
           selling_price: zod.number(),
-          rent_price: zod.number(),
-          deposit_price: zod.number(),
           tenement_floor: zod.number(),
 
           tenement_host_name: zod.string(),
@@ -916,7 +914,6 @@ export function useGetSellEdit() {
           validData.data.management_magnification.toString(),
         management_fee: validData.data.management_fee.toString(),
         selling_price: validData.data.selling_price.toString(),
-        rent_price: validData.data.rent_price.toString(),
         tenement_floor: validData.data.tenement_floor.toString(),
       });
     } catch (error) {
