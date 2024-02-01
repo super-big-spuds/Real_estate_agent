@@ -1347,6 +1347,7 @@ export async function handlePostAddNotice(
     }
   });
   const token = localStorage.getItem("token") as string;
+  console.log(organzedNotices);
 
   try {
     const res = await mutableFetch(
@@ -1378,7 +1379,6 @@ export async function handlePostAddNotice(
 }
 
 export function usePostAddNotice() {
-  const token = useToken();
   const [isDone, setIsDone] = useState(false);
   const [newNotices, setNotices] = useState<NoticeData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -1391,6 +1391,9 @@ export function usePostAddNotice() {
     setIsDone(false);
 
     try {
+      console.log(notices);
+      console.log(type);
+
       const validData = await handlePostAddNotice(type, notices);
 
       if (validData === undefined) throw new Error("validData is undefined");

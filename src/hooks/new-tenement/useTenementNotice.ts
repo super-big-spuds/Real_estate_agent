@@ -4,6 +4,7 @@ import {
   usePostAddNotice,
   usePutNotice,
   useDeleteNotice,
+  handlePostAddNotice,
 } from "../useAPI";
 
 import moment from "moment";
@@ -34,34 +35,30 @@ export default function useTenementNotice(
   ]);
 
   const { isLoading, isError, getNotice, dataNotice } = useGetNotice();
-  const { handlePostAddNotice, newNotices } = usePostAddNotice();
+  // const { handlePostAddNotice, newNotices } = usePostAddNotice();
   const { handlePutNotice } = usePutNotice();
   const handleSaveNoticeData = () => {
     handlePutNotice(tenementType, notices);
   };
-  const handleAddNotice = () => {
+
+  const handleAddNotice = async () => {
+    console.log(tenementId);
     const newNotice = {
       visitDate: nowdatestring,
       record: "",
       remindDate: nowdatestring,
       remind: "",
       collection_id: Number(tenementId),
-      isNew: true,
     };
-    handlePostAddNotice(tenementType, [newNotice]);
+
+    const newNoticeData = await handlePostAddNotice(tenementType, [newNotice]);
+
+    if (newNoticeData === undefined) return;
+
+    setNotices((prevNotices) => {
+      return [...prevNotices, ...newNoticeData];
+    });
   };
-  useEffect(() => {
-    if (newNotices.length > 0) {
-      setNotices((prevNotices) => {
-        const filteredNotices = newNotices.filter((newNotice) => {
-          return !prevNotices.some(
-            (prevNotice) => prevNotice.id === newNotice.id
-          );
-        });
-        return [...prevNotices, ...filteredNotices];
-      });
-    }
-  }, [newNotices]);
 
   useEffect(() => {
     getNotice(tenementType, tenementId);

@@ -87,7 +87,6 @@ export function useTenementMarketInfo(tenementId: string) {
       tenement_id: tenementId,
     };
     handleSaveColumn(marketinfo);
-    alert("儲存成功");
   };
 
   const { handleDeleteTenement } = useDeleteTenement();
@@ -233,7 +232,6 @@ export function useTenementRentInfo(tenementId: string) {
   const { handleSaveColumn } = usePostRentEdit();
   const handleSave = () => {
     if (!tenementId) return;
-    // rentinfo add tenement_id
     const rentinfo = {
       ...rentInfo,
       tenement_id: Number(tenementId),

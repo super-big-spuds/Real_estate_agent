@@ -22,7 +22,6 @@ const useCollectionEdit = () => {
   } = usePostCollectionEdit();
 
   const { handlePutNotice } = usePutNotice();
-  const { newNotices } = usePostAddNotice();
   const { handleDeleteNoticeApi } = useDeleteNotice();
 
   // get param id from url
