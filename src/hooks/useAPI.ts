@@ -10,6 +10,7 @@ import type {
   TenementDevelop,
   TenementRent,
   TenementMarket,
+  TenementSellList,
 } from "../type";
 import * as zod from "zod";
 
@@ -706,19 +707,20 @@ export function useGetTenementListSell() {
   const token = useToken();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [dataTenement, setDataTenement] = useState<TenementList[]>([]);
+  const [dataTenement, setDataTenement] = useState<TenementSellList[]>([]);
 
   const handleGetTenement = async (
-    query: { [s: string]: string } | ArrayLike<string> | undefined
+    query: { title: string; value: never }[] | ""
   ) => {
     setIsLoading(true);
-    // drop undefined
-    const querys = Object.fromEntries(
-      Object.entries(query || {}).filter(([, value]) => value !== undefined)
+    const filterData = Object.fromEntries(
+      Object.entries(query).filter(([_, v]) => v !== undefined && v !== "")
     );
-    const queryString = Object.keys(querys)
-      .map((key) => `${key}=${querys[key]}`)
+    // create query string
+    const queryString = Object.keys(filterData)
+      .map((key) => `${key}=${filterData[key]}`)
       .join("&");
+
     try {
       const res = await getFetch(`/tenement/sell?${queryString}`, token);
       const data = await res.json();
@@ -733,7 +735,6 @@ export function useGetTenementListSell() {
             tenement_type: zod.string(),
             tenement_product_type: zod.string(),
             management_fee_bottom: zod.number(),
-            management_floor_bottom: zod.number(),
             selling_price: zod.number(),
             Total_rating: zod.number(),
             inside_rating: zod.number(),

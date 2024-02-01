@@ -67,6 +67,23 @@ export type TenementList = {
   tenement_floor?: number;
 };
 
+export type TenementSellList = {
+  tenement_id: number;
+  tenement_address: string;
+  tenement_face: string;
+  tenement_status: string;
+  tenement_type: string;
+  tenement_product_type: string;
+  management_fee_bottom: number;
+  management_floor_bottom?: number;
+  rent?: number;
+  selling_price?: number;
+  Total_rating?: number;
+  inside_rating?: number;
+  public_building?: number;
+  tenement_floor?: number;
+};
+
 export type TenementSell = {
   tenement_id?: number;
   tenement_address: string;

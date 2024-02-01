@@ -121,6 +121,13 @@ const useTenementList = () => {
       onFilter: (value, record) => record.tenement_type.includes(value),
     },
     {
+      title: "樓層",
+      dataIndex: "management_floor_bottom",
+      key: "management_floor_bottom",
+      width: "10%",
+      sorter: (a, b) => a.management_floor_bottom - b.management_floor_bottom,
+    },
+    {
       title: "產品類別",
       dataIndex: "tenement_product_type",
       key: "tenement_product_type",

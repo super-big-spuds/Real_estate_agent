@@ -5,7 +5,7 @@ import FilterModule from "../../components/FilterModule";
 import { useEffect, useState } from "react";
 import { RuleObject } from "rc-field-form/lib/interface";
 import { useGetTenementListSell } from "../../hooks/useAPI";
-import type { TenementList } from "../../type";
+import type { TenementSellList } from "../../type";
 
 export const TenementListSell = () => {
   const [Popout, setPopout] = useState(false);
@@ -64,7 +64,7 @@ export const TenementListSell = () => {
 
   const { isLoading, isError, dataTenement, handleGetTenement } =
     useGetTenementListSell();
-  const [data, setData] = useState<TenementList[]>([
+  const [data, setData] = useState<TenementSellList[]>([
     {
       tenement_id: 1,
       tenement_address: "地址",
@@ -73,7 +73,6 @@ export const TenementListSell = () => {
       tenement_type: "出售",
       tenement_product_type: "辦公室",
       management_fee_bottom: 100,
-      management_floor_bottom: 7,
       rent: 100,
       Total_rating: 100,
       inside_rating: 100,
@@ -88,7 +87,7 @@ export const TenementListSell = () => {
       tenement_type: "出租",
       tenement_product_type: "店面",
       management_fee_bottom: 120,
-      management_floor_bottom: 11,
+
       rent: 120,
       Total_rating: 120,
       inside_rating: 120,
@@ -103,7 +102,7 @@ export const TenementListSell = () => {
       tenement_type: "開發追蹤",
       tenement_product_type: "套房",
       management_fee_bottom: 150,
-      management_floor_bottom: 3,
+
       rent: 150,
       Total_rating: 150,
       inside_rating: 150,
@@ -118,7 +117,7 @@ export const TenementListSell = () => {
       tenement_type: "行銷追蹤",
       tenement_product_type: "套房",
       management_fee_bottom: 150,
-      management_floor_bottom: 3,
+
       rent: 150,
       Total_rating: 150,
       inside_rating: 150,
@@ -140,7 +139,7 @@ export const TenementListSell = () => {
         tenement_type: item.tenement_type,
         tenement_product_type: item.tenement_product_type,
         management_fee_bottom: item.management_fee_bottom,
-        management_floor_bottom: item.management_floor_bottom,
+
         selling_price: item.selling_price,
         Total_rating: item.Total_rating,
         inside_rating: item.inside_rating,
@@ -152,7 +151,6 @@ export const TenementListSell = () => {
     setData(data);
   }, [dataTenement]);
   const handleSelect = (data: []) => {
-    handleGetTenement(data);
     const filterData = Object.fromEntries(
       Object.entries(data).filter(([_, v]) => v !== undefined && v !== "")
     );
@@ -171,6 +169,7 @@ export const TenementListSell = () => {
         value: v,
       }))
       .filter(removeFunction);
+    handleGetTenement(data);
     const filterDataTitle = filterDataTitles.map((item: item) => ({
       title: switchTitletoChinese(item.title),
       value: item.value,
