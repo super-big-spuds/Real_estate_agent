@@ -23,6 +23,7 @@ function getItem(
 }
 
 const isAdminMenuItems: MenuItem[] = [
+  getItem("登出", "login", undefined, undefined),
   getItem("代收付管理", "collectionmange", undefined, [
     getItem("代收付管理列表", "collections"),
     getItem("代收付管理新增", "Collection/Add"),
@@ -43,7 +44,7 @@ const isAdminMenuItems: MenuItem[] = [
   ]),
 ];
 
-const isNotAdminMenuItems: MenuItem[] = [...isAdminMenuItems.slice(0, 3)];
+const isNotAdminMenuItems: MenuItem[] = [...isAdminMenuItems.slice(0, 4)];
 
 const Menus = () => {
   const navigate = useNavigate();
