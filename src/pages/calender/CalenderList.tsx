@@ -17,7 +17,7 @@ export const CalenderList = () => {
           <p className="text-xs">代收付事項</p>
         </div>
         <div className="flex">
-          <p className="w-4 h-4 bg-red-400 rounded-full"></p>
+          <p className="w-4 h-4 bg-red-500 rounded-full"></p>
           <p className="text-xs">租房事項</p>
         </div>
         <div className="flex">

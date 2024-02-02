@@ -30,13 +30,13 @@ export default function CalenderTable(props: Props) {
   const getEventType = (classType: string) => {
     switch (classType) {
       case "collection":
-        return "pink";
-      case "rent":
-        return "orange";
-      case "sell":
         return "green";
+      case "rent":
+        return "red";
+      case "sell":
+        return "gray";
       case "develop":
-        return "purple";
+        return "blue";
       case "market":
         return "gold";
       case "pay":
@@ -56,6 +56,8 @@ export default function CalenderTable(props: Props) {
         type: getEventType(event.class),
       })),
     };
+    console.log(eventDataWithDate);
+
     return eventDataWithDate;
   };
 
