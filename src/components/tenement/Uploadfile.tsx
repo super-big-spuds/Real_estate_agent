@@ -38,7 +38,7 @@ const App = (props: UploadFileProps) => {
       ...acc,
       {
         uid: cur,
-        name: cur,
+        name: "",
         status: "done",
         url: cur,
       },
