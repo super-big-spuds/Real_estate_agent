@@ -656,12 +656,12 @@ export function useGetTenementList() {
   const [dataTenement, setDataTenement] = useState<TenementList[]>([]);
 
   const handleGetTenement = async (
-    query: { [s: string]: string } | ArrayLike<string> | undefined
+    query: { title: string; value: never }[] | ""
   ) => {
     setIsLoading(true);
     // drop undefined
     const querys = Object.fromEntries(
-      Object.entries(query || {}).filter(([, value]) => value !== undefined)
+      Object.entries(query).filter(([_, v]) => v !== undefined && v !== "")
     );
     const queryString = Object.keys(querys)
       .map((key) => `${key}=${querys[key]}`)
@@ -769,12 +769,12 @@ export function useGetTenementListRent() {
   const [dataTenement, setDataTenement] = useState<TenementList[]>([]);
 
   const handleGetTenement = async (
-    query: { [s: string]: string } | ArrayLike<string> | undefined
+    query: { title: string; value: never }[] | ""
   ) => {
     setIsLoading(true);
     // drop undefined
     const querys = Object.fromEntries(
-      Object.entries(query || {}).filter(([, value]) => value !== undefined)
+      Object.entries(query).filter(([_, v]) => v !== undefined && v !== "")
     );
     const queryString = Object.keys(querys)
       .map((key) => `${key}=${querys[key]}`)
@@ -860,7 +860,6 @@ export function useGetSellEdit() {
     try {
       const res = await getFetch(`/tenement/edit/sell/${id}`, token);
       const data = await res.json();
-
       const validSchema = basicZodSchema(
         zod.object({
           tenement_id: zod.number(),
