@@ -368,7 +368,7 @@ export default function TenementInfo(props: any) {
       }
     }
 
-    await handleCreateTenmentInfo(formData.tenement_type);
+    await handleCreateTenmentInfo(tenement_type);
 
     alert("儲存成功");
   };

@@ -86,6 +86,8 @@ export default function CalenderTable(props: Props) {
       : [];
   };
   const switchparam = (param: string, id: any) => {
+    console.log(param, id);
+
     switch (param) {
       case "market":
         return `/Tenement/${id}/market`;
@@ -114,7 +116,9 @@ export default function CalenderTable(props: Props) {
         {listData.map((item: any, index: any) => (
           <li
             key={index}
-            onClick={() => navigate(switchparam(item.class, item.id))}
+            onClick={() => {
+              navigate(switchparam(item.class, item.id));
+            }}
           >
             <Badge
               color={item.type as BadgeProps["color"]}
