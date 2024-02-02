@@ -6,11 +6,7 @@ import RenterInfo from "./RenterInfo";
 import Uploadfile from "./Uploadfile";
 import SellerInfo from "./SellerInfo";
 import { memo, useEffect, useState } from "react";
-import {
-  usePostAddNotice,
-  usePostAddTenement,
-  handlePostAddNotice,
-} from "../../hooks/useAPI";
+import { usePostAddTenement, handlePostAddNotice } from "../../hooks/useAPI";
 import { NoticeData } from "../../type";
 import moment from "moment";
 

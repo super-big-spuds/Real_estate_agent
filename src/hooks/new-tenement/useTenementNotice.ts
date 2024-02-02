@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   useGetNotice,
-  usePostAddNotice,
   usePutNotice,
   useDeleteNotice,
   handlePostAddNotice,

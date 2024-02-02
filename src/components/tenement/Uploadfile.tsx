@@ -91,6 +91,7 @@ const App = (props: UploadFileProps) => {
   };
 
   type IRemove = React.ComponentProps<typeof Upload>["onRemove"];
+
   const onRemove: IRemove = async (file) => {
     try {
       const fileName = file.url?.split("/")[4];

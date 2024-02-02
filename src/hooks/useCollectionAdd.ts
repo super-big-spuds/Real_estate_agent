@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  usePostAddNotice,
-  usePostCollectionAdd,
-  handlePostAddNotice,
-} from "./useAPI";
+import { usePostCollectionAdd, handlePostAddNotice } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { z } from "zod";
 import moment from "moment";
