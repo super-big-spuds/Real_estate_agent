@@ -63,12 +63,12 @@ export default function TenementInfo(props: any) {
     return {
       tenement_id: searchParams.get("tenement_id") || "",
       tenement_address: searchParams.get("tenement_address") || "",
-      tenement_product_type: searchParams.get("tenement_product_type") || "",
+      tenement_product_type: searchParams.get("tenement_product_type") || "套房",
       tenement_type: searchParams.get("tenement_type") || "",
       tenement_face: searchParams.get("tenement_face") || "",
       tenement_images:
         JSON.parse(searchParams.get("tenement_images") as string) || [],
-      tenement_status: searchParams.get("tenement_status") || "",
+      tenement_status: searchParams.get("tenement_status") || "未成交",
       total_rating: searchParams.get("total_rating") || "",
       main_building: searchParams.get("main_building") || "",
       affiliated_building: searchParams.get("affiliated_building") || "",
@@ -170,6 +170,8 @@ export default function TenementInfo(props: any) {
 
   useEffect(() => {
     const newFormData = handlePutDataWithQuery(searchParams);
+    console.log(newFormData);
+    
     setFormData(newFormData);
   }, [searchParams]);
 
@@ -477,6 +479,7 @@ export default function TenementInfo(props: any) {
                 onChange={(e) => handleChange("selling_price", e.target.value)}
                 isError={formData.selling_price.length <= 2}
                 errorMessage={"至少兩個字"}
+                required
               />
             </div>
           </div>
@@ -492,6 +495,7 @@ export default function TenementInfo(props: any) {
                 onChange={(e) => handleChange("selling_price", e.target.value)}
                 isError={formData.selling_price.length <= 2}
                 errorMessage={"至少兩個字"}
+                required
               />
             </div>
             {/* 租金 */}
@@ -553,6 +557,7 @@ export default function TenementInfo(props: any) {
               >
                 <Select.Option value="租房">租房</Select.Option>
                 <Select.Option value="買房">買房</Select.Option>
+                <Select.Option value="要租要買">要租要買</Select.Option>
               </Select>
             </div>
             {/* 預算 最大值 最小值 */}
@@ -570,6 +575,7 @@ export default function TenementInfo(props: any) {
                   }
                   className="h-8 col-span-1 mt-3"
                   placeholder="最小值"
+                  required
                 />
                 <p className="pt-3 pl-1 ">~</p>
               </div>
@@ -580,6 +586,7 @@ export default function TenementInfo(props: any) {
                 }
                 className="col-span-1 mt-3"
                 placeholder="最大值"
+                required
               />
             </div>
             <div className="grid grid-cols-5 gap-1 text-right">
@@ -592,6 +599,7 @@ export default function TenementInfo(props: any) {
                   }
                   className="h-8 col-span-1 mt-3"
                   placeholder="最小值"
+                  required
                 />
                 <p className="pt-3 pl-1 ">~</p>
               </div>
@@ -602,6 +610,7 @@ export default function TenementInfo(props: any) {
                 }
                 className="col-span-1 mt-3"
                 placeholder="最大值"
+                required
               />
             </div>
           </div>
@@ -612,7 +621,10 @@ export default function TenementInfo(props: any) {
   };
 
   return (
-    <div className="flex flex-col items-center w-full h-full ">
+    <form className="flex flex-col items-center w-full h-full " onSubmit={e => {
+        e.preventDefault()
+        handleSave()
+      }}>
       <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
         <button className="flex w-12 h-20 mt-10 ml-5" onClick={handleback}>
           {"< 返回"}
@@ -639,6 +651,7 @@ export default function TenementInfo(props: any) {
                   }
                   isError={formData.tenement_address.length <= 2}
                   errorMessage={"至少兩個字"}
+                  required={formData.tenement_type !== "行銷追蹤"}
                 />
               </div>
               {/* 房型 */}
@@ -647,6 +660,7 @@ export default function TenementInfo(props: any) {
                 {/* radio */}
                 <Radio.Group
                   className="col-span-4"
+                  value={formData.tenement_product_type}
                   onChange={(e) =>
                     handleChange("tenement_product_type", e.target.value)
                   }
@@ -1035,7 +1049,7 @@ export default function TenementInfo(props: any) {
           </div>
         </div>
         <div className="flex justify-end gap-5 m-10 ">
-          <Button className="bg-blue-600 " type="primary" onClick={handleSave}>
+          <Button className="bg-blue-600 " type="primary" htmlType="submit">
             儲存
           </Button>
           <Button type="default" onClick={() => handleReset()}>
@@ -1043,6 +1057,6 @@ export default function TenementInfo(props: any) {
           </Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

@@ -109,7 +109,10 @@ export default function Rent() {
   };
 
   return (
-    <div className="flex flex-col items-center w-full h-full ">
+    <form className="flex flex-col items-center w-full h-full " onSubmit={e => {
+      e.preventDefault()
+      onSave()
+    }}>
       <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
         <button
           className="flex w-12 h-20 mt-10 ml-5"
@@ -143,6 +146,7 @@ export default function Rent() {
                       2
                     }
                     errorMessage={"至少兩個字"}
+                    required
                   />
                 </div>
                 {/* 房型 */}
@@ -223,6 +227,7 @@ export default function Rent() {
                       developHook.states.developInfo.total_rating.length <= 2
                     }
                     errorMessage={"至少兩個字"}
+                    required
                   />
                 </div>
                 {/* 主建物坪數 */}
@@ -241,6 +246,7 @@ export default function Rent() {
                       developHook.states.developInfo.main_building.length <= 2
                     }
                     errorMessage={"至少兩個字"}
+                    required
                   />
                 </div>
                 {/* 附屬建物坪數 */}
@@ -260,6 +266,7 @@ export default function Rent() {
                         .length <= 2
                     }
                     errorMessage={"至少兩個字"}
+                    required
                   />
                 </div>
                 {/* 公共設施坪數 */}
@@ -278,6 +285,7 @@ export default function Rent() {
                       developHook.states.developInfo.public_building.length <= 2
                     }
                     errorMessage={"至少兩個字"}
+                    required
                   />
                 </div>
 
@@ -456,6 +464,7 @@ export default function Rent() {
                         .length <= 2
                     }
                     errorMessage={"至少兩個字"}
+                    required
                   />
                 </div>
                 {/* 行動電話 */}
@@ -476,6 +485,7 @@ export default function Rent() {
                         .length <= 2
                     }
                     errorMessage={"至少兩個字"}
+                    required
                   />
                 </div>
                 {/* 電話 */}
@@ -659,7 +669,7 @@ export default function Rent() {
           </div>
         </div>
         <div className="flex justify-end gap-5 m-10 ">
-          <Button className="bg-blue-600 " type="primary" onClick={onSave}>
+          <Button className="bg-blue-600 " type="primary" htmlType="submit">
             儲存
           </Button>
           <Button type="default">回復預設</Button>
@@ -668,6 +678,6 @@ export default function Rent() {
           </Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

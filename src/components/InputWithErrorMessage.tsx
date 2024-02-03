@@ -11,17 +11,17 @@ type Props = {
 export default function InputWithErrorMessage({
   value,
   onChange,
-  isError,
-  errorMessage,
+  // isError,
+  // errorMessage,
   required = false
 }: Props) {
   return (
     <div className="col-span-3">
       <div className="relative my-4">
         <Input placeholder="請輸入內容" value={value} onChange={onChange} required={required}/>
-        <span className="absolute left-0 text-red-500 top-full">
+        {/* <span className="absolute left-0 text-red-500 top-full">
           {isError ? errorMessage : ""}
-        </span>
+        </span> */}
       </div>
     </div>
   );

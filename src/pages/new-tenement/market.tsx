@@ -104,7 +104,10 @@ export default function Market() {
   };
 
   return (
-    <div className="flex flex-col items-center w-full h-full ">
+    <form className="flex flex-col items-center w-full h-full " onSubmit={e => {
+      e.preventDefault()
+      onSave()
+    }}>
       <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
         <button
           className="flex w-12 h-20 mt-10 ml-5"
@@ -244,6 +247,7 @@ export default function Market() {
                   >
                     <Select.Option value="租房">租房</Select.Option>
                     <Select.Option value="買房">買房</Select.Option>
+                    <Select.Option value="要租要買">要租要買</Select.Option>
                   </Select>
                 </div>
                 {/* 預算 最大值 最小值 */}
@@ -266,6 +270,7 @@ export default function Market() {
                       }
                       className="h-8 col-span-1 mt-3"
                       placeholder="最小值"
+                      required
                     />
                     <p className="pt-3 pl-1 ">~</p>
                   </div>
@@ -279,6 +284,7 @@ export default function Market() {
                     }
                     className="col-span-1 mt-3"
                     placeholder="最大值"
+                    required
                   />
                 </div>
                 {/* 希望的樓層 */}
@@ -295,6 +301,7 @@ export default function Market() {
                       }
                       className="h-8 col-span-1 mt-3"
                       placeholder="最小值"
+                      required
                     />
                     <p className="pt-3 pl-1 ">~</p>
                   </div>
@@ -308,6 +315,7 @@ export default function Market() {
                     }
                     className="col-span-1 mt-3"
                     placeholder="最大值"
+                    required
                   />
                 </div>
               </div>
@@ -347,6 +355,7 @@ export default function Market() {
                     marketHook.states.marketInfo.tenement_host_name.length <= 2
                   }
                   errorMessage={"至少兩個字"}
+                  required
                 />
               </div>
               {/* 行動電話 */}
@@ -365,6 +374,7 @@ export default function Market() {
                       .length <= 2
                   }
                   errorMessage={"至少兩個字"}
+                  required
                 />
               </div>
               {/* 電話 */}
@@ -541,7 +551,7 @@ export default function Market() {
           </div>
         </div>
         <div className="flex justify-end gap-5 m-10 ">
-          <Button className="bg-blue-600 " type="primary" onClick={onSave}>
+          <Button className="bg-blue-600 " type="primary" htmlType="submit">
             儲存
           </Button>
           <Button type="default">回復預設</Button>
@@ -550,6 +560,6 @@ export default function Market() {
           </Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

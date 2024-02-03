@@ -43,7 +43,10 @@ export default function CollectionMange(props: any) {
     
 
   return (
-    <div className="flex flex-col w-full h-full ">
+    <form className="flex flex-col w-full h-full " onSubmit={e => {
+      e.preventDefault()
+      handleSave();
+    }}>
       <div className="flex flex-col h-full px-10 py-20 mx-10 mt-12 mb-10 ml-12 bg-white shadow-2xl w-8/9 rounded-xl">
         <button className="flex w-12 h-20" onClick={handleback}>
           {"< 返回"}
@@ -69,6 +72,7 @@ export default function CollectionMange(props: any) {
                     }
                     isError={formData.tenement_address.length <= 2}
                     errorMessage={"至少兩個字"}
+                    required
                   />
                 </div>
                 {/* 是否完成 */}
@@ -130,6 +134,7 @@ export default function CollectionMange(props: any) {
                     onChange={(e) => handleChange("price", e.target.value)}
                     isError={formData.price.length <= 2}
                     errorMessage={"至少兩個字"}
+                    required
                   />
                 </div>
                 <div className="grid grid-cols-5 gap-1 ">
@@ -233,7 +238,7 @@ export default function CollectionMange(props: any) {
           </div>
         </div>
         <div className="flex justify-end gap-5 m-10 ">
-          <Button className="bg-blue-600 " type="primary" onClick={handleSave}>
+          <Button className="bg-blue-600 " type="primary" htmlType="submit">
             儲存
           </Button>
           <Button type="default" onClick={() => handleReset()}>
@@ -246,6 +251,6 @@ export default function CollectionMange(props: any) {
          }
         </div>
       </div>
-    </div>
+    </form>
   );
 }
