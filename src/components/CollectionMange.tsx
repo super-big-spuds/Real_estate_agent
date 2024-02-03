@@ -121,6 +121,7 @@ export default function CollectionMange(props: any) {
                       { value: "水電空調費" },
                       { value: "第四台" },
                       { value: "管理費" },
+                      { value: "租金" },
                       { value: "其他" },
                     ]}
                     onChange={(value) => handleChange("collection_name", value)}
