@@ -450,6 +450,7 @@ export default function TenementInfo(props: any) {
                 onChange={(e) => handleChange("rent_price", e.target.value)}
                 isError={formData.rent_price.length <= 2}
                 errorMessage={"至少兩個字"}
+                required
               />
             </div>
             {/* 押金 */}
@@ -726,6 +727,7 @@ export default function TenementInfo(props: any) {
                     }
                     isError={formData.total_rating.length <= 2}
                     errorMessage={"請輸入到小數點後二位"}
+                    required
                   />
                 </div>
               )}
@@ -742,6 +744,7 @@ export default function TenementInfo(props: any) {
                     }
                     isError={formData.main_building.length <= 2}
                     errorMessage={"請輸入到小數點後二位"}
+                    required
                   />
                 </div>
               )}
@@ -758,6 +761,7 @@ export default function TenementInfo(props: any) {
                     }
                     isError={formData.affiliated_building.length <= 2}
                     errorMessage={"請輸入到小數點後二位"}
+                    required
                   />
                 </div>
               )}
@@ -774,6 +778,7 @@ export default function TenementInfo(props: any) {
                     }
                     isError={formData.public_building.length <= 2}
                     errorMessage={"請輸入到小數點後二位"}
+                    required
                   />
                 </div>
               )}
@@ -872,6 +877,7 @@ export default function TenementInfo(props: any) {
                   }
                   isError={formData.tenement_host_name.length <= 2}
                   errorMessage={"至少兩個字"}
+                  required
                 />
               </div>
               {/* 行動電話 */}
@@ -884,6 +890,7 @@ export default function TenementInfo(props: any) {
                   }
                   isError={formData.tenement_host_telphone.length <= 2}
                   errorMessage={"至少兩個字"}
+                  required
                 />
               </div>
               {/* 電話 */}
