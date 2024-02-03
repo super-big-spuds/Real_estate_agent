@@ -304,7 +304,7 @@ export function usePostCollectionEdit() {
   const handleDeleteCollectionFetch = async (id: string) => {
     setIsLoading(true);
     try {
-      const res = await mutableFetch(`/collection/${id}`, "DELETE", token, id);
+      const res = await mutableFetch(`/collection/${id}`, "DELETE", token, {});
       if (!res.ok) {
         alert("操作失敗");
         throw new Error(res.statusText);
@@ -1520,7 +1520,7 @@ export function useDeleteTenement() {
         `/delete/tenement/${tenement_id}`,
         "DELETE",
         token,
-        null
+        {}
       );
       if (!res.ok) {
         alert("操作失敗");
