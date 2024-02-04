@@ -4,8 +4,11 @@ import InputWithErrorMessage from "./InputWithErrorMessage";
 
 export default function CollectionMange(props: any) {
   const navigate = useNavigate();
+  const query = new URLSearchParams(window.location.search);
+  const isRollback = query.get("rollback") || false;
+
   const handleback = () => {
-    navigate("/users");
+    navigate(isRollback ? "/rollback/users" : "/users");
   };
 
   const {
@@ -31,7 +34,9 @@ export default function CollectionMange(props: any) {
         ) : (
           <div>
             <div className="inline-flex flex-col ml-5">
-              <p className="text-4xl whitespace-normal">使用者管理</p>
+              <p className="text-4xl whitespace-normal">
+                {isRollback && "復原"}使用者管理
+              </p>
             </div>
             <div className="flex flex-col flex-wrap w-2/3 h-full gap-10 p-10 overflow-visible ">
               <div className="grid grid-cols-5 gap-1 text-right">
@@ -89,13 +94,13 @@ export default function CollectionMange(props: any) {
         )}
         <div className="flex justify-end gap-5 m-10 ">
           <Button className="bg-blue-600 " type="primary" onClick={handleSave}>
-            儲存
+            {isRollback ? "復原" : "儲存"}
           </Button>
           <Button type="default" onClick={() => handleReset()}>
             回復預設
           </Button>
           <Button danger onClick={() => handleDeleteUser()}>
-            刪除
+            {isRollback ? "永久刪除" : "刪除"}
           </Button>
         </div>
       </div>

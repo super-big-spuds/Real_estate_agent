@@ -9,6 +9,8 @@ const useCollectionEdit = () => {
     usePostUserEdit();
   const { getUserEdit, dataEdit } = useGetUserEdit();
   const { user_id } = useParams();
+  const query = new URLSearchParams(location.search);
+  const isRollback = query.get("rollback") || false;
 
   const [formData, setFormData] = useState<User>({
     user_name: "",
@@ -56,7 +58,8 @@ const useCollectionEdit = () => {
   };
   const handleDeleteUser = () => {
     confirm("確定要刪除嗎？");
-    handleDeleteUserFetch(user_id || "");
+    !isRollback && handleDeleteUserFetch(user_id || "");
+    isRollback && handleHardDeleteUser(user_id || "");
   };
 
   const handleReset = () => {

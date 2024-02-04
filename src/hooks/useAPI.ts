@@ -1777,3 +1777,17 @@ export const hardDeleteTenement = async (
     throw new Error(res.statusText);
   }
 };
+
+export const handleHardDeleteUser = async (user_id: string) => {
+  const token = localStorage.getItem("token") as string;
+  const res = await mutableFetch(
+    `/user/rollback/${user_id}`,
+    "DELETE",
+    token,
+    {}
+  );
+  if (!res.ok) {
+    alert("操作失敗");
+    throw new Error(res.statusText);
+  }
+};
