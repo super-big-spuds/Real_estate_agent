@@ -84,6 +84,7 @@ const useCollectionEdit = () => {
     confirm("確定要刪除嗎？");
     !isRollback && handleDeleteCollectionFetch(id || "");
     isRollback && deleteCollectionFetchFn(id || "");
+    alert("刪除成功");
   };
 
   const handleSave = async () => {

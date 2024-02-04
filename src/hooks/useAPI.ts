@@ -1532,7 +1532,7 @@ export function useDeleteTenement() {
 
     try {
       const res = await mutableFetch(
-        `/delete/tenement/${tenement_id}/${tenement_type}`,
+        `/tenement/delete/${tenement_type}/${tenement_id}`,
         "DELETE",
         token,
         {}
@@ -1767,7 +1767,7 @@ export const hardDeleteTenement = async (
 ) => {
   const token = localStorage.getItem("token") as string;
   const res = await mutableFetch(
-    `/delete/tenement/rollback/${tenement_id}/${tenement_type}`,
+    `/tenement/delete/rollback/${tenement_type}/${tenement_id}`,
     "DELETE",
     token,
     {}

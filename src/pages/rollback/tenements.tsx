@@ -73,7 +73,7 @@ export const RollbackTenementLists = () => {
         navigate(
           `/Tenement/${record.tenement_id}/${switchType(
             record.tenement_type
-          )}?rollback=true`
+          )}?rollback=true&tenement_type=${record.tenement_type}`
         );
       },
     };

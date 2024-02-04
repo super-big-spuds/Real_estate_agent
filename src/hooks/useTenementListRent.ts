@@ -154,7 +154,9 @@ const useTenementListRent = () => {
     return {
       onClick: () => {
         navigate(
-          `/Tenement/${record.tenement_id}/${switchType(record.tenement_type)}`
+          `/Tenement/${record.tenement_id}/${switchType(
+            record.tenement_type
+          )}?tenement_type=出租`
         );
       },
     };
