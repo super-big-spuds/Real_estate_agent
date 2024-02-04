@@ -1582,3 +1582,148 @@ export async function deleteFile(fileName: string) {
     throw new Error(res.statusText);
   }
 }
+
+export function useGetRollbackTenementList() {
+  const token = useToken();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [dataTenement, setDataTenement] = useState<TenementList[]>([]);
+
+  const handleGetTenement = async (
+    query: { title: string; value: never }[] | ""
+  ) => {
+    setIsLoading(true);
+    // drop undefined
+    const querys = Object.fromEntries(
+      Object.entries(query).filter(([_, v]) => v !== undefined && v !== "")
+    );
+    const queryString = Object.keys(querys)
+      .map((key) => `${key}=${querys[key]}`)
+      .join("&");
+    try {
+      const res = await getFetch(`/tenement?${queryString}/rollback`, token);
+      const data = await res.json();
+
+      const validSchema = basicZodSchema(
+        zod
+          .object({
+            tenement_id: zod.number(),
+            tenement_address: zod.string(),
+            tenement_face: zod.string(),
+            tenement_status: zod.string(),
+            tenement_type: zod.string(),
+            tenement_product_type: zod.string(),
+            management_fee_bottom: zod.number(),
+            management_floor_bottom: zod.number(),
+          })
+          .array()
+      );
+      const validData = validSchema.parse(data);
+
+      setDataTenement(validData.data);
+    } catch (error) {
+      console.error(error);
+      alert("取得資料失敗");
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    isLoading,
+    isError,
+    dataTenement,
+    handleGetTenement,
+  };
+}
+
+export function useGetRollbackCollectionList() {
+  const token = useToken();
+  const [datasa, setData] = useState<Collection[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await getFetch("/collection/rollback", token);
+        const newData = await res.json();
+
+        const validSchema = basicZodSchema(
+          zod
+            .object({
+              collection_name: zod.string(),
+              tenement_address: zod.string(),
+              collection_type: zod.string(),
+              price: zod.string(),
+              collection_id: zod.number(),
+            })
+            .array()
+        );
+
+        const validData = validSchema.parse(newData);
+        setData(validData.data);
+      } catch (error) {
+        console.error(error);
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, []);
+
+  return {
+    isLoading,
+    isError,
+    datasa,
+  };
+}
+
+export function useGetRollbackUserList() {
+  const token = useToken();
+  const [dataUser, setDataUser] = useState<User[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const getUserList = async () => {
+    try {
+      const res = await getFetch("/user/rollback/list", token);
+      const newData = await res.json();
+
+      const validSchema = basicZodSchema(
+        zod
+          .object({
+            user_id: zod.number(),
+            user_name: zod.string(),
+            user_email: zod.string(),
+            status: zod.boolean(),
+          })
+          .array()
+      );
+
+      const validData = validSchema.parse(newData);
+
+      const organizedData = validData.data.map((item) => ({
+        ...item,
+        status: item.status ? "是" : "否",
+        user_id: item.user_id.toString(),
+      }));
+
+      setDataUser(organizedData);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    getUserList();
+  }, []);
+
+  return {
+    isLoading,
+    isError,
+    dataUser,
+  };
+}
