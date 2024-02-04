@@ -1616,7 +1616,7 @@ export function useGetRollbackTenementList() {
       .map((key) => `${key}=${querys[key]}`)
       .join("&");
     try {
-      const res = await getFetch(`/tenement?${queryString}/rollback`, token);
+      const res = await getFetch(`/tenement/rollback?${queryString}`, token);
       const data = await res.json();
 
       const validSchema = basicZodSchema(
