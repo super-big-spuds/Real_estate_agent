@@ -1739,3 +1739,21 @@ export function useGetRollbackUserList() {
     dataUser,
   };
 }
+
+export const deleteCollectionFetchFn = async (id: string) => {
+  const token = localStorage.getItem("token") as string;
+  try {
+    const res = await mutableFetch(
+      `/collection/rollback/${id}`,
+      "DELETE",
+      token,
+      {}
+    );
+    if (!res.ok) {
+      alert("操作失敗");
+      throw new Error(res.statusText);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};

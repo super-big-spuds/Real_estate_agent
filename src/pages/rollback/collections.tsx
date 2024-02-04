@@ -1,9 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import Table from "../../components/Table";
 import useRollbackCollectionList from "../../hooks/useRollbackCollectionList";
+import { Collection } from "../../type";
 
 export const RollBackCollectionList = () => {
-  const { data, columns, onRow, isError, isLoading } =
-    useRollbackCollectionList();
+  const { data, columns, isError, isLoading } = useRollbackCollectionList();
+
+  const navigate = useNavigate();
+  const customOnRow = (record: Collection) => {
+    return {
+      onClick: () => {
+        navigate(`/Collection/${record.collection_id}?rollback=true`);
+      },
+    };
+  };
 
   return (
     <div className="flex flex-col items-center w-4/5 m-10 ">
@@ -15,7 +25,7 @@ export const RollBackCollectionList = () => {
       ) : isError ? (
         <p>error...</p>
       ) : (
-        <Table data={data} columns={columns} onRow={onRow} />
+        <Table data={data} columns={columns} onRow={customOnRow} />
       )}
     </div>
   );

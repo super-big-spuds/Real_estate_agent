@@ -39,14 +39,19 @@ export default function CollectionMange(props: any) {
       return false;
     }
     return true;
-  }
-    
+  };
+
+  const query = new URLSearchParams(window.location.search);
+  const isRollback = query.get("rollback") || false;
 
   return (
-    <form className="flex flex-col w-full h-full " onSubmit={e => {
-      e.preventDefault()
-      handleSave();
-    }}>
+    <form
+      className="flex flex-col w-full h-full "
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSave();
+      }}
+    >
       <div className="flex flex-col h-full px-10 py-20 mx-10 mt-12 mb-10 ml-12 bg-white shadow-2xl w-8/9 rounded-xl">
         <button className="flex w-12 h-20" onClick={handleback}>
           {"< 返回"}
@@ -58,7 +63,10 @@ export default function CollectionMange(props: any) {
         ) : (
           <div>
             <div className="inline-flex flex-col mb-3 ml-5">
-              <p className="text-4xl font-bold whitespace-normal">{formData.collection_type }管理</p>
+              <p className="text-4xl font-bold whitespace-normal">
+                {isRollback && "復原"}
+                {formData.collection_type}管理
+              </p>
             </div>
             <p className="ml-5 border-b-2 border-gray-300 "></p>
             <div className="flex flex-row justify-between ">
@@ -98,7 +106,6 @@ export default function CollectionMange(props: any) {
                     defaultValue={collection_date}
                     className="w-48 col-span-3"
                   />
-      
                 </div>
 
                 <div className="grid grid-cols-5 gap-1 ">
@@ -173,7 +180,11 @@ export default function CollectionMange(props: any) {
                       />
                     </div>
                     <div className="grid grid-cols-5 gap-1 text-right">
-                      <p className="col-span-1 pt-5 ">{ formData.collection_type === "代收" ? "客戶匯款銀行:" : "機構匯款銀行:"}</p>
+                      <p className="col-span-1 pt-5 ">
+                        {formData.collection_type === "代收"
+                          ? "客戶匯款銀行:"
+                          : "機構匯款銀行:"}
+                      </p>
                       <InputWithErrorMessage
                         value={formData.cus_remittance_bank}
                         onChange={(e) =>
@@ -184,7 +195,11 @@ export default function CollectionMange(props: any) {
                       />
                     </div>
                     <div className="grid grid-cols-5 gap-1 text-right">
-                      <p className="col-span-1 pt-5">{ formData.collection_type === "代收" ? "客戶匯款帳號:" : "機構匯款帳號:"}</p>
+                      <p className="col-span-1 pt-5">
+                        {formData.collection_type === "代收"
+                          ? "客戶匯款帳號:"
+                          : "機構匯款帳號:"}
+                      </p>
                       <InputWithErrorMessage
                         value={formData.cus_remittance_account}
                         onChange={(e) =>
@@ -240,16 +255,20 @@ export default function CollectionMange(props: any) {
         </div>
         <div className="flex justify-end gap-5 m-10 ">
           <Button className="bg-blue-600 " type="primary" htmlType="submit">
-            儲存
+            {isRollback ? "復原" : "儲存"}
           </Button>
           <Button type="default" onClick={() => handleReset()}>
             回復預設
           </Button>
-         {
-            getParams() && <Button type="primary" danger onClick={() => handleDeleteCollection()}>
-            刪除
-          </Button>
-         }
+          {getParams() && (
+            <Button
+              type="primary"
+              danger
+              onClick={() => handleDeleteCollection()}
+            >
+              {isRollback ? "永久刪除" : "刪除"}
+            </Button>
+          )}
         </div>
       </div>
     </form>

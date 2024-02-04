@@ -5,6 +5,7 @@ import {
   usePutNotice,
   useDeleteNotice,
   handlePostAddNotice,
+  deleteCollectionFetchFn,
 } from "./useAPI";
 import type { FormData, NoticeData } from "../type";
 import { useParams } from "react-router-dom";
@@ -25,6 +26,9 @@ const useCollectionEdit = () => {
 
   // get param id from url
   const getparamid = useParams<{ id: string }>().id as string;
+
+  const query = new URLSearchParams(window.location.search);
+  const isRollback = query.get("rollback") || false;
 
   const nowdatestring = moment().format("YYYY-MM-DD");
   const { id } = useParams();
@@ -78,7 +82,8 @@ const useCollectionEdit = () => {
   };
   const handleDeleteCollection = () => {
     confirm("確定要刪除嗎？");
-    handleDeleteCollectionFetch(id || "");
+    !isRollback && handleDeleteCollectionFetch(id || "");
+    isRollback && deleteCollectionFetchFn(id || "");
   };
 
   const handleSave = async () => {
