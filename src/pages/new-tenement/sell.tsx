@@ -60,6 +60,10 @@ export default function Rent() {
 
     for (const key in sellData) {
       if (sellData.hasOwnProperty(key) && sellData[key] !== "") {
+        if (key === "tenement_type") {
+          urlParams.append(key, e.target.value as string);
+          continue;
+        }
         urlParams.append(key, sellData[key] as string);
       }
     }
@@ -69,28 +73,38 @@ export default function Rent() {
     async function switchAndNavigate(type: string, id: string) {
       let data;
       switch (type) {
-        case "出租":
-          await getRentHook.getRentEdit(id);
-          data = getRentHook.dataEdit;
+        case "出租": {
+          const newData = await getRentHook.getRentEdit(id);
+          data = newData;
           break;
-        case "出售":
-          await getSellHook.getSellEdit(id);
-          data = getSellHook.dataEdit;
+        }
+        case "出售": {
+          const newData = await getSellHook.getSellEdit(id);
+          data = newData;
           break;
-        case "開發追蹤":
-          await getDevelopHook.getDevelopEdit(id);
-          data = getDevelopHook.dataEdit;
+        }
+        case "開發追蹤": {
+          const newData = await getDevelopHook.getDevelopEdit(id);
+          data = newData;
           break;
-        case "行銷追蹤":
-          await getMarketHook.getMarketEdit(id);
-          data = getMarketHook.dataEdit;
+        }
+        case "行銷追蹤": {
+          const newData = await getMarketHook.getMarketEdit(id);
+          data = newData;
           break;
+        }
         default:
           break;
       }
 
       if (data) {
-        navigate(`/tenement/${id}/${type}`);
+        const typeMap = {
+          出租: "rent",
+          出售: "sell",
+          開發追蹤: "develop",
+          行銷追蹤: "market",
+        };
+        navigate(`/tenement/${id}/${typeMap[type]}?tenement_type=${type}`);
       } else {
         navigate(`/Tenement/Add?${queryString}`);
       }
@@ -109,10 +123,13 @@ export default function Rent() {
   };
 
   return (
-    <form className="flex flex-col items-center w-full h-full " onSubmit={e => {
-      e.preventDefault()
-      onSave()
-    }}>
+    <form
+      className="flex flex-col items-center w-full h-full "
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSave();
+      }}
+    >
       <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
         <button
           className="flex w-12 h-20 mt-10 ml-5"

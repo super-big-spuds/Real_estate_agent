@@ -60,11 +60,14 @@ export default function TenementInfo(props: any) {
 
   const [searchParams] = useSearchParams();
   const handlePutDataWithQuery = (searchParams: URLSearchParams) => {
+    const tenementType = searchParams.get("tenement_type") || "出租";
+    setTenement_type(tenementType);
     return {
       tenement_id: searchParams.get("tenement_id") || "",
       tenement_address: searchParams.get("tenement_address") || "",
-      tenement_product_type: searchParams.get("tenement_product_type") || "套房",
-      tenement_type: searchParams.get("tenement_type") || "",
+      tenement_product_type:
+        searchParams.get("tenement_product_type") || "套房",
+      tenement_type: tenementType,
       tenement_face: searchParams.get("tenement_face") || "",
       tenement_images:
         JSON.parse(searchParams.get("tenement_images") as string) || [],
@@ -170,8 +173,6 @@ export default function TenementInfo(props: any) {
 
   useEffect(() => {
     const newFormData = handlePutDataWithQuery(searchParams);
-    console.log(newFormData);
-    
     setFormData(newFormData);
   }, [searchParams]);
 
@@ -348,19 +349,40 @@ export default function TenementInfo(props: any) {
     }
 
     async function handleCreateTenmentInfo(tenement_type: string) {
+      const queryData = handlePutDataWithQuery(searchParams);
       switch (tenement_type) {
-        case "出租":
-          await startCreateTenement("rent", rentData);
+        case "出租": {
+          const newRentData =
+            queryData.tenement_id === ""
+              ? rentData
+              : { ...rentData, tenement_id: queryData.tenement_id };
+          await startCreateTenement("rent", newRentData);
           break;
-        case "出售":
-          await startCreateTenement("sell", sellData);
+        }
+        case "出售": {
+          const newSellData =
+            queryData.tenement_id === ""
+              ? sellData
+              : { ...sellData, tenement_id: queryData.tenement_id };
+          await startCreateTenement("sell", newSellData);
           break;
-        case "開發追蹤":
-          await startCreateTenement("develop", developerData);
+        }
+        case "開發追蹤": {
+          const newDevelopData =
+            queryData.tenement_id === ""
+              ? developerData
+              : { ...developerData, tenement_id: queryData.tenement_id };
+          await startCreateTenement("develop", newDevelopData);
           break;
-        case "行銷追蹤":
-          await startCreateTenement("market", marketData);
+        }
+        case "行銷追蹤": {
+          const newMarketData =
+            queryData.tenement_id === ""
+              ? marketData
+              : { ...marketData, tenement_id: queryData.tenement_id };
+          await startCreateTenement("market", newMarketData);
           break;
+        }
         default:
           break;
       }
@@ -428,7 +450,7 @@ export default function TenementInfo(props: any) {
   const [tenement_type, setTenement_type] = useState("出租");
 
   const handletypeChange = (e: RadioChangeEvent) => {
-    setFormData((prev: any) => ({ ...prev, tenement_type: e.target.value }));
+    setFormData((prev) => ({ ...prev, tenement_type: e.target.value }));
     setTenement_type(e.target.value);
   };
 
@@ -621,10 +643,13 @@ export default function TenementInfo(props: any) {
   };
 
   return (
-    <form className="flex flex-col items-center w-full h-full " onSubmit={e => {
-        e.preventDefault()
-        handleSave()
-      }}>
+    <form
+      className="flex flex-col items-center w-full h-full "
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSave();
+      }}
+    >
       <div className="flex flex-col w-full h-full max-w-screen-xl pb-12 mt-12 mb-10 bg-white shadow-2xl rounded-xl">
         <button className="flex w-12 h-20 mt-10 ml-5" onClick={handleback}>
           {"< 返回"}

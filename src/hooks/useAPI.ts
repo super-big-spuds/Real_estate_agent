@@ -902,7 +902,7 @@ export function useGetSellEdit() {
 
       const validData = validSchema.parse(data);
 
-      setData({
+      const newData = {
         ...validData.data,
         total_rating: validData.data.total_rating.toString(),
         main_building: validData.data.main_building.toString(),
@@ -914,7 +914,10 @@ export function useGetSellEdit() {
         management_fee: validData.data.management_fee.toString(),
         selling_price: validData.data.selling_price.toString(),
         tenement_floor: validData.data.tenement_floor.toString(),
-      });
+      };
+
+      setData(newData);
+      return newData;
     } catch (error) {
       console.error(error);
       alert("取得資料失敗");
@@ -1010,7 +1013,7 @@ export function useGetDevelopEdit() {
 
       const validData = validSchema.parse(data);
 
-      setData({
+      const newData = {
         ...validData.data,
         total_rating: validData.data.total_rating.toString(),
         main_building: validData.data.main_building.toString(),
@@ -1024,7 +1027,10 @@ export function useGetDevelopEdit() {
         rent_price: validData.data.rent_price.toString(),
         tenement_floor: validData.data.tenement_floor.toString(),
         deposit_price: validData.data.deposit_price.toString(),
-      });
+      };
+
+      setData(newData);
+      return newData;
     } catch (error) {
       console.error(error);
       setIsError(true);
@@ -1125,7 +1131,7 @@ export function useGetRentEdit() {
 
       const validData = validSchema.parse(data);
 
-      setData({
+      const newData = {
         ...validData.data,
         total_rating: validData.data.total_rating.toString(),
         main_building: validData.data.main_building.toString(),
@@ -1138,7 +1144,10 @@ export function useGetRentEdit() {
         rent_price: validData.data.rent_price.toString(),
         deposit_price: validData.data.deposit_price.toString(),
         tenement_floor: validData.data.tenement_floor.toString(),
-      });
+      };
+
+      setData(newData);
+      return newData;
     } catch (error) {
       console.error(error);
       alert("取得資料失敗");
@@ -1226,7 +1235,7 @@ export function useGetMarketEdit() {
 
       const validData = validSchema.parse(data);
 
-      setData({
+      const newData = {
         ...validData.data,
         tenement_area_max: validData.data.tenement_area_max.toString(),
         tenement_area_min: validData.data.tenement_area_min.toString(),
@@ -1234,7 +1243,10 @@ export function useGetMarketEdit() {
         burget_rent_min: validData.data.burget_rent_min.toString(),
         hopefloor_max: validData.data.hopefloor_max.toString(),
         hopefloor_min: validData.data.hopefloor_min.toString(),
-      });
+      };
+
+      setData(newData);
+      return newData;
     } catch (error) {
       console.error(error);
       alert("取得資料失敗");

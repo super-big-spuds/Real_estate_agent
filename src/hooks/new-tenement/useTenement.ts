@@ -100,13 +100,18 @@ export function useTenementMarketInfo(tenementId: string) {
   useEffect(() => {
     getMarketEdit(tenementId);
   }, [tenementId]);
+
+  const query = new URLSearchParams(window.location.search);
+  const tenementTypeOnQuery = query.get("tenement_type");
   useEffect(() => {
     if (!dataEdit) return;
     setMarketInfo({
       tenement_id: Number(dataEdit.tenement_id),
       tenement_address: dataEdit.tenement_address,
       tenement_product_type: dataEdit.tenement_product_type,
-      tenement_type: dataEdit.tenement_type,
+      tenement_type: tenementTypeOnQuery
+        ? tenementTypeOnQuery
+        : dataEdit.tenement_type,
       tenement_face: dataEdit.tenement_face,
       tenement_images: dataEdit.tenement_images,
       tenement_host_name: dataEdit.tenement_host_name,
@@ -252,13 +257,17 @@ export function useTenementRentInfo(tenementId: string) {
     getRentEdit(tenementId);
   }, [tenementId]);
 
+  const query = new URLSearchParams(window.location.search);
+  const tenementTypeOnQuery = query.get("tenement_type");
   useEffect(() => {
     if (!dataEdit) return;
     setRentInfo({
       tenement_id: dataEdit.tenement_id as number,
       tenement_address: dataEdit.tenement_address,
       tenement_product_type: dataEdit.tenement_product_type,
-      tenement_type: dataEdit.tenement_type,
+      tenement_type: tenementTypeOnQuery
+        ? tenementTypeOnQuery
+        : dataEdit.tenement_type,
       tenement_face: dataEdit.tenement_face,
       tenement_images: dataEdit.tenement_images,
       tenement_status: dataEdit.tenement_status,
@@ -394,13 +403,17 @@ export function useTenementDevelopInfo(tenementId: string) {
   useEffect(() => {
     getDevelopEdit(tenementId);
   }, [tenementId]);
+  const query = new URLSearchParams(window.location.search);
+  const tenementTypeOnQuery = query.get("tenement_type");
   useEffect(() => {
     if (!dataEdit) return;
     setDevelopInfo({
       tenement_id: Number(dataEdit.tenement_id),
       tenement_address: dataEdit.tenement_address,
       tenement_product_type: dataEdit.tenement_product_type,
-      tenement_type: dataEdit.tenement_type,
+      tenement_type: tenementTypeOnQuery
+        ? tenementTypeOnQuery
+        : dataEdit.tenement_type,
       tenement_face: dataEdit.tenement_face,
       tenement_images: dataEdit.tenement_images,
       total_rating: dataEdit.total_rating,
@@ -548,13 +561,17 @@ export function useTenementSellInfo(tenementId: string) {
     getSellEdit(tenementId);
   }, [tenementId]);
 
+  const query = new URLSearchParams(window.location.search);
+  const tenementTypeOnQuery = query.get("tenement_type");
   useEffect(() => {
     if (!dataEdit) return;
     setSellInfo({
       tenement_id: Number(dataEdit.tenement_id),
       tenement_address: dataEdit.tenement_address,
       tenement_product_type: dataEdit.tenement_product_type,
-      tenement_type: dataEdit.tenement_type,
+      tenement_type: tenementTypeOnQuery
+        ? tenementTypeOnQuery
+        : dataEdit.tenement_type,
       tenement_face: dataEdit.tenement_face,
       tenement_images: dataEdit.tenement_images,
       tenement_status: dataEdit.tenement_status,
