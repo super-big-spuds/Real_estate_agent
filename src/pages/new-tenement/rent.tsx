@@ -18,6 +18,8 @@ import dayjs from "dayjs";
 
 export default function Rent() {
   const { id: tenementId } = useParams();
+  const query = new URLSearchParams(window.location.search);
+  const isRollback = query.get("rollback");
 
   const noticeHook = useTenementNotice("rent", tenementId as string);
   const rentHook = useTenementRentInfo(tenementId as string);
@@ -35,7 +37,7 @@ export default function Rent() {
 
   const onDelete = () => {
     if (window.confirm("確定要刪除嗎?")) {
-      rentHook.handlers.handleDelete();
+      rentHook.handlers.handleDelete("rent", isRollback !== null);
     }
   };
 
@@ -135,7 +137,9 @@ export default function Rent() {
           {"< 返回"}
         </button>
         <div className="inline-flex flex-col mb-5 ml-8">
-          <p className="text-4xl font-bold whitespace-normal">出租資料</p>
+          <p className="text-4xl font-bold whitespace-normal">
+            {isRollback && "復原"}出租資料
+          </p>
         </div>
         <p className="mb-3 ml-5 border-b-2 border-gray-300"></p>
 
@@ -804,11 +808,11 @@ export default function Rent() {
         </div>
         <div className="flex justify-end gap-5 m-10 ">
           <Button className="bg-blue-600 " type="primary" htmlType="submit">
-            儲存
+            {isRollback ? "復原" : "儲存"}
           </Button>
           <Button type="default">回復預設</Button>
           <Button danger onClick={onDelete}>
-            刪除
+            {isRollback ? "永久刪除" : "刪除"}
           </Button>
         </div>
       </div>

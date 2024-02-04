@@ -7,6 +7,7 @@ import { RuleObject } from "rc-field-form/lib/interface";
 import { useEffect, useState } from "react";
 import { useGetRollbackTenementList } from "../../hooks/useAPI";
 import type { TenementList } from "../../type";
+import { useNavigate } from "react-router-dom";
 
 export const RollbackTenementLists = () => {
   const [Popout, setPopout] = useState(false);
@@ -49,7 +50,35 @@ export const RollbackTenementLists = () => {
     value: string;
   };
 
-  const { columns, onRow } = useTenementList();
+  const navigate = useNavigate();
+  const { columns } = useTenementList();
+
+  const customOnRow = (record: TenementList) => {
+    const switchType = (type: string) => {
+      switch (type) {
+        case "出租":
+          return "rent";
+        case "出售":
+          return "sell";
+        case "開發追蹤":
+          return "develop";
+        case "行銷追蹤":
+          return "market";
+        default:
+          return "rent";
+      }
+    };
+    return {
+      onClick: () => {
+        navigate(
+          `/Tenement/${record.tenement_id}/${switchType(
+            record.tenement_type
+          )}?rollback=true`
+        );
+      },
+    };
+  };
+
   const [data, setData] = useState<TenementList[]>([
     {
       tenement_address: "54321",
@@ -186,7 +215,7 @@ export const RollbackTenementLists = () => {
       ) : isError ? (
         <p>error...</p>
       ) : (
-        <Table data={data} columns={columns} onRow={onRow} />
+        <Table data={data} columns={columns} onRow={customOnRow} />
       )}
       {Popout && (
         <FilterModule

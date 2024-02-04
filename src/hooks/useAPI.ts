@@ -1523,13 +1523,16 @@ export function useDeleteTenement() {
   const [isDone, setIsDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const handleDeleteTenement = async (tenement_id: string) => {
+  const handleDeleteTenement = async (
+    tenement_id: string,
+    tenement_type: string
+  ) => {
     setIsLoading(true);
     setIsDone(false);
 
     try {
       const res = await mutableFetch(
-        `/delete/tenement/${tenement_id}`,
+        `/delete/tenement/${tenement_id}/${tenement_type}`,
         "DELETE",
         token,
         {}
@@ -1755,5 +1758,22 @@ export const deleteCollectionFetchFn = async (id: string) => {
     }
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const hardDeleteTenement = async (
+  tenement_id: string,
+  tenement_type: string
+) => {
+  const token = localStorage.getItem("token") as string;
+  const res = await mutableFetch(
+    `/delete/tenement/rollback/${tenement_id}/${tenement_type}`,
+    "DELETE",
+    token,
+    {}
+  );
+  if (!res.ok) {
+    alert("操作失敗");
+    throw new Error(res.statusText);
   }
 };

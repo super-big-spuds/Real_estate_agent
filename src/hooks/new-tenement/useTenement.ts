@@ -9,6 +9,7 @@ import {
   useGetMarketEdit,
   usePostMarketEdit,
   useDeleteTenement,
+  hardDeleteTenement,
 } from "../useAPI";
 
 type ITenementBasedInfoType = {
@@ -90,9 +91,10 @@ export function useTenementMarketInfo(tenementId: string) {
   };
 
   const { handleDeleteTenement } = useDeleteTenement();
-  const handleDelete = () => {
+  const handleDelete = (tenement_type: string, isRollback: boolean = false) => {
     if (!tenementId) return;
-    handleDeleteTenement(tenementId);
+    !isRollback && handleDeleteTenement(tenementId, tenement_type);
+    isRollback && hardDeleteTenement(tenementId, tenement_type);
     alert("刪除成功");
   };
 
@@ -245,9 +247,10 @@ export function useTenementRentInfo(tenementId: string) {
   };
 
   const { handleDeleteTenement } = useDeleteTenement();
-  const handleDelete = () => {
+  const handleDelete = (tenement_type: string, isRollback: boolean = false) => {
     if (!tenementId) return;
-    handleDeleteTenement(tenementId);
+    !isRollback && handleDeleteTenement(tenementId, tenement_type);
+    isRollback && hardDeleteTenement(tenementId, tenement_type);
     alert("刪除成功");
   };
 
@@ -393,9 +396,10 @@ export function useTenementDevelopInfo(tenementId: string) {
   };
 
   const { handleDeleteTenement } = useDeleteTenement();
-  const handleDelete = () => {
+  const handleDelete = (tenement_type: string, isRollback: boolean = false) => {
     if (!tenementId) return;
-    handleDeleteTenement(tenementId);
+    !isRollback && handleDeleteTenement(tenementId, tenement_type);
+    isRollback && hardDeleteTenement(tenementId, tenement_type);
     alert("刪除成功");
   };
   const { getDevelopEdit, dataEdit, isError, isLoading } = useGetDevelopEdit();
@@ -549,9 +553,10 @@ export function useTenementSellInfo(tenementId: string) {
   };
 
   const { handleDeleteTenement } = useDeleteTenement();
-  const handleDelete = () => {
+  const handleDelete = (tenement_type: string, isRollback: boolean = false) => {
     if (!tenementId) return;
-    handleDeleteTenement(tenementId);
+    !isRollback && handleDeleteTenement(tenementId, tenement_type);
+    isRollback && hardDeleteTenement(tenementId, tenement_type);
     alert("刪除成功");
   };
 
