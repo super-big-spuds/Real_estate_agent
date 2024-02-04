@@ -17,9 +17,9 @@ import NewMarket from "../pages/new-tenement/market";
 import NewRent from "../pages/new-tenement/rent";
 import NewSell from "../pages/new-tenement/sell";
 import NewDevelop from "../pages/new-tenement/develop";
-import BackupCollectionsPage from "../pages/backup/collections";
-import BackupUsersPage from "../pages/backup/users";
-import BackupTenementsPage from "../pages/backup/tenements";
+import BackupCollectionsPage from "../pages/rollback/collections";
+import BackupUsersPage from "../pages/rollback/users";
+import BackupTenementsPage from "../pages/rollback/tenements";
 
 const App = () => {
   return (
