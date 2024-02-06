@@ -109,7 +109,8 @@ export const TenementLists = () => {
         tenement_status: item.tenement_status,
         tenement_type: item.tenement_type,
         tenement_product_type: item.tenement_product_type,
-        management_fee_bottom: item.management_fee_bottom,
+        management_fee_bottom:
+          item.tenement_type === "行銷追蹤" ? 0 : item.management_fee_bottom,
         management_floor_bottom: item.management_floor_bottom,
         key: item.tenement_address,
       };
