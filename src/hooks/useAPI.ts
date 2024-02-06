@@ -22,6 +22,7 @@ const getFetch = (url: string, token: string) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
+      "ngrok-skip-browser-warning": "true",
     },
   });
 };
@@ -37,6 +38,7 @@ const mutableFetch = <T>(
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
+      "ngrok-skip-browser-warning": "true",
     },
     body: JSON.stringify(body),
   });
@@ -1588,6 +1590,7 @@ export async function deleteFile(fileName: string) {
   const res = await fetch(`${APIBaseURL}/api/files/delete/${fileName}`, {
     headers: {
       Authorization: `Bearer ${token}`,
+      "ngrok-skip-browser-warning": "true",
     },
     method: "DELETE",
   });
