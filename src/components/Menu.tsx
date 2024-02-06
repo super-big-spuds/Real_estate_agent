@@ -79,7 +79,7 @@ const Menus = () => {
       defaultOpenKeys={["sub1"]}
       mode="inline"
       items={menuItems}
-      className="sticky top-0 h-screen pt-20 bg-blue-100 "
+      className="sticky top-0 h-screen max-h-screen pt-10 overflow-y-auto bg-blue-100"
     />
   );
 };

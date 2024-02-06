@@ -7,6 +7,7 @@ export default function CollectionMange(props: any) {
   const query = new URLSearchParams(window.location.search);
   const isRollback = query.get("rollback") || false;
 
+  const isAdd = window.location.pathname === "/user";
   const handleback = () => {
     navigate(isRollback ? "/rollback/users" : "/users");
   };
@@ -99,9 +100,11 @@ export default function CollectionMange(props: any) {
           <Button type="default" onClick={() => handleReset()}>
             回復預設
           </Button>
-          <Button danger onClick={() => handleDeleteUser()}>
-            {isRollback ? "永久刪除" : "刪除"}
-          </Button>
+          {isAdd ? null : (
+            <Button danger onClick={() => handleDeleteUser()}>
+              {isRollback ? "永久刪除" : "刪除"}
+            </Button>
+          )}
         </div>
       </div>
     </div>
