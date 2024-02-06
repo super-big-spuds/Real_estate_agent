@@ -5,10 +5,11 @@ import FilterModule from "../../components/FilterModule";
 
 import { RuleObject } from "rc-field-form/lib/interface";
 import { useEffect, useState } from "react";
-import { useGetTenementList } from "../../hooks/useAPI";
+import { useGetRollbackTenementList } from "../../hooks/useAPI";
 import type { TenementList } from "../../type";
+import { useNavigate } from "react-router-dom";
 
-export const TenementLists = () => {
+export const RollbackTenementLists = () => {
   const [Popout, setPopout] = useState(false);
   const handlePopout = () => {
     setPopout(!Popout);
@@ -49,7 +50,35 @@ export const TenementLists = () => {
     value: string;
   };
 
-  const { columns, onRow } = useTenementList();
+  const navigate = useNavigate();
+  const { columns } = useTenementList();
+
+  const customOnRow = (record: TenementList) => {
+    const switchType = (type: string) => {
+      switch (type) {
+        case "出租":
+          return "rent";
+        case "出售":
+          return "sell";
+        case "開發追蹤":
+          return "develop";
+        case "行銷追蹤":
+          return "market";
+        default:
+          return "rent";
+      }
+    };
+    return {
+      onClick: () => {
+        navigate(
+          `/Tenement/${record.tenement_id}/${switchType(
+            record.tenement_type
+          )}?rollback=true&tenement_type=${record.tenement_type}`
+        );
+      },
+    };
+  };
+
   const [data, setData] = useState<TenementList[]>([
     {
       tenement_address: "54321",
@@ -93,7 +122,7 @@ export const TenementLists = () => {
     },
   ]);
   const { isLoading, isError, dataTenement, handleGetTenement } =
-    useGetTenementList();
+    useGetRollbackTenementList();
   useEffect(() => {
     handleGetTenement("");
   }, []);
@@ -169,7 +198,7 @@ export const TenementLists = () => {
   return (
     <div className="flex flex-col items-center w-4/5 m-10 ">
       <div className="inline-flex items-center mb-10 justify-evenly w-96">
-        <p className="text-4xl ">房屋列表</p>
+        <p className="text-4xl ">復原房屋列表</p>
         <Button type="primary" onClick={handlePopout} className="bg-blue-600 ">
           篩選
         </Button>
@@ -186,7 +215,7 @@ export const TenementLists = () => {
       ) : isError ? (
         <p>error...</p>
       ) : (
-        <Table data={data} columns={columns} onRow={onRow} />
+        <Table data={data} columns={columns} onRow={customOnRow} />
       )}
       {Popout && (
         <FilterModule
@@ -252,4 +281,4 @@ export const TenementLists = () => {
     </div>
   );
 };
-export default TenementLists;
+export default RollbackTenementLists;

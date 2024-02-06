@@ -92,13 +92,13 @@ export default function CalenderTable(props: Props) {
 
     switch (param) {
       case "market":
-        return `/Tenement/${id}/market`;
+        return `/Tenement/${id}/market?tenement_type=行銷追蹤`;
       case "rent":
-        return `/Tenement/${id}/rent`;
+        return `/Tenement/${id}/rent?tenement_type=出租`;
       case "sell":
-        return `/Tenement/${id}/sell`;
+        return `/Tenement/${id}/sell?tenement_type=出售`;
       case "develop":
-        return `/Tenement/${id}/develop`;
+        return `/Tenement/${id}/develop?tenement_type=開發追蹤`;
       case "collection":
         return `/Collection/${id}`;
       case "pay":

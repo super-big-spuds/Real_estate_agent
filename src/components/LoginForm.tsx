@@ -38,7 +38,7 @@ const LoginForm = () => {
         name="user_password"
         rules={[{ required: true, message: "請輸入您的密碼" }]}
       >
-        <Input
+        <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="user_password"
           placeholder="密碼"
