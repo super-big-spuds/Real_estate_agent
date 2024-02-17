@@ -10,7 +10,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <AuthProvider>
         <Routes />
-        dsaDa
       </AuthProvider>
     </BrowserRouter>
   </ConfigProvider>
